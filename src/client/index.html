@@ -7,17 +7,90 @@
   <meta name="description" content="Super Academic Advisor">
   <meta name="author" content="Anton Nikitenko & Summer Johnson">
 
+  <!-- meta tags for Bootstrap -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- EaselJS -->
   <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
-
-  <!-- Bootstrap -->
+  <!-- Dev-defined CSS -->
+  <link rel="stylesheet" href="assets/style.css">
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+  <script src="index.js"></script>
+
+  <div class="container-fluid bg-dark">
+    <nav class="navbar navbar-expand navbar-dark fixed-top" id="navigation">
+        <a class="navbar-brand" href="#">UVic</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <form class="form-inline ml-auto">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Settings</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">About</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Contact</button>
+          </form>
+        </div>
+    </nav>
+    <div class="row" id="main">
+        <div class="col-md-2 col-sm-1 v-align box" id="search">
+          <form>
+            <div class="form-group">
+              <label for="faculty">Faculty</label>
+              <select class="custom-select d-block w-100" id="faculty" required="">
+                <option value="">Engineering</option>
+                <option>Science</option>
+                <option>Humanities</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="programs">Program</label>
+              <select class="form-control" id="programs">
+                <option>Software Engineering</option>
+                <option>Mechanical Engineering</option>
+                <option>Biomedical Engineering</option>
+                <option>Civil Engineering</option>
+                <option>Electrical Engineering</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="minors">Minor</label>
+              <select class="form-control" id="minors">
+                <option>Business</option>
+                <option>Software Development</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="minors">Specializations</label>
+              <select class="form-control" id="minors">
+                <option>Data mining and analysis, artificial intelligence, and machine learning</option>
+                <option>Cybersecurity and privacy</option>
+                <option>Performance and scalability</option>
+                <option>Interaction design and data visualization</option>
+                <option>Visual computing (vision/graphics/gaming)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-10 col-sm-11">
+            <div class="class-dashboard">
+              <!-- EaselJS Implementation -->
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- jQuery, Popper.js, and Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-</head>
-
-<body>
-  <script src="index.js"></script>
 </body>
 </html>
