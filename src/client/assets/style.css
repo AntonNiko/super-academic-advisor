@@ -6,6 +6,11 @@ html, body, .container-fluid {
   height: 95%;
 }
 
+#course-panel {
+  height: 100%;
+  width: 100%;
+}
+
 .bg-image {
     background: url(../images/background-login.jpg) no-repeat 0 0 / cover;
     position: relative;
