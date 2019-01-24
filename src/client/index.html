@@ -9,8 +9,6 @@
 
   <!-- meta tags for Bootstrap -->
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- EaselJS -->
-  <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
   <!-- Dev-defined CSS -->
   <link rel="stylesheet" href="assets/style.css">
   <!-- Bootstrap CSS -->
@@ -87,31 +85,34 @@
         </div>
         <div class="panel-container col-md-10 col-sm-11">
           <div class="panel-term" id="term_1">
-            <div class="panel-course" id="math_100">
-              <div class="panel-course-header">
-                <span class="panel-course-name">MATH 100</span>
-                <span class="panel-course-details-icon ui-icon ui-icon-close" style="background-color:black;position:absolute;"></span>
-              </div>
-              <div class="panel-course-body">
-                <span class="panel-course-offered">F,Sp,Su</span>
-                <span class="panel-course-prereqs">None</span>
-              </div>
-              <div class="panel-course-footer">
-                <span class="panel-course-credits">1.5</span>
-              </div>
-            </div>
-            <!--<div class="panel-course" id="math_101">
-              <div class="panel-course-header">
-                <span class="panel-course-subj">MATH</span><span class="panel-course-num">101</span>
-              </div>
-              <div class="panel-course-body">
-                <span class="panel-course-offered">F,Sp,Su</span>
-                <span class="panel-course-prereqs">MATH 100</span>
-              </div>
-              <div class="panel-course-footer">
-                <span class="panel-course-credits">1.5</span>
-              </div>
-            </div>-->
+            <ul class="panel-term-list">
+              <li class="panel-course" id="math_100">
+                <div class="panel-course-header">
+                  <span class="panel-course-name">MATH 100</span>
+                  <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
+                </div>
+                <div class="panel-course-body">
+                  <span class="panel-course-offered">F,Sp,Su</span>
+                  <span class="panel-course-prereqs">None</span>
+                </div>
+                <div class="panel-course-footer">
+                  <span class="panel-course-credits">1.5</span>
+                </div>
+              </li>
+              <li class="panel-course" id="math_101">
+                <div class="panel-course-header">
+                  <span class="panel-course-name">MATH 101</span>
+                  <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
+                </div>
+                <div class="panel-course-body">
+                  <span class="panel-course-offered">F,Sp,Su</span>
+                  <span class="panel-course-prereqs">MATH 100</span>
+                </div>
+                <div class="panel-course-footer">
+                  <span class="panel-course-credits">1.5</span>
+                </div>
+              </li>
+            </ul>
           </div>
           <div class="panel-term" id="term_2">
           </div>
@@ -125,6 +126,7 @@
     </div>
   </div>
   <script src="assets/courses.js"></script>
+  <script src="assets/view.js"></script>
   <script src="index.js"></script>
 </body>
 </html>

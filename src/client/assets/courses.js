@@ -1,19 +1,20 @@
-var program_combs = {
-  "Engineering":[
-    "Software Engineering",
-    "Mechanical Engineering"
-  ],
-  "Science":[
-    "Physics",
-    "Biology",
-    "Chemistry"
-  ]
-};
+/*
+
+Graduate me...
+- Program
+- Specialization <if applicable>
+- Minor <if applicable>
+- Complementary Studies & Natural Science Electives
+- Classes per semester
+
+*/
 
 class Course {
-  constructor(subj, course_num, prereqs, coreqs, blocks, exists){
+  constructor(subj, course_num, credits, semesters_offered, prereqs, coreqs, blocks, exists){
     this.subj = subj;
     this.course_num = course_num;
+    this.credits = credits;
+    this.semesters_offered = semesters_offered;
     this.prereqs = prereqs;
     this.coreqs = coreqs;
     this.blocks = blocks;
@@ -29,6 +30,7 @@ class Semester {
     this.prev_semester = prev_semester;
     this.next_semester = next_semester;
     this.courses = new Map();
+    this.max_units = 9;
   }
 
   addCourse(course){
@@ -64,18 +66,18 @@ class ProgramSelection {
 }
 
 var courses_eng_seng = {
-  "CSC 111": new Course("CSC","111",[],[],[], false),
-  "ENGR 130": new Course("ENGR","130",[],[],[], false),
-  "ENGR 110": new Course("ENGR","110",[],[],[], false),
-  "MATH 100": new Course("MATH","100",[],[],[], false),
-  "MATH 110": new Course("MATH","110",[],[],[], false),
-  "PHYS 110": new Course("PHYS","110",[],[],[], false),
-  "CSC 115": new Course("CSC","115",["CSC 111"],[],[], false),
-  "ENGR 120": new Course("ENGR","120",["CSC 111", "ENGR 110"],[],[], false),
-  "ENGR 141": new Course("ENGR","141",["MATH 100", "MATH 110"],[],[], false),
-  "MATH 101": new Course("MATH","100",["MATH 100"],[],[], false),
-  "PHYS 111": new Course("PHYS","111",["MATH 100", "PHYS 110"],[],[], false),
-  "CSC 230": new Course("CSC","230",["CSC 115"],[],[], false)/*,
+  "CSC 111": new Course("CSC","111",1.5,["F","Sp"],[],[],[], false),
+  "ENGR 130": new Course("ENGR","130",0.5,["F","Sp"],[],[],[], false),
+  "ENGR 110": new Course("ENGR","110",2.5,["F"],[],[],[], false),
+  "MATH 100": new Course("MATH","100",1.5,["F","Sp","Su"],[],[],[], false),
+  "MATH 110": new Course("MATH","110",1.5,["F"],[],[],[], false),
+  "PHYS 110": new Course("PHYS","110",1.5,["F","Sp"],[],[],[], false),
+  "CSC 115": new Course("CSC","115",1.5,["Sp","Su","F"],["CSC 111"],[],[], false),
+  "ENGR 120": new Course("ENGR","120",2.5,["Sp"],["CSC 111", "ENGR 110"],[],[], false),
+  "ENGR 141": new Course("ENGR","141",1.5,["Sp","Su"],["MATH 100", "MATH 110"],[],[], false),
+  "MATH 101": new Course("MATH","100",1.5,["Sp","Su","F"],["MATH 100"],[],[], false),
+  "PHYS 111": new Course("PHYS","111",1.5,["Sp","Su"],["MATH 100", "PHYS 110"],[],[], false),
+  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],["CSC 115"],[],[], false)/*,
   "CHEM 101": new Course("CHEM","101",[],[],[], false),
   "ECE 260": new Course("ECE","260",["MATH 101", "MATH 110"],[],[], false),
   "MATH 122": new Course("MATH","122",["MATH 100"],[],[], false),
@@ -97,4 +99,12 @@ var courses_eng_seng = {
   "SENG 350": new Course("SENG","350",["SENG 275"],[],[], false),
   "SENG 360": new Course("SENG","360",["SENG 265"],[],[], false)*/
 }
-/* HANDLE CO-REQUISITES */
+
+var program_sequence_seng_rec = {
+  "1A":["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],
+  "1B":["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],
+  "1C":[],
+  "2A":["CSC 230","CHEM 101","ECE 260","MATH 122","SENG 265","STAT 260"],
+  "2B":[],
+  "2C":["CSC 225","ECE 310","ECON 180","SENG 275","SENG 310"]
+}
