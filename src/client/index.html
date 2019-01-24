@@ -14,7 +14,14 @@
   <!-- Dev-defined CSS -->
   <link rel="stylesheet" href="assets/style.css">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/bootstrap-4.2.1-dist/css/bootstrap.css">
+
+  <!-- jQuery, Popper.js, and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="assets/bootstrap-4.2.1-dist/js/bootstrap.js"></script>
+  <!-- jQuery UI -->
+  <script src="assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+  <link rel="stylesheet" href="assets/jquery-ui-1.12.1.custom/jquery-ui.css">
 </head>
 <body>
   <div class="container-fluid bg-dark">
@@ -78,20 +85,46 @@
             </div>
           </form>
         </div>
-        <div class="col-md-10 col-sm-11">
-            <canvas id="course-panel">
-            </canvas>
+        <div class="panel-container col-md-10 col-sm-11">
+          <div class="panel-term" id="term_1">
+            <div class="panel-course" id="math_100">
+              <div class="panel-course-header">
+                <span class="panel-course-name">MATH 100</span>
+                <span class="panel-course-close-icon ui-icon ui-icon-close" style="background-color:black;position:absolute;"></span>
+              </div>
+              <div class="panel-course-body">
+                <span class="panel-course-offered">F,Sp,Su</span>
+                <span class="panel-course-prereqs">None</span>
+              </div>
+              <div class="panel-course-footer">
+                <span class="panel-course-credits">1.5</span>
+              </div>
+            </div>
+            <!--<div class="panel-course" id="math_101">
+              <div class="panel-course-header">
+                <span class="panel-course-subj">MATH</span><span class="panel-course-num">101</span>
+              </div>
+              <div class="panel-course-body">
+                <span class="panel-course-offered">F,Sp,Su</span>
+                <span class="panel-course-prereqs">MATH 100</span>
+              </div>
+              <div class="panel-course-footer">
+                <span class="panel-course-credits">1.5</span>
+              </div>
+            </div>-->
+          </div>
+          <div class="panel-term" id="term_2">
+          </div>
+          <div class="panel-term" id="term_3">
+          </div>
+          <div class="panel-term" id="term_4">
+          </div>
+          <div class="panel-term" id="term_5">
+          </div>
         </div>
     </div>
   </div>
-
-  <!-- jQuery, Popper.js, and Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-  <!-- Library .js file -->
-  <script src="components/panel-components.js"></script> <!-- type="module" -->
+  <script src="assets/courses.js"></script>
   <script src="index.js"></script>
 </body>
 </html>
