@@ -51,6 +51,7 @@ html, body, .container-fluid {
 .panel-term-list {
   list-style-type: none;
   padding-left: 0;
+  height: 100%;
 }
 
 

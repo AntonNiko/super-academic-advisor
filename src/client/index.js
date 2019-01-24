@@ -1,6 +1,5 @@
-//$("#math_100").draggable();
-//$("#math_101").draggable();
-
-//$("#term_1").droppable();
-$(".panel-term-list").sortable();
-$("#term_2").droppable();
+$(function(){
+  $("#term_1, #term_2, #term_3, #term_4, #term_5").sortable({
+    connectWith: ".panel-term-list"
+  }).disableSelection();
+});
