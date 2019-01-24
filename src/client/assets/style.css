@@ -4,8 +4,9 @@ html, body, .container-fluid {
 }
 
 .panel-container {
+  background-color: #2c2c2d;
   display: flex;
-  overflow: auto;
+  /*overflow: auto;*/
 }
 
 .panel-course {
@@ -28,7 +29,7 @@ html, body, .container-fluid {
   position: absolute;
   left: 0;
 }
-.panel-course-close-icon {
+.panel-course-details-icon {
   position: absolute;
   right: 0;
 }
@@ -42,7 +43,7 @@ html, body, .container-fluid {
 .panel-term {
   height: 90%;
   width: 200px;
-  background-color: #a0a0a0;
+  background-color: #4a4a4a;
   margin: 10px;
 }
 
@@ -60,12 +61,8 @@ html, body, .container-fluid {
     padding: 70px 0;
 }
 
-#navigation {
-    background-color: #0e1a35;
-}
-
-#search {
-    background-color: #0e1a35;
+#navigation, #search {
+    background-color: #1c1f27;
 }
 
 #main {
