@@ -26,7 +26,7 @@ class Semester {
   constructor(id, year, semester_name, prev_semester, next_semester){
     this.id = id;
     this.year = year;
-    this.semester = semester_name;
+    this.semester_name = semester_name;
     this.prev_semester = prev_semester;
     this.next_semester = next_semester;
     this.courses = new Map();
@@ -34,6 +34,7 @@ class Semester {
   }
 
   addCourse(course){
+    course.semester = this.semester_name;
     this.courses.set(course.subj+" "+course.course_num, course);
   }
 
@@ -44,24 +45,24 @@ class Semester {
 
 class ProgramSelection {
   constructor(){
-    this.semester = new Map();
+    this.semesters = new Map();
   }
 
   addSemester(semester){
-    this.semester.set(semester.id, semester);
+    this.semesters.set(semester.id, semester);
   }
 
   addCourse(course, semester_id){
-    this.semester.get(semester_id).addCourse(course);
+    this.semesters.get(semester_id).addCourse(course);
   }
 
   moveCourse(course, origin_semester_id, dest_semester_id){
-     this.semester.get(origin_semester_id).removeCourse(course);
-     this.semester.set(dest_semester_id).addCourse(course);
+     this.semesters.get(origin_semester_id).removeCourse(course);
+     this.semesters.set(dest_semester_id).addCourse(course);
   }
 
   removeCourse(course, semester_id){
-    this.semester.get(semester_id).removeCourse(course);
+    this.semesters.get(semester_id).removeCourse(course);
   }
 }
 
@@ -77,9 +78,9 @@ var courses_eng_seng = {
   "ENGR 141": new Course("ENGR","141",1.5,["Sp","Su"],["MATH 100", "MATH 110"],[],[], false),
   "MATH 101": new Course("MATH","100",1.5,["Sp","Su","F"],["MATH 100"],[],[], false),
   "PHYS 111": new Course("PHYS","111",1.5,["Sp","Su"],["MATH 100", "PHYS 110"],[],[], false),
-  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],["CSC 115"],[],[], false)/*,
-  "CHEM 101": new Course("CHEM","101",[],[],[], false),
-  "ECE 260": new Course("ECE","260",["MATH 101", "MATH 110"],[],[], false),
+  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],["CSC 115"],[],[], false),
+  "CHEM 101": new Course("CHEM","101",1.5,["F","Su"],[],[],[], false),
+  "ECE 260": new Course("ECE","260",1.5,["F","Su"],["MATH 101", "MATH 110"],[],[], false)/*,
   "MATH 122": new Course("MATH","122",["MATH 100"],[],[], false),
   "SENG 265": new Course("SENG","265",["CSC 115"],[],[], false),
   "STAT 260": new Course("STAT","260",["MATH 101"],[],[], false),
@@ -103,8 +104,8 @@ var courses_eng_seng = {
 var program_sequence_seng_rec = {
   "1A":["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],
   "1B":["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],
-  "1C":[],
+  "1C":[]/*,
   "2A":["CSC 230","CHEM 101","ECE 260","MATH 122","SENG 265","STAT 260"],
   "2B":[],
-  "2C":["CSC 225","ECE 310","ECON 180","SENG 275","SENG 310"]
+  "2C":["CSC 225","SENG 275"]*/
 }
