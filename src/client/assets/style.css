@@ -54,7 +54,7 @@ body {
 .sidebar div {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 14px;
   color: #f2f2f2;
   display: block;
 }
@@ -101,6 +101,7 @@ body {
 
 /* Courses Board style */
 .panel-container {
+  min-height: 1000px;
   background-color: #2b2b2b;
   display: flex;
   overflow: scroll;
@@ -118,6 +119,12 @@ body {
   margin: 10px;
   padding: 0px 0px 5px 5px;
   position: relative;
+}
+
+.panel-course a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .panel-course-header {
@@ -154,4 +161,16 @@ body {
 
 .tab-content .tab-pane {
     padding: 70px 0;
+}
+
+/* Miscalleneous components */
+
+.btn {
+  background-color: #e7e7e7;
+  border: none;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
 }

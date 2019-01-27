@@ -14,7 +14,7 @@ class Course {
     this.subj = subj;
     this.course_num = course_num;
     this.credits = credits;
-    this.semesters_offered = semesters_offered;
+    this.semesters_offered = semesters_offered; /* E.g; ["F","Sp"] */
     this.prereqs = prereqs;
     this.coreqs = coreqs;
     this.blocks = blocks;
@@ -26,7 +26,7 @@ class Semester {
   constructor(id, year, semester_name, prev_semester, next_semester){
     this.id = id;
     this.year = year;
-    this.semester_name = semester_name;
+    this.semester_name = semester_name; /* "F","Sp","Su" */
     this.prev_semester = prev_semester;
     this.next_semester = next_semester;
     this.courses = new Map();
@@ -55,6 +55,7 @@ class ProgramSelection {
   addCourse(course, semester_id){
     /* Adding course to existing semester. Verify valid semester */
     this.semesters.get(semester_id).addCourse(course);
+    console.log(this.verifyCourseOffered(course, semester_id));
   }
 
   moveCourse(course, origin_semester_id, dest_semester_id){
@@ -67,7 +68,14 @@ class ProgramSelection {
   }
 
   verifyCourseOffered(course, semester_id){
-    
+    /* Checks if course offered in semester. If it is, return true.
+    If not, return false */
+    var semester = this.semesters.get(semester_id);
+    if(course.semesters_offered.includes(semester.semester_name)){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 
@@ -108,9 +116,9 @@ var courses_eng_seng = {
 
 
 var program_sequence_seng_rec = {
-  "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"Fall"],
-  "1B":[["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],2019,"Winter"],
-  "1C":[[],2019,"Summer"]/*,
+  "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],
+  "1B":[["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],2019,"Sp"],
+  "1C":[[],2019,"Su"]/*,
   "2A":["CSC 230","CHEM 101","ECE 260","MATH 122","SENG 265","STAT 260"],
   "2B":[],
   "2C":["CSC 225","SENG 275"]*/
