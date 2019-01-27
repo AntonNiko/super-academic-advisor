@@ -53,6 +53,7 @@ class ProgramSelection {
   }
 
   addCourse(course, semester_id){
+    /* Adding course to existing semester. Verify valid semester */
     this.semesters.get(semester_id).addCourse(course);
   }
 
@@ -63,6 +64,10 @@ class ProgramSelection {
 
   removeCourse(course, semester_id){
     this.semesters.get(semester_id).removeCourse(course);
+  }
+
+  verifyCourseOffered(course, semester_id){
+    
   }
 }
 
