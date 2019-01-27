@@ -11,148 +11,65 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Dev-defined CSS -->
   <link rel="stylesheet" href="assets/style.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="assets/bootstrap-4.2.1-dist/css/bootstrap.css">
-
   <!-- jQuery, Popper.js, and Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-  <script src="assets/bootstrap-4.2.1-dist/js/bootstrap.js"></script>
   <!-- jQuery UI -->
   <script src="assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
   <link rel="stylesheet" href="assets/jquery-ui-1.12.1.custom/jquery-ui.css">
 </head>
 <body>
   <div class="container-fluid bg-dark">
-    <nav class="navbar navbar-expand navbar-dark fixed-top" id="navigation">
+    <nav class="navbar" id="navigation">
         <a class="navbar-brand" href="#">UVic</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarColor01">
-          <form class="form-inline ml-auto">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Settings</button>
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">About</button>
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Contact</button>
-          </form>
-        </div>
+        <a type="submit" href="#">Settings</a>
+        <a type="submit" href="#">About</a>
+        <a type="submit" href="#">Contact</a>
     </nav>
-    <div class="row" id="main">
-        <div class="col-md-2 col-sm-1 v-align box" id="search">
-          <form>
-            <div class="form-group">
-              <label for="faculty">Faculty</label>
-              <select class="custom-select d-block w-100" id="faculty" required="">
-                <option value="">Engineering</option>
-                <option>Science</option>
-                <option>Humanities</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="programs">Program</label>
-              <select class="form-control" id="programs">
-                <option>Software Engineering</option>
-                <option>Mechanical Engineering</option>
-                <option>Biomedical Engineering</option>
-                <option>Civil Engineering</option>
-                <option>Electrical Engineering</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="minors">Minor</label>
-              <select class="form-control" id="minors">
-                <option>Business</option>
-                <option>Software Development</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="minors">Specializations</label>
-              <select class="form-control" id="minors">
-                <option>Data mining and analysis, artificial intelligence, and machine learning</option>
-                <option>Cybersecurity and privacy</option>
-                <option>Performance and scalability</option>
-                <option>Interaction design and data visualization</option>
-                <option>Visual computing (vision/graphics/gaming)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <button type="button" class="btn btn-primary">Submit</button>
-            </div>
-          </form>
+    <div id="main">
+        <div class="sidebar" id="sidebar">
+          <div class="form-group">
+            <label for="faculty">Faculty</label>
+            <select class="form-control" id="faculty">
+              <option value="">Engineering</option>
+              <option>Science</option>
+              <option>Humanities</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="programs">Program</label>
+            <select class="form-control" id="programs">
+              <option>Software Engineering</option>
+              <option>Mechanical Engineering</option>
+              <option>Biomedical Engineering</option>
+              <option>Civil Engineering</option>
+              <option>Electrical Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="minors">Minor</label>
+            <select class="form-control" id="minors">
+              <option>Business</option>
+              <option>Software Development</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="minors">Specializations</label>
+            <select class="form-control" id="minors">
+              <option>Data mining and analysis, artificial intelligence, and machine learning</option>
+              <option>Cybersecurity and privacy</option>
+              <option>Performance and scalability</option>
+              <option>Interaction design and data visualization</option>
+              <option>Visual computing (vision/graphics/gaming)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
         </div>
-        <div class="panel-container col-md-10 col-sm-11" id="panel-container">
-          <!--<div class="panel-term">
-            <div class="panel-term-header">1A
-            </div>
-            <ul class="panel-term-list" id="term_1">
-              <li class="panel-course" id="math_100">
-                <div class="panel-course-header">
-                  <span class="panel-course-name">MATH 100</span>
-                  <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
-                </div>
-                <div class="panel-course-body">
-                  <span class="panel-course-offered">F,Sp,Su</span>
-                  <span class="panel-course-prereqs">None</span>
-                </div>
-                <div class="panel-course-footer">
-                  <span class="panel-course-credits">1.5</span>
-                </div>
-              </li>
-              <li class="panel-course" id="math_101">
-                <div class="panel-course-header">
-                  <span class="panel-course-name">MATH 101</span>
-                  <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
-                </div>
-                <div class="panel-course-body">
-                  <span class="panel-course-offered">F,Sp,Su</span>
-                  <span class="panel-course-prereqs">MATH 100</span>
-                </div>
-                <div class="panel-course-footer">
-                  <span class="panel-course-credits">1.5</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="panel-term">
-            <div class="panel-term-header">1B
-            </div>
-            <ul class="panel-term-list" id="term_2">
-              <li class="panel-course" id="math_110">
-                <div class="panel-course-header">
-                  <span class="panel-course-name">MATH 110</span>
-                  <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
-                </div>
-                <div class="panel-course-body">
-                  <span class="panel-course-offered">F,Sp,Su</span>
-                  <span class="panel-course-prereqs">MATH 100</span>
-                </div>
-                <div class="panel-course-footer">
-                  <span class="panel-course-credits">1.5</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="panel-term">
-            <div class="panel-term-header">1C
-            </div>
-            <ul class="panel-term-list" id="term_3">
-            </ul>
-          </div>
-          <div class="panel-term">
-            <div class="panel-term-header">2A
-            </div>
-            <ul class="panel-term-list" id="term_4">
-            </ul>
-          </div>
-          <div class="panel-term">
-            <div class="panel-term-header">2B
-            </div>
-            <ul class="panel-term-list" id="term_5">
-            </ul>
-          </div>-->
+        <div class="panel-container" id="panel-container">
         </div>
     </div>
   </div>
@@ -161,3 +78,73 @@
   <script src="index.js"></script>
 </body>
 </html>
+
+<!--<div class="panel-term">
+  <div class="panel-term-header">1A
+  </div>
+  <ul class="panel-term-list" id="term_1">
+    <li class="panel-course" id="math_100">
+      <div class="panel-course-header">
+        <span class="panel-course-name">MATH 100</span>
+        <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
+      </div>
+      <div class="panel-course-body">
+        <span class="panel-course-offered">F,Sp,Su</span>
+        <span class="panel-course-prereqs">None</span>
+      </div>
+      <div class="panel-course-footer">
+        <span class="panel-course-credits">1.5</span>
+      </div>
+    </li>
+    <li class="panel-course" id="math_101">
+      <div class="panel-course-header">
+        <span class="panel-course-name">MATH 101</span>
+        <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
+      </div>
+      <div class="panel-course-body">
+        <span class="panel-course-offered">F,Sp,Su</span>
+        <span class="panel-course-prereqs">MATH 100</span>
+      </div>
+      <div class="panel-course-footer">
+        <span class="panel-course-credits">1.5</span>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="panel-term">
+  <div class="panel-term-header">1B
+  </div>
+  <ul class="panel-term-list" id="term_2">
+    <li class="panel-course" id="math_110">
+      <div class="panel-course-header">
+        <span class="panel-course-name">MATH 110</span>
+        <span class="panel-course-details-icon ui-icon ui-icon-plusthick" style="background-color:black;position:absolute;"></span>
+      </div>
+      <div class="panel-course-body">
+        <span class="panel-course-offered">F,Sp,Su</span>
+        <span class="panel-course-prereqs">MATH 100</span>
+      </div>
+      <div class="panel-course-footer">
+        <span class="panel-course-credits">1.5</span>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="panel-term">
+  <div class="panel-term-header">1C
+  </div>
+  <ul class="panel-term-list" id="term_3">
+  </ul>
+</div>
+<div class="panel-term">
+  <div class="panel-term-header">2A
+  </div>
+  <ul class="panel-term-list" id="term_4">
+  </ul>
+</div>
+<div class="panel-term">
+  <div class="panel-term-header">2B
+  </div>
+  <ul class="panel-term-list" id="term_5">
+  </ul>
+</div>-->
