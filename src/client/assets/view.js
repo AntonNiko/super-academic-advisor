@@ -1,7 +1,3 @@
-/* Create Program Selection */
-
-
-
 function createSemesterDOM(semester){
   $("#panel-container").append(`
   <div class="panel-term" id="term-`+semester.id+`">
@@ -38,18 +34,20 @@ function createCourseDOM(semester, course){
 }
 
 /* Create Program Selection, representing user choices */
-var program = new ProgramSelection();
+var program = new Program();
 
 function addSemester(semester_id, semester_year, semester_name){
   var current_semester = new Semester(semester_id, semester_year, semester_name);
-  createSemesterDOM(current_semester);
   program.addSemester(current_semester);
+  createSemesterDOM(current_semester);
 }
 
 function addCourse(semester_id, course_id){
   var current_course = courses_eng_seng[course_id];
-  program.addCourse(current_course, semester_id);
-  createCourseDOM(semester_id, current_course);
+  if(program.addCourse(current_course, semester_id)){
+    /* Create DOM if course added successfully */
+    createCourseDOM(semester_id, current_course);
+  }
 }
 
 Object.keys(program_sequence_seng_rec).forEach(function(key){
