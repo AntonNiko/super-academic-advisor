@@ -1,3 +1,10 @@
+:root {
+  --panel-course-color: #ffffff;
+  --panel-navbar-color: #ffffff;
+  --panel-semester-color: #ffffff;
+  --panel-semester-header-color: #ffffff;
+}
+
 html {
   height: 100%;
   font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
@@ -82,14 +89,14 @@ body {
   border-radius: 3px;
   min-height: 30px;
   width: 200px;
-  background-color: #353535;
+  background-color: #3a3a3a;
   margin: 10px;
 }
 
 .panel-term-header {
   padding: 5px;
-  color: #ffffff;
-  font-weight: bold;
+  color: #009429;
+  /*font-weight: bold;*/
 }
 
 .panel-term-list {
@@ -109,13 +116,13 @@ body {
 }
 
 .panel-course {
-  border-radius: 3px;
+  /*border-radius: 3px;*/
   height: 85px;
   width: 160px;
   border-style: solid;
   border-width: 1px;
   border-color: #000000;
-  background-color: #4e4e4e;
+  background-color: #272727;
   margin: 10px;
   padding: 0px 5px 5px 5px;
   position: relative;
@@ -132,16 +139,20 @@ body {
   height: 30px;
 }
 
+/* Course container header */
 .panel-course-name {
   position: absolute;
   left: 0;
   padding-top: 5px;
+  font-weight: bold;
 }
 .panel-course-details-icon {
   position: absolute;
   right: 0;
+  font-weight: bold;
 }
 
+/* Course container body */
 .panel-course-offered {
   float: left;
 }
@@ -150,6 +161,7 @@ body {
   float: right;
 }
 
+/* Course container footer */
 .panel-course-footer {
   position: absolute;
   bottom: 5px;
