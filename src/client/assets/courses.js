@@ -131,7 +131,7 @@ class Program {
 
   verifyCoursePrereqSatisfied(course, semester_id){
     var course_prerequisites = course.prereqs;
-    console.log("COURSE: "+course.subj+" "+course.course_num);
+    //console.log("COURSE: "+course.subj+" "+course.course_num);
 
     var _found_prereq = false;
     for(var i=0; i<course_prerequisites.length; i++){
@@ -141,9 +141,9 @@ class Program {
       while(current_semester != null){
         /* Cycle through OR statements of prereq (e.g: one of MATh 110 or MATH 211)*/
         for(var j=0; j<course_prerequisites[i].length; j++){
-          console.log("\tPREREQ:"+current_semester.id+" :"+course_prerequisites[i][j]);
+          //console.log("\tPREREQ:"+current_semester.id+" :"+course_prerequisites[i][j]);
           if(current_semester.courses.has(course_prerequisites[i][j])){
-            console.log("\t\tFOUND");
+            //console.log("\t\tFOUND");
             _found_prereq = true;
             break;
           }
@@ -157,7 +157,7 @@ class Program {
       /* Reaching first semester and no satisfied prereq means
       one of prereqs not satisfied */
       if(current_semester == null){
-        console.log("\t\tNOT FOUND");
+        //console.log("\t\tNOT FOUND");
         return false;
       }
     }
@@ -170,17 +170,17 @@ class Program {
     var _found_coreq = false;
     for(var i=0; i<course_corequisites.length; i++){
       var current_semester = this.semesters.get(semester_id);
-      console.log("\tCOREQ:"+current_semester.id+" :"+course_corequisites[i]);
+      //console.log("\tCOREQ:"+current_semester.id+" :"+course_corequisites[i]);
       while(current_semester != null){
         if(current_semester.courses.has(course_corequisites[i])){
-          console.log("\t\tFOUND");
+          //console.log("\t\tFOUND");
           break;
 
         }
         current_semester = current_semester.prev_semester;
       }
       if(current_semester == null){
-        console.log("\t\tNOT FOUND");
+        //console.log("\t\tNOT FOUND");
         return false;
       }
     }
