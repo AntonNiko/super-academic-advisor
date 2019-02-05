@@ -1,13 +1,49 @@
 /*
-
 Graduate me...
 - Program
 - Specialization <if applicable>
 - Minor <if applicable>
 - Complementary Studies & Natural Science Electives
 - Classes per semester
-
 */
+
+
+
+function createSemesterDOM(semester){
+  $("#panel-container").append(`
+  <div class="panel-term" id="term-`+semester.id+`">
+    <div class="panel-term-header">
+      <span>`+semester.id+`</span>
+      <span style="float:right;">`+semester.semester_name+` `+semester.year+`</span>
+    </div>
+    <ul class="panel-term-list" id="term-`+semester.id+`-list">
+    </ul>
+  </div>
+  `);
+}
+
+function createCourseDOM(semester, course){
+  $("#term-"+semester+"-list").append(`
+    <li class="panel-course" id="`+course.subj+`_`+course.course_num+`">
+      <a href="#">
+        <div class="panel-course-header">
+          <span class="panel-course-name">`+course.subj+` `+course.course_num+`</span>
+          <span class="panel-course-details-icon">
+            <img src="assets/icons/icons8-checkmark-24.png" style="width:80%;float:right;">
+          </span>
+        </div>
+        <div class="panel-course-body">
+          <span class="panel-course-offered">`+course.semesters_offered+`</span>
+          <span class="panel-course-prereqs">MATH 100</span>
+        </div>
+        <div class="panel-course-footer">
+          <span class="panel-course-credits">`+course.credits+`</span>
+        </div>
+      </a>
+    </li>
+  `);
+}
+
 
 class Course {
   constructor(subj, course_num, credits, semesters_offered, prereqs, coreqs, blocks, exists){
@@ -27,13 +63,19 @@ class Semester {
     this.id = id;
     this.year = year;
     this.semester_name = semester_name; /* "F","Sp","Su" */
-    this.prev_semester = prev_semester;
-    this.next_semester = next_semester;
+    this.prev_semester = prev_semester; /* Previous semester, even if off semester */
+    this.next_semester = next_semester; /* Next semester, even if off semester */
     this.courses = new Map();
     this.max_units = 9;
+    this.current_units = 0;
   }
 
   addCourse(course){
+    // Assert course will not exceeded current units
+    if(this.current_units + course.credits > this.max_units){
+      alert("Too many units!!!");
+      return -1;
+    }
     course.semester = this.semester_name;
     this.courses.set(course.subj+" "+course.course_num, course);
   }
@@ -46,16 +88,32 @@ class Semester {
 class ProgramSelection {
   constructor(){
     this.semesters = new Map();
+    this.last_added_semester = null;
   }
 
-  addSemester(semester){
-    this.semesters.set(semester.id, semester);
+  addSemester(semester_id, semester_year, semester_name){
+    var current_semester = new Semester(semester_id, semester_year, semester_name);
+    if(this.last_added_semester!=null) current_semester.prev_semester = this.last_added_semester;
+    this.last_added_semester = current_semester;
+
+    this.semesters.set(current_semester.id, current_semester);
+    createSemesterDOM(current_semester);
   }
 
-  addCourse(course, semester_id){
+  addCourse(semester_id, course_id){
     /* Adding course to existing semester. Verify valid semester */
-    this.semesters.get(semester_id).addCourse(course);
-    console.log(this.verifyCourseOffered(course, semester_id));
+    var current_course = courses_eng_seng[course_id];
+    if(!this.verifyCourseOffered(current_course, semester_id)){
+      alert("Not offered!!!!");
+      return -1;
+    }
+    if(!this.verifyCourseRequisitesSatisfied(current_course, semester_id)){
+      alert("Requisites not satisfied!!!");
+      return -2;
+    }
+
+    this.semesters.get(semester_id).addCourse(current_course)
+    createCourseDOM(semester_id, current_course);
   }
 
   moveCourse(course, origin_semester_id, dest_semester_id){
@@ -77,6 +135,72 @@ class ProgramSelection {
       return false;
     }
   }
+
+  verifyCourseRequisitesSatisfied(course, semester_id){
+     /* Checks that requisites satisfied, by cycling through previous semesters */
+     if(!this.verifyCoursePrereqSatisfied(course, semester_id)) return false;
+     /* Verify coreqs */
+     if(!this.verifyCourseCoreqSatisfied(course, semester_id)) return false;
+     /* Very blocks */
+     return true;
+   }
+
+   verifyCoursePrereqSatisfied(course, semester_id){
+     var course_prerequisites = course.prereqs;
+     console.log("COURSE: "+course.subj+" "+course.course_num);
+
+     var _found_prereq = false;
+     for(var i=0; i<course_prerequisites.length; i++){
+       /* Check for every set of prereqs (e.g: MATH 110 or MATH 211 and then MATh 101) */
+       var current_semester = this.semesters.get(semester_id);
+       current_semester = current_semester.prev_semester;
+
+       while(current_semester != null){
+         /* Cycle through OR statements of prereq (e.g: one of MATh 110 or MATH 211)*/
+         for(var j=0; j<course_prerequisites[i].length; j++){
+           console.log("\tPREREQ:"+current_semester.id+" :"+course_prerequisites[i][j]);
+           if(current_semester.courses.has(course_prerequisites[i][j])){
+             console.log("\t\tFOUND");
+             _found_prereq = true;
+             break;
+           }
+         }
+         if(_found_prereq){
+           _found_prereq = false;
+           break;
+         }
+         current_semester = current_semester.prev_semester;
+       }
+       /* Reaching first semester and no satisfied prereq means
+       one of prereqs not satisfied */
+       if(current_semester == null){
+         console.log("\t\tNOT FOUND");
+         return false;
+       }
+     }
+     return true;
+   }
+
+   verifyCourseCoreqSatisfied(course, semester_id){
+     var course_corequisites = course.coreqs;
+     var _found_coreq = false;
+     for(var i=0; i<course_corequisites.length; i++){
+       var current_semester = this.semesters.get(semester_id);
+       console.log("\tCOREQ:"+current_semester.id+" :"+course_corequisites[i]);
+       while(current_semester != null){
+         if(current_semester.courses.has(course_corequisites[i])){
+           console.log("\t\tFOUND");
+           break;
+         }
+         current_semester = current_semester.prev_semester;
+       }
+       if(current_semester == null){
+         console.log("\t\tNOT FOUND");
+         return false;
+       }
+     }
+     return true;
+   }
 }
 
 var courses_eng_seng = {
@@ -86,17 +210,17 @@ var courses_eng_seng = {
   "MATH 100": new Course("MATH","100",1.5,["F","Sp","Su"],[],[],[], false),
   "MATH 110": new Course("MATH","110",1.5,["F"],[],[],[], false),
   "PHYS 110": new Course("PHYS","110",1.5,["F","Sp"],[],[],[], false),
-  "CSC 115": new Course("CSC","115",1.5,["Sp","Su","F"],["CSC 111"],[],[], false),
-  "ENGR 120": new Course("ENGR","120",2.5,["Sp"],["CSC 111", "ENGR 110"],[],[], false),
-  "ENGR 141": new Course("ENGR","141",1.5,["Sp","Su"],["MATH 100", "MATH 110"],[],[], false),
-  "MATH 101": new Course("MATH","100",1.5,["Sp","Su","F"],["MATH 100"],[],[], false),
-  "PHYS 111": new Course("PHYS","111",1.5,["Sp","Su"],["MATH 100", "PHYS 110"],[],[], false),
-  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],["CSC 115"],[],[], false),
+  "CSC 115": new Course("CSC","115",1.5,["Sp","Su","F"],[["CSC 110","CSC 111"]],[],[], false),
+  "ENGR 120": new Course("ENGR","120",2.5,["Sp"],[["CSC 110","CSC 111"], ["ENGR 110"]],[],[], false),
+  "ENGR 141": new Course("ENGR","141",1.5,["Sp","Su"],[["MATH 100"], ["MATH 110"]],[],[], false),
+  "MATH 101": new Course("MATH","101",1.5,["Sp","Su","F"],[["MATH 100","MATH 109"]],[],[], false),
+  "PHYS 111": new Course("PHYS","111",1.5,["Sp","Su"],[["MATH 100","MATH 109"], ["PHYS 110"]],[],[], false),
+  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],[["CSC 115","CSC 116"]],[],[], false),
   "CHEM 101": new Course("CHEM","101",1.5,["F","Su"],[],[],[], false),
-  "ECE 260": new Course("ECE","260",1.5,["F","Su"],["MATH 101", "MATH 110"],[],[], false)/*,
-  "MATH 122": new Course("MATH","122",["MATH 100"],[],[], false),
-  "SENG 265": new Course("SENG","265",["CSC 115"],[],[], false),
-  "STAT 260": new Course("STAT","260",["MATH 101"],[],[], false),
+  "ECE 260": new Course("ECE","260",1.5,["F","Su"],[["MATH 101"], ["MATH 110","MATH 211"]],["MATH 101","ENGR 141"],[], false),
+  "MATH 122": new Course("MATH","122",1.5,["F","Sp","Su"],[["MATH 100","MATH 109"]],[],[], false),
+  "SENG 265": new Course("SENG","265",1.5,["F","Sp","Su"],[["CSC 115","CSC 116"]],[],[], false),
+  "STAT 260": new Course("STAT","260",1.5,["F","Sp","Su"],[["MATH 101"]],[],[], false)/*
   "CSC 225": new Course("CSC","255",["CSC 115", "MATH 122"],[],[], false),
   "ECE 310": new Course("ECE","310",["ECE 260"],[],[], false),
   "ECON 180": new Course("ECON","180",["MATH 101"],[],[], false),
@@ -113,7 +237,8 @@ var courses_eng_seng = {
   "SENG 350": new Course("SENG","350",["SENG 275"],[],[], false),
   "SENG 360": new Course("SENG","360",["SENG 265"],[],[], false)*/
 }
-
+// TODO: Case of ENGR 120: Either ENGR 110 or ENGL 135 and ENGR 112
+// TODO: Case of ECE 260: Either MATH 110 prereq or MATH 211 coreq
 
 var program_sequence_seng_rec = {
   "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],
