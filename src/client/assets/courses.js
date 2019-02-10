@@ -7,8 +7,6 @@ Graduate me...
 - Classes per semester
 */
 
-
-
 function createSemesterDOM(semester){
   $("#panel-container").append(`
   <div class="panel-term" id="term-`+semester.id+`">
@@ -34,7 +32,7 @@ function createCourseDOM(semester, course){
         </div>
         <div class="panel-course-body">
           <span class="panel-course-offered">`+course.semesters_offered+`</span>
-          <span class="panel-course-prereqs">MATH 100</span>
+          <span class="panel-course-prereqs"></span>
         </div>
         <div class="panel-course-footer">
           <span class="panel-course-credits">`+course.credits+`</span>
@@ -46,14 +44,13 @@ function createCourseDOM(semester, course){
 
 
 class Course {
-  constructor(subj, course_num, credits, semesters_offered, prereqs, coreqs, blocks, exists){
+  constructor(subj, course_num, credits, semesters_offered, reqs, blocks){
     this.subj = subj;
     this.course_num = course_num;
     this.credits = credits;
     this.semesters_offered = semesters_offered; /* E.g; ["F","Sp"] */
-    this.prereqs = prereqs;
-    this.coreqs = coreqs;
-    this.blocks = blocks;
+    this.reqs = reqs; /* e.g: [["MATH 100","MATH 109"], ["MATH 110"]] math 100 or math 109, and math 110 */
+    this.blocks = blocks; /* Not possible to take if credit w/ one of these  */
     this.semester = null;
   }
 }
@@ -101,12 +98,14 @@ class ProgramSelection {
   }
 
   addCourse(semester_id, course_id){
-    /* Adding course to existing semester. Verify valid semester */
     var current_course = courses_eng_seng[course_id];
+
+    /* Assert course is offered in selected semester */
     if(!this.verifyCourseOffered(current_course, semester_id)){
       alert("Not offered!!!!");
       return -1;
     }
+    /* Assert that both pre-requisites and co-requisites are satisified */
     if(!this.verifyCourseRequisitesSatisfied(current_course, semester_id)){
       alert("Requisites not satisfied!!!");
       return -2;
@@ -137,90 +136,83 @@ class ProgramSelection {
   }
 
   verifyCourseRequisitesSatisfied(course, semester_id){
-     /* Checks that requisites satisfied, by cycling through previous semesters */
-     if(!this.verifyCoursePrereqSatisfied(course, semester_id)) return false;
-     /* Verify coreqs */
-     if(!this.verifyCourseCoreqSatisfied(course, semester_id)) return false;
-     /* Very blocks */
-     return true;
-   }
-
-   verifyCoursePrereqSatisfied(course, semester_id){
-     var course_prerequisites = course.prereqs;
+     var course_reqs =  course.reqs;
      console.log("COURSE: "+course.subj+" "+course.course_num);
+     /* [[["CSC 110","p"],["CSC 111","c"]], [["ENGR 110","p"],[["ENGR 112","ENGL 135"],"p"]]] */
+     for(var i=0; i<course_reqs.length; i++){
+       /* Each iteration in outer loop must satisfy reqs*/
+       /* Within each iteration, only one of the conditions must be satisfied  */
+       var current_req = course_reqs[i];
+       /* ["ENGR 110","p"],[["ENGR 112","ENGL 135"],"p"]] */
+       var _found_req = false;
+       for(var j=0; j<current_req.length; j++){
+         var current_course = current_req[j];
+         var req_choice = current_course[1];
 
-     var _found_prereq = false;
-     for(var i=0; i<course_prerequisites.length; i++){
-       /* Check for every set of prereqs (e.g: MATH 110 or MATH 211 and then MATh 101) */
-       var current_semester = this.semesters.get(semester_id);
-       current_semester = current_semester.prev_semester;
+         if(typeof current_course[0] === 'object'){
+           // Case where two or more courses must satisfy one condition
+           var _found_joint_reqs = true;
+           for(var k=0; k<current_course[0].length; k++){
+             if(!this.verifyCourseReqSatisfied(current_course[0][k], semester_id, req_choice)){
+               _found_joint_reqs = false;
+             }
+           }
+           if(_found_joint_reqs == true) _found_req = true;
 
-       while(current_semester != null){
-         /* Cycle through OR statements of prereq (e.g: one of MATh 110 or MATH 211)*/
-         for(var j=0; j<course_prerequisites[i].length; j++){
-           console.log("\tPREREQ:"+current_semester.id+" :"+course_prerequisites[i][j]);
-           if(current_semester.courses.has(course_prerequisites[i][j])){
-             console.log("\t\tFOUND");
-             _found_prereq = true;
-             break;
+         }else if(typeof current_course[0] === 'string'){
+           // Case where only 1 course involved
+           if(this.verifyCourseReqSatisfied(current_course[0], semester_id, req_choice)){
+             _found_req = true;
            }
          }
-         if(_found_prereq){
-           _found_prereq = false;
-           break;
-         }
-         current_semester = current_semester.prev_semester;
        }
-       /* Reaching first semester and no satisfied prereq means
-       one of prereqs not satisfied */
-       if(current_semester == null){
-         console.log("\t\tNOT FOUND");
+
+       // If at the end of analyzing a required req, if not satisfied, return false
+       if(_found_req == false){
+         console.log("Requisites not satisfied!!!");
          return false;
        }
      }
      return true;
    }
 
-   verifyCourseCoreqSatisfied(course, semester_id){
-     var course_corequisites = course.coreqs;
-     var _found_coreq = false;
-     for(var i=0; i<course_corequisites.length; i++){
-       var current_semester = this.semesters.get(semester_id);
-       console.log("\tCOREQ:"+current_semester.id+" :"+course_corequisites[i]);
-       while(current_semester != null){
-         if(current_semester.courses.has(course_corequisites[i])){
-           console.log("\t\tFOUND");
-           break;
-         }
-         current_semester = current_semester.prev_semester;
+   verifyCourseReqSatisfied(course_str, semester_id, req_choice){
+     var current_semester = this.semesters.get(semester_id);
+     if(req_choice == "p") current_semester = current_semester.prev_semester;
+     console.log(req_choice+": "+course_str);
+
+
+     while(current_semester != null){
+       if(current_semester.courses.has(course_str)){
+         console.log("FOUND!!!");
+         return true;
        }
-       if(current_semester == null){
-         console.log("\t\tNOT FOUND");
-         return false;
-       }
+       current_semester = current_semester.prev_semester;
      }
-     return true;
+     console.log("NOT FOUND :(");
+     return false;
    }
 }
 
 var courses_eng_seng = {
-  "CSC 111": new Course("CSC","111",1.5,["F","Sp"],[],[],[], false),
-  "ENGR 130": new Course("ENGR","130",0.5,["F","Sp"],[],[],[], false),
-  "ENGR 110": new Course("ENGR","110",2.5,["F"],[],[],[], false),
-  "MATH 100": new Course("MATH","100",1.5,["F","Sp","Su"],[],[],[], false),
-  "MATH 110": new Course("MATH","110",1.5,["F"],[],[],[], false),
-  "PHYS 110": new Course("PHYS","110",1.5,["F","Sp"],[],[],[], false),
-  "CSC 115": new Course("CSC","115",1.5,["Sp","Su","F"],[["CSC 110","CSC 111"]],[],[], false),
-  "ENGR 120": new Course("ENGR","120",2.5,["Sp"],[["CSC 110","CSC 111"], ["ENGR 110"]],[],[], false),
-  "ENGR 141": new Course("ENGR","141",1.5,["Sp","Su"],[["MATH 100"], ["MATH 110"]],[],[], false),
-  "MATH 101": new Course("MATH","101",1.5,["Sp","Su","F"],[["MATH 100","MATH 109"]],[],[], false),
-  "PHYS 111": new Course("PHYS","111",1.5,["Sp","Su"],[["MATH 100","MATH 109"], ["PHYS 110"]],[],[], false),
-  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],[["CSC 115","CSC 116"]],[],[], false),
-  "CHEM 101": new Course("CHEM","101",1.5,["F","Su"],[],[],[], false),
-  "ECE 260": new Course("ECE","260",1.5,["F","Su"],[["MATH 101"], ["MATH 110","MATH 211"]],["MATH 101","ENGR 141"],[], false),
-  "MATH 122": new Course("MATH","122",1.5,["F","Sp","Su"],[["MATH 100","MATH 109"]],[],[], false),
-  "SENG 265": new Course("SENG","265",1.5,["F","Sp","Su"],[["CSC 115","CSC 116"]],[],[], false),
-  "STAT 260": new Course("STAT","260",1.5,["F","Sp","Su"],[["MATH 101"]],[],[], false)/*
+  "CSC 111": new Course("CSC","111",1.5,["F","Sp"],[],[]),
+  "ENGR 130": new Course("ENGR","130",0.5,["F","Sp"],[],[]),
+  "ENGR 110": new Course("ENGR","110",2.5,["F"],[],[]),
+  "MATH 100": new Course("MATH","100",1.5,["F","Sp","Su"],[],[]),
+  "MATH 109": new Course("MATH","109",1.5,["F","Sp","Su"],[],[]),
+  "MATH 110": new Course("MATH","110",1.5,["F"],[],[]),
+  "PHYS 110": new Course("PHYS","110",1.5,["F","Sp"],[],[]),
+  "CSC 115": new Course("CSC","115",1.5,["Sp","Su","F"],[[["CSC 110","p"],["CSC 111","p"]]],[]),
+  "ENGR 120": new Course("ENGR","120",2.5,["Sp"],[[["CSC 110","p"],["CSC 111","c"]], [["ENGR 110","p"],[["ENGR 112","ENGL 135"],"p"]]],[]),
+  "ENGR 141": new Course("ENGR","141",1.5,["Sp","Su"],[[["MATH 100","p"],["MATH 109","p"]],[["MATH 110","c"],["MATH 211","c"]]],[]),
+  "MATH 101": new Course("MATH","101",1.5,["Sp","Su","F"],[[["MATH 100","p"],["MATH 109","p"]]],[]),
+  "PHYS 111": new Course("PHYS","111",1.5,["Sp","Su"],[[["MATH 100","c"],["MATH 109","c"]],[["PHYS 110","p"]]],[]),
+  "CSC 230": new Course("CSC","230",1.5,["F","Sp","Su"],[[["CSC 115","p"],["CSC 116","p"]]],[]),
+  "CHEM 101": new Course("CHEM","101",1.5,["F","Su"],[],[],[]),
+  "ECE 260": new Course("ECE","260",1.5,["F","Su"],[[["MATH 101","p"]], [["MATH 110","p"],["MATH 211","c"]]],[]),
+  //"MATH 122": new Course("MATH","122",1.5,["F","Sp","Su"],[["MATH 100","MATH 109"]],[],[]),
+  //"SENG 265": new Course("SENG","265",1.5,["F","Sp","Su"],[["CSC 115","CSC 116"]],[],[]),
+  /*"STAT 260": new Course("STAT","260",1.5,["F","Sp","Su"],[["MATH 101"]],[],[])
   "CSC 225": new Course("CSC","255",["CSC 115", "MATH 122"],[],[], false),
   "ECE 310": new Course("ECE","310",["ECE 260"],[],[], false),
   "ECON 180": new Course("ECON","180",["MATH 101"],[],[], false),
@@ -237,8 +229,6 @@ var courses_eng_seng = {
   "SENG 350": new Course("SENG","350",["SENG 275"],[],[], false),
   "SENG 360": new Course("SENG","360",["SENG 265"],[],[], false)*/
 }
-// TODO: Case of ENGR 120: Either ENGR 110 or ENGL 135 and ENGR 112
-// TODO: Case of ECE 260: Either MATH 110 prereq or MATH 211 coreq
 
 var program_sequence_seng_rec = {
   "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],

@@ -79,7 +79,6 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: #000000;
-  border-radius: 3px;
   min-height: 30px;
   width: 200px;
   background-color: #353535;
@@ -115,7 +114,7 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: #000000;
-  background-color: #4e4e4e;
+  background-color: #232323;
   margin: 10px;
   padding: 0px 0px 5px 5px;
   position: relative;
