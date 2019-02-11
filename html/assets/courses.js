@@ -14,14 +14,14 @@ function createSemesterDOM(semester){
       <span>`+semester.id+`</span>
       <span style="float:right;">`+semester.semester_name+` `+semester.year+`</span>
     </div>
-    <ul class="panel-term-list" id="term-`+semester.id+`-list">
+    <ul class="panel-term-list" id="`+semester.id+`">
     </ul>
   </div>
   `);
 }
 
 function createCourseDOM(semester, course){
-  $("#term-"+semester+"-list").append(`
+  $("#"+semester).append(`
     <li class="panel-course" id="`+course.subj+`_`+course.course_num+`">
       <a href="#">
         <div class="panel-course-header">
@@ -180,7 +180,6 @@ class ProgramSelection {
      var current_semester = this.semesters.get(semester_id);
      if(req_choice == "p") current_semester = current_semester.prev_semester;
      console.log(req_choice+": "+course_str);
-
 
      while(current_semester != null){
        if(current_semester.courses.has(course_str)){
