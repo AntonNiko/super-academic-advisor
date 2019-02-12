@@ -81,7 +81,6 @@ class Semester {
     }
     course.semester = this.semester_name;
     this.current_units = this.current_units + course.credits;
-    //console.log("credit-"+this.id);
     $("#credit-"+this.id).text(this.current_units);
     //console.log(document.getElementById("credit-"+this.id));
     this.courses.set(course.subj+" "+course.course_num, course);
@@ -89,6 +88,8 @@ class Semester {
 
   removeCourse(course){
     this.courses.delete(course.subj+" "+course.course_num, course);
+    this.current_units = this.current_units - course.credits;
+    $("#credit-"+this.id).text(this.current_units);
   }
 }
 
@@ -107,31 +108,41 @@ class ProgramSelection {
     createSemesterDOM(current_semester);
   }
 
-  addCourse(semester_id, course_id){
+  addCourse(semester_id, course_id, dom_create){
     var current_course = courses_eng_seng[course_id];
 
     /* Assert course is offered in selected semester */
     if(!this.verifyCourseOffered(current_course, semester_id)){
       alert("Not offered!!!!");
-      return -1;
+      return false;
     }
     /* Assert that both pre-requisites and co-requisites are satisified */
     if(!this.verifyCourseRequisitesSatisfied(current_course, semester_id)){
       alert("Requisites not satisfied!!!");
-      return -2;
+      return false;
     }
 
     this.semesters.get(semester_id).addCourse(current_course)
-    createCourseDOM(semester_id, current_course);
+    if(dom_create) createCourseDOM(semester_id, current_course);
+    return true;
   }
 
-  moveCourse(course, origin_semester_id, dest_semester_id){
-     this.semesters.get(origin_semester_id).removeCourse(course);
-     this.semesters.set(dest_semester_id).addCourse(course);
+  moveCourse(course_str, origin_semester_id, new_semester_id){
+    if(!this.addCourse(new_semester_id, course_str, false)){
+      alert("Cannot be moved!!!");
+      //return false;
+    }
+    console.log("Added "+course_str);
+
+    this.removeCourse(origin_semester_id, course_str);
+    console.log("Removed "+course_str);
+    //this.semesters.get(origin_semester_id).removeCourse(course);
+    //this.semesters.set(new_semester_id).addCourse(course);
   }
 
-  removeCourse(course, semester_id){
-    this.semesters.get(semester_id).removeCourse(course);
+  removeCourse(semester_id, course_id){
+    var current_course = courses_eng_seng[course_id];
+    this.semesters.get(semester_id).removeCourse(current_course);
   }
 
   verifyCourseOffered(course, semester_id){

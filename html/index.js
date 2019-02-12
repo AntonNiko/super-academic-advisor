@@ -4,9 +4,11 @@ $(function(){
   $(".panel-term-list").sortable({
     connectWith: ".panel-term-list",
     receive: function(event, ui){
-      var semester_id = event.target.id;
+      var origin_semester_id = ui.sender.attr("id");
+      var new_semester_id = event.target.id;
       var course_str = ui.item.attr("id").replace("_"," ");
-      console.log(semester_id+" "+course_str);
+      //console.log(origin_semester_id+"->"+new_semester_id+" "+course_str);
+      program.moveCourse(course_str, origin_semester_id, new_semester_id);
     }
   }).disableSelection();
 });
