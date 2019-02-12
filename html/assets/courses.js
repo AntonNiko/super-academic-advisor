@@ -130,14 +130,14 @@ class ProgramSelection {
   moveCourse(course_str, origin_semester_id, new_semester_id){
     if(!this.addCourse(new_semester_id, course_str, false)){
       alert("Cannot be moved!!!");
-      //return false;
+      return false;
     }
     console.log("Added "+course_str);
 
     this.removeCourse(origin_semester_id, course_str);
     console.log("Removed "+course_str);
-    //this.semesters.get(origin_semester_id).removeCourse(course);
-    //this.semesters.set(new_semester_id).addCourse(course);
+    // TODO: Prevent user form placing element in new semester, move back
+    // to origin semester
   }
 
   removeCourse(semester_id, course_id){

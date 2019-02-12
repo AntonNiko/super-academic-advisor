@@ -1,3 +1,13 @@
+/*
+Grey:#b09f9e
+Orange:#f5ad42
+Red:#e83647
+Black:#2d2b35
+White:#f0f3f0
+
+*/
+
+
 html {
   height: 100%;
   font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
@@ -46,7 +56,7 @@ body {
   float: left;
   z-index: 1;
   left: 0;
-  background-color: #171819;
+  background-color: #3e3e3e;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -115,12 +125,11 @@ body {
 }
 
 .panel-course {
-  border-radius: 3px;
   height: 85px;
   width: 160px;
   border-style: solid;
   border-width: 1px;
-  border-color: #000000;
+  border-color: #3a629b;
   background-color: #232323;
   margin: 10px;
   padding: 0px 0px 5px 5px;
@@ -142,6 +151,7 @@ body {
   position: absolute;
   left: 0;
   padding-top: 5px;
+  font-weight: bold;
 }
 .panel-course-details-icon {
   position: absolute;

@@ -3,7 +3,7 @@ var program = new ProgramSelection();
 
 /* Parse JSON file containing all existing courses info */
 var courses_eng_seng = {};
-$.getJSON("assets/course_dir.json", function(json){
+$.getJSON("assets/data/course_dir.json", function(json){
   for(var course_str in json){
     courses_eng_seng[course_str] = new Course(json[course_str][0],
                                               json[course_str][1],
