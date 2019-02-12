@@ -147,7 +147,7 @@ class ProgramSelection {
 
   verifyCourseRequisitesSatisfied(course, semester_id){
      var course_reqs =  course.reqs;
-     console.log("COURSE: "+course.subj+" "+course.course_num);
+     //console.log("COURSE: "+course.subj+" "+course.course_num);
      /* [[["CSC 110","p"],["CSC 111","c"]], [["ENGR 110","p"],[["ENGR 112","ENGL 135"],"p"]]] */
      for(var i=0; i<course_reqs.length; i++){
        /* Each iteration in outer loop must satisfy reqs*/
@@ -179,7 +179,7 @@ class ProgramSelection {
 
        // If at the end of analyzing a required req, if not satisfied, return false
        if(_found_req == false){
-         console.log("Requisites not satisfied!!!");
+         //console.log("Requisites not satisfied!!!");
          return false;
        }
      }
@@ -189,16 +189,16 @@ class ProgramSelection {
    verifyCourseReqSatisfied(course_str, semester_id, req_choice){
      var current_semester = this.semesters.get(semester_id);
      if(req_choice == "p") current_semester = current_semester.prev_semester;
-     console.log(req_choice+": "+course_str);
+     //console.log(req_choice+": "+course_str);
 
      while(current_semester != null){
        if(current_semester.courses.has(course_str)){
-         console.log("FOUND!!!");
+         //console.log("FOUND!!!");
          return true;
        }
        current_semester = current_semester.prev_semester;
      }
-     console.log("NOT FOUND :(");
+     //console.log("NOT FOUND :(");
      return false;
    }
 }
