@@ -217,8 +217,6 @@ class ProgramSelection {
 var program_sequence_seng_rec = {
   "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],
   "1B":[["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],2019,"Sp"],
-  "1C":[[],2019,"Su"]/*,
-  "2A":["CSC 230","CHEM 101","ECE 260","MATH 122","SENG 265","STAT 260"],
-  "2B":[],
-  "2C":["CSC 225","SENG 275"]*/
+  "1C":[[],2019,"Su"],
+  "2A":[[],2019,"F"]
 }
