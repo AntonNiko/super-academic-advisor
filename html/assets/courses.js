@@ -16,6 +16,9 @@ function createSemesterDOM(semester){
     </div>
     <ul class="panel-term-list" id="`+semester.id+`">
     </ul>
+    <div class="panel-term-footer">
+      <span style="float:right;">Total Credits: <span id="credit-`+semester.id+`">0</span></span>
+    </div>
   </div>
   `);
 }
@@ -40,6 +43,9 @@ function createCourseDOM(semester, course){
       </a>
     </li>
   `);
+
+  // Update total credits in DOM
+
 }
 
 
@@ -74,6 +80,10 @@ class Semester {
       return -1;
     }
     course.semester = this.semester_name;
+    this.current_units = this.current_units + course.credits;
+    //console.log("credit-"+this.id);
+    $("#credit-"+this.id).text(this.current_units);
+    //console.log(document.getElementById("credit-"+this.id));
     this.courses.set(course.subj+" "+course.course_num, course);
   }
 
