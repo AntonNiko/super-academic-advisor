@@ -101,5 +101,28 @@
         </div>
     </div>
   </div>
+  
+  <div class="modal-course-details" id="modal">
+    <div class="modal-course-details-content" id="modal-content">
+	  <span class="close" id="close-btn">X</span>
+	  <p>Content</p>
+	</div>
+  </div>
+  <script>
+	$("#test-course").click(function(){
+	  $("#modal").css("display","block");
+	});
+	
+	$("#close-btn").click(function(){
+	  $("#modal").css("display","none");
+	});
+	
+	$(window).click(function(e){
+	  var target = $(e.target);
+	  if(target.is("#modal")){
+	    $("#modal").css("display","none");
+	  }
+	});
+  </script>
 </body>
 </html>
