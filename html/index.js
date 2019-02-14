@@ -3,6 +3,7 @@
 $(function(){
   $(".panel-term-list").sortable({
     connectWith: ".panel-term-list",
+    placeholder: "ui-state-highlight",
     receive: function(event, ui){
       var origin_semester_id = ui.sender.attr("id");
       var new_semester_id = event.target.id;

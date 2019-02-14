@@ -71,14 +71,13 @@ body {
 
 /* Select choice style */
 .form-control {
-  border-radius: 2px;
-  border: 1px solid #AAA;
-  color: #555;
+  border: 1px solid #8c8c8c;
+  background-color: #353535;
+  color: #f3f2f2;
   font-size: inherit;
-  margin: 5px;
-  margin-left: 0px;
-  overflow: hidden;
+  margin: 5px 5px 5px 0px;
   padding: 5px 10px;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 90%;
@@ -88,9 +87,9 @@ body {
 .panel-term {
   border-style: solid;
   border-width: 1px;
-  border-color: #000000;
+  border-color: #272727;
   min-height: 30px;
-  width: 200px;
+  min-width: 200px;
   background-color: #353535;
   margin: 10px;
 }
@@ -115,6 +114,14 @@ body {
   margin-bottom: -5px;
 }
 
+/* Course sortable placeholder highlight */
+.ui-state-highlight {
+  height: 85px;
+  width: 160px;
+  margin: 0px 0px 10px 15px;
+  padding: 0px 0px 5px 5px;
+}
+
 /* Courses Board style */
 .panel-container {
   min-height: 1000px;
@@ -129,9 +136,9 @@ body {
   width: 160px;
   border-style: solid;
   border-width: 1px;
-  border-color: #3a629b;
+  border-color: #274c82;
   background-color: #232323;
-  margin: 10px;
+  margin: 0px 0px 10px 15px;
   padding: 0px 0px 5px 5px;
   position: relative;
 }
@@ -182,11 +189,17 @@ body {
 /* Miscalleneous components */
 
 .btn {
-  background-color: #e7e7e7;
-  border: none;
+  background-color: #5e5e5e;
+  border: 1px solid #151515;
+  border-radius: 3px;
+  color: #f3f2f2;
   padding: 8px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #464646;
 }

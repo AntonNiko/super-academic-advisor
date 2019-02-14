@@ -146,6 +146,7 @@ class ProgramSelection {
   }
 
   verifyCourseOffered(course, semester_id){
+    //console.log(course);
     /* Checks if course offered in semester. If it is, return true.
     If not, return false */
     var semester = this.semesters.get(semester_id);
@@ -218,5 +219,5 @@ var program_sequence_seng_rec = {
   "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],
   "1B":[["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],2019,"Sp"],
   "1C":[[],2019,"Su"],
-  "2A":[[],2019,"F"]
+  "2A":[["MATH 122"],2019,"F"]
 }
