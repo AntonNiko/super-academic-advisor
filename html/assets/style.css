@@ -50,6 +50,11 @@ body {
 }
 
 
+.form-group {
+	display: inline;
+}
+
+
 /* Sidebar style */
 .sidebar {
   min-height: 1000px;
@@ -199,9 +204,29 @@ body {
 	background-color: #4c4c4c;
 	color: #f3f2f2;
 	margin: 15% auto;
-	padding: 20px;
+	margin-top: 5%;
+	padding: 20px 20px 5px 20px;
 	border: 1px solid #888;
 	width: 80%;
+	min-height: 443px;
+}
+
+.modal-course-reqs-content {
+	font-size: 15px;
+}
+
+.modal-title {
+	margin: 10px 0px 10px 0px;
+}
+
+.modal-subtitle {
+	margin-top: 5px;
+	font-weight: 100;
+}
+
+.modal-footer {
+	float: right;
+	height: 35px;
 }
 
 .close {
@@ -230,7 +255,7 @@ body {
 
 /* Miscalleneous components */
 
-.btn {
+.btn-primary {
   background-color: #0077cc;
   border: 1px solid #656565;
   border-radius: 3px;
@@ -242,6 +267,22 @@ body {
   font-size: 14px;
 }
 
-.btn:hover {
-  background-color: #68a3ce;
+.btn-primary:hover {
+  background-color: #04558e;
+}
+
+.btn-secondary {
+  background-color: #8e8e8e;
+  border: 1px solid #656565;
+  border-radius: 3px;
+  color: #f3f2f2;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;	
+}
+
+.btn-secondary:hover {
+	background-color: #616161;
 }

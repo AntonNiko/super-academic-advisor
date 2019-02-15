@@ -12,6 +12,9 @@ $(function(){
       program.moveCourse(course_str, origin_semester_id, new_semester_id);
     }
   }).disableSelection();
+  
+  
+  $("#modal-content").draggable();
 
   $(".panel-course").click(function(){
     $("#modal").css("display","block");
@@ -19,6 +22,9 @@ $(function(){
 
   $("#close-btn").click(function(){
     $("#modal").css("display","none");
+  });
+  $("#modal-course-cancel").click(function(){
+    $("#modal").css("display","none");	  
   });
 
   $(window).click(function(e){
