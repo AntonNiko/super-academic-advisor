@@ -43,9 +43,6 @@ function createCourseDOM(semester, course){
       </a>
     </li>
   `);
-
-  // Update total credits in DOM
-
 }
 
 
@@ -75,10 +72,6 @@ class Semester {
 
   addCourse(course){
     // Assert course will not exceeded current units
-    if(this.current_units + course.credits > this.max_units){
-      alert("Too many units!!!");
-      return -1;
-    }
     course.semester = this.semester_name;
     this.current_units = this.current_units + course.credits;
     $("#credit-"+this.id).text(this.current_units);
@@ -121,6 +114,12 @@ class ProgramSelection {
       alert("Requisites not satisfied!!!");
       return false;
     }
+    /* Assert that adding course will not exceed credit limit */
+    var semester = this.semesters.get(semester_id);
+    if(semester.current_units + current_course.credits > semester.max_units){
+      alert("Too many units!!");
+      return false;
+    }
 
     this.semesters.get(semester_id).addCourse(current_course)
     if(dom_create) createCourseDOM(semester_id, current_course);
@@ -129,9 +128,11 @@ class ProgramSelection {
 
   moveCourse(course_str, origin_semester_id, new_semester_id){
     if(!this.addCourse(new_semester_id, course_str, false)){
-      alert("Cannot be moved!!!");
+      // Delete
+      $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
       return false;
     }
+    //!this.verifyAllCourseReqsSatisfied()
     console.log("Added "+course_str);
 
     this.removeCourse(origin_semester_id, course_str);
@@ -212,6 +213,24 @@ class ProgramSelection {
      }
      //console.log("NOT FOUND :(");
      return false;
+   }
+
+   verifyAllCourseReqsSatisfied(){
+     /* Method which checks that for all existing courses, all reqs are satisified
+     . Commonly used after course moved, to check it does not break any other course reqs */
+     var selection = this;
+
+     this.semesters.forEach(function e(semester, semester_id, map){
+       semester.courses.forEach(function e(course, course_id, map2){
+         console.log(course);
+         if(!selection.verifyCourseRequisitesSatisfied(course, semester.id)){
+           console.log("A course lost its req!!!");
+           //return false;
+         }
+       });
+     });
+
+     return true;
    }
 }
 
