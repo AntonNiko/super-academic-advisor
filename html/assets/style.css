@@ -154,10 +154,9 @@ body {
   height: 30px;
 }
 
-.panel-course-name:hover, .panel-course-offered:hover {
+.panel-course-header:hover .panel-course-name, .panel-course-body:hover .panel-course-offered {
 	text-decoration: underline;
 }
-
 
 .panel-course-name {
   position: absolute;
@@ -197,6 +196,7 @@ body {
 
 .modal-course-details-content {
 	background-color: #4c4c4c;
+	color: #f3f2f2;
 	margin: 15% auto;
 	padding: 20px;
 	border: 1px solid #888;
@@ -216,8 +216,6 @@ body {
 	cursor: pointer;
 }
 
-
-
 /* OTHER */
 
 #course-panel {
@@ -232,8 +230,8 @@ body {
 /* Miscalleneous components */
 
 .btn {
-  background-color: #5e5e5e;
-  border: 1px solid #151515;
+  background-color: #0077cc;
+  border: 1px solid #656565;
   border-radius: 3px;
   color: #f3f2f2;
   padding: 8px;
@@ -244,5 +242,5 @@ body {
 }
 
 .btn:hover {
-  background-color: #464646;
+  background-color: #68a3ce;
 }
