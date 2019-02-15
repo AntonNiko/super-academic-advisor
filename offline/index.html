@@ -70,8 +70,62 @@
           </div>
         </div>
         <div class="panel-container" id="panel-container">
+		  <div class="panel-term" id="term-`+semester.id+`">
+			<div class="panel-term-header">
+			  <span>2B</span>
+			  <span style="float:right;">F 2018</span>
+			</div>
+			<ul class="panel-term-list" id="`+semester.id+`">
+			    <li class="panel-course" id="test-course">
+				  <a href="#">
+					<div class="panel-course-header">
+					  <span class="panel-course-name">MECH 999</span>
+					  <span class="panel-course-details-icon">
+						<img src="../html/assets/icons/icons8-checkmark-24.png" style="width:80%;float:right;">
+					  </span>
+					</div>
+					<div class="panel-course-body">
+					  <span class="panel-course-offered">F, Sp, Su</span>
+					  <span class="panel-course-prereqs"></span>
+					</div>
+					<div class="panel-course-footer">
+					  <span class="panel-course-credits">1.5</span>
+					</div>
+				  </a>
+				</li>
+			</ul>
+			<div class="panel-term-footer">
+			  <span style="float:right;">Total Credits: <span id="credit-`+semester.id+`">1.5</span></span>
+			</div>
+		  </div>
         </div>
     </div>
   </div>
+  
+  <div class="modal-course-details" id="modal">
+    <div class="modal-course-details-content" id="modal-content">
+	  <span class="close" id="close-btn">X</span>
+	  <h2 class="modal-title">MECH 999</h2>
+	  <h3 class="modal-subtitle">F, Sp, Su</h3>
+	  <div class="modal-course-reqs"></div>
+	  <div class="modal-footer"></div>
+	</div>
+  </div>
+  <script>
+	$("#test-course").click(function(){
+	  $("#modal").css("display","block");
+	});
+	
+	$("#close-btn").click(function(){
+	  $("#modal").css("display","none");
+	});
+	
+	$(window).click(function(e){
+	  var target = $(e.target);
+	  if(target.is("#modal")){
+	    $("#modal").css("display","none");
+	  }
+	});
+  </script>
 </body>
 </html>
