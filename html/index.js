@@ -22,6 +22,7 @@ $(function(){
 
   $("#close-btn").click(function(){
     $("#modal").css("display","none");
+	$("#modal-content").css({top: 0, left: 0, position:"relative"});
   });
   $("#modal-course-cancel").click(function(){
     $("#modal").css("display","none");	  

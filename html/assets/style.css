@@ -19,6 +19,15 @@ body {
   margin: 0px;
 }
 
+
+li {
+  font-size: 12px;
+}
+
+li span {
+  font-size: 15px;
+}
+
 /* Navigation Bar style */
 .navbar {
   overflow: hidden;
@@ -215,13 +224,27 @@ body {
 	font-size: 15px;
 }
 
+.modal-course-links {
+	font-size: 12px;
+}
+
+.modal-course-links a {
+	color: #99a9e4;
+}
+
 .modal-title {
 	margin: 10px 0px 10px 0px;
 }
 
-.modal-subtitle {
+.modal-subtitle-left {
 	margin-top: 5px;
 	font-weight: 100;
+	display: inline;
+}
+
+.modal-subtitle-right {
+	float: right;
+	display: inline;
 }
 
 .modal-footer {
