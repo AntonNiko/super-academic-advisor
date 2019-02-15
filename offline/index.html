@@ -1,0 +1,131 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Super Academic Advisor</title>
+  <meta name="description" content="Super Academic Advisor">
+  <meta name="author" content="Anton Nikitenko & Summer Johnson">
+
+  <!-- meta tags for Bootstrap -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Dev-defined CSS -->
+  <link rel="stylesheet" href="../html/assets/style.css">
+  <!-- jQuery, Popper.js, and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <!-- jQuery UI -->
+  <script src="../html/assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+  <link rel="stylesheet" href="../html/assets/jquery-ui-1.12.1.custom/jquery-ui.css">
+</head>
+<body>
+  <div class="container-fluid bg-dark">
+    <nav class="navbar" id="navigation">
+        <a class="navbar-brand" href="#">UVic</a>
+        <a type="submit" href="#">Settings</a>
+        <a type="submit" href="#">About</a>
+        <a type="submit" href="#">Contact</a>
+    </nav>
+    <div id="main">
+        <div class="sidebar" id="sidebar">
+          <div class="form-group">
+            <label for="faculty">Faculty</label>
+            <select class="form-control" id="faculty">
+              <option value="">Engineering</option>
+              <option>Science</option>
+              <option>Humanities</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="programs">Program</label>
+            <select class="form-control" id="programs">
+              <option>Software Engineering</option>
+              <option>Mechanical Engineering</option>
+              <option>Biomedical Engineering</option>
+              <option>Civil Engineering</option>
+              <option>Electrical Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="minors">Minor</label>
+            <select class="form-control" id="minors">
+              <option>Business</option>
+              <option>Software Development</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="minors">Specializations</label>
+            <select class="form-control" id="minors">
+              <option>Data mining and analysis, artificial intelligence, and machine learning</option>
+              <option>Cybersecurity and privacy</option>
+              <option>Performance and scalability</option>
+              <option>Interaction design and data visualization</option>
+              <option>Visual computing (vision/graphics/gaming)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn">Submit</button>
+          </div>
+        </div>
+        <div class="panel-container" id="panel-container">
+		  <div class="panel-term" id="term-`+semester.id+`">
+			<div class="panel-term-header">
+			  <span>2B</span>
+			  <span style="float:right;">F 2018</span>
+			</div>
+			<ul class="panel-term-list" id="`+semester.id+`">
+			    <li class="panel-course" id="test-course">
+				  <a href="#">
+					<div class="panel-course-header">
+					  <span class="panel-course-name">MECH 999</span>
+					  <span class="panel-course-details-icon">
+						<img src="../html/assets/icons/icons8-checkmark-24.png" style="width:80%;float:right;">
+					  </span>
+					</div>
+					<div class="panel-course-body">
+					  <span class="panel-course-offered">F, Sp, Su</span>
+					  <span class="panel-course-prereqs"></span>
+					</div>
+					<div class="panel-course-footer">
+					  <span class="panel-course-credits">1.5</span>
+					</div>
+				  </a>
+				</li>
+			</ul>
+			<div class="panel-term-footer">
+			  <span style="float:right;">Total Credits: <span id="credit-`+semester.id+`">1.5</span></span>
+			</div>
+		  </div>
+        </div>
+    </div>
+  </div>
+  
+  <div class="modal-course-details" id="modal">
+    <div class="modal-course-details-content" id="modal-content">
+	  <span class="close" id="close-btn">X</span>
+	  <h2 class="modal-title">MECH 999</h2>
+	  <h3 class="modal-subtitle">F, Sp, Su</h3>
+	  <div class="modal-course-reqs"></div>
+	  <div class="modal-footer"></div>
+	</div>
+  </div>
+  <script>
+	$("#test-course").click(function(){
+	  $("#modal").css("display","block");
+	});
+	
+	$("#close-btn").click(function(){
+	  $("#modal").css("display","none");
+	});
+	
+	$(window).click(function(e){
+	  var target = $(e.target);
+	  if(target.is("#modal")){
+	    $("#modal").css("display","none");
+	  }
+	});
+  </script>
+</body>
+</html>
