@@ -12,4 +12,19 @@ $(function(){
       program.moveCourse(course_str, origin_semester_id, new_semester_id);
     }
   }).disableSelection();
+
+  $(".panel-course").click(function(){
+    $("#modal").css("display","block");
+  });
+
+  $("#close-btn").click(function(){
+    $("#modal").css("display","none");
+  });
+
+  $(window).click(function(e){
+    var target = $(e.target);
+    if(target.is("#modal")){
+      $("#modal").css("display","none");
+    }
+  });
 });
