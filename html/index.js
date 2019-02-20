@@ -24,14 +24,17 @@ $(function(){
     $("#modal").css("display","none");
 	$("#modal-content").css({top: 0, left: 0, position:"relative"});
   });
+  
   $("#modal-course-cancel").click(function(){
     $("#modal").css("display","none");	  
+	$("#modal-content").css({top: 0, left: 0, position:"relative"});
   });
 
   $(window).click(function(e){
-    var target = $(e.target);
-    if(target.is("#modal")){
-      $("#modal").css("display","none");
-    }
-  });
+	var target = $(e.target);
+	  if(target.is("#modal")){
+	    $("#modal").css("display","none");
+	    $("#modal-content").css({top: 0, left: 0, position:"relative"});
+	  }
+	});
 });

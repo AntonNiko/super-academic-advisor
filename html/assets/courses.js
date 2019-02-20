@@ -65,7 +65,8 @@ class Semester {
     this.semester_name = semester_name; /* "F","Sp","Su" */
     this.prev_semester = prev_semester; /* Previous semester, even if off semester */
     this.next_semester = next_semester; /* Next semester, even if off semester */
-    this.courses = new Map();
+    //this.courses = new Map();
+	this.courses = {};
     this.max_units = 9;
     this.current_units = 0;
   }
@@ -77,7 +78,8 @@ class Semester {
       this.current_units = this.current_units + course.credits;
       $("#credit-"+this.id).text(this.current_units);
     }
-    this.courses.set(course.subj+" "+course.course_num, course);
+	this.courses[course.subj+"_"+course.course_num] = course;
+    //this.courses.set(course.subj+" "+course.course_num, course);
   }
 
   removeCourse(course, temporary = false){
@@ -85,7 +87,15 @@ class Semester {
       this.current_units = this.current_units - course.credits;
       $("#credit-"+this.id).text(this.current_units);
     }
-    this.courses.delete(course.subj+" "+course.course_num, course);
+	console.log("REMOVED "+course.subj+"_"+course.course_num);
+	//console.log(this.courses);
+	var temp = this.courses;
+	var str = course.subj+"_"+course.course_num;
+	console.log(str+" "+typeof(str));
+	console.log(temp);
+	delete temp[str];
+	console.log(temp);
+    //this.courses.delete(course.subj+" "+course.course_num, course);
   }
 }
 
@@ -133,7 +143,6 @@ class ProgramSelection {
     if(!this.addCourse(new_semester_id, course_str, false) ||
        !this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
       // Delete
-      console.log("FAILED!!!");
       $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
       return false;
     }
@@ -203,9 +212,12 @@ class ProgramSelection {
      if(req_choice == "p") current_semester = current_semester.prev_semester;
      //console.log(req_choice+": "+course_str);
      while(current_semester != null){
-       if(current_semester.courses.has(course_str)){
-         return true;
-       }
+	    if(course_str.replace(" ","_") in current_semester.courses){
+			return true;
+		}
+       //if(current_semester.courses.has(course_str)){
+       //  return true;
+       //}
        current_semester = current_semester.prev_semester;
      }
      return false;
@@ -216,15 +228,29 @@ class ProgramSelection {
      . Commonly used after course moved, to check it does not break any other course reqs */
 
      // Temporarily move course in question to new position, simulate new arrangement
+	 console.log("ALL REQS START");
      var current_course = courses_eng_seng[course_str];
+	 console.log("REMOVE 1");
      this.semesters.get(origin_semester_id).removeCourse(current_course, true);
+	 console.log("REMOVE FINISH 1");
      this.semesters.get(new_semester_id).addCourse(current_course, true);
 
      var selection = this;
      var _failed = false;
-     console.log(this.semesters);
+	 console.log(this.semesters);
      this.semesters.forEach(function e(semester, semester_id, map){
        //console.log(semester_id);
+	   for(var course_id in semester.courses){
+		 console.log(semester.courses[course_id]);
+		 if(!selection.verifyCourseRequisitesSatisfied(semester.courses[course_id], semester.id)){
+           console.log("FAILED: ");
+		   //console.log(semester.courses[course_id]);
+           selection.semesters.get(new_semester_id).removeCourse(current_course, true);
+           selection.semesters.get(origin_semester_id).addCourse(current_course, true);
+           _failed = true;
+           //return;
+		 } 
+	   } /*
        semester.courses.forEach(function e(course, course_id, map2){
          //console.log(course);
          if(!selection.verifyCourseRequisitesSatisfied(course, semester.id)){
@@ -236,8 +262,8 @@ class ProgramSelection {
            return;
          }
          if(_failed) return;
-       });
-       if(_failed) return;
+       }); */
+       //if(_failed) return;
      });
      if(_failed) return false;
 
@@ -249,7 +275,7 @@ class ProgramSelection {
 
 var program_sequence_seng_rec = {
   "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],
-  "1B":[["CSC 115","ENGR 120","ENGR 141","MATH 101","PHYS 111"],2019,"Sp"],
+  "1B":[["CSC 115","ENGR 120","MATH 101","ENGR 141","PHYS 111"],2019,"Sp"],
   "1C":[[],2019,"Su"],
   "2A":[["MATH 122"],2019,"F"]
 }
