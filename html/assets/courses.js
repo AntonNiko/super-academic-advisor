@@ -74,7 +74,7 @@ class Semester {
   addCourse(course, temporary = false){
     // Assert course will not exceeded current units
     if(!temporary){
-      course.semester = this.semester_name;
+      course.semester = this.sem  ester_name;
       this.current_units = this.current_units + course.credits;
       $("#credit-"+this.id).text(this.current_units);
     }
@@ -140,6 +140,7 @@ class ProgramSelection {
   }
 
   moveCourse(course_str, origin_semester_id, new_semester_id){
+    console.log("BEGIN");
     if(!this.addCourse(new_semester_id, course_str, false) ||
        !this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
       // Delete
@@ -147,6 +148,7 @@ class ProgramSelection {
       return false;
     }
     this.removeCourse(origin_semester_id, course_str);
+    console.log("END");
   }
 
   removeCourse(semester_id, course_id){
@@ -228,48 +230,39 @@ class ProgramSelection {
      . Commonly used after course moved, to check it does not break any other course reqs */
 
      // Temporarily move course in question to new position, simulate new arrangement
-	 console.log("ALL REQS START");
      var current_course = courses_eng_seng[course_str];
 	 console.log("REMOVE 1");
      this.semesters.get(origin_semester_id).removeCourse(current_course, true);
-	 console.log("REMOVE FINISH 1");
      this.semesters.get(new_semester_id).addCourse(current_course, true);
+     console.log("CCC");
 
      var selection = this;
      var _failed = false;
-	 console.log(this.semesters);
+     console.log(this.semesters);
      this.semesters.forEach(function e(semester, semester_id, map){
        //console.log(semester_id);
-	   for(var course_id in semester.courses){
-		 console.log(semester.courses[course_id]);
-		 if(!selection.verifyCourseRequisitesSatisfied(semester.courses[course_id], semester.id)){
-           console.log("FAILED: ");
-		   //console.log(semester.courses[course_id]);
-           selection.semesters.get(new_semester_id).removeCourse(current_course, true);
-           selection.semesters.get(origin_semester_id).addCourse(current_course, true);
-           _failed = true;
-           //return;
-		 } 
-	   } /*
        semester.courses.forEach(function e(course, course_id, map2){
-         //console.log(course);
          if(!selection.verifyCourseRequisitesSatisfied(course, semester.id)){
            console.log("A course lost its req!!!");
            console.log(course);
            selection.semesters.get(new_semester_id).removeCourse(current_course, true);
            selection.semesters.get(origin_semester_id).addCourse(current_course, true);
            _failed = true;
-           return;
+           //return;
          }
          if(_failed) return;
-       }); */
-       //if(_failed) return;
+       });
+       if(_failed) return;
      });
-     if(_failed) return false;
-
      this.semesters.get(new_semester_id).removeCourse(current_course, true);
      this.semesters.get(origin_semester_id).addCourse(current_course, true);
-     return true;
+     console.log("BBB");
+
+     if(_failed){
+       return false;
+     }else{
+       return true;
+     }
    }
 }
 

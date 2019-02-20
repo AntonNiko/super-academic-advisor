@@ -133,14 +133,6 @@ option:hover {
   margin-bottom: -5px;
 }
 
-/* Course sortable placeholder highlight */
-.ui-state-highlight {
-  height: 85px;
-  width: 160px;
-  margin: 0px 0px 10px 15px;
-  padding: 0px 0px 5px 5px;
-}
-
 /* Courses Board style */
 .panel-container {
   height: 100%;
@@ -312,9 +304,18 @@ option:hover {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;	
+  font-size: 14px;
 }
 
 .btn-secondary:hover {
 	background-color: #616161;
+}
+
+/* Course sortable placeholder highlight */
+.ui-state-highlight {
+  height: 85px;
+  width: 160px;
+  margin: 0px 0px 10px 15px;
+  padding: 0px 0px 5px 5px;
+  background-color: red;
 }

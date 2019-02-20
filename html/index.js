@@ -12,8 +12,8 @@ $(function(){
       program.moveCourse(course_str, origin_semester_id, new_semester_id);
     }
   }).disableSelection();
-  
-  
+
+
   $("#modal-content").draggable();
 
   $(".panel-course").click(function(){
