@@ -66,19 +66,20 @@ class Semester {
     this.prev_semester = prev_semester; /* Previous semester, even if off semester */
     this.next_semester = next_semester; /* Next semester, even if off semester */
     //this.courses = new Map();
-	this.courses = {};
+	  this.courses = {};
     this.max_units = 9;
     this.current_units = 0;
+    this.a = {a:5};
   }
 
   addCourse(course, temporary = false){
     // Assert course will not exceeded current units
     if(!temporary){
-      course.semester = this.sem  ester_name;
+      course.semester = this.semester_name;
       this.current_units = this.current_units + course.credits;
       $("#credit-"+this.id).text(this.current_units);
     }
-	this.courses[course.subj+"_"+course.course_num] = course;
+	  this.courses[course.subj+"_"+course.course_num] = course;
     //this.courses.set(course.subj+" "+course.course_num, course);
   }
 
@@ -88,14 +89,13 @@ class Semester {
       $("#credit-"+this.id).text(this.current_units);
     }
 	console.log("REMOVED "+course.subj+"_"+course.course_num);
-	//console.log(this.courses);
-	var temp = this.courses;
 	var str = course.subj+"_"+course.course_num;
-	console.log(str+" "+typeof(str));
-	console.log(temp);
-	delete temp[str];
-	console.log(temp);
+  delete this.courses[str];
+  //return;
+	//delete this.courses.MATH_100;
+	//console.log(this.courses);
     //this.courses.delete(course.subj+" "+course.course_num, course);
+  return true;
   }
 }
 
@@ -140,15 +140,19 @@ class ProgramSelection {
   }
 
   moveCourse(course_str, origin_semester_id, new_semester_id){
-    console.log("BEGIN");
-    if(!this.addCourse(new_semester_id, course_str, false) ||
-       !this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
+    if(!this.addCourse(new_semester_id, course_str, false)){
+      $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
+      console.log("lol");
+      return false;
+    }
+
+    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
       // Delete
       $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
+      //console.log(this.semesters.get(origin_semester_id).courses);
       return false;
     }
     this.removeCourse(origin_semester_id, course_str);
-    console.log("END");
   }
 
   removeCourse(semester_id, course_id){
@@ -231,32 +235,24 @@ class ProgramSelection {
 
      // Temporarily move course in question to new position, simulate new arrangement
      var current_course = courses_eng_seng[course_str];
-	 console.log("REMOVE 1");
      this.semesters.get(origin_semester_id).removeCourse(current_course, true);
      this.semesters.get(new_semester_id).addCourse(current_course, true);
-     console.log("CCC");
 
      var selection = this;
      var _failed = false;
-     console.log(this.semesters);
      this.semesters.forEach(function e(semester, semester_id, map){
-       //console.log(semester_id);
-       semester.courses.forEach(function e(course, course_id, map2){
-         if(!selection.verifyCourseRequisitesSatisfied(course, semester.id)){
+       for(var course_id in semester.courses){
+         if(!selection.verifyCourseRequisitesSatisfied(semester.courses[course_id], semester.id)){
            console.log("A course lost its req!!!");
-           console.log(course);
-           selection.semesters.get(new_semester_id).removeCourse(current_course, true);
-           selection.semesters.get(origin_semester_id).addCourse(current_course, true);
+           console.log(semester.courses[course_id]);
            _failed = true;
-           //return;
          }
-         if(_failed) return;
-       });
-       if(_failed) return;
+         //if(_failed) return;
+       }
+       //if(_failed) return;
      });
      this.semesters.get(new_semester_id).removeCourse(current_course, true);
      this.semesters.get(origin_semester_id).addCourse(current_course, true);
-     console.log("BBB");
 
      if(_failed){
        return false;
