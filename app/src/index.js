@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './Style.css';
 import App from './App';
 import Test from './Test';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 import * as serviceWorker from './serviceWorker';
 
 //ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Test />, document.getElementById('root'));
+ReactDOM.render(<Navbar />, document.getElementById('navigation'));
+ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
 
 
 // If you want your app to work offline and load faster, you can change
@@ -24,7 +27,4 @@ React Components:
 - Course containers 
 - Pop-up modal
 All visual
-
-
-
 */

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-//import './App.css';
+//import './Style.css';
 
 class Navbar extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
+      <a class="navbar-brand" href="#">UVic</a>
+      <a type="submit" href="#">Settings</a>
+      <a type="submit" href="#">About</a>
+      <a type="submit" href="#">Contact</a>
+      </div>
+      /*<div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -20,7 +26,7 @@ class Navbar extends Component {
             Learn React
           </a>
         </header>
-      </div>
+      </div>*/
     );
   }
 }
