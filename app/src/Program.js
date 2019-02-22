@@ -10,14 +10,12 @@ class Program extends Component {
       sequence : this.props.program_sequence,
     };
   }
-  
+
   createSemesters(){
-    console.log(this.state.sequence);
     var semesters = [];
     for(var semester_id in this.state.sequence){
-      semesters.push(<Semester courses={this.state.sequence[semester_id]}/>);
+      semesters.push(<Semester semester_id={semester_id} courses={this.state.sequence[semester_id]}/>);
     }
-    
     return semesters;
   }
 

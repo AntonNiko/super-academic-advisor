@@ -5,6 +5,7 @@ class Course extends Component {
   constructor(props){
     super(props);
     this.state = {
+      course_id: this.props.course_id,
       data: null
     };
 
@@ -18,10 +19,10 @@ class Course extends Component {
       <li class="panel-course" id="CSC_111">
         <a href="#">
           <div class="panel-course-header">
-            <span class="panel-course-name">CSC 111</span>
+            <span class="panel-course-name">{this.state.course_id}</span>
             <span class="panel-course-details-icon">
               <img src=""></img>
-            </span> 
+            </span>
           </div>
           <div class="panel-course-body">
             <span class="panel-course-offered">F, Sp, Su</span>

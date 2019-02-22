@@ -8,8 +8,20 @@ class Semester extends Component {
     console.log(this.props);
 
     this.state = {
+      semester_id: this.props.semester_id,
       courses: this.props.courses,
     };
+  }
+
+  createCourses(){
+    var courses = [];
+    console.log("AAA");
+    console.log(this.state.courses);
+
+    for(var i=0; i<this.state.courses[0].length; i++){
+      courses.push(<Course course_id={this.state.courses[0][i]} />);
+    }
+    return courses;
   }
 
   render() {
@@ -20,7 +32,7 @@ class Semester extends Component {
           <span style={{float: "right"}}>F 2019</span>
         </div>
         <ul class="panel-term-list" id="0">
-          <Course />
+          {this.createCourses()}
         </ul>
         <div class="panel-term-footer">
           <span style={{float: "right"}}>Total Credits: <span id="credit-0">0</span></span>
