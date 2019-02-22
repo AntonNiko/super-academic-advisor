@@ -32,15 +32,35 @@ li span {
 .navbar {
   overflow: hidden;
   background-color: #171819;
+  height: 50px;
 }
 
-.navbar a {
+.navbar div {
+  height: 100%;
+}
+
+.navbar-text {
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 20px 16px;
+  padding: 15px 20px 0px 20px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 14px;
+  height: 35px;
+}
+
+.navbar-img {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  font-size: 14px;
+  height: 40px;
+}
+
+.navbar-img img {
+  height: 100%;
 }
 
 .navbar a:hover {
@@ -185,7 +205,7 @@ option:hover {
   bottom: 5px;
 }
 
-.panel-term-list a {
+.panel-term-list li {
   text-decoration: none;
   color: #efefef;
 }

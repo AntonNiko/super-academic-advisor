@@ -32,7 +32,6 @@ class Course extends Component {
     
     return (
       <li class="panel-course" id={this.state.course_id.replace(" ","_")}>
-        <a href="#">
           <div class="panel-course-header">
             <span class="panel-course-name">{this.state.course_id}</span>
             <span class="panel-course-details-icon">
@@ -46,7 +45,6 @@ class Course extends Component {
           <div class="panel-course-footer">
             <span class="panel-course-credits">{course_obj[2]}</span>
           </div>
-        </a>
       </li>
     );
   }
