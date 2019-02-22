@@ -30,7 +30,54 @@ ReactDOM.render(<Program program_sequence={program_sequence_seng_rec} ref={prog 
 //serviceWorker.unregister();
 
 $(function(){
+  var startIndex, changeIndex, uiHeight;
+
   $(".panel-term-list").sortable({
+    'placeholder': 'marker',
+    start: function(e, ui){
+      startIndex = ui.placeholder.index();
+      uiHeight = ui.item.outerHeight(true);
+
+      ui.item.nextAll("li:not(.marker)").css({
+        transform: "translateY("+uiHeight+"px)"
+      });
+      ui.placeholder.css({
+        height: 0,
+        padding: 0
+      });
+    },
+    change: function(e, ui){
+      changeIndex = ui.placeholder.index();
+
+      if(startIndex > changeIndex){
+        var slice = $(".panel-term-list li").slice(changeIndex, $(".panel-term-list li").length);
+        slice.not(".ui-sortable-helper").each(function(){
+          var item = $(this);
+          item.css({
+            //background:"lightcoral",
+            transform: "translateY("+uiHeight+"px)"
+          });
+        });
+      }else if (startIndex < changeIndex) {
+
+        var slice = $('.panel-term-list li').slice(startIndex, changeIndex);
+
+        slice.not('.ui-sortable-helper').each(function() {
+            var item = $(this);
+            item.css({
+                //background: 'lightgreen',
+                transform: 'translateY(0px)'
+            });
+        });
+      }
+      startIndex = changeIndex;
+    },
+    stop: function(e, ui) {
+      $('.ui-sortable-handle').css({
+          //background: 'lightblue',
+          transform: 'translateY(0)'
+      })
+    },
     connectWith: ".panel-term-list",
     placeholder: "ui-state-highlight",
     receive: function(event, ui){
@@ -39,7 +86,6 @@ $(function(){
       var course_str = ui.item.attr("id").replace("_"," ");
       console.log(origin_semester_id+" | "+new_semester_id+" | "+course_str);
       window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
-      //console.log("movee...");
     }
   });
 

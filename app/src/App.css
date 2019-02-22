@@ -10,7 +10,7 @@ White:#f0f3f0
 
 html {
   height: 1020px;
-  font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+  font-family: 'Arimo',sans-serif;
 }
 
 /* Body style: Ensure fluid container */
@@ -25,7 +25,7 @@ li {
 }
 
 li span {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 /* Navigation Bar style */
@@ -127,10 +127,10 @@ option:hover {
   border-style: solid;
   border-width: 1px;
   border-color: #272727;
-  min-height: 30px;
   min-width: 200px;
+  height: 800px;
   background-color: #353535;
-  margin: 10px;
+  margin: 25px;
 }
 
 .panel-term-header {
@@ -140,7 +140,7 @@ option:hover {
 }
 
 .panel-term-footer {
-  padding: 5px;
+  padding: 0px 5px 5px 0px;
   color: rgb(51,152,44);
   font-weight: 500;
 }
@@ -152,6 +152,13 @@ option:hover {
   width: 100%;
   margin-bottom: -5px;
 }
+
+.panel-term-list:after {
+  clear:both;
+  content:'';
+  display:table;
+}  
+
 
 /* Courses Board style */
 .panel-container {
@@ -172,6 +179,13 @@ option:hover {
   margin: 0px 0px 10px 15px;
   padding: 0px 0px 5px 5px;
   position: relative;
+  transition: transform .2s;
+}
+
+.marker { opacity:0.0; transition:.2s height }
+
+.ui-sortable-helper {
+  transform:scale(.9)
 }
 
 .panel-course a {
