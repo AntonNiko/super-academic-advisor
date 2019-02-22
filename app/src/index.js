@@ -37,10 +37,14 @@ $(function(){
     start: function(e, ui){
       startIndex = ui.placeholder.index();
       uiHeight = ui.item.outerHeight(true);
+      console.log(startIndex);
 
+      console.log("INITIAL");
+      console.log();
       ui.item.nextAll("li:not(.marker)").css({
         transform: "translateY("+uiHeight+"px)"
       });
+
       ui.placeholder.css({
         height: 0,
         padding: 0
@@ -48,24 +52,25 @@ $(function(){
     },
     change: function(e, ui){
       changeIndex = ui.placeholder.index();
+      console.log("CHANGE");
+      console.log(startIndex+" | "+changeIndex);
 
       if(startIndex > changeIndex){
-        var slice = $(".panel-term-list li").slice(changeIndex, $(".panel-term-list li").length);
+        // TODO: Only select slice of current list, not other semesters
+        var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
+        console.log(slice);
         slice.not(".ui-sortable-helper").each(function(){
           var item = $(this);
           item.css({
-            //background:"lightcoral",
             transform: "translateY("+uiHeight+"px)"
           });
         });
       }else if (startIndex < changeIndex) {
-
-        var slice = $('.panel-term-list li').slice(startIndex, changeIndex);
+        var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
 
         slice.not('.ui-sortable-helper').each(function() {
             var item = $(this);
             item.css({
-                //background: 'lightgreen',
                 transform: 'translateY(0px)'
             });
         });
@@ -73,8 +78,8 @@ $(function(){
       startIndex = changeIndex;
     },
     stop: function(e, ui) {
+      console.log("STOP");
       $('.ui-sortable-handle').css({
-          //background: 'lightblue',
           transform: 'translateY(0)'
       })
     },
