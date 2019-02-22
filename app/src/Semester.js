@@ -30,7 +30,7 @@ class Semester extends Component {
           <span>{this.state.semester_id}</span>
           <span style={{float: "right"}}>{this.state.courses[2]} {this.state.courses[1]}</span>
         </div>
-        <ul class="panel-term-list" id="0">
+        <ul class="panel-term-list" id={this.state.semester_id}>
           {this.createCourses()}
         </ul>
         <div class="panel-term-footer">

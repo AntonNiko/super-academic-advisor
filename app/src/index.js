@@ -22,12 +22,12 @@ var program_sequence_seng_rec = {
 
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
 ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
-ReactDOM.render(<Program program_sequence={program_sequence_seng_rec}/>, document.getElementById('panel-container-parent'));
+ReactDOM.render(<Program program_sequence={program_sequence_seng_rec} ref={prog => {window.prog = prog;}}/>, document.getElementById('panel-container-parent'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//serviceWorker.unregister();
 
 $(function(){
   $(".panel-term-list").sortable({
@@ -37,9 +37,9 @@ $(function(){
       var origin_semester_id = ui.sender.attr("id");
       var new_semester_id = event.target.id;
       var course_str = ui.item.attr("id").replace("_"," ");
-      //console.log(origin_semester_id+"->"+new_semester_id+" "+course_str);
-      //program.moveCourse(course_str, origin_semester_id, new_semester_id);
-      console.log("movee...");
+      console.log(origin_semester_id+" | "+new_semester_id+" | "+course_str);
+      window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
+      //console.log("movee...");
     }
   });
 
