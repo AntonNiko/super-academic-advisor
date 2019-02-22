@@ -7,7 +7,6 @@ class Course extends Component {
     this.state = {
       course_id: this.props.course_id,
       data: null,
-      course_obj: null,
     };
 
     const request = async() => {
@@ -29,6 +28,7 @@ class Course extends Component {
       return <li class="panel-course" id={this.state.course_id.replace(" ","_")}></li>
     }
     var course_obj = this.returnCourseContent();
+    console.log(course_obj);
     
     return (
       <li class="panel-course" id={this.state.course_id.replace(" ","_")}>
@@ -40,21 +40,15 @@ class Course extends Component {
             </span>
           </div>
           <div class="panel-course-body">
-            <span class="panel-course-offered">F, Sp, Su</span>
+            <span class="panel-course-offered">{course_obj[3].join(", ")}</span>
             <span class="panel-course-prereqs"></span>
           </div>
           <div class="panel-course-footer">
-            <span class="panel-course-credits">1.5</span>
+            <span class="panel-course-credits">{course_obj[2]}</span>
           </div>
         </a>
       </li>
     );
-  }
-
-  componentDidMount(){
-    fetch("course_dir.json")
-      .then(response => response.json())
-      .then(dataJSON => this.setState({data: dataJSON}));
   }
 }
 

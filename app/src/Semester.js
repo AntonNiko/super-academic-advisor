@@ -12,7 +12,6 @@ class Semester extends Component {
       courses: this.props.courses,
       prev_semester: this.props.last_added_semester,
     };
-    console.log(this.state);
   }
 
   createCourses(){
