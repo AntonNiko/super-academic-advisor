@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-//import './App.css';
 import Course from './Course';
 
-class SemesterContainer extends Component {
+class Semester extends Component {
+  constructor(props){
+    super(props);
+    console.log(this.props);
+
+    this.state = {
+      courses: this.props.courses,
+    };
+  }
+
   render() {
     return (
       <div class="panel-term" id="term-0">
@@ -22,4 +30,4 @@ class SemesterContainer extends Component {
   }
 }
 
-export default SemesterContainer;
+export default Semester;

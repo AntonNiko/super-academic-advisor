@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-//import './App.css';
 
 class Course extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      data: null
+    };
+
+    fetch("course_dir.json")
+      .then(response => response.json())
+      .then(dataJSON => this.setState({data: dataJSON}));
+  }
+
   render() {
     return (
       <li class="panel-course" id="CSC_111">
@@ -11,7 +21,7 @@ class Course extends Component {
             <span class="panel-course-name">CSC 111</span>
             <span class="panel-course-details-icon">
               <img src=""></img>
-            </span>
+            </span> 
           </div>
           <div class="panel-course-body">
             <span class="panel-course-offered">F, Sp, Su</span>
@@ -23,6 +33,12 @@ class Course extends Component {
         </a>
       </li>
     );
+  }
+
+  componentDidMount(){
+    fetch("course_dir.json")
+      .then(response => response.json())
+      .then(dataJSON => this.setState({data: dataJSON}));
   }
 }
 
