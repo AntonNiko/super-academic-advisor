@@ -13,8 +13,11 @@ class Program extends Component {
 
   createSemesters(){
     var semesters = [];
+    var last_added_semester = null;
+
     for(var semester_id in this.state.sequence){
-      semesters.push(<Semester semester_id={semester_id} courses={this.state.sequence[semester_id]}/>);
+      semesters.push(<Semester semester_id={semester_id} courses={this.state.sequence[semester_id]} last_added_semester={last_added_semester}/>);
+      last_added_semester = semester_id;
     }
     return semesters;
   }

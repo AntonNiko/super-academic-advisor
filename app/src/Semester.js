@@ -5,18 +5,18 @@ import Course from './Course';
 class Semester extends Component {
   constructor(props){
     super(props);
-    console.log(this.props);
+    //console.log(this.props);
 
     this.state = {
       semester_id: this.props.semester_id,
       courses: this.props.courses,
+      prev_semester: this.props.last_added_semester,
     };
+    console.log(this.state);
   }
 
   createCourses(){
     var courses = [];
-    console.log("AAA");
-    console.log(this.state.courses);
 
     for(var i=0; i<this.state.courses[0].length; i++){
       courses.push(<Course course_id={this.state.courses[0][i]} />);
@@ -26,16 +26,16 @@ class Semester extends Component {
 
   render() {
     return (
-      <div class="panel-term" id="term-0">
+      <div class="panel-term" id={"term-"+this.state.semester_id}>
         <div class="panel-term-header">
-          <span>Term 0</span>
-          <span style={{float: "right"}}>F 2019</span>
+          <span>{this.state.semester_id}</span>
+          <span style={{float: "right"}}>{this.state.courses[2]} {this.state.courses[1]}</span>
         </div>
         <ul class="panel-term-list" id="0">
           {this.createCourses()}
         </ul>
         <div class="panel-term-footer">
-          <span style={{float: "right"}}>Total Credits: <span id="credit-0">0</span></span>
+          <span style={{float: "right"}}>Total Credits: <span id={"credit-"+this.state.semester_id}>0</span></span>
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './Style.css';
+import './App.css';
 import Test from './Test';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
