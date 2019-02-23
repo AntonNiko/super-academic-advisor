@@ -29,11 +29,11 @@ class Course extends Component {
     }
     var course_obj = this.returnCourseContent();
     console.log(course_obj);
-    
+
     return (
       <li class="panel-course" id={this.state.course_id.replace(" ","_")}>
           <div class="panel-course-header">
-            <span class="panel-course-name">CSC 111</span>
+            <span class="panel-course-name">{this.state.course_id}</span>
             <span class="panel-course-details-icon">
               <img src=""></img>
             </span>
