@@ -12,13 +12,17 @@ class Semester extends Component {
       courses: this.props.courses,
       prev_semester: this.props.last_added_semester,
     };
+
+    fetch("course_dir.json")
+      .then(response => response.json())
+      .then(dataJSON => this.setState({courses_json: dataJSON}));
   }
 
   createCourses(){
     var courses = [];
 
     for(var i=0; i<this.state.courses[0].length; i++){
-      courses.push(<Course course_id={this.state.courses[0][i]} />);
+      courses.push(<Course course_json={this.state.courses_json[this.state.courses[0][i]]} />);
     }
     return courses;
   }

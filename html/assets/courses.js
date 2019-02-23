@@ -141,14 +141,14 @@ class ProgramSelection {
       $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
       //console.log(this.semesters.get(origin_semester_id).courses);
       return false;
-    }    
-	
+    }
+
 	if(!this.addCourse(new_semester_id, course_str, false)){
       $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
 	  console.log("Could not add...");
       return false;
     }
-	
+
     this.removeCourse(origin_semester_id, course_str);
 	return true;
   }
@@ -248,7 +248,7 @@ class ProgramSelection {
      });
      this.semesters.get(new_semester_id).removeCourse(current_course, true);
      this.semesters.get(origin_semester_id).addCourse(current_course, true);
-	 
+
 	 console.log("__________");
      if(_failed){
        return false;
