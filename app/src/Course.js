@@ -22,8 +22,8 @@ class Course extends Component {
   }
 
   componentDidMount(){
-    //console.log(this.state.data[this.state.course_id]);
-    //this.props.updateCreditValue(this.getCourseCreditValue());
+    //console.log("mounted "+this.props.course_id);
+    this.props.updateCreditValue(this.props.data[this.props.course_id][2])
   }
 
   render() {

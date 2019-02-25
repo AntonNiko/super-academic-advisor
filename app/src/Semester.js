@@ -36,7 +36,6 @@ class Semester extends Component {
   updateCreditValue(course_credit_value){
     console.log("updating credit 1...");
     this.setState({current_units: this.state.current_units+=course_credit_value});
-    this.props.updateCreditValues();
   }
 
   addCourse(course_id, temporary = false){
@@ -69,7 +68,7 @@ class Semester extends Component {
           {this.createCourses()}
         </ul>
         <div class="panel-term-footer">
-          <span style={{float: "right"}}>Total Credits: <span id={"credit-"+this.props.semester_id}>0</span></span>
+          <span style={{float: "right"}}>Total Credits: <span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
         </div>
       </div>
     );

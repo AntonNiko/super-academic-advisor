@@ -218,7 +218,7 @@ class ProgramSelection {
      while(current_semester != null){
 	    if(course_str.replace(" ","_") in current_semester.courses){
 			return true;
-		}
+		  }
        //if(current_semester.courses.has(course_str)){
        //  return true;
        //}

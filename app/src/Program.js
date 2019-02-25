@@ -37,8 +37,8 @@ class Program extends Component {
     return semesters;
   }
 
-  updateCreditValues(){
-    console.log("update credit 2");
+  addCourse(semester_id, course_id, dom_create){
+    //var current_course = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
   }
 
   moveCourse(course_str, origin_semester_id, new_semester_id){
@@ -50,7 +50,11 @@ class Program extends Component {
       return false;
     }
 
-    
+    if(!this.addCourse(new_semester_id, course_str, false)){
+
+    }
+
+
     /*    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
 	  console.log("One or more courses were invalidated...");
       // Delete
