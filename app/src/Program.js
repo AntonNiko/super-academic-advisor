@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import Semester from './Semester';
 import logo from './logo.svg';
 import $ from 'jquery';
@@ -8,6 +8,12 @@ import 'jquery-ui/ui/widgets/draggable';
 class Program extends Component {
   constructor(props){
     super(props);
+
+    this.sem = {};
+    for(var semester_id in this.props.sequence){
+      this.sem[semester_id] = createRef();
+    }
+
     this.state = {
       sem: {},
     };
@@ -23,10 +29,9 @@ class Program extends Component {
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
         last_added_semester={last_added_semester}
-        /*ref={sem => {this.sem[semester_id] = sem}}*/
+        ref={this.sem[semester_id]}
         updateCreditValues={this.updateCreditValues}
         data = {this.props.data}/>);
-
       last_added_semester = semester_id;
     }
     return semesters;
@@ -66,7 +71,8 @@ class Program extends Component {
 
     // Temporarily move course in question to new position, simulate new arrangement
     //var current_course = this.state.data[course_str];
-    this.sem[origin_semester_id].removeCourse(course_str);
+    console.log(this.sem);
+    //this.sem[origin_semester_id].removeCourse(course_str);
 
     /*var current_course = courses_eng_seng[course_str];
     this.semesters.get(origin_semester_id).removeCourse(current_course, true);
@@ -85,6 +91,10 @@ class Program extends Component {
     this.semesters.get(new_semester_id).removeCourse(current_course, true);
     this.semesters.get(origin_semester_id).addCourse(current_course, true);*/
     //console.log("checking all course reqs");
+  }
+
+  componentDidMount(){
+    this.setState({sem: this.sem});
   }
 
   render() {
