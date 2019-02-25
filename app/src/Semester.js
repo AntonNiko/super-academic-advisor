@@ -41,12 +41,14 @@ class Semester extends Component {
     if(!temporary){
 
     }
+    console.log("adding...");
   }
 
   removeCourse(course_id, temporary = false){
     if(!temporary){
 
     }
+    console.log("removing...");
   }
 
 

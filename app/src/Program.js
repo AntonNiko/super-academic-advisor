@@ -71,8 +71,8 @@ class Program extends Component {
 
     // Temporarily move course in question to new position, simulate new arrangement
     //var current_course = this.state.data[course_str];
-    console.log(this.sem);
-    //this.sem[origin_semester_id].removeCourse(course_str);
+    this.state.sem[origin_semester_id].current.removeCourse(course_str, true);
+    //this.state.sem[origin_semester_id].removeCourse(course_str, true);
 
     /*var current_course = courses_eng_seng[course_str];
     this.semesters.get(origin_semester_id).removeCourse(current_course, true);
