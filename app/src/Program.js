@@ -42,6 +42,9 @@ class Program extends Component {
   }
 
   moveCourse(course_str, origin_semester_id, new_semester_id){
+    // Temporarily move course DOM back to original semester for processing 
+    $("#"+origin_semester_id).prepend($("#"+course_str.replace(" ","_")))
+
     if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
 
     }
@@ -60,7 +63,7 @@ class Program extends Component {
     }
 
     this.removeCourse(origin_semester_id, course_str);*/
-    console.log("moving...");
+    //console.log("moving...");
     //console.log(this.sem);
 	  return true;
   }
@@ -70,8 +73,8 @@ class Program extends Component {
     . Commonly used after course moved, to check it does not break any other course reqs */
 
     // Temporarily move course in question to new position, simulate new arrangement
-    //var current_course = this.state.data[course_str];
     this.state.sem[origin_semester_id].current.removeCourse(course_str, true);
+    this.state.sem[new_semester_id].current.addCourse(course_str, true);
     //this.state.sem[origin_semester_id].removeCourse(course_str, true);
 
     /*var current_course = courses_eng_seng[course_str];

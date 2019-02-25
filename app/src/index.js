@@ -86,14 +86,10 @@ $(function(){
     start: function(e, ui){
       startIndex = ui.placeholder.index();
       uiHeight = ui.item.outerHeight(true);
-      //console.log(startIndex);
 
-      //console.log("INITIAL");
-      //console.log();
       ui.item.nextAll("li:not(.marker)").css({
         transform: "translateY("+uiHeight+"px)"
       });
-
       ui.placeholder.css({
         height: 0,
         padding: 0
@@ -138,7 +134,6 @@ $(function(){
       var origin_semester_id = ui.sender.attr("id");
       var new_semester_id = event.target.id;
       var course_str = ui.item.attr("id").replace("_"," ");
-      console.log(origin_semester_id+" | "+new_semester_id+" | "+course_str);
       window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
     }
   });

@@ -11,6 +11,7 @@ class Semester extends Component {
       current_units: 0,
       max_units: 9,
       courses_obj: {},
+      courses: this.props.courses,
     };
 
     this.removeCourse = this.removeCourse.bind(this);
@@ -20,8 +21,8 @@ class Semester extends Component {
   createCourses(){
     var courses = [];
 
-    for(var i=0; i<this.props.courses[0].length; i++){
-      courses.push(<Course course_id={this.props.courses[0][i]}
+    for(var i=0; i<this.state.courses[0].length; i++){
+      courses.push(<Course course_id={this.state.courses[0][i]}
                       ref={course => {this.course = course}}
                       updateCreditValue={this.updateCreditValue}
                       data = {this.props.data}/>);
@@ -38,21 +39,30 @@ class Semester extends Component {
   }
 
   addCourse(course_id, temporary = false){
+    console.log("Adding "+course_id);
+
+    this.props.courses[0].push(course_id);
+    this.forceUpdate();
+
     if(!temporary){
 
     }
-    console.log("adding...");
   }
 
   removeCourse(course_id, temporary = false){
+    console.log("Removing "+course_id);
+
+    this.props.courses[0].splice(this.props.courses[0].indexOf(course_id), 1);
+    this.forceUpdate();
+
     if(!temporary){
 
     }
-    console.log("removing...");
   }
 
 
   render() {
+    console.log("rendering...");
     return (
       <div class="panel-term" id={"term-"+this.props.semester_id}>
         <div class="panel-term-header">
