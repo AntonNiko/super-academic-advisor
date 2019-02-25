@@ -5,6 +5,7 @@ import Course from './Course';
 class Semester extends Component {
   constructor(props){
     super(props);
+
     this.state = {
       //semester_id: this.props.semester_id,
       prev_semester: this.props.last_added_semester,
@@ -42,10 +43,8 @@ class Semester extends Component {
     console.log("Adding "+course_id);
 
     this.props.courses[0].push(course_id);
-    this.forceUpdate();
-
     if(!temporary){
-
+      this.forceUpdate();
     }
   }
 
@@ -53,16 +52,13 @@ class Semester extends Component {
     console.log("Removing "+course_id);
 
     this.props.courses[0].splice(this.props.courses[0].indexOf(course_id), 1);
-    this.forceUpdate();
-
     if(!temporary){
-
+      this.forceUpdate();
     }
   }
 
 
   render() {
-    console.log("rendering...");
     return (
       <div class="panel-term" id={"term-"+this.props.semester_id}>
         <div class="panel-term-header">
