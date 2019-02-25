@@ -46,9 +46,12 @@ class Program extends Component {
     $("#"+origin_semester_id).prepend($("#"+course_str.replace(" ","_")))
 
     if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
-
+      console.log("One or more courses were invalidated...");
+      return false;
     }
-    /*if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
+
+    
+    /*    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
 	  console.log("One or more courses were invalidated...");
       // Delete
       $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
@@ -56,13 +59,14 @@ class Program extends Component {
       return false;
     }
 
-	  if(!this.addCourse(new_semester_id, course_str, false)){
+	if(!this.addCourse(new_semester_id, course_str, false)){
       $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
-	    console.log("Could not add...");
+	  console.log("Could not add...");
       return false;
     }
 
-    this.removeCourse(origin_semester_id, course_str);*/
+    this.removeCourse(origin_semester_id, course_str);
+	return true;*/
     //console.log("moving...");
     //console.log(this.sem);
 	  return true;
@@ -81,19 +85,23 @@ class Program extends Component {
       for(var i=0; i<this.state.sem[semester_id].current.state.courses[0].length; i++){
         var course_obj = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
         if(!this.verifyCourseRequisitesSatisfied(course_obj, semester_id)){
-
+          _failed = true;
         }
       }
     }
 
     this.state.sem[new_semester_id].current.removeCourse(course_str, true);
     this.state.sem[origin_semester_id].current.addCourse(course_str, true);
+
+    if(_failed){
+      return false;
+    }else{
+      return true;
+    }
   }
 
   verifyCourseRequisitesSatisfied(course, semester_id){
-    console.log("individual course reqs...");
     var course_reqs = course[4];
-    console.log(course_reqs);
     /* [[["CSC 110","p"],["CSC 111","c"]], [["ENGR 110","p"],[["ENGR 112","ENGL 135"],"p"]]] */
     for(var i=0; i<course_reqs.length; i++){
       /* Each iteration in this outer loop represents a requirement that must be satisfied */
@@ -130,19 +138,16 @@ class Program extends Component {
   }
 
   verifyCourseReqSatisfied(course_str, semester_id, req_choice){
-
-    /*var current_semester = this.semesters.get(semester_id);
-    if(req_choice == "p") current_semester = current_semester.prev_semester;
-    //console.log(req_choice+": "+course_str);
+    var current_semester = this.state.sem[semester_id];
+    if(req_choice == "p") current_semester = this.state.sem[current_semester.current.state.prev_semester];
     while(current_semester != null){
-     if(course_str.replace(" ","_") in current_semester.courses){
-     return true;
-   }
-      //if(current_semester.courses.has(course_str)){
-      //  return true;
-      //}
-      current_semester = current_semester.prev_semester;
-    }*/
+      //console.log(current_semester.current.props.courses[0]);
+      if(current_semester.current.props.courses[0].includes(course_str)){
+        return true;
+      }
+      current_semester = this.state.sem[current_semester.current.state.prev_semester];
+    }
+
     return false;
   }
 
