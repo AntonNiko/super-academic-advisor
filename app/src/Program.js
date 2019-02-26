@@ -46,7 +46,6 @@ class Program extends Component {
     // Method that will allow courses to be added as a component
     //var current_course = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
 
-
     // Verify course offered in semester
     if(!this.verifyCourseOffered(course_str, semester_id)){
       alert("Not offered!");
@@ -55,13 +54,13 @@ class Program extends Component {
 
     // Assert all requisites satisfied
     if(!this.verifyCourseRequisitesSatisfied(this.props.data[course_str], semester_id)){
-      alert("Course requisite not satisifed!!!...");
+      console.log("Course requisite not satisifed!!!...");
       return false;
     }
 
     // Assert that course will not exceed credit limit
     if(!this.verifyCourseCreditLimit(course_str, semester_id)){
-      alert("Too many units!");
+      console.log("Too many units!");
       return false;
     }
 
@@ -84,7 +83,7 @@ class Program extends Component {
       return false;
     }
     this.state.sem[origin_semester_id].current.removeCourse(course_str, false);
-    
+
 
 
     /*    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
@@ -146,7 +145,7 @@ class Program extends Component {
       for(var j=0; j<current_req.length; j++){
         var current_course = current_req[j];
         var req_choice = current_course[1]; /* either p (prereq), or c (coreq) */
-        
+
         // If nested condition is actually 2 or more courses, then all those courses must be present
         if(typeof current_course[0] === 'object'){
           var _found_joint_reqs = true;
@@ -167,7 +166,6 @@ class Program extends Component {
 
     // If a required req is not satisfied, return false
     if(_found_req == false){
-      console.log("Requisites not satisfied!!!");
       return false;
     }
     return true;
@@ -201,7 +199,7 @@ class Program extends Component {
     var course_credit = this.props.data[course_str][2];
     var semester_credit = this.sem[semester_id].current.state.current_units;
     var credit_limit = this.sem[semester_id].current.state.max_units;
-    
+
     if(semester_credit + course_credit > credit_limit){
       return false;
     }else{

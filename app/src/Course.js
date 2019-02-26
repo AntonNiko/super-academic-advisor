@@ -7,8 +7,6 @@ class Course extends Component {
     this.state = {
       course_obj: null,
     };
-    //this.setState({course_obj: this.state.data[this.props.course_id][2]});
-    //this.getCourseCreditValue = this.getCourseCreditValue.bind(this);
   }
 
   returnCourseContent(){
@@ -22,8 +20,11 @@ class Course extends Component {
   }
 
   componentDidMount(){
-    //console.log("mounted "+this.props.course_id);
     this.props.updateCreditValue(this.props.data[this.props.course_id][2])
+  }
+
+  componentWillUnmount(){
+    this.props.updateCreditValue(-this.props.data[this.props.course_id][2]);
   }
 
   render() {
