@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Program from './Program';
 import Semester from './Semester';
+import PopupCourse from './PopupCourse';
 import * as serviceWorker from './serviceWorker';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
@@ -72,6 +73,7 @@ ReactDOM.render(<Program sequence={program_sequence_seng_rec}
   ref={prog => {window.prog = prog;}}
   data={data}/>,
   document.getElementById('panel-container-parent'));
+ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -141,7 +143,9 @@ $(function(){
 
   $("#modal-content").draggable();
 
-  $(".panel-course").click(function(){
+  $(".panel-course").dblclick(function(){
+    var course_obj = data[$(this).attr("id").replace("_"," ")];
+    window.popup.populateCourse(course_obj);
     $("#modal").css("display","block");
   });
 
