@@ -44,6 +44,9 @@ class Sidebar extends Component {
           </select>
         </div>
         <div class="form-group">
+          
+        </div>
+        <div class="form-group">
           <button type="button" class="btn-primary">Submit</button>
         </div>
       </div>

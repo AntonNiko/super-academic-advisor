@@ -215,6 +215,7 @@ class Program extends Component {
     return (
       <div class="panel-container" id="panel-container">
         {this.createSemesters()}
+        <button id="add-course" type="button" class="btn-primary">Add Course</button>
       </div>
     );
   }

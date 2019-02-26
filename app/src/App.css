@@ -345,6 +345,12 @@ option:hover {
 	background-color: #616161;
 }
 
+#add-course {
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+}
+
 /* Course sortable placeholder highlight */
 .ui-state-highlight {
   height: 85px;
