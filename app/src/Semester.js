@@ -61,7 +61,7 @@ class Semester extends Component {
           {this.createCourses()}
         </ul>
         <div class="panel-term-footer">
-          <span style={{float: "right"}}>Total Credits: <span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
+          <span style={{float: "right"}}>Credits: <span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
         </div>
       </div>
     );

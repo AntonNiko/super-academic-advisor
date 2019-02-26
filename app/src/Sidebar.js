@@ -44,28 +44,30 @@ class Sidebar extends Component {
           </select>
         </div>
         <div class="form-group">
-          
+          <label for="minors">Specialization</label>
+          <select class="form-control" id="minors">
+            <option>Data mining and analysis, artificial intelligence, and machine learning</option>
+            <option>Cybersecurity and privacy</option>
+            <option>Performance and scalability</option>
+            <option>Interaction design and data visualization</option>
+            <option>Visual computing (vision/graphics/gaming)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <ul class="dropdown-select">
+            <li>
+              <span>Engineering</span><span class="arrow-down"></span>
+              <ul>
+                <li><a href="#">Engineering</a></li>
+                <li><a href="#">Economics</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <div class="form-group">
           <button type="button" class="btn-primary">Submit</button>
         </div>
       </div>
-      /*<div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>*/
     );
   }
 }
