@@ -25,6 +25,11 @@ class Program extends Component {
     var semesters = [];
     var last_added_semester = null;
 
+
+    // Evaluate each course requisites, and adjust props accordingly
+
+
+
     for(var semester_id in this.props.sequence){
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
@@ -37,8 +42,32 @@ class Program extends Component {
     return semesters;
   }
 
-  addCourse(semester_id, course_id, dom_create){
+  addCourse(semester_id, course_str){
+    // Method that will allow courses to be added as a component
     //var current_course = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
+
+
+    // Verify course offered in semester
+    if(!this.verifyCourseOffered(course_str, semester_id)){
+      alert("Not offered!");
+      return false;
+    }
+
+    // Assert all requisites satisfied
+    if(!this.verifyCourseRequisitesSatisfied(this.props.data[course_str], semester_id)){
+      alert("Course requisite not satisifed!!!...");
+      return false;
+    }
+
+    // Assert that course will not exceed credit limit
+    if(!this.verifyCourseCreditLimit(course_str, semester_id)){
+      alert("Too many units!");
+      return false;
+    }
+
+
+    this.state.sem[semester_id].current.addCourse(course_str, false);
+    return true;
   }
 
   moveCourse(course_str, origin_semester_id, new_semester_id){
@@ -51,8 +80,11 @@ class Program extends Component {
     }
 
     if(!this.addCourse(new_semester_id, course_str, false)){
-
+      console.log("failed to add course...");
+      return false;
     }
+    this.state.sem[origin_semester_id].current.removeCourse(course_str, false);
+    
 
 
     /*    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
@@ -153,6 +185,28 @@ class Program extends Component {
     }
 
     return false;
+  }
+
+  verifyCourseOffered(course_str, semester_id){
+    /* Checks if course offered in semester. If it is, return true.
+    If not, return false */
+    if(this.props.data[course_str][3].includes(this.sem[semester_id].current.props.courses[2])){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  verifyCourseCreditLimit(course_str, semester_id){
+    var course_credit = this.props.data[course_str][2];
+    var semester_credit = this.sem[semester_id].current.state.current_units;
+    var credit_limit = this.sem[semester_id].current.state.max_units;
+    
+    if(semester_credit + course_credit > credit_limit){
+      return false;
+    }else{
+      return true;
+    }
   }
 
   componentDidMount(){

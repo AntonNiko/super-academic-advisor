@@ -27,20 +27,15 @@ class Semester extends Component {
                       ref={course => {this.course = course}}
                       updateCreditValue={this.updateCreditValue}
                       data = {this.props.data}/>);
-      //this.current_units+=this.course.getCourseCreditValue();
-      //courses.push(<Course course_json={this.state.courses_json[this.state.courses[0][i]]} />);
     }
     return courses;
   }
 
   updateCreditValue(course_credit_value){
-    console.log("updating credit 1...");
     this.setState({current_units: this.state.current_units+=course_credit_value});
   }
 
   addCourse(course_id, temporary = false){
-    console.log("Adding "+course_id);
-
     this.props.courses[0].push(course_id);
     if(!temporary){
       this.forceUpdate();
@@ -48,8 +43,6 @@ class Semester extends Component {
   }
 
   removeCourse(course_id, temporary = false){
-    console.log("Removing "+course_id);
-
     this.props.courses[0].splice(this.props.courses[0].indexOf(course_id), 1);
     if(!temporary){
       this.forceUpdate();
