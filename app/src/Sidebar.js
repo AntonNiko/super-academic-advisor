@@ -53,7 +53,7 @@ class Sidebar extends Component {
             <option>Visual computing (vision/graphics/gaming)</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group-new">
           <ul class="dropdown-select">
             <li>
               <span>Engineering</span><span class="arrow-down"></span>

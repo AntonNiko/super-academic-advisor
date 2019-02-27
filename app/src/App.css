@@ -365,21 +365,25 @@ li span {
 
 
 /* NEW Select Dropdown */
+.form-group-new {
+  width: 100%;
+}
+
 ul.dropdown-select {
   text-align: left;
-  display: inline;
+  display: block;
   margin: 0;
-  padding: 15px 4px 17px 0;
+  padding: 10px 4px 10px 0;
   list-style: none;
   width: 100%;
-  border: 1px solid #8c8c8c;
 }
+
 ul.dropdown-select li {
   /*font: bold 12px/18px sans-serif;*/
   display: inline-block;
   margin-right: -4px;
   position: relative;
-  padding: 15px 20px;
+  padding: 10px 3px 10px 5px;
   background: #353535;
   cursor: pointer;
   -webkit-transition: all 0.2s;
@@ -389,6 +393,7 @@ ul.dropdown-select li {
   transition: all 0.2s;
   color: #fff;
   width: 75%;
+  border: 1px solid #8c8c8c;
 }
 ul.dropdown-select li:hover {
   background: #555;
@@ -397,8 +402,8 @@ ul.dropdown-select li:hover {
 ul.dropdown-select li ul {
   padding: 0;
   position: absolute;
-  top: 48px;
-  left: 0;
+  top: 36px;
+  left: -1px;
   width: 100%;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -413,7 +418,7 @@ ul.dropdown-select li ul {
   -transition: opacity 0.2s;
 }
 ul.dropdown-select li ul li {
-  min-width: 80px;
+  width: 95%;
   background-color: #555;
 }
 ul.dropdown-select li ul li > a { 
@@ -424,7 +429,7 @@ ul.dropdown-select li ul li > a {
 ul.dropdown-select li ul li:hover {
     background: #666;
 }
-ul.dropdown-select li:hover ul {
+ul.dropdown-select li:hover ul { /* li:hover ul */
   display: block;
   opacity: 1;
   visibility: visible;
