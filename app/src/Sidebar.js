@@ -5,25 +5,31 @@ class Sidebar extends Component {
   render() {
     return (
       <div>
-        <div class="form-group">
-          <label for="faculty">Faculty</label>
-          <select class="form-control" id="faculty">
-            <option value="">Engineering</option>
-            <option>Science</option>
-            <option>Humanities</option>
-          </select>
+        <div class="form-group-new">
+          <ul class="dropdown-select">
+            <li>
+              <span class="dropdown-value">Engineering</span><span class="arrow-down"></span>
+              <ul>
+                <li value="Engineering"><span>Engineering</span></li>
+                <li value="Economics"><span>Science</span></li>
+                <li value="Humanities"><span>Humanities</span></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <div class="form-group">
-          <label for="programs">Program</label>
-          <select class="form-control" id="programs">
-            <option>Software Engineering</option>
-            <option>Mechanical Engineering</option>
-            <option>Biomedical Engineering</option>
-            <option>Civil Engineering</option>
-            <option>Electrical Engineering</option>
-          </select>
+        <div class="form-group-new">
+          <ul class="dropdown-select">
+            <li>
+              <span class="dropdown-value">Software Eng</span><span class="arrow-down"></span>
+              <ul>
+                <li value="Software Engineering"><span>Software Engineering</span></li>
+                <li value="Mechanical Engineering"><span>Mechanical Engineering</span></li>
+                <li value="Biomedical Engineering"><span>Biomedical Engineering</span></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <div class="form-group">
+        <div class="form-group-new">
           <label for="minors">Minor</label>
           <select class="form-control" id="minors">
             <option>Business</option>
@@ -33,17 +39,7 @@ class Sidebar extends Component {
             <option>5</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="minors">Specialization</label>
-          <select class="form-control" id="minors">
-            <option>Data mining and analysis, artificial intelligence, and machine learning</option>
-            <option>Cybersecurity and privacy</option>
-            <option>Performance and scalability</option>
-            <option>Interaction design and data visualization</option>
-            <option>Visual computing (vision/graphics/gaming)</option>
-          </select>
-        </div>
-        <div class="form-group">
+        <div class="form-group-new">
           <label for="minors">Specialization</label>
           <select class="form-control" id="minors">
             <option>Data mining and analysis, artificial intelligence, and machine learning</option>
@@ -54,15 +50,14 @@ class Sidebar extends Component {
           </select>
         </div>
         <div class="form-group-new">
-          <ul class="dropdown-select">
-            <li>
-              <span>Engineering</span><span class="arrow-down"></span>
-              <ul>
-                <li><a href="#">Engineering</a></li>
-                <li><a href="#">Economics</a></li>
-              </ul>
-            </li>
-          </ul>
+          <label for="minors">Specialization</label>
+          <select class="form-control" id="minors">
+            <option>Data mining and analysis, artificial intelligence, and machine learning</option>
+            <option>Cybersecurity and privacy</option>
+            <option>Performance and scalability</option>
+            <option>Interaction design and data visualization</option>
+            <option>Visual computing (vision/graphics/gaming)</option>
+          </select>
         </div>
         <div class="form-group">
           <button type="button" class="btn-primary">Submit</button>

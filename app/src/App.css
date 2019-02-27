@@ -420,15 +420,17 @@ ul.dropdown-select li ul {
 }
 ul.dropdown-select li ul li {
   width: 95%;
+  margin-bottom: -1px;
   background-color: #353535;
+  border: 1px solid #707070;
 }
-ul.dropdown-select li ul li > a { 
+ul.dropdown-select li ul li > span { 
   text-decoration: none;
   display: block; 
   color: #fff;
 }
 ul.dropdown-select li ul li:hover {
-    background: #666;
+  background: #666;
 }
 ul.dropdown-select li:hover ul { /* li:hover ul */
   display: block;
@@ -439,8 +441,8 @@ ul.dropdown-select li > span.arrow-down {
   display: inline-block; 
   float: right;
 	margin: 0 0 -3px 5px;
-	width: 12px;
-	height: 12px;
-	background-image: url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/down4-24.png');
-	background-size: 12px 12px;
+	width: 15px;
+	height: 15px;
+	background-image: url('/assets/icons8-expand-arrow-48.png');
+	background-size: 15px 15px;
 }
