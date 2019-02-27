@@ -351,6 +351,7 @@ li span {
   right: 10px;
   height: 40px;
   width: 100px;
+  font-weight: 700;
 }
 
 /* Course sortable placeholder highlight */
@@ -396,7 +397,7 @@ ul.dropdown-select li {
   border: 1px solid #8c8c8c;
 }
 ul.dropdown-select li:hover {
-  background: #555;
+  background: #353535;
   color: #fff;
 }
 ul.dropdown-select li ul {
@@ -419,7 +420,7 @@ ul.dropdown-select li ul {
 }
 ul.dropdown-select li ul li {
   width: 95%;
-  background-color: #555;
+  background-color: #353535;
 }
 ul.dropdown-select li ul li > a { 
   text-decoration: none;
