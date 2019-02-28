@@ -25,11 +25,7 @@ class Program extends Component {
     var semesters = [];
     var last_added_semester = null;
 
-
     // Evaluate each course requisites, and adjust props accordingly
-
-
-
     for(var semester_id in this.props.sequence){
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
@@ -42,7 +38,7 @@ class Program extends Component {
     return semesters;
   }
 
-  addCourse(semester_id, course_str){
+  addCourse(semester_id, course_str, updateState = true){
     // Method that will allow courses to be added as a component
     //var current_course = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
 
@@ -64,8 +60,9 @@ class Program extends Component {
       return false;
     }
 
-
-    this.state.sem[semester_id].current.addCourse(course_str, false);
+    if(updateState == true){
+      this.state.sem[semester_id].current.addCourse(course_str, false);
+    }
     return true;
   }
 
@@ -78,7 +75,7 @@ class Program extends Component {
       return false;
     }
 
-    if(!this.addCourse(new_semester_id, course_str, false)){
+    if(!this.addCourse(new_semester_id, course_str)){
       console.log("failed to add course...");
       return false;
     }
@@ -209,6 +206,18 @@ class Program extends Component {
 
   componentDidMount(){
     this.setState({sem: this.sem});
+
+    // Verify all initial courses satisfy prereqs, AFTER having initialized them
+    /*var current_sequence = this.props.sequence;
+    var course;
+    for(var semester_id in current_sequence){
+      for(var i=0; i<current_sequence[semester_id][0].length; i++){
+        course = current_sequence[semester_id][0][i];
+        if(!this.addCourse(semester_id, course)){
+
+        }
+      }
+    }*/
   }
 
   render() {
