@@ -6,6 +6,7 @@ class Sidebar extends Component {
     return (
       <div>
         <div class="form-group-new">
+          <span>Faculty</span>
           <ul class="dropdown-select">
             <li>
               <span class="dropdown-value">Engineering</span><span class="arrow-down"></span>
@@ -18,9 +19,10 @@ class Sidebar extends Component {
           </ul>
         </div>
         <div class="form-group-new">
+          <span>Program</span>
           <ul class="dropdown-select">
             <li>
-              <span class="dropdown-value">Software Eng</span><span class="arrow-down"></span>
+              <span class="dropdown-value">Software Engineering</span><span class="arrow-down"></span>
               <ul>
                 <li value="Software Engineering"><span>Software Engineering</span></li>
                 <li value="Mechanical Engineering"><span>Mechanical Engineering</span></li>
@@ -30,34 +32,30 @@ class Sidebar extends Component {
           </ul>
         </div>
         <div class="form-group-new">
-          <label for="minors">Minor</label>
-          <select class="form-control" id="minors">
-            <option>Business</option>
-            <option>Software Development</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <span>Minor</span>
+          <ul class="dropdown-select">
+            <li>
+              <span class="dropdown-value">Business</span><span class="arrow-down"></span>
+              <ul>
+                <li value="Business"><span>Business</span></li>
+                <li value="Software Development"><span>Software Development</span></li>
+                <li value="Biomedical Engineering"><span>Biomedical Engineering</span></li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <div class="form-group-new">
-          <label for="minors">Specialization</label>
-          <select class="form-control" id="minors">
-            <option>Data mining and analysis, artificial intelligence, and machine learning</option>
-            <option>Cybersecurity and privacy</option>
-            <option>Performance and scalability</option>
-            <option>Interaction design and data visualization</option>
-            <option>Visual computing (vision/graphics/gaming)</option>
-          </select>
-        </div>
-        <div class="form-group-new">
-          <label for="minors">Specialization</label>
-          <select class="form-control" id="minors">
-            <option>Data mining and analysis, artificial intelligence, and machine learning</option>
-            <option>Cybersecurity and privacy</option>
-            <option>Performance and scalability</option>
-            <option>Interaction design and data visualization</option>
-            <option>Visual computing (vision/graphics/gaming)</option>
-          </select>
+          <span>Specialization</span>
+          <ul class="dropdown-select">
+            <li>
+              <span class="dropdown-value">Data mining and analysis, artificial intelligence, and machine learning</span><span class="arrow-down"></span>
+              <ul>
+                <li value="Data mining and analysis, artificial intelligence, and machine learning"><span>Data mining and analysis, artificial intelligence, and machine learning</span></li>
+                <li value="Software Development"><span>Cybersecurity and privacy</span></li>
+                <li value="Performance and scalability"><span>Performance and scalability</span></li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <div class="form-group">
           <button type="button" class="btn-primary">Submit</button>

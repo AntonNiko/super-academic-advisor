@@ -384,7 +384,7 @@ ul.dropdown-select li {
   display: inline-block;
   margin-right: -4px;
   position: relative;
-  padding: 10px 3px 10px 5px;
+  padding: 10px 3px 7px 5px;
   background: #353535;
   cursor: pointer;
   -webkit-transition: all 0.2s;
@@ -396,6 +396,13 @@ ul.dropdown-select li {
   width: 75%;
   border: 1px solid #8c8c8c;
 }
+
+ul.dropdown-select li span.dropdown-value {
+  display: inline-block;
+  max-height: 18px;
+  overflow: hidden;
+}
+
 ul.dropdown-select li:hover {
   background: #353535;
   color: #fff;
@@ -423,6 +430,7 @@ ul.dropdown-select li ul li {
   margin-bottom: -1px;
   background-color: #353535;
   border: 1px solid #707070;
+  z-index: 100;
 }
 ul.dropdown-select li ul li > span { 
   text-decoration: none;
@@ -438,9 +446,12 @@ ul.dropdown-select li:hover ul { /* li:hover ul */
   visibility: visible;
 }
 ul.dropdown-select li > span.arrow-down {
+  position: absolute;
   display: inline-block; 
   float: right;
-	margin: 0 0 -3px 5px;
+  right: 5px;
+  
+	/*margin: 0 0 -3px 5px;*/
 	width: 15px;
 	height: 15px;
 	background-image: url('/assets/icons8-expand-arrow-48.png');
