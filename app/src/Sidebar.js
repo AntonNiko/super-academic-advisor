@@ -12,7 +12,7 @@ class Sidebar extends Component {
               <span class="dropdown-value">Engineering</span><span class="arrow-down"></span>
               <ul>
                 <li value="Engineering"><span>Engineering</span></li>
-                <li value="Economics"><span>Science</span></li>
+                <li value="Economics"><span>Economics</span></li>
                 <li value="Humanities"><span>Humanities</span></li>
               </ul>
             </li>

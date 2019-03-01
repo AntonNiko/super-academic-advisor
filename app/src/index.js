@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import Program from './Program';
 import Semester from './Semester';
 import PopupCourse from './PopupCourse';
+import PopupReqs from './PopupReqs.js';
 import * as serviceWorker from './serviceWorker';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
