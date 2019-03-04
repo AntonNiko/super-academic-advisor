@@ -1,0 +1,43 @@
+.navbar {
+    overflow: hidden;
+    background-color: #171819;
+    height: 50px;
+  }
+  
+  .navbar div {
+    height: 100%;
+  }
+  
+  .navbar-text {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 20px 0px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    height: 35px;
+  }
+  
+  .navbar-img {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    font-size: 14px;
+    height: 40px;
+  }
+  
+  .navbar-img img {
+    height: 90%;
+  }
+  
+  .navbar a:hover {
+    background-color: rgb(51, 51, 51);
+    /*color: rgb(196, 196, 196);*/
+  }
+  
+  .navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+  }

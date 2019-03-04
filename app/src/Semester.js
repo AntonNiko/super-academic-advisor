@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import Course from './Course';
+import './Semester.css';
 
 class Semester extends Component {
   constructor(props){

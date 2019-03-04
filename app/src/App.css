@@ -1,24 +1,13 @@
-/*
-Grey:#b09f9e
-Orange:#f5ad42
-Red:#e83647
-Black:#2d2b35
-White:#f0f3f0
-
-*/
-
-
 html {
   height: 1020px;
   font-family: 'Arimo',sans-serif;
 }
 
-/* Body style: Ensure fluid container */
+/* Body style */
 body {
   height: 100%;
   margin: 0px;
 }
-
 
 li {
   font-size: 12px;
@@ -28,80 +17,13 @@ li span {
   font-size: 14px;
 }
 
-/* Navigation Bar style */
-.navbar {
-  overflow: hidden;
-  background-color: #171819;
-  height: 50px;
-}
-
-.navbar div {
-  height: 100%;
-}
-
-.navbar-text {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 15px 20px 0px 20px;
-  text-decoration: none;
-  font-size: 14px;
-  height: 35px;
-}
-
-.navbar-img {
-  float: right;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 5px 10px 5px 10px;
-  text-decoration: none;
-  font-size: 14px;
-  height: 40px;
-}
-
-.navbar-img img {
-  height: 90%;
-}
-
-.navbar a:hover {
-  background-color: rgb(51, 51, 51);
-  /*color: rgb(196, 196, 196);*/
-}
-
-.navbar a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
 /* Main container style */
 #main {
   height: 100%;
 }
 
-
 .form-group {
 	display: inline;
-}
-
-
-/* Sidebar style */
-.sidebar {
-  min-height: 1000px;
-  width: 200px;
-  float: left;
-  z-index: 1;
-  left: 0;
-  background-color: #3e3e3e;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.sidebar div div {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 14px;
-  color: #f2f2f2;
-  display: block;
 }
 
 /* Select choice style */
@@ -122,201 +44,13 @@ li span {
 	background-color: #ff0000;
 }
 
-/* Semester container style */
-.panel-term {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #272727;
-  min-width: 200px;
-  height: 800px;
-  background-color: #353535;
-  margin: 25px;
-}
-
-.panel-term-header {
-  padding: 5px;
-  color: #ffffff;
-  font-weight: 500;
-}
-
-.panel-term-footer {
-  padding: 0px 5px 5px 0px;
-  color: #ffffff;
-  font-weight: 500;
-}
-
-.panel-term-list {
-  list-style-type: none;
-  padding-left: 0;
-  height: 94%;
-  width: 100%;
-  margin-bottom: -5px;
-}
-
-.panel-term-list:after {
-  clear:both;
-  content:'';
-  display:table;
-}  
-
-
 /* Courses Board style */
-.panel-container {
-  height: 100%;
-  background-color: #2b2b2b;
-  display: flex;
-  overflow: hidden;
-  font-size: 14px;
-}
-
-.panel-course {
-  height: 85px;
-  width: 160px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #5f5858;
-  background-color: #232323;
-  margin: 0px 0px 10px 15px;
-  padding: 0px 0px 5px 5px;
-  position: relative;
-  transition: transform .2s;
-}
-
-.marker { opacity:0.0; transition:.2s height }
-
-.ui-sortable-helper {
-  transform:scale(.9)
-}
-
-.panel-course a {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}
-
-.panel-course-header {
-  position: relative;
-  height: 30px;
-}
-
-.panel-course-header:hover .panel-course-name, .panel-course-body:hover .panel-course-offered {
-	text-decoration: underline;
-}
-
-.panel-course-name {
-  position: absolute;
-  left: 0;
-  padding-top: 5px;
-  font-weight: bold;
-}
-.panel-course-details-icon {
-  position: absolute;
-  right: 0;
-}
-
-.panel-course-footer {
-  position: absolute;
-  bottom: 5px;
-}
-
-.panel-term-list li {
-  text-decoration: none;
-  color: #efefef;
-}
-
-/* Course Details Modal style */
-
-.modal-course-details {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.2);
-}
-
-.modal-course-details-content {
-	background-color: #4c4c4c;
-	color: #f3f2f2;
-	margin: 15% auto;
-	margin-top: 5%;
-	padding: 20px 10px 5px 15px;
-	border: 1px solid #888;
-	width: 80%;
-	min-height: 485px;
-}
-
-.modal-course-reqs-content {
-	font-size: 15px;
-}
-
-.modal-course-links {
-	font-size: 12px;
-}
-
-.modal-course-links a {
-	color: #99a9e4;
-}
-
-.modal-title {
-	margin: 10px 0px 10px 0px;
-}
-
-.modal-subtitle {
-	font-size: 14px;
-}
-
-.modal-subtitle-left {
-	margin-top: 5px;
-	font-weight: 100;
-	display: inline;
-}
-
-.modal-subtitle-right {
-	float: right;
-	font-weight: 100;
-	display: inline;
-}
-
-.modal-footer {
-	float: right;
-	height: 35px;
-}
-
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-/* Program Requirements Modal Style */
-
-
-
-/* OTHER */
-
 #course-panel {
   height: 100%;
   width: 100%;
 }
 
-.tab-content .tab-pane {
-    padding: 70px 0;
-}
-
-/* Miscalleneous components */
-
+/* Primary and Secondary Buttons */
 .btn-primary {
   background-color: #0077cc;
   border: 1px solid #656565;
@@ -349,15 +83,6 @@ li span {
 	background-color: #616161;
 }
 
-#add-course {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  height: 40px;
-  width: 100px;
-  font-weight: 700;
-}
-
 /* Course sortable placeholder highlight */
 .ui-state-highlight {
   height: 85px;
@@ -367,9 +92,7 @@ li span {
   background-color: #313131;
 }
 
-
-
-/* NEW Select Dropdown */
+/* Select Dropdown */
 .form-group-new {
   width: 100%;
 }
@@ -384,7 +107,6 @@ ul.dropdown-select {
 }
 
 ul.dropdown-select li {
-  /*font: bold 12px/18px sans-serif;*/
   display: inline-block;
   margin-right: -4px;
   position: relative;
@@ -412,6 +134,7 @@ ul.dropdown-select li:hover {
   background: #353535;
   color: #fff;
 }
+
 ul.dropdown-select li ul {
   padding: 0;
   position: absolute;
@@ -432,34 +155,36 @@ ul.dropdown-select li ul {
   transition: visibility 0s, opacity 0.2s linear;
   z-index: 100;
 }
+
 ul.dropdown-select li ul li {
   width: 95%;
   padding-bottom: 10px;
   margin-bottom: -1px;
   background-color: #353535;
   border: 1px solid #707070;
-  
 }
+
 ul.dropdown-select li ul li > span { 
   text-decoration: none;
   display: block; 
   color: #fff;
 }
+
 ul.dropdown-select li ul li:hover {
   background: #666;
 }
-ul.dropdown-select li:hover ul { /* li:hover ul */
+
+ul.dropdown-select li:hover ul {
   display: block;
   opacity: 1;
   visibility: visible;
 }
+
 ul.dropdown-select li > span.arrow-down {
   position: absolute;
   display: inline-block; 
   float: right;
   right: 5px;
-  
-	/*margin: 0 0 -3px 5px;*/
 	width: 15px;
 	height: 15px;
 	background-image: url('/assets/icons8-expand-arrow-48.png');

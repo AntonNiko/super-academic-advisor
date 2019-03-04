@@ -1,0 +1,73 @@
+.modal-course-details {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.2);
+}
+
+.modal-course-details-content {
+	background-color: #4c4c4c;
+	color: #f3f2f2;
+	margin: 15% auto;
+	margin-top: 5%;
+	padding: 20px 10px 5px 15px;
+	border: 1px solid #888;
+	width: 80%;
+	min-height: 485px;
+}
+
+.modal-course-reqs-content {
+	font-size: 15px;
+}
+
+.modal-course-links {
+	font-size: 12px;
+}
+
+.modal-course-links a {
+	color: #99a9e4;
+}
+
+.modal-title {
+	margin: 10px 0px 10px 0px;
+}
+
+.modal-subtitle {
+	font-size: 14px;
+}
+
+.modal-subtitle-left {
+	margin-top: 5px;
+	font-weight: 100;
+	display: inline;
+}
+
+.modal-subtitle-right {
+	float: right;
+	font-weight: 100;
+	display: inline;
+}
+
+.modal-footer {
+	float: right;
+	height: 35px;
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
