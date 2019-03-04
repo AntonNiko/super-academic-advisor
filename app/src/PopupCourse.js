@@ -23,7 +23,6 @@ class PopupCourse extends Component {
       course_offered: course[3].join(", "),
       course_credits: course[2],
     });
-    //console.log("Populating...");
   }
 
   render() {

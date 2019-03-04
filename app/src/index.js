@@ -48,8 +48,8 @@ ReactDOM.render(<Program sequence={program_sequence}
   ref={prog => {window.prog = prog;}}
   data={data}/>,
   document.getElementById('panel-container-parent'));
-ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-container'));
-//ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} />, document.getElementById('modal-container'));
+ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-course-container'));
+ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} />, document.getElementById('modal-reqs-container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -101,7 +101,6 @@ $(function(){
       startIndex = changeIndex;
     },
     stop: function(e, ui) {
-      //console.log("STOP");
       $('.ui-sortable-handle').css({
           transform: 'translateY(0)'
       })
@@ -115,7 +114,6 @@ $(function(){
       window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
     }
   });
-
 
   $("#modal-content").draggable();
 
@@ -149,11 +147,6 @@ $(function(){
     var selected_display = $(this).parent().parent().children("span.dropdown-value");
     selected_display.attr("value", selected_value);
     selected_display.text(selected_value);
-    /*$(this).parent().css({
-      "opacity": 0,
-      "visibility": "hidden"
-    });*/
-
   });
 });
 /*
