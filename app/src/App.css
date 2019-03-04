@@ -60,7 +60,7 @@ li span {
 }
 
 .navbar-img img {
-  height: 100%;
+  height: 90%;
 }
 
 .navbar a:hover {
@@ -299,6 +299,10 @@ li span {
 	text-decoration: none;
 	cursor: pointer;
 }
+
+/* Program Requirements Modal Style */
+
+
 
 /* OTHER */
 

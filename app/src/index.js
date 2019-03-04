@@ -49,6 +49,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   data={data}/>,
   document.getElementById('panel-container-parent'));
 ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-container'));
+ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} />, document.getElementById('modal-container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

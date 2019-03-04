@@ -11,6 +11,9 @@ class Navbar extends Component {
         <a class="navbar-img" type="submit" href="#">
           <img src="/assets/icons8-services-480.png"></img>
         </a>
+        <a class="navbar-img" type="submit" href="#">
+          <img src="/assets/icons8-course-80.png"></img>
+        </a>
       </div>
     );
   }

@@ -7,6 +7,12 @@ import 'jquery-ui/ui/widgets/draggable';
 
 class PopupReqs extends Component {
     render(){
-        return <div></div>
+        return (
+            <div class="modal-reqs-details" id="modal-reqs">
+            
+            </div>
+        );
     }
 }
+
+export default PopupReqs;
