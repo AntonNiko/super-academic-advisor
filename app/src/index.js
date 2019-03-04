@@ -22,7 +22,8 @@ var program_sequence_seng_rec = {
     "2C":[[],2020,"Su"]
   }
 
-function getRemote(){
+
+function getCoursesData(){
   return $.ajax({
     type: "GET",
     url: "/course_dir.json",
@@ -30,11 +31,20 @@ function getRemote(){
   }).responseText;
 }
 
-var data = JSON.parse(getRemote());
+function getSequenceData(){
+  return $.ajax({
+    type: "GET",
+    url: "/program_sequence.json",
+    async: false
+  }).responseText;
+}
+
+var data = JSON.parse(getCoursesData());
+var program_sequence = JSON.parse(getSequenceData());
 
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
 ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
-ReactDOM.render(<Program sequence={program_sequence_seng_rec}
+ReactDOM.render(<Program sequence={program_sequence}
   ref={prog => {window.prog = prog;}}
   data={data}/>,
   document.getElementById('panel-container-parent'));
