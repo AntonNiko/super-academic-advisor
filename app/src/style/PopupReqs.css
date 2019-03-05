@@ -14,7 +14,7 @@
 #modal-reqs-content {
 	background-color: #4c4c4c;
 	color: #f3f2f2;
-	padding: 20px 10px 5px 15px;
+	padding: 20px 0px 5px 15px;
 	border: 1px solid #757575;
 	width: 250px;
     height: 350px;
@@ -25,6 +25,51 @@
 
 #modal-reqs-list {
 	height: 90%;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	margin-top: 10px;
+}
+
+#reqs-course-list {
+	padding-left: 0px;
+	font-size: 14px;
+}
+
+.reqs-course-item {
+	list-style-type: none;
+	height: 22px;
+}
+
+.reqs-checkmark-bg {
+	background-color: #6b6b6b;
+	height: 15px;
+	width: 15px;
+	float: left;
+	margin: 3px;
+}
+
+.reqs-checkmark-bg img {
+	height: 100%;
+	width: 100%;
+}
+
+.reqs-course-name {
+	position: relative;
+	top: 2px;
+	left: 10px;
+}
+
+.reqs-course-separator {
+	list-style-type: none;
+}
+
+.reqs-course-separator hr {
+	margin: 5px 0px 5px 0px;
+	border: 0;
+	background-color: #5d5d5d;
+	height: 1px;
+}
+
+.reqs-course-conditional {
+	list-style-type: none;
 }

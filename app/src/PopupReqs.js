@@ -25,37 +25,37 @@ class PopupReqs extends Component {
 
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
-                <li class="reqs-course-item">CSC 111</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">CSC 111</span></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">CSC 115</li>
                 <li class="reqs-course-conditional">OR</li>
                 <li class="reqs-course-item">CSC 116</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">ENGR 110</li>
                 <li class="reqs-course-conditional">OR</li>
                 <li class="reqs-course-item">ENGR 112</li>
                 <li class="reqs-course-item">ENGL 135</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">MATH 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-separator"><hr></hr></li>
                 <li class="reqs-course-item">PHYS 110</li>
                 
               </ul>

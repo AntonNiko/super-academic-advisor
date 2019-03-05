@@ -46,6 +46,14 @@
 	font-size: 15px;
 }
 
+#modal-course-reqs-content li {
+	font-size: 12px;
+  }
+  
+#modal-course-reqs-content li span {
+font-size: 14px;
+}
+
 #modal-course-links {
 	font-size: 12px;
 }

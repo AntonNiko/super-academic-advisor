@@ -9,14 +9,6 @@ body {
   margin: 0px;
 }
 
-li {
-  font-size: 12px;
-}
-
-li span {
-  font-size: 14px;
-}
-
 /* Main container style */
 #main {
   height: 100%;
