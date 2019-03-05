@@ -28,24 +28,24 @@ function getSequenceData(){
 }
 
 var program_requirements_seng = [
-  "CSC 111",
+  ["CSC 111"],
   ["CSC 115","CSC 116"],
   ["ENGR 110",["ENGR 112","ENGL 135"]],
-  "ENGR 120",
-  "ENGR 130",
-  "ENGR 141",
-  "MATH 100",
-  "MATH 101",
-  "MATH 110",
-  "PHYS 110",
-  "PHYS 111",
-  "CSC 230",
-  "CHEM 101",
-  "CSC 225",
-  "ECE 260",
-  "ECE 310",
-  "ECON 180",
-  "MATH 122"
+  ["ENGR 120"],
+  ["ENGR 130"],
+  ["ENGR 141"],
+  ["MATH 100"],
+  ["MATH 101"],
+  ["MATH 110"],
+  ["PHYS 110"],
+  ["PHYS 111"],
+  ["CSC 230"],
+  ["CHEM 101"],
+  ["CSC 225"],
+  ["ECE 260"],
+  ["ECE 310"],
+  ["ECON 180"],
+  ["MATH 122"]
 ]
 
 // Fetch Data for course info and program sequence respectively
