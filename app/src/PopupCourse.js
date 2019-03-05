@@ -27,20 +27,20 @@ class PopupCourse extends Component {
 
   render() {
     return (
-      <div class="modal-course-details" id="modal">
-        <div class="modal-course-details-content" id="modal-content">
-    	    <span class="close" id="close-btn">X</span>
-    	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
-    	    <h2 class="modal-title" id="mocal-course-desc">Dynamics</h2>
+      <div id="modal-course-details">
+        <div id="modal-course-content">
+    	    <span id="close-btn">X</span>
+    	    <h2 class="modal-course-title" id="modal-course-title">{this.state.course_str}</h2>
+    	    <h2 class="modal-course-title" id="modal-course-desc">Course Title</h2>
 
-    	    <div class="modal-subtitle">
-    	      <h3 class="modal-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>
-    		    <h3 class="modal-subtitle-right"><span>Credits: </span><span id="modal-course-credits">{this.state.course_credits}</span></h3>
+    	    <div id="modal-course-subtitle">
+    	      <h3 id="modal-course-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>
+    		    <h3 id="modal-course-subtitle-right"><span>Credits: </span><span id="modal-course-credits">{this.state.course_credits}</span></h3>
     	    </div>
 
     	    <div class="modal-course-reqs" id="modal-course-reqs">
-    	      <h3 class="modal-course-reqs-title">Prerequisites</h3>
-    		    <ul class="modal-course-reqs-content">
+    	      <h3 id="modal-course-reqs-title">Prerequisites</h3>
+    		    <ul id="modal-course-reqs-content">
     	        <li><span>MECH 141 or ENGR 141; and</span></li>
     		      <li><span>CSC 110 or CSC 111; and</span></li>
     		      <li><span>MATH 101; and</span></li>
@@ -60,10 +60,10 @@ class PopupCourse extends Component {
     		    </ul>
 
     	      </div>
-    	      <div class="modal-course-links">
+    	      <div id="modal-course-links">
     	          Course link: <a href="https://web.uvic.ca/calendar2019-05/CDs/MECH/242.html">https://web.uvic.ca/calendar2019-05/CDs/MECH/242.html</a>
     	      </div>
-    	      <div class="modal-footer">
+    	      <div id="modal-course-footer">
               <div class="form-group">
                 <button type="button" class="btn-primary" id="modal-course-submit">Submit</button>
               </div>

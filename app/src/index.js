@@ -7,40 +7,31 @@ import Program from './Program';
 import Semester from './Semester';
 import PopupCourse from './PopupCourse';
 import PopupReqs from './PopupReqs.js';
-import * as serviceWorker from './serviceWorker';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 
-var program_sequence_seng_rec = {
-    "1A":[["CSC 111","ENGR 130","ENGR 110","MATH 100","MATH 110","PHYS 110"],2018,"F"],
-    "1B":[["CSC 115","ENGR 120","MATH 101","ENGR 141","PHYS 111"],2019,"Sp"],
-    "1C":[[],2019,"Su"],
-    "2A":[["MATH 122"],2019,"F"],
-    "2B":[[],2020,"Sp"],
-    "2C":[[],2020,"Su"]
-  }
-
-
 function getCoursesData(){
-  return $.ajax({
+  return JSON.parse($.ajax({
     type: "GET",
     url: "/course_dir.json",
     async: false
-  }).responseText;
+  }).responseText);
 }
 
 function getSequenceData(){
-  return $.ajax({
+  return JSON.parse($.ajax({
     type: "GET",
     url: "/program_sequence.json",
     async: false
-  }).responseText;
+  }).responseText);
 }
 
-var data = JSON.parse(getCoursesData());
-var program_sequence = JSON.parse(getSequenceData());
+// Fetch Data for course info and program sequence respectively
+var data = getCoursesData();
+var program_sequence = getSequenceData();
 
+// Build React Elements
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
 ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
 ReactDOM.render(<Program sequence={program_sequence}
@@ -50,14 +41,11 @@ ReactDOM.render(<Program sequence={program_sequence}
 ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-course-container'));
 ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} />, document.getElementById('modal-reqs-container'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-//serviceWorker.unregister();
-
+// jQuery code
 $(function(){
-  var startIndex, changeIndex, uiHeight;
 
+  // Configure draggable course elements for semester container
+  var startIndex, changeIndex, uiHeight;
   $(".panel-term-list").sortable({
     'placeholder': 'marker',
     start: function(e, ui){
@@ -74,9 +62,6 @@ $(function(){
     },
     change: function(e, ui){
       changeIndex = ui.placeholder.index();
-      //console.log("CHANGE");
-      //console.log(startIndex+" | "+changeIndex);
-
       if(startIndex > changeIndex){
         // TODO: Only select slice of current list, not other semesters
         var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
@@ -114,29 +99,43 @@ $(function(){
     }
   });
 
-  $("#modal-content").draggable();
-
   $(".panel-course").dblclick(function(){
     var course_obj = data[$(this).attr("id").replace("_"," ")];
     window.popup.populateCourse(course_obj);
-    $("#modal").css("display","block");
+    $("#modal-course-details").css("display","block");
   });
 
+  // Configure course details modal properties
+  $("#modal-course-content").draggable();
+
   $("#close-btn").click(function(){
-    $("#modal").css("display","none");
-  $("#modal-content").css({top: 0, left: 0, position:"relative"});
+    $("#modal-course-details").css("display","none");
+  $("#modal-course-content").css({top: 0, left: 0, position:"relative"});
   });
 
   $("#modal-course-cancel").click(function(){
-    $("#modal").css("display","none");
-  $("#modal-content").css({top: 0, left: 0, position:"relative"});
+    $("#modal-course-details").css("display","none");
+  $("#modal-course-content").css({top: 0, left: 0, position:"relative"});
   });
 
   $(window).click(function(e){
   var target = $(e.target);
-    if(target.is("#modal")){
-      $("#modal").css("display","none");
-      $("#modal-content").css({top: 0, left: 0, position:"relative"});
+    if(target.is("#modal-course-details")){
+      console.log("haha");
+      $("#modal-course-details").css("display","none");
+      $("#modal-course-content").css({top: 0, left: 0, position:"relative"});
+    }
+  });
+
+  // Configure course reqs modal properties
+  $("#navbar-course-icon").click(function(){
+    $("#modal-reqs").css("display","block");
+  });
+
+  $(window).click(function(e){
+  var target = $(e.target);
+    if(target.is("#modal-reqs")){
+      $("#modal-reqs").css("display","none");
     }
   });
 

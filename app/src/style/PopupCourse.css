@@ -1,4 +1,4 @@
-.modal-course-details {
+#modal-course-details {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -11,7 +11,7 @@
 	background-color: rgba(0,0,0,0.2);
 }
 
-.modal-course-details-content {
+#modal-course-content {
 	background-color: #4c4c4c;
 	color: #f3f2f2;
 	margin: 15% auto;
@@ -22,51 +22,51 @@
 	min-height: 485px;
 }
 
-.modal-course-reqs-content {
-	font-size: 15px;
-}
-
-.modal-course-links {
-	font-size: 12px;
-}
-
-.modal-course-links a {
-	color: #99a9e4;
-}
-
-.modal-title {
+.modal-course-title {
 	margin: 10px 0px 10px 0px;
 }
 
-.modal-subtitle {
+#modal-course-subtitle {
 	font-size: 14px;
 }
 
-.modal-subtitle-left {
+#modal-course-subtitle-left {
 	margin-top: 5px;
 	font-weight: 100;
 	display: inline;
 }
 
-.modal-subtitle-right {
+#modal-course-subtitle-right {
 	float: right;
 	font-weight: 100;
 	display: inline;
 }
 
-.modal-footer {
+#modal-course-reqs-content {
+	font-size: 15px;
+}
+
+#modal-course-links {
+	font-size: 12px;
+}
+
+#modal-course-links a {
+	color: #99a9e4;
+}
+
+#modal-course-footer {
 	float: right;
 	height: 35px;
 }
 
-.close {
+#close-btn {
 	color: #aaa;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
 }
 
-.close:hover, .close:focus {
+#close-btn:hover, #close-btn:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;

@@ -1,6 +1,6 @@
-.modal-reqs-details {
+#modal-reqs {
 	display: none;
-	position: fixed;
+	position: static;
 	z-index: 1;
 	left: 0;
 	top: 0;
@@ -11,14 +11,14 @@
 	background-color: rgba(0,0,0,0);
 }
 
-.modal-reqs-details-content {
+#modal-reqs-content {
 	background-color: #4c4c4c;
 	color: #f3f2f2;
 	top: 50px;
 	padding: 20px 10px 5px 15px;
 	border: 1px solid #888;
 	width: 250px;
-    min-height: 350px;
-    position: fixed;
-    right: 0px;
+  min-height: 350px;
+  position: static;
+  right: 0px;
 }

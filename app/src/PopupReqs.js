@@ -9,10 +9,23 @@ import './style/PopupReqs.css';
 class PopupReqs extends Component {
     render(){
         return (
-          <div class="modal-reqs-details" id="modal-reqs">
-            <div class="modal-reqs-details-content" id="modal-reqs-content">
+          <div id="modal-reqs">
+            <div id="modal-reqs-content">
+              <span>Program Requirements</span>
 
-    	    </div>
+              <div id="modal-reqs-list">
+                <ul id="reqs-course-list">
+                  <li clss="reqs-course-item">CSC 111</li>
+                  <li clss="reqs-course-item">CSC 115</li>
+                  <li clss="reqs-course-item">MATH 100</li>
+                  <li clss="reqs-course-item">MATH 110</li>
+                  <li clss="reqs-course-item">PHYS 110</li>
+                  <li clss="reqs-course-item">ENGR 110</li>
+                  <li clss="reqs-course-item">ENGR 112</li>
+                  <li clss="reqs-course-item">ENGL 135</li>
+                </ul>
+              </div>
+    	      </div>
           </div>
         );
     }

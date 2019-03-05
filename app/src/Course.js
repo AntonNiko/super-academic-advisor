@@ -34,7 +34,6 @@ class Course extends Component {
       return <li class="panel-course" id={this.props.course_id.replace(" ","_")}></li>
     }
     var course_obj = this.returnCourseContent();
-    //console.log(course_obj);
 
     return (
       <li class="panel-course" id={this.props.course_id.replace(" ","_")}>
