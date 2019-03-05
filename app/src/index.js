@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
-import Test from './Test';
+import './style/App.css';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Program from './Program';
@@ -141,7 +140,7 @@ $(function(){
     }
   });
 
-  // Dropdown select value 
+  // Dropdown select value
   $("ul.dropdown-select li ul li").click(function(e){
     var selected_value = $(this).attr("value");
     var selected_display = $(this).parent().parent().children("span.dropdown-value");

@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
-import './Program.css';
+import './style/Program.css';
 
 class Program extends Component {
   constructor(props){
