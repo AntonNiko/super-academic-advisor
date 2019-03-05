@@ -52,17 +52,19 @@ var program_requirements_seng = [
 var data = getCoursesData();
 var program_sequence = getSequenceData();
 
+
 // Build React Elements
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
 ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
-ReactDOM.render(<Program sequence={program_sequence}
-  ref={prog => {window.prog = prog;}}
-  data={data}/>,
-  document.getElementById('panel-container-parent'));
-ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-course-container'));
+ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}}/>, document.getElementById('modal-course-container'));
 ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} 
    requirements={program_requirements_seng}/>
    , document.getElementById('modal-reqs-container'));
+ReactDOM.render(<Program sequence={program_sequence}
+  ref={prog => {window.prog = prog;}}
+  data={data}
+  updateProgramReqs={window.reqs.updateProgramReqList}/>,
+    document.getElementById('panel-container-parent'));
 
 // jQuery code
 $(function(){

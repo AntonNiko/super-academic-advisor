@@ -15,20 +15,26 @@ class PopupReqs extends Component {
       active_courses: [],
       fulfilled: false,
     };
+
+    this.updateProgramReqList = this.updateProgramReqList.bind(this);
   }  
 
-  createCourseReqList(){
+  updateProgramReqList(){
+    console.log("hello!");
+  }
+
+  createProgramReqList(){
     var list_items = [];
 
     var requirements = this.props.requirements;
+    // Cycle through each individual program requirement
     for(var i=0; i<requirements.length; i++){
-      
-
-      // Variable to determine if need to insert conditional item
-      var _done = false;
+      // Cycle through each course requirement's elements
       for(var j=0; j<requirements[i].length; j++){
+        // Represents a program requirements
         var current_course = requirements[i][j];
         if(typeof current_course == "object"){
+          // If the requirements is an array, means that both courses need to be satisfied
           for(var k=0; k<current_course.length; k++){
             list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
 
@@ -38,15 +44,15 @@ class PopupReqs extends Component {
           }
 
         }else if(typeof current_course == "string"){
+          // Individual course, so can simply add course item and move on
           list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">{current_course}</span></li>); 
         }
 
-        if(j+1 == requirements[i].length) _done = true;
-        if(!_done){
+        // If we've reached the end of the individual program requirement, we can avoid placing a conditional item
+        if(j+1 != requirements[i].length){
           list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">OR</span></li>);
         }
       }
-      console.log(requirements[i]);
 
       list_items.push(<li class="reqs-course-separator"><hr></hr></li>);
     }
@@ -62,7 +68,7 @@ class PopupReqs extends Component {
 
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
-                {this.createCourseReqList()}                
+                {this.createProgramReqList()}                
               </ul>
             </div>
           </div>
