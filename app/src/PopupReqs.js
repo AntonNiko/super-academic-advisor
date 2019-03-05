@@ -7,28 +7,63 @@ import 'jquery-ui/ui/widgets/draggable';
 import './style/PopupReqs.css';
 
 class PopupReqs extends Component {
-    render(){
-        return (
-          <div id="modal-reqs">
-            <div id="modal-reqs-content">
-              <span>Program Requirements</span>
+  constructor(props){
+    super(props);
 
-              <div id="modal-reqs-list">
-                <ul id="reqs-course-list">
-                  <li clss="reqs-course-item">CSC 111</li>
-                  <li clss="reqs-course-item">CSC 115</li>
-                  <li clss="reqs-course-item">MATH 100</li>
-                  <li clss="reqs-course-item">MATH 110</li>
-                  <li clss="reqs-course-item">PHYS 110</li>
-                  <li clss="reqs-course-item">ENGR 110</li>
-                  <li clss="reqs-course-item">ENGR 112</li>
-                  <li clss="reqs-course-item">ENGL 135</li>
-                </ul>
-              </div>
-    	      </div>
+    this.state = {
+      requirements: this.props.requirements,
+      active_courses: [],
+      fulfilled: false,
+    };
+  }  
+
+  render(){
+      return (
+        <div id="modal-reqs">
+          <div id="modal-reqs-content">
+            <span>Program Requirements</span>
+
+            <div id="modal-reqs-list">
+              <ul id="reqs-course-list">
+                <li class="reqs-course-item">CSC 111</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">CSC 115</li>
+                <li class="reqs-course-conditional">OR</li>
+                <li class="reqs-course-item">CSC 116</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">ENGR 110</li>
+                <li class="reqs-course-conditional">OR</li>
+                <li class="reqs-course-item">ENGR 112</li>
+                <li class="reqs-course-item">ENGL 135</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">MATH 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                <li class="reqs-course-separator"></li>
+                <li class="reqs-course-item">PHYS 110</li>
+                
+              </ul>
+            </div>
           </div>
-        );
-    }
+        </div>
+      );
+  }
 }
 
 export default PopupReqs;

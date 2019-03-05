@@ -1,8 +1,8 @@
 #modal-reqs {
 	display: none;
-	position: static;
+	position: fixed;
 	z-index: 1;
-	left: 0;
+	right: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
@@ -14,11 +14,17 @@
 #modal-reqs-content {
 	background-color: #4c4c4c;
 	color: #f3f2f2;
-	top: 50px;
 	padding: 20px 10px 5px 15px;
-	border: 1px solid #888;
+	border: 1px solid #757575;
 	width: 250px;
-  min-height: 350px;
-  position: static;
-  right: 0px;
+    height: 350px;
+	position: fixed;
+	top: 50px;
+	right: 0px;
+}
+
+#modal-reqs-list {
+	height: 90%;
+	overflow: scroll;
+	margin-top: 10px;
 }

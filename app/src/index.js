@@ -27,6 +27,27 @@ function getSequenceData(){
   }).responseText);
 }
 
+var program_requirements_seng = [
+  "CSC 111",
+  ["CSC 115","CSC 116"],
+  ["ENGR 110",["ENGR 112","ENGL 135"]],
+  "ENGR 120",
+  "ENGR 130",
+  "ENGR 141",
+  "MATH 100",
+  "MATH 101",
+  "MATH 110",
+  "PHYS 110",
+  "PHYS 111",
+  "CSC 230",
+  "CHEM 101",
+  "CSC 225",
+  "ECE 260",
+  "ECE 310",
+  "ECON 180",
+  "MATH 122"
+]
+
 // Fetch Data for course info and program sequence respectively
 var data = getCoursesData();
 var program_sequence = getSequenceData();
@@ -39,7 +60,9 @@ ReactDOM.render(<Program sequence={program_sequence}
   data={data}/>,
   document.getElementById('panel-container-parent'));
 ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}} />, document.getElementById('modal-course-container'));
-ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} />, document.getElementById('modal-reqs-container'));
+ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} 
+   requirements={program_requirements_seng}/>
+   , document.getElementById('modal-reqs-container'));
 
 // jQuery code
 $(function(){
@@ -147,13 +170,3 @@ $(function(){
     selected_display.text(selected_value);
   });
 });
-/*
-React Components:
-- Navbar
-- Sidebar
-- Program container
-- Semester containers
-- Course containers
-- Pop-up modal
-All visual
-*/
