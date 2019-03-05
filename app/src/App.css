@@ -28,7 +28,7 @@ li span {
 
 /* Select choice style */
 .form-control {
-  border: 1px solid #8c8c8c;
+  border: 1px solid #5f5858;
   background-color: #353535;
   color: #f3f2f2;
   font-size: inherit;
@@ -37,7 +37,7 @@ li span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 90%;
+  width: 100%;
 }
 
 .form-control:hover > option:hover {
