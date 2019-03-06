@@ -11,13 +11,37 @@
 	background-color: rgba(0,0,0,0);
 }
 
+#modal-reqs-header {
+	height: 20px;
+}
+
+#modal-reqs-footer {
+	margin-top: 5px;
+	margin-right: 10px;
+	height: 37px;
+}
+
+#modal-reqs-title {
+	position: relative;
+	top: 10%;
+}
+
+#modal-reqs-fulfilled-status {
+	float: right;
+	margin-right: 8px;
+	padding: 3px 6px 2px 6px;
+	background-color: #bd0b0b;
+	border-radius: 3px;
+	position: relative;
+}
+
 #modal-reqs-content {
 	background-color: #353535;
 	color: #f3f2f2;
-	padding: 10px 0px 5px 15px;
+	padding: 8px 0px 5px 15px;
 	border: 1px solid #757575;
 	width: 250px;
-    height: 350px;
+    height: 355px;
 	position: fixed;
 	top: 50px;
 	right: 0px;
@@ -25,11 +49,15 @@
 }
 
 #modal-reqs-list {
-	height: 90%;
+	height: 80%;
 	overflow-y: scroll;
 	overflow-x: hidden;
-	margin-top: 10px;
+	margin-top: 8px;
 	border: 1px solid #757575;
+}
+
+#modal-reqs-clear-button {
+	float: right;
 }
 
 #reqs-course-list {
@@ -37,13 +65,6 @@
 	margin: 0;
 	font-size: 14px;
 	background-color: #232323;
-}
-
-#modal-reqs-fulfilled-status {
-	float: right;
-	margin-right: 5px;
-	padding: 2px 2px 2px 2px;
-	background-color: #e22b2b;
 }
 
 .reqs-course-item {

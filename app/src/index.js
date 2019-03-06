@@ -27,6 +27,10 @@ function getSequenceData(){
   }).responseText);
 }
 
+function getDetailedCourseData(){
+  return null;
+}
+
 var program_requirements_seng = [
   ["CSC 111"],
   ["CSC 115","CSC 116"],
@@ -51,6 +55,7 @@ var program_requirements_seng = [
 // Fetch Data for course info and program sequence respectively
 var data = getCoursesData();
 var program_sequence = getSequenceData();
+var detailed_data = getDetailedCourseData();
 
 
 // Build React Elements

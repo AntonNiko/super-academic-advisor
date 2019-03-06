@@ -207,13 +207,7 @@ class Program extends Component {
 
   componentDidMount(){
     this.setState({sem: this.sem});
-
-
-    // Update PopupReqs object to reflect newly addded courses
-    //this.props.updateProgramReqs();
     
-    //this.props.updateProgramReqs(this.state.sem);
-
     // Verify all initial courses satisfy prereqs, AFTER having initialized them
     /*var current_sequence = this.props.sequence;
     var course;

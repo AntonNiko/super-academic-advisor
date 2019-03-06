@@ -85,12 +85,18 @@ class PopupReqs extends Component {
       return (
         <div id="modal-reqs">
           <div id="modal-reqs-content">
-            <span>Required</span>
-            <span id="modal-reqs-fulfilled-status">1 or more missing</span>
+            <div id="modal-reqs-header">
+              <span id="modal-reqs-title">Required</span>
+              <span id="modal-reqs-fulfilled-status">1 or more missing</span>
+            </div>
+
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
                 {this.createProgramReqList()}                
               </ul>
+            </div>
+            <div id="modal-reqs-footer">
+              <button type="button" class="btn-primary" id="modal-reqs-clear-button">Clear</button>
             </div>
           </div>
         </div>
