@@ -31,6 +31,10 @@ class PopupReqs extends Component {
     this.setState({active_courses: new_active_courses});
   }
 
+  allProgramRequirementsMet(){
+    // TODO: Write method which checks if all program requirements have been met
+  }
+
   isCourseActive(course_str){
     console.log(course_str);
     if(this.state.active_courses.includes(course_str)){
@@ -82,7 +86,7 @@ class PopupReqs extends Component {
         <div id="modal-reqs">
           <div id="modal-reqs-content">
             <span>Required</span>
-
+            <span id="modal-reqs-fulfilled-status">1 or more missing</span>
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
                 {this.createProgramReqList()}                

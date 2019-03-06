@@ -39,6 +39,13 @@
 	background-color: #232323;
 }
 
+#modal-reqs-fulfilled-status {
+	float: right;
+	margin-right: 5px;
+	padding: 2px 2px 2px 2px;
+	background-color: #e22b2b;
+}
+
 .reqs-course-item {
 	list-style-type: none;
 	height: 25px;
