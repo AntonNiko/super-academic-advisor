@@ -36,7 +36,6 @@ class PopupReqs extends Component {
   }
 
   isCourseActive(course_str){
-    console.log(course_str);
     if(this.state.active_courses.includes(course_str)){
       return true;
     }else{
