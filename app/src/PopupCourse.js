@@ -30,15 +30,12 @@ class PopupCourse extends Component {
 			course_link_extension: course[7],
     });
 	}
-	
+
 	renderCourseDetails(){
-		var elements = [];
-
-
 		// TEMPORARY: ONLY FOR CSC 115 (TEST)
 		if(this.state.course_str != "CSC 115"){
 			return [<h3 id="modal-course-reqs-title">Prerequisites</h3>,
-			<ul id="modal-course-reqs-content">
+			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>
 				<li><span>CSC 110 or CSC 111; and</span></li>
 				<li><span>MATH 101; and</span></li>
@@ -58,31 +55,36 @@ class PopupCourse extends Component {
 			</ul>];
 		}
 
+		var elements = [];
+		var prereq_elements = [];
+		var coreq_elements = [];
+		var notes_elements = [];
 
-		
 		if(this.state.course_details.Prerequisites != undefined){
 			elements.push(<h3 id="modal-course-reqs-title">Prerequisites</h3>);
 			// Look through prerequisites list
 			for(var i=0; i<this.state.course_details.Prerequisites.length; i++){
-				elements.push(<li><span>{this.state.course_details.Prerequisites[i]}</span></li>);
+				prereq_elements.push(<li><span>{this.state.course_details.Prerequisites[i]}</span></li>);
 			}
+			elements.push(<ul class="modal-course-reqs-content">{prereq_elements}</ul>);
 		}
 
 		if(this.state.course_details.Corequisites != undefined){
 			elements.push(<h3 class="modal-course-reqs-title">Corequisites</h3>);
 			// Look through corequisites list
 			for(var i=0; i<this.state.course_details.Corequisites.length; i++){
-				elements.push(<li><span>{this.state.course_details.Corequisites[i]}</span></li>);
+				coreq_elements.push(<li><span>{this.state.course_details.Corequisites[i]}</span></li>);
 			}	
+			elements.push(<ul class="modal-course-reqs-content">{coreq_elements}</ul>);
 		}
 
 		if(this.state.course_details.Note != undefined){
 			elements.push(<h3 class="modal-course-reqs-title">Notes</h3>);
 			// Look through notes list
-			elements.push(<ul class="modal-course-reqs-content"></ul>);
 			for(var i=0; i<this.state.course_details.Note.length; i++){
-				elements.push(<li><span>{this.state.course_details.Note[i]}</span></li>);
+				notes_elements.push(<li><span>{this.state.course_details.Note[i]}</span></li>);
 			}
+			elements.push(<ul class="modal-course-reqs-content">{notes_elements}</ul>);
 		}
 
 		return elements;
