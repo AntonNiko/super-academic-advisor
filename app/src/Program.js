@@ -211,7 +211,8 @@ class Program extends Component {
 
     // Update PopupReqs object to reflect newly addded courses
     //this.props.updateProgramReqs();
-    this.props.updateProgramReqs();
+    
+    //this.props.updateProgramReqs(this.state.sem);
 
     // Verify all initial courses satisfy prereqs, AFTER having initialized them
     /*var current_sequence = this.props.sequence;
@@ -224,6 +225,10 @@ class Program extends Component {
         }
       }
     }*/
+  }
+
+  componentDidUpdate(){
+    this.props.updateProgramReqs(this.state.sem);
   }
 
   render() {

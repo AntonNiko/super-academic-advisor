@@ -16,11 +16,28 @@ class PopupReqs extends Component {
       fulfilled: false,
     };
 
+    this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
+    this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
+
     this.updateProgramReqList = this.updateProgramReqList.bind(this);
   }  
 
-  updateProgramReqList(){
-    console.log("hello!");
+  updateProgramReqList(semesters){
+    var new_active_courses = [];
+    for(var semester_id in semesters){
+      var current_semester_courses = semesters[semester_id].current.state.courses[0];
+      new_active_courses = new_active_courses.concat(current_semester_courses);
+    }
+    this.setState({active_courses: new_active_courses});
+  }
+
+  isCourseActive(course_str){
+    console.log(course_str);
+    if(this.state.active_courses.includes(course_str)){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   createProgramReqList(){
@@ -36,7 +53,7 @@ class PopupReqs extends Component {
         if(typeof current_course == "object"){
           // If the requirements is an array, means that both courses need to be satisfied
           for(var k=0; k<current_course.length; k++){
-            list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
+            list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.isCourseActive(current_course[k]) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
 
             if(k+1 != current_course.length){
               list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">AND</span></li>);
@@ -45,7 +62,7 @@ class PopupReqs extends Component {
 
         }else if(typeof current_course == "string"){
           // Individual course, so can simply add course item and move on
-          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">{current_course}</span></li>); 
+          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.isCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>); 
         }
 
         // If we've reached the end of the individual program requirement, we can avoid placing a conditional item
