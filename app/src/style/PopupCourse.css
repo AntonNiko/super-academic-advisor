@@ -19,7 +19,7 @@
 	padding: 20px 10px 5px 15px;
 	border: 1px solid #888;
 	width: 80%;
-	min-height: 485px;
+	min-height: 400px;
 }
 
 .modal-course-title {
@@ -42,8 +42,15 @@
 	display: inline;
 }
 
+#modal-course-description {
+	font-size: 14px;
+	padding-right: 350px;
+}
+
 #modal-course-links {
 	font-size: 12px;
+	position: absolute;
+	bottom: 45px;
 }
 
 #modal-course-links a {

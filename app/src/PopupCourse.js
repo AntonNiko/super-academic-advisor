@@ -90,6 +90,19 @@ class PopupCourse extends Component {
 		return elements;
 	}
 
+	renderCourseDescription(){
+		// On render, check null state
+		if(this.state.course_details == null){
+			return <div></div>
+		}
+
+		if(this.state.course_details.Description != undefined){
+			return (<p>{this.state.course_details.Description}</p>);
+		}else{
+			return (<p></p>);
+		}
+	}
+
 	renderCourseLink(){
 		return this.course_link_url + this.state.course_link_extension;
 	}
@@ -106,6 +119,10 @@ class PopupCourse extends Component {
     	      <h3 id="modal-course-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>
     		    <h3 id="modal-course-subtitle-right"><span>Credits: </span><span id="modal-course-credits">{this.state.course_credits}</span></h3>
     	    </div>
+
+					<div id="modal-course-description">
+						{this.renderCourseDescription()}
+					</div>
 
     	    <div class="modal-course-reqs" id="modal-course-reqs">
     	      {this.renderCourseDetails()}
