@@ -9,7 +9,7 @@
     padding-top: 20px;
   }
   
-  .sidebar div div {
+  .sidebar div > div {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 14px;

@@ -133,11 +133,14 @@ ul.dropdown-select li {
   border: 1px solid #8c8c8c;
 }
 
-ul.dropdown-select li span.dropdown-value {
+ul.dropdown-select li div p.dropdown-value {
   padding-right: 20px;
-  display: inline-block;
   max-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
+  margin: 0;
+  width: 87%;
 }
 
 ul.dropdown-select li:hover {
@@ -185,15 +188,19 @@ ul.dropdown-select li ul li:hover {
 }
 
 ul.dropdown-select li:hover ul {
-  display: block;
   opacity: 1;
   visibility: visible;
 }
 
-ul.dropdown-select li > span.arrow-down {
+ul.dropdown-select li ul:active {
+  visibility: hidden;
+  opacity: 0;
+}
+
+ul.dropdown-select li > div span.arrow-down {
   position: absolute;
   display: inline-block; 
-  float: right;
+  top: 10px;
   right: 5px;
 	width: 15px;
 	height: 15px;

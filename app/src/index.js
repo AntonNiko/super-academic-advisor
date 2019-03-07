@@ -167,7 +167,7 @@ $(function(){
   // Dropdown select value
   $("ul.dropdown-select li ul li").click(function(e){
     var selected_value = $(this).attr("value");
-    var selected_display = $(this).parent().parent().children("span.dropdown-value");
+    var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
     selected_display.attr("value", selected_value);
     selected_display.text(selected_value);
   });
