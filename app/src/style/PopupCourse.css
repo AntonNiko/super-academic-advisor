@@ -51,8 +51,18 @@
 }
 
 #modal-course-footer {
-	float: right;
+	position: absolute;
+	bottom: 10px;
+	width: 98%;
 	height: 35px;
+}
+
+#modal-course-button-group {
+	float: right;
+}
+
+#modal-course-button-group div button {
+	margin: 0 0 0 3px;
 }
 
 #close-btn {

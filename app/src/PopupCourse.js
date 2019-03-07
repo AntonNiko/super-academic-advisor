@@ -114,12 +114,17 @@ class PopupCourse extends Component {
     	          Course link: <a href={this.renderCourseLink()}>{this.renderCourseLink()}</a>
     	      </div>
     	      <div id="modal-course-footer">
-              <div class="form-group">
-                <button type="button" class="btn-primary" id="modal-course-submit">Submit</button>
-              </div>
-              <div class="form-group">
-                <button type="button" class="btn-secondary" id="modal-course-cancel">Cancel</button>
-              </div>
+						  <div id="modal-course-button-group">
+								<div class="form-group">
+									<button type="button" class="btn-primary" id="modal-course-submit">Submit</button>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn-danger" id="modal-course-delete">Delete</button>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn-secondary" id="modal-course-cancel">Cancel</button>
+								</div>							
+							</div>
     	      </div>
     	   </div>
       </div>
