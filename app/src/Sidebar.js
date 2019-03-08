@@ -8,11 +8,29 @@ class Sidebar extends Component {
 
     this.state = {
       current_selection: null,
+      faculty_selected: null,
+      program_selected: null,
+      minor_selected: null,
+      specialization_selected: null
     };
   }
 
   renderFacultyDropdown(){
+    var result = [];
+    var _first = true;
+    var list = [];
+    for(var faculty in this.props.selection){
+      if(_first){
+        result.push(<div class="dropdown-header"><p class="dropdown-value">{faculty}</p><span class="arrow-down"></span></div>);
+        _first = false;
+      }
 
+      if(faculty != "Minors"){
+        list.push(<li value={faculty}><span>{faculty}</span></li>);
+      }
+    }
+    result.push(<ul>{list}</ul>);
+    return result;
   }
 
   renderProgramDropdown(){
@@ -28,20 +46,15 @@ class Sidebar extends Component {
   }
 
   render() {
+    //console.log(this.props);
+    this.renderFacultyDropdown();
     return (
       <div>
         <div class="form-group-new">
           <span>Faculty</span>
           <ul class="dropdown-select">
             <li>
-              <div class="dropdown-header">
-                <p class="dropdown-value">Engineering</p><span class="arrow-down"></span>
-              </div>
-              <ul>
-                <li value="Engineering"><span>Engineering</span></li>
-                <li value="Economics"><span>Economics</span></li>
-                <li value="Humanities"><span>Humanities</span></li>
-              </ul>
+              {this.renderFacultyDropdown()}
             </li>
           </ul>
         </div>
