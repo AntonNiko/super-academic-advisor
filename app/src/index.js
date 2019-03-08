@@ -14,7 +14,7 @@ import 'jquery-ui/ui/widgets/draggable';
 function getCoursesData(){
   return JSON.parse($.ajax({
     type: "GET",
-    url: "/course_dir.json",
+    url: "/data/course_dir.json",
     async: false
   }).responseText);
 }
@@ -22,9 +22,25 @@ function getCoursesData(){
 function getSequenceData(){
   return JSON.parse($.ajax({
     type: "GET",
-    url: "/program_sequence.json",
+    url: "/data/program_sequence.json",
     async: false
   }).responseText);
+}
+
+function getSelectionData(){
+  return JSON.parse($.ajax({
+    type: "GET",
+    url: "/data/program_selection.json",
+    async: false
+  }).responseText);  
+}
+
+function getRequirementsData(){
+  return JSON.parse($.ajax({
+    type: "GET",
+    url: "/data/requirements_dir.json",
+    async: false
+  }).responseText);  
 }
 
 var program_requirements_seng = [
@@ -51,11 +67,13 @@ var program_requirements_seng = [
 // Fetch Data for course info and program sequence respectively
 var data = getCoursesData();
 var program_sequence = getSequenceData();
+var program_selection = getSelectionData();
+var program_requirements = getRequirementsData();
 
 
 // Build React Elements
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
-ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
+ReactDOM.render(<Sidebar selection={program_selection}/>, document.getElementById('sidebar'));
 ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}}/>, document.getElementById('modal-course-container'));
 ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} 
    requirements={program_requirements_seng}/>
@@ -74,22 +92,20 @@ $(function(){
   $(".panel-term-list").sortable({
     'placeholder': 'marker',
     start: function(e, ui){
-      console.log("start");
       startIndex = ui.placeholder.index();
       uiHeight = ui.item.outerHeight(true);
 
-      /*ui.item.nextAll("li:not(.marker)").css({
+      ui.item.nextAll("li:not(.marker)").css({
         transform: "translateY("+uiHeight+"px)"
       });
       ui.placeholder.css({
         height: 0,
         padding: 0
-      });*/
+      });
     },
     change: function(e, ui){
       changeIndex = ui.placeholder.index();
       if(startIndex > changeIndex){
-        console.log(1);
         // TODO: Only select slice of current list, not other semesters
         var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
         //console.log(slice);
@@ -100,13 +116,12 @@ $(function(){
           });
         });
       }else if (startIndex < changeIndex) {
-        console.log(2);
         var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
 
         slice.not('.ui-sortable-helper').each(function() {
             var item = $(this);
             item.css({
-                transform: 'translateY('+uiHeight+'px)'
+                transform: 'translateY(0px)'
             });
         });
       }

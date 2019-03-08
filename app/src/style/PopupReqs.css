@@ -70,6 +70,7 @@
 .reqs-course-item {
 	list-style-type: none;
 	height: 25px;
+	margin: 3px 0px 3px 0px;
 	padding: 2px 0px 0px 5px;
 }
 
@@ -97,7 +98,7 @@
 }
 
 .reqs-course-separator hr {
-	margin: 5px 0px 5px 0px;
+	margin: 0;
 	border: 0;
 	background-color: #615f5f;
 	height: 1px;

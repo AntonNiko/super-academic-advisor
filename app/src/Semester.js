@@ -58,11 +58,14 @@ class Semester extends Component {
           <span>{this.props.semester_id}</span>
           <span style={{float: "right"}}>{this.props.courses[2]} {this.props.courses[1]}</span>
         </div>
+        <div class="panel-term-subheader">
+        <span style={{float: "right"}}><span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
+        </div>
         <ul class="panel-term-list" id={this.props.semester_id}>
           {this.createCourses()}
         </ul>
         <div class="panel-term-footer">
-          <span style={{float: "right"}}>Credits: <span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
+          
         </div>
       </div>
     );

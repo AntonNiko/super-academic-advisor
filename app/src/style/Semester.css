@@ -14,10 +14,11 @@
     font-weight: 500;
   }
   
-  .panel-term-footer {
+  .panel-term-subheader {
     padding: 0px 5px 5px 0px;
     color: #ffffff;
     font-weight: 500;
+    height: 10px;
   }
   
   .panel-term-list {

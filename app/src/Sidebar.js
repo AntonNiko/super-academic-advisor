@@ -3,6 +3,30 @@ import logo from './logo.svg';
 import './style/Sidebar.css';
 
 class Sidebar extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      current_selection: null,
+    };
+  }
+
+  renderFacultyDropdown(){
+
+  }
+
+  renderProgramDropdown(){
+
+  }
+
+  renderMinorDropdown(){
+
+  }
+
+  renderSpecializationDropdown(){
+
+  }
+
   render() {
     return (
       <div>
