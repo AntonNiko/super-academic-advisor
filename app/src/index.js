@@ -74,20 +74,22 @@ $(function(){
   $(".panel-term-list").sortable({
     'placeholder': 'marker',
     start: function(e, ui){
+      console.log("start");
       startIndex = ui.placeholder.index();
       uiHeight = ui.item.outerHeight(true);
 
-      ui.item.nextAll("li:not(.marker)").css({
+      /*ui.item.nextAll("li:not(.marker)").css({
         transform: "translateY("+uiHeight+"px)"
       });
       ui.placeholder.css({
         height: 0,
         padding: 0
-      });
+      });*/
     },
     change: function(e, ui){
       changeIndex = ui.placeholder.index();
       if(startIndex > changeIndex){
+        console.log(1);
         // TODO: Only select slice of current list, not other semesters
         var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
         //console.log(slice);
@@ -98,12 +100,13 @@ $(function(){
           });
         });
       }else if (startIndex < changeIndex) {
+        console.log(2);
         var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
 
         slice.not('.ui-sortable-helper').each(function() {
             var item = $(this);
             item.css({
-                transform: 'translateY(0px)'
+                transform: 'translateY('+uiHeight+'px)'
             });
         });
       }
