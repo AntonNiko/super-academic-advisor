@@ -12,13 +12,13 @@
 
 #modal-add-course-action-container {
   position: absolute;
-  height: 100%;
+  height: 200px;
   width: -webkit-fill-available;
 }
 
 #modal-add-course-action-container div {
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin: 50px 10px;
+  height: 100px;
 }
 
 #modal-add-course-action-container div button {
