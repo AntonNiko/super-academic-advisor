@@ -183,14 +183,6 @@ $(function(){
   });
 
   // Dropdown select hover action
-  /*$("ul.dropdown-select li").hover(
-    function(){
-      $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
-    },
-    function(){
-      $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
-    }
-  );*/
   $("ul.dropdown-select li").mouseenter(function(){
     $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
   });
