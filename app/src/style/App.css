@@ -76,6 +76,23 @@ body {
 	background-color: #616161;
 }
 
+/* Action Button */
+.btn-action {
+  background-color: #1d7108;
+  border: 1px solid #656565;
+  border-radius: 3px;
+  color: #f3f2f2;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.btn-action:hover {
+	background-color: #0f4003;
+}
+
 /* Danger Button */
 .btn-danger {
   background-color: #980a0a;

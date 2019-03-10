@@ -218,6 +218,15 @@ $(function(){
 
   // Modal add course table toggle animation
   $(".modal-add-course-subject").click(function(){
-    $(this).next().slideToggle(300);
+    $(this).next().slideToggle(200);
+    $(this).find(".modal-chevron-collapsed").toggleClass("modal-chevron-expanded");
   });
+
+  // Modal add course table select action
+  $(".modal-course-item").click(function(){
+    console.log("1");
+
+    // Send selected course to PopupAddCourse
+    $(this).css({"background-color":"#3e3e3e"});
+  })
 });

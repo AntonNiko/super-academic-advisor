@@ -1,12 +1,50 @@
 #modal-add-course-dir {
-  width: 50%;
+  width: 35%;
+  display: table-cell;
+}
+
+#modal-add-course-transfer-actions {
+  position: absolute;
+  display: table-cell;
+  height: inherit;
+  width: 29%;
+}
+
+#modal-add-course-action-container {
+  position: absolute;
+  height: 100%;
+  width: -webkit-fill-available;
+}
+
+#modal-add-course-action-container div {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+#modal-add-course-action-container div button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#modal-add-course-results {
+  display: table-cell;
+  width: 35%;
 }
 
 #modal-add-course-workplace {
-  display: inline-block;
+  display: table;
   width: 100%;
+  height: 200px;
 }
 
 .modal-add-course-subject {
 
+}
+
+.modal-course-group {
+  padding-left: 0;
+}
+
+.modal-course-group li span {
+  padding-left: 50px;
 }

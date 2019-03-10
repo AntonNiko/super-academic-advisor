@@ -27,44 +27,47 @@ class PopupAddCourse extends Component {
           </div>
 
           <div id="modal-add-course-workplace">
-            <div class="modal-table-nested" id="modal-add-course-dir" style={{height:"140px"}}>
+            <div class="modal-table-nested" id="modal-add-course-dir">
               <div class="modal-table-content">
                 <ul class="modal-table-list">
-                  <li class="modal-add-course-subject">CSC</li>
-                    <ul>
-                      <li>CSC 110</li>
-                      <li>CSC 111</li>
-                      <li>CSC 115</li>
+                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">CSC</span></li>
+                    <ul class="modal-course-group">
+                      <li class="modal-course-item"><span>CSC 110</span></li>
+                      <li class="modal-course-item"><span>CSC 111</span></li>
+                      <li class="modal-course-item"><span>CSC 115</span></li>
                     </ul>
-                  <li class="modal-add-course-subject">ENGR</li>
-                    <ul>
-                      <li>ENGR 110</li>
-                      <li>ENGR 120</li>
+                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">ENGR</span></li>
+                    <ul class="modal-course-group">
+                      <li class="modal-course-item"><span>ENGR 110</span></li>
+                      <li class="modal-course-item"><span>ENGR 120</span></li>
                     </ul>
-                  <li class="modal-add-course-subject">MATH</li>
-                    <ul>
-                      <li>MATH 100</li>
-                      <li>MATH 101</li>
-                      <li>MATH 110</li>
+                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">MATH</span></li>
+                    <ul class="modal-course-group">
+                      <li class="modal-course-item"><span>MATH 100</span></li>
+                      <li class="modal-course-item"><span>MATH 101</span></li>
+                      <li class="modal-course-item"><span>MATH 110</span></li>
                     </ul>
                 </ul>
               </div>
             </div>
 
-            <div></div>
+            <div id="modal-add-course-transfer-actions">
+              <div id="modal-add-course-action-container">
+                <div>
+                  <button type="button" class="btn-action" id="modal-add-course-action-add">Move Courses</button>
+                  <button type="button" class="btn-action" id="modal-add-course-action-remove">Remove Courses</button>
+                </div>
+              </div>
+            </div>
 
-            <div class="modal-table">
-
+            <div class="modal-table-nested" id="modal-add-course-results">
             </div>
           </div>
 
           <div id="modal-add-footer" class="modal-footer">
             <div class="modal-footer-buttons">
               <div class="form-group">
-                <button type="button" class="btn-primary" id="modal-add-course-submit">Submit</button>
-              </div>
-              <div class="form-group">
-                <button type="button" class="btn-danger" id="modal-add-course-delete">Delete</button>
+                <button type="button" class="btn-primary" id="modal-add-course-submit">Add Courses</button>
               </div>
               <div class="form-group">
                 <button type="button" class="btn-secondary modal-cancel-button" id="modal-add-course-cancel">Cancel</button>

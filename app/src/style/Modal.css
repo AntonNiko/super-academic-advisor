@@ -84,6 +84,28 @@
   display: none;
 }
 
+.modal-chevron-collapsed {
+  position: relative;
+  float: left;
+  background-image: url("/assets/icons8-expand-arrow-48-right.png");
+  width: 15px;
+  height: 15px;
+  background-size: 15px 15px;
+}
+
+.modal-chevron-expanded {
+  position: relative;
+  float: left;
+  background-image: url("/assets/icons8-expand-arrow-48.png");
+  width: 15px;
+  height: 15px;
+  background-size: 15px 15px;
+}
+
+.modal-list-title {
+  padding-left: 10px;
+}
+
 .modal-close-button {
   color: #aaa;
   float: right;
