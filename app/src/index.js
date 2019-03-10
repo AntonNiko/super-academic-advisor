@@ -32,7 +32,7 @@ function getSelectionData(){
     type: "GET",
     url: "/data/program_selection.json",
     async: false
-  }).responseText);  
+  }).responseText);
 }
 
 function getRequirementsData(){
@@ -40,7 +40,7 @@ function getRequirementsData(){
     type: "GET",
     url: "/data/requirements_dir.json",
     async: false
-  }).responseText);  
+  }).responseText);
 }
 
 var program_requirements_seng = [
@@ -75,7 +75,7 @@ var program_requirements = getRequirementsData();
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
 ReactDOM.render(<Sidebar selection={program_selection}/>, document.getElementById('sidebar'));
 ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}}/>, document.getElementById('modal-course-container'));
-ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}} 
+ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}}
    requirements={program_requirements_seng}/>
    , document.getElementById('modal-reqs-container'));
 ReactDOM.render(<Program sequence={program_sequence}
@@ -182,11 +182,37 @@ $(function(){
     }
   });
 
+  // Dropdown select hover action
+  /*$("ul.dropdown-select li").hover(
+    function(){
+      $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
+    },
+    function(){
+      $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
+    }
+  );*/
+  $("ul.dropdown-select li").mouseenter(function(){
+    $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
+  });
+  $("ul.dropdown-select li").mouseleave(function(){
+    $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
+  });
+
+  $("ul.dropdown-select li ul li").hover(
+    function(){
+      $(this).css({"background":"#666"});
+    },
+    function(){
+      $(this).css({"background":"#353535"});
+    }
+  );
+
   // Dropdown select value
   $("ul.dropdown-select li ul li").click(function(e){
     var selected_value = $(this).attr("value");
     var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
     selected_display.attr("value", selected_value);
     selected_display.text(selected_value);
+    $(this).parent().css({"visibility":"hidden", "opacity":"0"})
   });
 });

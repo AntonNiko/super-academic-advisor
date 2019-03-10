@@ -5,6 +5,7 @@ import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 import './style/PopupReqs.css';
+import './style/Modal.css';
 
 class PopupReqs extends Component {
   constructor(props){
@@ -20,7 +21,7 @@ class PopupReqs extends Component {
     this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
 
     this.updateProgramReqList = this.updateProgramReqList.bind(this);
-  }  
+  }
 
   updateProgramReqList(semesters){
     var new_active_courses = [];
@@ -65,7 +66,7 @@ class PopupReqs extends Component {
 
         }else if(typeof current_course == "string"){
           // Individual course, so can simply add course item and move on
-          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.isCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>); 
+          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.isCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>);
         }
 
         // If we've reached the end of the individual program requirement, we can avoid placing a conditional item
@@ -82,7 +83,7 @@ class PopupReqs extends Component {
 
   render(){
       return (
-        <div id="modal-reqs">
+        <div id="modal-reqs" class="modal-clear">
           <div id="modal-reqs-content">
             <div id="modal-reqs-header">
               <span id="modal-reqs-title">Required</span>
@@ -91,7 +92,7 @@ class PopupReqs extends Component {
 
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
-                {this.createProgramReqList()}                
+                {this.createProgramReqList()}
               </ul>
             </div>
             <div id="modal-reqs-footer">
@@ -106,7 +107,7 @@ class PopupReqs extends Component {
 export default PopupReqs;
 
 
-/* 
+/*
 
 
                 <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">CSC 111</span></li>

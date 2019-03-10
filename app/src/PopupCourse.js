@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './style/PopupCourse.css';
+import './style/Modal.css';
 
 class PopupCourse extends Component {
   constructor(props){
@@ -14,7 +15,7 @@ class PopupCourse extends Component {
 			course_link: null,
 			course_details: null,
 		}
-		
+
 		this.course_link_url = "https://web.uvic.ca/calendar2019-05/CDs/";
 
     this.populateCourse = this.populateCourse.bind(this);
@@ -34,7 +35,7 @@ class PopupCourse extends Component {
 	renderCourseDetails(){
 		// TEMPORARY: ONLY FOR CSC 115 (TEST)
 		if(this.state.course_str != "CSC 115"){
-			return [<h3 id="modal-course-reqs-title">Prerequisites</h3>,
+			return [<h3 class="modal-subsection-title">Prerequisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>
 				<li><span>CSC 110 or CSC 111; and</span></li>
@@ -43,13 +44,13 @@ class PopupCourse extends Component {
 				<li><span>one of PHYS 110, PHYS 122, PHYS 120</span></li>
 			</ul>,
 
-			<h3 class="modal-course-reqs-title">Pre- or Co-requisites</h3>,
+			<h3 class="modal-subsection-title">Pre- or Co-requisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MATH 200 or MATH 204; or</span></li>
 				<li><span>permission of the department.</span></li>
 			</ul>,
 
-			<h3 class="modal-course-reqs-title">Notes</h3>,
+			<h3 class="modal-subsection-title">Notes</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>Credit will be granted for only one of MECH 242, CIVE 242</span></li>
 			</ul>];
@@ -61,30 +62,30 @@ class PopupCourse extends Component {
 		var notes_elements = [];
 
 		if(this.state.course_details.Prerequisites != undefined){
-			elements.push(<h3 id="modal-course-reqs-title">Prerequisites</h3>);
+			elements.push(<h3 class="modal-subsection-title">Prerequisites</h3>);
 			// Look through prerequisites list
 			for(var i=0; i<this.state.course_details.Prerequisites.length; i++){
 				prereq_elements.push(<li><span>{this.state.course_details.Prerequisites[i]}</span></li>);
 			}
-			elements.push(<ul class="modal-course-reqs-content">{prereq_elements}</ul>);
+			elements.push(<ul class="modal-list">{prereq_elements}</ul>);
 		}
 
 		if(this.state.course_details.Corequisites != undefined){
-			elements.push(<h3 class="modal-course-reqs-title">Corequisites</h3>);
+			elements.push(<h3 class="modal-subsection-title">Corequisites</h3>);
 			// Look through corequisites list
 			for(var i=0; i<this.state.course_details.Corequisites.length; i++){
 				coreq_elements.push(<li><span>{this.state.course_details.Corequisites[i]}</span></li>);
-			}	
-			elements.push(<ul class="modal-course-reqs-content">{coreq_elements}</ul>);
+			}
+			elements.push(<ul class="modal-list">{coreq_elements}</ul>);
 		}
 
 		if(this.state.course_details.Note != undefined){
-			elements.push(<h3 class="modal-course-reqs-title">Notes</h3>);
+			elements.push(<h3 class="modal-subsection-title">Notes</h3>);
 			// Look through notes list
 			for(var i=0; i<this.state.course_details.Note.length; i++){
 				notes_elements.push(<li><span>{this.state.course_details.Note[i]}</span></li>);
 			}
-			elements.push(<ul class="modal-course-reqs-content">{notes_elements}</ul>);
+			elements.push(<ul class="modal-list">{notes_elements}</ul>);
 		}
 
 		return elements;
@@ -109,29 +110,29 @@ class PopupCourse extends Component {
 
   render() {
     return (
-      <div id="modal-course-details">
-        <div id="modal-course-content">
-    	    <span id="close-btn">X</span>
-    	    <h2 class="modal-course-title" id="modal-course-title">{this.state.course_str}</h2>
-    	    <h2 class="modal-course-title" id="modal-course-desc">{this.state.course_str == "CSC 115" ? this.state.course_details.Title : "Course Title"}</h2>
+      <div id="modal-course-details" class="modal-opaque">
+        <div id="modal-course-content" class="modal-content">
+    	    <span id="close-btn" class="modal-close-button">X</span>
+    	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
+    	    <h2 class="modal-title" id="modal-course-desc">{this.state.course_str == "CSC 115" ? this.state.course_details.Title : "Course Title"}</h2>
 
-    	    <div id="modal-course-subtitle">
-    	      <h3 id="modal-course-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>
-    		    <h3 id="modal-course-subtitle-right"><span>Credits: </span><span id="modal-course-credits">{this.state.course_credits}</span></h3>
+    	    <div class="modal-subtitle">
+    	      <h3 id="modal-course-subtitle-left" class="modal-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>
+    		    <h3 id="modal-course-subtitle-right" class="modal-subtitle-right"><span>Credits: </span><span id="modal-course-credits">{this.state.course_credits}</span></h3>
     	    </div>
 
-					<div id="modal-course-description">
+					<div id="modal-course-description" class="modal-text">
 						{this.renderCourseDescription()}
 					</div>
 
     	    <div class="modal-course-reqs" id="modal-course-reqs">
     	      {this.renderCourseDetails()}
     	    </div>
-    	      <div id="modal-course-links">
+    	      <div id="modal-course-links" class="modal-text-footer">
     	          Course link: <a href={this.renderCourseLink()}>{this.renderCourseLink()}</a>
     	      </div>
-    	      <div id="modal-course-footer">
-						  <div id="modal-course-button-group">
+    	      <div id="modal-course-footer" class="modal-footer">
+						  <div class="modal-footer-buttons">
 								<div class="form-group">
 									<button type="button" class="btn-primary" id="modal-course-submit">Submit</button>
 								</div>
@@ -140,7 +141,7 @@ class PopupCourse extends Component {
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn-secondary" id="modal-course-cancel">Cancel</button>
-								</div>							
+								</div>
 							</div>
     	      </div>
     	   </div>

@@ -177,29 +177,15 @@ ul.dropdown-select li ul li {
   border: 1px solid #707070;
 }
 
-ul.dropdown-select li ul li > span { 
+ul.dropdown-select li ul li > span {
   text-decoration: none;
-  display: block; 
+  display: block;
   color: #fff;
-}
-
-ul.dropdown-select li ul li:hover {
-  background: #666;
-}
-
-ul.dropdown-select li:hover ul {
-  opacity: 1;
-  visibility: visible;
-}
-
-ul.dropdown-select li ul:active {
-  visibility: hidden;
-  opacity: 0;
 }
 
 ul.dropdown-select li > div span.arrow-down {
   position: absolute;
-  display: inline-block; 
+  display: inline-block;
   top: 10px;
   right: 5px;
 	width: 15px;
