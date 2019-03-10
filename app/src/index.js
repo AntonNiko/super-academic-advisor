@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Program from './Program';
 import Semester from './Semester';
+import PopupAddCourse from './PopupAddCourse.js';
 import PopupCourse from './PopupCourse';
 import PopupReqs from './PopupReqs.js';
 import $ from 'jquery';
@@ -84,6 +85,8 @@ ReactDOM.render(<Program sequence={program_sequence}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
     document.getElementById('panel-container-parent'));
 
+ReactDOM.render(<PopupAddCourse />, document.getElementById('modal-add-course-container'));
+
 // jQuery code
 $(function(){
 
@@ -142,32 +145,36 @@ $(function(){
     }
   });
 
+  // Configure course details modal to open on double click
   $(".panel-course").dblclick(function(){
     var course_obj = data[$(this).attr("id").replace("_"," ")];
     window.popup.populateCourse(course_obj);
     $("#modal-course-details").css("display","block");
   });
 
-  // Configure course details modal properties
-  $("#modal-course-content").draggable();
+  $(".modal-draggable").draggable();
 
-  $("#close-btn").click(function(){
-    $("#modal-course-details").css("display","none");
-  $("#modal-course-content").css({top: 0, left: 0, position:"relative"});
+  $(".modal-cancel-button").click(function(){
+    $(this).parents().eq(4).css({"display":"none"});
+    $(this).parents().eq(3).css({top: 0, left: 0, position:"relative"});
   });
 
-  $("#modal-course-cancel").click(function(){
-    $("#modal-course-details").css("display","none");
-  $("#modal-course-content").css({top: 0, left: 0, position:"relative"});
+  $(".modal-close-button").click(function(){
+    $(this).parents().eq(1).css({"display":"none"});
+    $(this).parent().css({top: 0, left: 0, position:"relative"});
   });
 
   $(window).click(function(e){
   var target = $(e.target);
-    if(target.is("#modal-course-details")){
-      console.log("haha");
-      $("#modal-course-details").css("display","none");
-      $("#modal-course-content").css({top: 0, left: 0, position:"relative"});
+    if(target.is(".modal")){
+      target.css("display","none");
+      target.find(".modal-content").css({top: 0, left: 0, position:"relative"})
     }
+  });
+
+  // Configure Add Course modal actions and properties
+  $("#add-course").click(function(){
+    $("#modal-add-course").css("display","block");
   });
 
   // Configure course reqs modal properties
@@ -206,5 +213,11 @@ $(function(){
     selected_display.attr("value", selected_value);
     selected_display.text(selected_value);
     $(this).parent().css({"visibility":"hidden", "opacity":"0"})
+  });
+
+
+  // Modal add course table toggle animation
+  $(".modal-add-course-subject").click(function(){
+    $(this).next().slideToggle(300);
   });
 });

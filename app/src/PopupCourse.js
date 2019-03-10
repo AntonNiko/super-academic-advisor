@@ -110,9 +110,9 @@ class PopupCourse extends Component {
 
   render() {
     return (
-      <div id="modal-course-details" class="modal-opaque">
-        <div id="modal-course-content" class="modal-content">
-    	    <span id="close-btn" class="modal-close-button">X</span>
+      <div id="modal-course-details" class="modal modal-opaque">
+        <div id="modal-course-content" class="modal-content modal-draggable">
+    	    <span class="modal-close-button">X</span>
     	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
     	    <h2 class="modal-title" id="modal-course-desc">{this.state.course_str == "CSC 115" ? this.state.course_details.Title : "Course Title"}</h2>
 
@@ -140,7 +140,7 @@ class PopupCourse extends Component {
 									<button type="button" class="btn-danger" id="modal-course-delete">Delete</button>
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn-secondary" id="modal-course-cancel">Cancel</button>
+									<button type="button" class="btn-secondary modal-cancel-button" id="modal-course-cancel">Cancel</button>
 								</div>
 							</div>
     	      </div>

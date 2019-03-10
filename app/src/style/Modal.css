@@ -25,7 +25,7 @@
 }
 
 .modal-content {
-  background-color: #4c4c4c;
+  background-color: #353535;
 	color: #f3f2f2;
 	margin: 15% auto;
 	margin-top: 5%;
@@ -66,6 +66,24 @@
   font-size: 14px;
 }
 
+.modal-table-nested {
+  background-color: #232323;
+  border: 1px solid #757575;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.modal-table-list {
+  list-style-type: none;
+  padding-left: 15px;
+}
+
+.modal-table-list ul {
+  list-style-type: none;
+  display: none;
+}
+
 .modal-close-button {
   color: #aaa;
   float: right;
@@ -90,8 +108,6 @@
 
 .modal-text-footer {
   font-size: 12px;
-	position: absolute;
-	bottom: 45px;
 }
 
 .modal-text-footer a {
@@ -99,10 +115,11 @@
 }
 
 .modal-footer {
-	position: absolute;
+	position: relative;
 	bottom: 10px;
 	width: 98%;
 	height: 35px;
+  margin-top: 20px;
 }
 
 .modal-footer-buttons {
