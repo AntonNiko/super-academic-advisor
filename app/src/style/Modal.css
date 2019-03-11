@@ -122,10 +122,6 @@
 	cursor: pointer;
 }
 
-.modal-subsection-title {
-
-}
-
 .modal-text {
   font-size: 14px;
   padding-right: 350px;
@@ -142,6 +138,7 @@
 .modal-table-content {
   position: relative;
   top: -16px;
+  max-height: 300px;
 }
 
 .modal-footer {

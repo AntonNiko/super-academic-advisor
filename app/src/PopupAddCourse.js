@@ -47,6 +47,18 @@ class PopupAddCourse extends Component {
                       <li class="modal-course-item course-item-unselected"><span>MATH 101</span></li>
                       <li class="modal-course-item course-item-unselected"><span>MATH 110</span></li>
                     </ul>
+                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">MATH</span></li>
+                    <ul class="modal-course-group">
+                      <li class="modal-course-item course-item-unselected"><span>MATH 100</span></li>
+                      <li class="modal-course-item course-item-unselected"><span>MATH 101</span></li>
+                      <li class="modal-course-item course-item-unselected"><span>MATH 110</span></li>
+                    </ul>
+                    <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">MATH</span></li>
+                      <ul class="modal-course-group">
+                        <li class="modal-course-item course-item-unselected"><span>MATH 100</span></li>
+                        <li class="modal-course-item course-item-unselected"><span>MATH 101</span></li>
+                        <li class="modal-course-item course-item-unselected"><span>MATH 110</span></li>
+                      </ul>
                 </ul>
               </div>
             </div>

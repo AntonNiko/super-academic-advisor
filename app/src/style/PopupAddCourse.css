@@ -51,6 +51,14 @@
   min-width: 400px;
 }
 
+.modal-add-course-subject {
+  margin-bottom: 3px;
+}
+
+.modal-course-item {
+  margin-bottom: 3px;
+}
+
 .modal-add-course-selected-course {
   height: 40px;
 }
