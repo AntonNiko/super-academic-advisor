@@ -191,24 +191,27 @@ $(function(){
   });
 
   // Dropdown select hover action
-  $("ul.dropdown-select li, ul.dropdown-select-small li").mouseenter(function(){
+  // TODO: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements 
+  // Adapt for dynamically generated elements
+  $("ul.dropdown-select li, ul.dropdown-select-small li").on("mouseenter" ,function(){
     $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
   });
-  $("ul.dropdown-select li, ul.dropdown-select-small li").mouseleave(function(){
+
+  $("ul.dropdown-select li, ul.dropdown-select-small li").on("mouseleave", function(){
     $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
   });
 
-  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").hover(
-    function(){
+  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").on({
+    mouseenter: function(){
       $(this).css({"background":"#666"});
     },
-    function(){
+    mouseleave: function(){
       $(this).css({"background":"#353535"});
     }
-  );
+  });
 
   // Dropdown select value
-  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").click(function(e){
+  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").on("click", function(e){
     var selected_value = $(this).attr("value");
     var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
     selected_display.attr("value", selected_value);
@@ -217,13 +220,13 @@ $(function(){
   });
 
   // Modal add course table toggle animation
-  $(".modal-add-course-subject").click(function(){
+  $(".modal-add-course-subject").on("click", function(){
     $(this).next().slideToggle(200);
     $(this).find(".modal-chevron-collapsed").toggleClass("modal-chevron-expanded");
   });
 
   // Modal add course table select action
-  $(".modal-course-item").click(function(){
+  $(".modal-course-item").on("click", function(){
     var course_str = $(this).find("span").text();
 
     if($(this).hasClass("course-item-selected")){
@@ -232,4 +235,11 @@ $(function(){
       window.addCourse.addSelectedCourse(course_str);
     }
   })
+
+  $("#modal-add-course-action-add").on("click", function(){
+    window.addCourse.stageSelectedCourses();
+  });
+  $("#modal-add-course-action-remove").on("click", function(){
+    window.addCourse.unstageStagedCourses();
+  });
 });

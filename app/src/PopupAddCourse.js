@@ -9,30 +9,42 @@ class PopupAddCourse extends Component {
 
     this.state = {
       selected_courses: [],
+      staged_courses: {},
+      available_years: ["2018","2019","2020","2021"],
     }
 
     this.addSelectedCourse = this.addSelectedCourse.bind(this);
     this.removeSelectedCourse = this.removeSelectedCourse.bind(this);
+    this.stageSelectedCourses = this.stageSelectedCourses.bind(this);
+    this.unstageStagedCourses = this.unstageStagedCourses.bind(this);
   }
 
   addSelectedCourse(course_str){
-    this.state.selected_courses.push(course_str);
-    this.forceUpdate();
+    var new_selected_courses = this.state.selected_courses;
+    new_selected_courses.push(course_str);
+    this.setState({selected_courses: new_selected_courses});
   }
 
   removeSelectedCourse(course_str){
-    var selected_courses = this.state.selected_courses;
-    selected_courses.splice(selected_courses.indexOf(course_str), 1);
-    this.state.selected_courses = selected_courses;
-    this.forceUpdate();
+    var new_selected_courses = this.state.selected_courses;
+    new_selected_courses.splice(new_selected_courses.indexOf(course_str), 1);
+    this.setState({selected_courses: new_selected_courses});
   }
 
-  addSelectedCourses(){
-
+  stageSelectedCourses(){
+    // Move selected courses in position to be added to program
+    // TODO: Verify course offered in right semesters
+    // TODO: Verify course not already added to program
+    // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
+    var new_staged_courses = this.state.staged_courses;
+    for(var i=0; i<this.state.selected_courses.length; i++){
+      new_staged_courses[this.state.selected_courses[i]] = ["2019","F"];
+    }
+    this.setState({staged_courses: new_staged_courses});
   }
 
-  removeStagedCourses(){
-
+  unstageStagedCourses(){
+    console.log("unstaging");
   }
 
   editStagedCourseSequence(){
@@ -41,7 +53,7 @@ class PopupAddCourse extends Component {
 
 
 
-  renderCoursesList(){
+  renderCourseSelectionList(){
     var list_elements = [];
 
     // Sort course props into dictionary, ready to render
@@ -73,6 +85,70 @@ class PopupAddCourse extends Component {
     return list_elements;
   }
 
+  renderStagedCoursesList(){
+    var list_elements = [];
+
+    // For each staged course in the state, render and add a separator for list
+    for(var course_str in this.state.staged_courses){
+      var course_container = []
+      var actions_container = [];
+
+      // Generate year dropdown for course, based on state
+      actions_container.push(this.generateDynamicYearDropdownList());
+      actions_container.push(this.generateDynamicSemesterDropdownList(course_str));
+      actions_container.push(<div class="modal-add-course-selected-delete"><img src="/assets/icons8-delete-40.png"></img></div>);
+
+      course_container.push(<div class="modal-add-course-selected-title"><span>{course_str}</span></div>);
+      course_container.push(<div class="modal-add-course-selected-actions">{actions_container}</div>);
+      list_elements.push(<li class="modal-add-course-selected-course">{course_container}</li>);
+      list_elements.push(<li class="modal-add-course-selected-separator"><hr></hr></li>);
+    }
+
+    return list_elements;
+  }
+
+  generateDynamicYearDropdownList(){
+    var list_items = [];
+    for(var i=0; i<this.state.available_years.length; i++){
+      list_items.push(<li value={this.state.available_years[i]}><span>{this.state.available_years[i]}</span></li>)
+    }
+
+    return(
+    <ul class="dropdown-select-small">
+      <li>
+        <div class="dropdown-header">
+          <p class="dropdown-value">{this.state.available_years[0]}</p><span class="arrow-down"></span>
+        </div>
+        <ul>
+          {list_items}
+        </ul>
+      </li>
+    </ul>
+    );
+  }
+
+  generateDynamicSemesterDropdownList(course_str){
+    /* Generate dynamic semester dropdown list, based on specific course's semester avilability */
+    var course_semesters_offered = this.props.data[course_str][3];
+    var list_items = [];
+    for(var i=0; i<course_semesters_offered.length; i++){
+      var semester = course_semesters_offered[i];
+      list_items.push(<li value={semester}><span>{semester}</span></li>);
+    }
+
+    return (
+    <ul class="dropdown-select-small">
+      <li class="dropdown-select-small-narrow">
+        <div class="dropdown-header">
+          <p class="dropdown-value">{course_semesters_offered[0]}</p><span class="arrow-down"></span>
+        </div>
+        <ul>
+          {list_items}
+        </ul>
+      </li>
+    </ul>);
+  }
+
   render(){
     return (
       <div id="modal-add-course" class="modal modal-opaque">
@@ -90,7 +166,7 @@ class PopupAddCourse extends Component {
             <div class="modal-table-nested" id="modal-add-course-dir">
               <div class="modal-table-content">
                 <ul class="modal-table-list">
-                  {this.renderCoursesList()}
+                  {this.renderCourseSelectionList()}
                 </ul>
               </div>
             </div>
@@ -107,39 +183,7 @@ class PopupAddCourse extends Component {
             <div class="modal-table-nested" id="modal-add-course-results">
               <div class="modal-table-content" id="modal-add-course-results-content">
                 <ul class="modal-table-list" id="modal-add-course-results-list">
-                  <li class="modal-add-course-selected-course">
-                    <div class="modal-add-course-selected-title"><span>ENGR 141</span></div>
-                    <div class="modal-add-course-selected-actions">
-                      <ul class="dropdown-select-small">
-                        <li>
-                          <div class="dropdown-header">
-                            <p class="dropdown-value">2019</p><span class="arrow-down"></span>
-                          </div>
-                          <ul>
-                            <li value="2019"><span>2019</span></li>
-                            <li value="2020"><span>2020</span></li>
-                            <li value="2021"><span>2021</span></li>
-                          </ul>
-                        </li>
-                      </ul>
-                      <ul class="dropdown-select-small">
-                        <li class="dropdown-select-small-narrow">
-                          <div class="dropdown-header">
-                            <p class="dropdown-value">F</p><span class="arrow-down"></span>
-                          </div>
-                          <ul>
-                            <li value="F"><span>F</span></li>
-                            <li value="Sp"><span>Sp</span></li>
-                            <li value="Su"><span>Su</span></li>
-                          </ul>
-                        </li>
-                      </ul>
-                      <div class="modal-add-course-selected-delete">
-                        <img src="/assets/icons8-delete-40.png"></img>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="modal-add-course-selected-separator"><hr></hr></li>
+                  {this.renderStagedCoursesList()}
                 </ul>
               </div>
             </div>
