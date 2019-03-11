@@ -85,7 +85,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
     document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<PopupAddCourse />, document.getElementById('modal-add-course-container'));
+ReactDOM.render(<PopupAddCourse data={data}/>, document.getElementById('modal-add-course-container'));
 
 // jQuery code
 $(function(){

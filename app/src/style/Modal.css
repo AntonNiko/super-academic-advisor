@@ -114,6 +114,9 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  position: relative;
+  top: -18px;
+  right: -5px;
 }
 
 .modal-close-button:hover, .modal-close-button:focus {

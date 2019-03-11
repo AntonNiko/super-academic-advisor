@@ -8,9 +8,38 @@ class PopupAddCourse extends Component {
     super(props);
 
     this.state = {
+      selected_courses: null,
+    }
+  }
 
+
+  renderCoursesList(){
+    var list_elements = [];
+
+    // Sort course props into dictionary, ready to render
+    var course_dir = {};
+    for(var course_key in this.props.data){
+      var course_obj = this.props.data[course_key];
+      var course_subject = course_obj[0];
+
+
+      // If subject key is undefined, create one
+      if(course_dir[course_subject] == undefined){
+        course_dir[course_subject] = [];
+      }
+      course_dir[course_subject].push(course_key);
     }
 
+    // Render all list elements
+    for(var course_subject in course_dir){
+      list_elements.push(<li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">{course_subject}</span></li>);
+      var subject_courses = [];
+      for(var i=0; i<course_dir[course_subject].length; i++){
+        subject_courses.push(<li class="modal-course-item course-item-unselected"><span>{course_dir[course_subject][i]}</span></li>);
+      }
+      list_elements.push(<ul class="modal-course-group">{subject_courses}</ul>);
+    }
+    return list_elements;
   }
 
   render(){
@@ -30,35 +59,7 @@ class PopupAddCourse extends Component {
             <div class="modal-table-nested" id="modal-add-course-dir">
               <div class="modal-table-content">
                 <ul class="modal-table-list">
-                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">CSC</span></li>
-                    <ul class="modal-course-group">
-                      <li class="modal-course-item course-item-unselected"><span>CSC 110</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>CSC 111</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>CSC 115</span></li>
-                    </ul>
-                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">ENGR</span></li>
-                    <ul class="modal-course-group">
-                      <li class="modal-course-item course-item-unselected"><span>ENGR 110</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>ENGR 120</span></li>
-                    </ul>
-                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">MATH</span></li>
-                    <ul class="modal-course-group">
-                      <li class="modal-course-item course-item-unselected"><span>MATH 100</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>MATH 101</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>MATH 110</span></li>
-                    </ul>
-                  <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">MATH</span></li>
-                    <ul class="modal-course-group">
-                      <li class="modal-course-item course-item-unselected"><span>MATH 100</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>MATH 101</span></li>
-                      <li class="modal-course-item course-item-unselected"><span>MATH 110</span></li>
-                    </ul>
-                    <li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">MATH</span></li>
-                      <ul class="modal-course-group">
-                        <li class="modal-course-item course-item-unselected"><span>MATH 100</span></li>
-                        <li class="modal-course-item course-item-unselected"><span>MATH 101</span></li>
-                        <li class="modal-course-item course-item-unselected"><span>MATH 110</span></li>
-                      </ul>
+                  {this.renderCoursesList()}
                 </ul>
               </div>
             </div>
