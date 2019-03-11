@@ -79,10 +79,10 @@
 
 .modal-table-list {
   list-style-type: none;
-  padding-left: 15px;
+  padding-left: 5px;
 }
 
-.modal-table-list ul {
+.modal-table-list > ul {
   list-style-type: none;
   display: none;
 }
@@ -137,6 +137,11 @@
 
 .modal-text-footer a {
   color: #99a9e4;
+}
+
+.modal-table-content {
+  position: relative;
+  top: -16px;
 }
 
 .modal-footer {

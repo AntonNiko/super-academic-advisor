@@ -147,6 +147,7 @@ $(function(){
 
   // Configure course details modal to open on double click
   $(".panel-course").dblclick(function(){
+    console.log("id");
     var course_obj = data[$(this).attr("id").replace("_"," ")];
     window.popup.populateCourse(course_obj);
     $("#modal-course-details").css("display","block");
@@ -190,14 +191,14 @@ $(function(){
   });
 
   // Dropdown select hover action
-  $("ul.dropdown-select li").mouseenter(function(){
+  $("ul.dropdown-select li, ul.dropdown-select-small li").mouseenter(function(){
     $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
   });
-  $("ul.dropdown-select li").mouseleave(function(){
+  $("ul.dropdown-select li, ul.dropdown-select-small li").mouseleave(function(){
     $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
   });
 
-  $("ul.dropdown-select li ul li").hover(
+  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").hover(
     function(){
       $(this).css({"background":"#666"});
     },
@@ -207,14 +208,13 @@ $(function(){
   );
 
   // Dropdown select value
-  $("ul.dropdown-select li ul li").click(function(e){
+  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").click(function(e){
     var selected_value = $(this).attr("value");
     var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
     selected_display.attr("value", selected_value);
     selected_display.text(selected_value);
     $(this).parent().css({"visibility":"hidden", "opacity":"0"})
   });
-
 
   // Modal add course table toggle animation
   $(".modal-add-course-subject").click(function(){
@@ -224,9 +224,7 @@ $(function(){
 
   // Modal add course table select action
   $(".modal-course-item").click(function(){
-    console.log("1");
-
-    // Send selected course to PopupAddCourse
-    $(this).css({"background-color":"#3e3e3e"});
+    // TODO: Send selected course to PopupAddCourse
+    $(this).toggleClass("course-item-selected");
   })
 });

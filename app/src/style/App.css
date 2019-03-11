@@ -133,6 +133,17 @@ ul.dropdown-select {
   width: 100%;
 }
 
+ul.dropdown-select-small {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 10px 4px 10px 0;
+  list-style: none;
+  height: 20px;
+  position: relative;
+  top: 8px;
+}
+
 ul.dropdown-select li {
   display: inline-block;
   margin-right: -4px;
@@ -150,9 +161,27 @@ ul.dropdown-select li {
   border: 1px solid #8c8c8c;
 }
 
-ul.dropdown-select li div p.dropdown-value {
+ul.dropdown-select-small li {
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 2px 3px 2px 5px;
+  background: #353535;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #fff;
+  width: 75%;
+  border: 1px solid #8c8c8c;
+  height: 14px;
+  font-size: 13px;
+}
+
+ul.dropdown-select li div p.dropdown-value , ul.dropdown-select-small li div p.dropdown-value {
   padding-right: 20px;
-  max-height: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -160,7 +189,7 @@ ul.dropdown-select li div p.dropdown-value {
   width: 87%;
 }
 
-ul.dropdown-select li:hover {
+ul.dropdown-select li:hover, ul.dropdown-select-small li:hover {
   background: #353535;
   color: #fff;
 }
@@ -168,7 +197,28 @@ ul.dropdown-select li:hover {
 ul.dropdown-select li ul {
   padding: 0;
   position: absolute;
-  top: 36px;
+  top: 34px;
+  left: -1px;
+  width: 100%;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+  transition: visibility 0s, opacity 0.2s linear;
+  z-index: 100;
+}
+
+ul.dropdown-select-small li ul {
+  padding: 0;
+  position: absolute;
+  top: 19px;
   left: -1px;
   width: 100%;
   -webkit-box-shadow: none;
@@ -194,7 +244,16 @@ ul.dropdown-select li ul li {
   border: 1px solid #707070;
 }
 
-ul.dropdown-select li ul li > span {
+ul.dropdown-select-small li ul li {
+  width: 87%;
+  padding-bottom: 10px;
+  margin-bottom: -1px;
+  background-color: #353535;
+  border: 1px solid #707070;
+  height: 10px;
+}
+
+ul.dropdown-select li ul li > span, ul.dropdown-select-small li ul li > span {
   text-decoration: none;
   display: block;
   color: #fff;
@@ -204,6 +263,17 @@ ul.dropdown-select li > div span.arrow-down {
   position: absolute;
   display: inline-block;
   top: 10px;
+  right: 5px;
+	width: 15px;
+	height: 15px;
+	background-image: url('/assets/icons8-expand-arrow-48.png');
+	background-size: 15px 15px;
+}
+
+ul.dropdown-select-small li > div span.arrow-down {
+  position: absolute;
+  display: inline-block;
+  top: 1px;
   right: 5px;
 	width: 15px;
 	height: 15px;

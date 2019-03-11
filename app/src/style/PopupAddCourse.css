@@ -3,6 +3,10 @@
   display: table-cell;
 }
 
+#modal-add-course-dir div {
+  top: -12px;
+}
+
 #modal-add-course-transfer-actions {
   position: absolute;
   display: table-cell;
@@ -29,6 +33,8 @@
 #modal-add-course-results {
   display: table-cell;
   width: 35%;
+  overflow-x: scroll;
+  max-width: 0;
 }
 
 #modal-add-course-workplace {
@@ -37,12 +43,80 @@
   height: 200px;
 }
 
-.modal-add-course-subject {
+#modal-add-course-results-list {
+  padding-left: 0px;
+}
 
+#modal-add-course-results-content {
+  min-width: 400px;
+}
+
+.modal-add-course-selected-course {
+  height: 40px;
+}
+
+.modal-add-course-selected-separator hr {
+  margin: 0;
+  border: 0;
+  background-color: #615f5f;
+  height: 1px;
+}
+
+.modal-add-course-selected-title {
+  height: 100%;
+  width: 40%;
+  display: inline-block;
+}
+
+.modal-add-course-selected-delete {
+  float: right;
+  position: relative;
+  top: 11px;
+  right: 10px;
+}
+
+.modal-add-course-selected-title span {
+  position: relative;
+  top: 11px;
+  left: 5px;
+}
+
+.modal-add-course-selected-actions {
+  height: 100%;
+  width: 60%;
+  float: right;
+  display: inline-block;
+}
+
+.modal-add-course-selected-delete {
+  width: 15px;
+  height: 15px;
+}
+
+.modal-add-course-selected-delete img {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-add-course-selected-actions ul li {
+  width: 50px;
+}
+
+.dropdown-select-small-narrow {
+  margin-left: 5px;
+  width: 33px;
 }
 
 .modal-course-group {
   padding-left: 0;
+}
+
+.course-item-unselected {
+  background-color: #232323;
+}
+
+.course-item-selected {
+  background-color: #3e3e3e;
 }
 
 .modal-course-group li span {
