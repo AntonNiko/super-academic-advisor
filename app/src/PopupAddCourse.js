@@ -8,9 +8,37 @@ class PopupAddCourse extends Component {
     super(props);
 
     this.state = {
-      selected_courses: null,
+      selected_courses: [],
     }
+
+    this.addSelectedCourse = this.addSelectedCourse.bind(this);
+    this.removeSelectedCourse = this.removeSelectedCourse.bind(this);
   }
+
+  addSelectedCourse(course_str){
+    this.state.selected_courses.push(course_str);
+    this.forceUpdate();
+  }
+
+  removeSelectedCourse(course_str){
+    var selected_courses = this.state.selected_courses;
+    selected_courses.splice(selected_courses.indexOf(course_str), 1);
+    this.state.selected_courses = selected_courses;
+    this.forceUpdate();
+  }
+
+  addSelectedCourses(){
+
+  }
+
+  removeStagedCourses(){
+
+  }
+
+  editStagedCourseSequence(){
+
+  }
+
 
 
   renderCoursesList(){
@@ -35,7 +63,10 @@ class PopupAddCourse extends Component {
       list_elements.push(<li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">{course_subject}</span></li>);
       var subject_courses = [];
       for(var i=0; i<course_dir[course_subject].length; i++){
-        subject_courses.push(<li class="modal-course-item course-item-unselected"><span>{course_dir[course_subject][i]}</span></li>);
+        var selection_class = this.state.selected_courses.includes(course_dir[course_subject][i]) ? "course-item-selected" : "course-item-unselected";
+        var course_item_class = "modal-course-item "+selection_class;
+
+        subject_courses.push(<li class={course_item_class}><span>{course_dir[course_subject][i]}</span></li>);
       }
       list_elements.push(<ul class="modal-course-group">{subject_courses}</ul>);
     }

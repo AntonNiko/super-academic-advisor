@@ -5,6 +5,7 @@
 
 #modal-add-course-dir div {
   top: -12px;
+  display: inline-flex;
 }
 
 #modal-add-course-transfer-actions {

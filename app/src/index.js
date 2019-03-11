@@ -85,7 +85,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
     document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<PopupAddCourse data={data}/>, document.getElementById('modal-add-course-container'));
+ReactDOM.render(<PopupAddCourse data={data} ref={addCourse => {window.addCourse = addCourse}}/>, document.getElementById('modal-add-course-container'));
 
 // jQuery code
 $(function(){
@@ -224,7 +224,12 @@ $(function(){
 
   // Modal add course table select action
   $(".modal-course-item").click(function(){
-    // TODO: Send selected course to PopupAddCourse
-    $(this).toggleClass("course-item-selected");
+    var course_str = $(this).find("span").text();
+
+    if($(this).hasClass("course-item-selected")){
+      window.addCourse.removeSelectedCourse(course_str);
+    }else{
+      window.addCourse.addSelectedCourse(course_str);
+    }
   })
 });
