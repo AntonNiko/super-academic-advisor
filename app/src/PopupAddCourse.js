@@ -51,8 +51,6 @@ class PopupAddCourse extends Component {
 
   }
 
-
-
   renderCourseSelectionList(){
     var list_elements = [];
 

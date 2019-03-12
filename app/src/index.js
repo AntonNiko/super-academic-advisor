@@ -191,27 +191,25 @@ $(function(){
   });
 
   // Dropdown select hover action
-  // TODO: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements 
+  // TODO: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements
   // Adapt for dynamically generated elements
-  $("ul.dropdown-select li, ul.dropdown-select-small li").on("mouseenter" ,function(){
+  $(document).on("mouseenter", "ul.dropdown-select li, ul.dropdown-select-small li", function(){
     $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
   });
 
-  $("ul.dropdown-select li, ul.dropdown-select-small li").on("mouseleave", function(){
+  $(document).on("mouseleave", "ul.dropdown-select li, ul.dropdown-select-small li", function(){
     $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
   });
 
-  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").on({
-    mouseenter: function(){
-      $(this).css({"background":"#666"});
-    },
-    mouseleave: function(){
-      $(this).css({"background":"#353535"});
-    }
+  $(document).on("mouseenter", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
+    $(this).css({"background":"#666"});
+  });
+  $(document).on("mouseleave", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
+    $(this).css({"background":"#353535"});
   });
 
   // Dropdown select value
-  $("ul.dropdown-select li ul li, ul.dropdown-select-small li ul li").on("click", function(e){
+  $(document).on("click", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
     var selected_value = $(this).attr("value");
     var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
     selected_display.attr("value", selected_value);
