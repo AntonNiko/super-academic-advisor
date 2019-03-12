@@ -4,6 +4,8 @@ import './style/PopupAddCourse.css';
 import './style/Modal.css';
 
 class PopupAddCourse extends Component {
+  // Write method to recognize semester_id based on user input of year and semester
+
   constructor(props){
     super(props);
 
@@ -14,12 +16,23 @@ class PopupAddCourse extends Component {
       available_years: ["2018","2019","2020","2021"],
     }
 
+    this.submitCourses = this.submitCourses.bind(this);
     this.selectUnstagedCourse = this.selectUnstagedCourse.bind(this);
     this.unselectUnstagedCourse = this.unselectUnstagedCourse.bind(this);
     this.stageCourses = this.stageCourses.bind(this);
     this.unstageCourses = this.unstageCourses.bind(this);
     this.selectStagedCourse = this.selectStagedCourse.bind(this);
     this.unselectStagedCourse = this.unselectStagedCourse.bind(this);
+  }
+
+  submitCourses(){
+    // TODO: For each selected staged course, add to program
+    for(var course_str in this.state.staged_courses){
+      var semester_id = this.state.staged_courses[course_str][2];
+      this.props.addCourse(semester_id, course_str);
+
+      // TODO: Remove staged course if successfully added
+    }
   }
 
   selectUnstagedCourse(course_str){
@@ -53,7 +66,7 @@ class PopupAddCourse extends Component {
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     var new_staged_courses = this.state.staged_courses;
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
-      new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2019","F"];
+      new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2019","F","2A"];
     }
     this.setState({staged_courses: new_staged_courses});
   }

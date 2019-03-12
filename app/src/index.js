@@ -109,7 +109,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
     document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<PopupAddCourse data={data} ref={addCourse => {window.addCourse = addCourse}}/>, document.getElementById('modal-add-course-container'));
+ReactDOM.render(<PopupAddCourse data={data} ref={addCourse => {window.addCourse = addCourse}} addCourse={window.prog.addCourse}/>, document.getElementById('modal-add-course-container'));
 
 // jQuery code
 $(function(){
@@ -272,6 +272,11 @@ $(function(){
   });
   $("#modal-add-course-action-remove").on("click", function(){
     window.addCourse.unstageCourses();
+  });
+
+  // Modal add course add courses to program action
+  $("#modal-add-course-submit").click(function(){
+    window.addCourse.submitCourses();
   });
 
   // Add semester action

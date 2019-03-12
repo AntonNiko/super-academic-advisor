@@ -7,6 +7,11 @@ import 'jquery-ui/ui/widgets/draggable';
 import './style/Program.css';
 
 class Program extends Component {
+  // Modify implementation of state.sequence to be used as: 
+  //     1) placeholder for semesters and corresponding year and semester
+  //     2) first-time indicator of courses to be added. Any subsequent aciton will interact
+  //        w/ each semester's methods
+
   constructor(props){
     super(props);
 
@@ -23,6 +28,7 @@ class Program extends Component {
 
     this.moveCourse = this.moveCourse.bind(this);
     this.addSemester = this.addSemester.bind(this);
+    this.addCourse = this.addCourse.bind(this);
   }
 
   createSemesters(){
@@ -57,7 +63,6 @@ class Program extends Component {
 
   addCourse(semester_id, course_str, updateState = true){
     // Method that will allow courses to be added as a component
-    //var current_course = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
 
     // Verify course offered in semester
     if(!this.verifyCourseOffered(course_str, semester_id)){
