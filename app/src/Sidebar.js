@@ -13,6 +13,28 @@ class Sidebar extends Component {
       minor_selected: null,
       specialization_selected: null
     };
+
+    this.selectFaculty = this.selectFaculty.bind(this);
+    this.selectProgram = this.selectProgram.bind(this);
+    this.selectMinor = this.selectMinor.bind(this);
+    this.selectSpecialization = this.selectSpecialization.bind(this);
+  }
+
+
+  selectFaculty(){
+    console.log("a");
+  }
+
+  selectProgram(){
+    console.log("b");
+  }
+
+  selectMinor(){
+    console.log("c");
+  }
+
+  selectSpecialization(){
+    console.log("d");
   }
 
   renderFacultyDropdown(){
@@ -34,7 +56,9 @@ class Sidebar extends Component {
   }
 
   renderProgramDropdown(){
-
+    var result = [];
+    var _first = true;
+    var list = [];
   }
 
   renderMinorDropdown(){
@@ -46,14 +70,12 @@ class Sidebar extends Component {
   }
 
   render() {
-    //console.log(this.props);
-    this.renderFacultyDropdown();
     return (
       <div>
         <div class="form-group-new">
           <span>Faculty</span>
           <ul class="dropdown-select">
-            <li>
+            <li id="faculty-dropdown">
               {this.renderFacultyDropdown()}
             </li>
           </ul>
@@ -61,7 +83,7 @@ class Sidebar extends Component {
         <div class="form-group-new">
           <span>Program</span>
           <ul class="dropdown-select">
-            <li>
+            <li id="program-dropdown">
               <div class="dropdown-header">
                 <p class="dropdown-value">Software Engineering</p><span class="arrow-down"></span>
               </div>
@@ -76,7 +98,7 @@ class Sidebar extends Component {
         <div class="form-group-new">
           <span>Minor</span>
           <ul class="dropdown-select">
-            <li>
+            <li id="minor-dropdown">
               <div class="dropdown-header">
                 <p class="dropdown-value">Business</p><span class="arrow-down"></span>
               </div>
@@ -91,7 +113,7 @@ class Sidebar extends Component {
         <div class="form-group-new">
           <span>Specialization</span>
           <ul class="dropdown-select">
-            <li>
+            <li id="specialization-dropdown">
               <div class="dropdown-header">
                 <p class="dropdown-value">Data mining and analysis, artificial intelligence, and machine learning</p><span class="arrow-down"></span>
               </div>

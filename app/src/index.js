@@ -97,19 +97,24 @@ var program_requirements = getRequirementsData();
 
 // Build React Elements
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
-ReactDOM.render(<Sidebar selection={program_selection}/>, document.getElementById('sidebar'));
+ReactDOM.render(<Sidebar selection={program_selection} ref={sidebar => {window.sidebar = sidebar}}/>, document.getElementById('sidebar'));
 ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}}/>, document.getElementById('modal-course-container'));
 ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}}
-   requirements={program_requirements_seng}/>
-   , document.getElementById('modal-reqs-container'));
+   requirements={program_requirements_seng}/>,
+document.getElementById('modal-reqs-container'));
+
 ReactDOM.render(<Program sequence={program_sequence}
   ref={prog => {window.prog = prog;}}
   data={data}
   sequence_ids={sequence_ids}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
-    document.getElementById('panel-container-parent'));
+document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<PopupAddCourse data={data} ref={addCourse => {window.addCourse = addCourse}} addCourse={window.prog.addCourse}/>, document.getElementById('modal-add-course-container'));
+ReactDOM.render(<PopupAddCourse data={data} 
+  ref={addCourse => {window.addCourse = addCourse}} 
+  addCourse={window.prog.addCourse} 
+  updateProgramReqs={window.reqs.updateProgramReqList}/>, 
+document.getElementById('modal-add-course-container'));
 
 // jQuery code
 $(function(){
@@ -274,13 +279,35 @@ $(function(){
     window.addCourse.unstageCourses();
   });
 
-  // Modal add course add courses to program action
+  // Modal add course submit courses to program action
   $("#modal-add-course-submit").click(function(){
     window.addCourse.submitCourses();
+    window.reqs.forceUpdate();
   });
 
   // Add semester action
   $("#add-semester-button").click(function(){
     window.prog.addSemester();
   });
+
+  // Sidebar value aciton
+  $(document).on("click", "ul.dropdown-select li ul li", function(){
+    switch($(this).parent().parent().attr("id")){
+      case "faculty-dropdown":
+        window.sidebar.selectFaculty();
+        break;
+      case "program-dropdown":
+        window.sidebar.selectProgram();
+        break;
+      case "minor-dropdown":
+        window.sidebar.selectMinor();
+        break;
+      case "specialization-dropdown":
+        window.sidebar.selectSpecialization();
+        break;
+      default:
+        break;
+    }
+  });
+
 });

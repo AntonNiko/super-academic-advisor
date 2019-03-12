@@ -33,6 +33,7 @@ class PopupAddCourse extends Component {
 
       // TODO: Remove staged course if successfully added
     }
+
   }
 
   selectUnstagedCourse(course_str){

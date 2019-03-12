@@ -82,6 +82,7 @@ class PopupReqs extends Component {
   }
 
   render(){
+    console.log("hello");
       return (
         <div id="modal-reqs" class="modal-clear">
           <div id="modal-reqs-content">
@@ -105,46 +106,3 @@ class PopupReqs extends Component {
 }
 
 export default PopupReqs;
-
-
-/*
-
-
-                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">CSC 111</span></li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">CSC 115</span></li>
-                <li class="reqs-course-conditional"><span class="reqs-conditional-text">OR</span></li>
-                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">CSC 116</span></li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">ENGR 110</span></li>
-                <li class="reqs-course-conditional"><span class="reqs-conditional-text">OR</span></li>
-                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">ENGR 112</span></li>
-                <li class="reqs-course-conditional"><span class="reqs-conditional-text">AND</span></li>
-                <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src="/assets/icons8-delete-96.png"></img></span><span class="reqs-course-name">ENGL 135</span></li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">MATH 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-                <li class="reqs-course-separator"><hr></hr></li>
-                <li class="reqs-course-item">PHYS 110</li>
-
-
-
-
-*/
