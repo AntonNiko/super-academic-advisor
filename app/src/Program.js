@@ -17,9 +17,12 @@ class Program extends Component {
 
     this.state = {
       sem: {},
+      sequence: this.props.sequence,
+      sequence_semester_ids: Object.keys(this.props.sequence),
     };
 
     this.moveCourse = this.moveCourse.bind(this);
+    this.addSemester = this.addSemester.bind(this);
   }
 
   createSemesters(){
@@ -27,7 +30,7 @@ class Program extends Component {
     var last_added_semester = null;
 
     // Evaluate each course requisites, and adjust props accordingly
-    for(var semester_id in this.props.sequence){
+    for(var semester_id in this.state.sequence){
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
         last_added_semester={last_added_semester}
@@ -37,6 +40,13 @@ class Program extends Component {
       last_added_semester = semester_id;
     }
     return semesters;
+  }
+
+  addSemester(){
+    var sequence_ids = this.state.sequence_semester_ids;
+    var last_semester_id = sequence_ids[sequence_ids.length -1];
+    var next_semester_id = this.props.sequence_ids[this.props.sequence_ids.indexOf(last_semester_id)+1];
+    console.log(next_semester_id);
   }
 
   addCourse(semester_id, course_str, updateState = true){
@@ -82,26 +92,6 @@ class Program extends Component {
     }
     this.state.sem[origin_semester_id].current.removeCourse(course_str, false);
 
-
-
-    /*    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
-	  console.log("One or more courses were invalidated...");
-      // Delete
-      $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
-      //console.log(this.semesters.get(origin_semester_id).courses);
-      return false;
-    }
-
-	if(!this.addCourse(new_semester_id, course_str, false)){
-      $("#"+origin_semester_id).append($("#"+course_str.replace(" ","_")));
-	  console.log("Could not add...");
-      return false;
-    }
-
-    this.removeCourse(origin_semester_id, course_str);
-	return true;*/
-    //console.log("moving...");
-    //console.log(this.sem);
 	  return true;
   }
 
@@ -179,7 +169,6 @@ class Program extends Component {
       }
       current_semester = this.state.sem[current_semester.current.state.prev_semester];
     }
-
     return false;
   }
 
@@ -207,18 +196,6 @@ class Program extends Component {
 
   componentDidMount(){
     this.setState({sem: this.sem});
-    
-    // Verify all initial courses satisfy prereqs, AFTER having initialized them
-    /*var current_sequence = this.props.sequence;
-    var course;
-    for(var semester_id in current_sequence){
-      for(var i=0; i<current_sequence[semester_id][0].length; i++){
-        course = current_sequence[semester_id][0][i];
-        if(!this.addCourse(semester_id, course)){
-
-        }
-      }
-    }*/
   }
 
   componentDidUpdate(){
@@ -229,6 +206,9 @@ class Program extends Component {
     return (
       <div class="panel-container" id="panel-container">
         {this.createSemesters()}
+        <div id="panel-add-semester">
+          <button type="button" class="btn-action" id="add-semester-button">Add Semester</button>
+        </div>
         <button id="add-course" type="button" class="btn-primary">Add Course</button>
       </div>
     );
