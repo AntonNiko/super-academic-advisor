@@ -8,47 +8,66 @@ class PopupAddCourse extends Component {
     super(props);
 
     this.state = {
-      selected_courses: [],
+      selected_unstaged_courses: [],
+      selected_staged_courses: [],
       staged_courses: {},
       available_years: ["2018","2019","2020","2021"],
     }
 
-    this.addSelectedCourse = this.addSelectedCourse.bind(this);
-    this.removeSelectedCourse = this.removeSelectedCourse.bind(this);
-    this.stageSelectedCourses = this.stageSelectedCourses.bind(this);
-    this.unstageStagedCourses = this.unstageStagedCourses.bind(this);
+    this.selectUnstagedCourse = this.selectUnstagedCourse.bind(this);
+    this.unselectUnstagedCourse = this.unselectUnstagedCourse.bind(this);
+    this.stageCourses = this.stageCourses.bind(this);
+    this.unstageCourses = this.unstageCourses.bind(this);
+    this.selectStagedCourse = this.selectStagedCourse.bind(this);
+    this.unselectStagedCourse = this.unselectStagedCourse.bind(this);
   }
 
-  addSelectedCourse(course_str){
-    var new_selected_courses = this.state.selected_courses;
+  selectUnstagedCourse(course_str){
+    var new_selected_courses = this.state.selected_unstaged_courses;
     new_selected_courses.push(course_str);
-    this.setState({selected_courses: new_selected_courses});
+    this.setState({selected_unstaged_courses: new_selected_courses});
   }
 
-  removeSelectedCourse(course_str){
-    var new_selected_courses = this.state.selected_courses;
+  unselectUnstagedCourse(course_str){
+    var new_selected_courses = this.state.selected_unstaged_courses;
     new_selected_courses.splice(new_selected_courses.indexOf(course_str), 1);
-    this.setState({selected_courses: new_selected_courses});
+    this.setState({selected_unstaged_courses: new_selected_courses});
   }
 
-  stageSelectedCourses(){
+  selectStagedCourse(course_str){
+    var new_selected_courses = this.state.selected_staged_courses;
+    new_selected_courses.push(course_str);
+    this.setState({selected_staged_courses: new_selected_courses});
+  }
+
+  unselectStagedCourse(course_str){
+    var new_staged_courses = this.state.selected_staged_courses;
+    new_staged_courses.splice(new_staged_courses.indexOf(course_str), 1);
+    this.setState({selected_staged_courses: new_staged_courses});
+  }
+
+  stageCourses(){
     // Move selected courses in position to be added to program
     // TODO: Verify course offered in right semesters
     // TODO: Verify course not already added to program
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     var new_staged_courses = this.state.staged_courses;
-    for(var i=0; i<this.state.selected_courses.length; i++){
-      new_staged_courses[this.state.selected_courses[i]] = ["2019","F"];
+    for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
+      new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2019","F"];
     }
     this.setState({staged_courses: new_staged_courses});
   }
 
-  unstageStagedCourses(){
-    console.log("unstaging");
+  unstageCourses(){
+    var new_staged_courses = this.state.staged_courses;
+    for(var i=0; i<this.state.selected_staged_courses.length; i++){
+      delete new_staged_courses[this.state.selected_staged_courses[i]];
+    }
+    this.setState({staged_courses: new_staged_courses});
   }
 
   editStagedCourseSequence(){
-
+    console.log("edit");
   }
 
   renderCourseSelectionList(){
@@ -73,7 +92,7 @@ class PopupAddCourse extends Component {
       list_elements.push(<li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">{course_subject}</span></li>);
       var subject_courses = [];
       for(var i=0; i<course_dir[course_subject].length; i++){
-        var selection_class = this.state.selected_courses.includes(course_dir[course_subject][i]) ? "course-item-selected" : "course-item-unselected";
+        var selection_class = this.state.selected_unstaged_courses.includes(course_dir[course_subject][i]) ? "course-item-selected" : "course-item-unselected";
         var course_item_class = "modal-course-item "+selection_class;
 
         subject_courses.push(<li class={course_item_class}><span>{course_dir[course_subject][i]}</span></li>);
@@ -98,7 +117,10 @@ class PopupAddCourse extends Component {
 
       course_container.push(<div class="modal-add-course-selected-title"><span>{course_str}</span></div>);
       course_container.push(<div class="modal-add-course-selected-actions">{actions_container}</div>);
-      list_elements.push(<li class="modal-add-course-selected-course">{course_container}</li>);
+
+      var selection_class = this.state.selected_staged_courses.includes(course_str) ? "course-item-selected" : "course-item-unselected";
+      var course_item_class = "modal-add-course-selected-course "+selection_class;
+      list_elements.push(<li class={course_item_class}>{course_container}</li>);
       list_elements.push(<li class="modal-add-course-selected-separator"><hr></hr></li>);
     }
 

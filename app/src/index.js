@@ -226,18 +226,27 @@ $(function(){
   // Modal add course table select action
   $(".modal-course-item").on("click", function(){
     var course_str = $(this).find("span").text();
-
     if($(this).hasClass("course-item-selected")){
-      window.addCourse.removeSelectedCourse(course_str);
+      window.addCourse.unselectUnstagedCourse(course_str);
     }else{
-      window.addCourse.addSelectedCourse(course_str);
+      window.addCourse.selectUnstagedCourse(course_str);
     }
   })
 
+  $(document).on("click", ".modal-add-course-selected-course", function(){
+    var course_str = $(this).find(".modal-add-course-selected-title span").text();
+
+    if($(this).hasClass("course-item-selected")){
+      window.addCourse.unselectStagedCourse(course_str);
+    }else{
+      window.addCourse.selectStagedCourse(course_str);
+    }
+  });
+
   $("#modal-add-course-action-add").on("click", function(){
-    window.addCourse.stageSelectedCourses();
+    window.addCourse.stageCourses();
   });
   $("#modal-add-course-action-remove").on("click", function(){
-    window.addCourse.unstageStagedCourses();
+    window.addCourse.unstageCourses();
   });
 });
