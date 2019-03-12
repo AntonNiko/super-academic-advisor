@@ -43,10 +43,16 @@ class Program extends Component {
   }
 
   addSemester(){
-    var sequence_ids = this.state.sequence_semester_ids;
-    var last_semester_id = sequence_ids[sequence_ids.length -1];
+    var new_sequence_semester_ids = this.state.sequence_semester_ids;
+    var new_sequence = this.state.sequence;
+
+    var last_semester_id = new_sequence_semester_ids[new_sequence_semester_ids.length -1];
     var next_semester_id = this.props.sequence_ids[this.props.sequence_ids.indexOf(last_semester_id)+1];
-    console.log(next_semester_id);
+
+    // Add new semester id to state.sequence_semester_ids, and as new object in state.sequence
+    new_sequence_semester_ids.push(next_semester_id);
+    new_sequence[next_semester_id] = [[], 2020, "F"];
+    this.setState({sequence: new_sequence, sequence_semester_ids: new_sequence_semester_ids});
   }
 
   addCourse(semester_id, course_str, updateState = true){
