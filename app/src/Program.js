@@ -7,7 +7,7 @@ import 'jquery-ui/ui/widgets/draggable';
 import './style/Program.css';
 
 class Program extends Component {
-  // Modify implementation of state.sequence to be used as: 
+  // Modify implementation of state.sequence to be used as:
   //     1) placeholder for semesters and corresponding year and semester
   //     2) first-time indicator of courses to be added. Any subsequent aciton will interact
   //        w/ each semester's methods

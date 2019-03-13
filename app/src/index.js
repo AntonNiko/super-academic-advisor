@@ -118,58 +118,63 @@ document.getElementById('modal-add-course-container'));
 
 // jQuery code
 $(function(){
-
   // Configure draggable course elements for semester container
-  var startIndex, changeIndex, uiHeight;
-  $(".panel-term-list").sortable({
-    'placeholder': 'marker',
-    start: function(e, ui){
-      startIndex = ui.placeholder.index();
-      uiHeight = ui.item.outerHeight(true);
+  $(function(){
+    var startIndex, changeIndex, uiHeight;
+    $(".panel-term-list").sortable({
+      'placeholder': 'marker',
+      start: function(e, ui){
+        console.log("start");
+        startIndex = ui.placeholder.index();
+        uiHeight = ui.item.outerHeight(true);
 
-      ui.item.nextAll("li:not(.marker)").css({
-        transform: "translateY("+uiHeight+"px)"
-      });
-      ui.placeholder.css({
-        height: 0,
-        padding: 0
-      });
-    },
-    change: function(e, ui){
-      changeIndex = ui.placeholder.index();
-      if(startIndex > changeIndex){
-        // TODO: Only select slice of current list, not other semesters
-        var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
-        slice.not(".ui-sortable-helper").each(function(){
-          var item = $(this);
-          item.css({
-            transform: "translateY("+uiHeight+"px)"
-          });
-        });
-      }else if (startIndex < changeIndex) {
-        var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
-        slice.not('.ui-sortable-helper').each(function() {
+        /*ui.item.nextAll("li:not(.marker)").css({
+          transform: "translateY("+uiHeight+"px)"
+        });*/
+        /*ui.placeholder.css({
+          height: 0,
+          padding: 0
+        });*/
+      },
+      change: function(e, ui){
+        console.log("change");
+        changeIndex = ui.placeholder.index();
+        if(startIndex > changeIndex){
+          console.log("up");
+          // TODO: Only select slice of current list, not other semesters
+          var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
+          slice.not(".ui-sortable-helper").each(function(){
             var item = $(this);
             item.css({
-                transform: 'translateY(0px)'
+              transform: "translateY("+uiHeight+"px)"
             });
-        });
+          });
+        }else if (startIndex < changeIndex) {
+          console.log("down");
+          var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
+          slice.not('.ui-sortable-helper').each(function() {
+              var item = $(this);
+              item.css({
+                  transform: 'translateY(0px)'
+              });
+          });
+        }
+        startIndex = changeIndex;
+      },
+      stop: function(e, ui) {
+        $('.ui-sortable-handle').css({
+            transform: 'translateY(0)'
+        })
+      },
+      connectWith: ".panel-term-list",
+      placeholder: "ui-state-highlight",
+      receive: function(event, ui){
+        var origin_semester_id = ui.sender.attr("id");
+        var new_semester_id = event.target.id;
+        var course_str = ui.item.attr("id").replace("_"," ");
+        window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
       }
-      startIndex = changeIndex;
-    },
-    stop: function(e, ui) {
-      $('.ui-sortable-handle').css({
-          transform: 'translateY(0)'
-      })
-    },
-    connectWith: ".panel-term-list",
-    placeholder: "ui-state-highlight",
-    receive: function(event, ui){
-      var origin_semester_id = ui.sender.attr("id");
-      var new_semester_id = event.target.id;
-      var course_str = ui.item.attr("id").replace("_"," ");
-      window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
-    }
+    });
   });
 
   // Configure course details modal to open on double click

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './style/Sidebar.css';
 
 class Sidebar extends Component {
+  // TODO: TEST STATE UPDATE ON FACULTY, PROGRAM, MINOR, and SPECIALIZATION CHANGE
   constructor(props){
     super(props);
 
@@ -104,7 +105,6 @@ class Sidebar extends Component {
     var _first = true;
     var list = [];
 
-    console.log("aa");
     if(this.state.program_selected == null){
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
       console.log("null");
