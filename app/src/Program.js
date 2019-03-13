@@ -35,7 +35,9 @@ class Program extends Component {
     var last_added_semester = null;
 
     // Evaluate each course requisites, and adjust props accordingly
+    console.log("rendering...");
     for(var semester_id in this.state.sequence){
+      console.log(semester_id);
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
         last_added_semester={last_added_semester}
@@ -44,6 +46,7 @@ class Program extends Component {
         data = {this.props.data}/>);
       last_added_semester = semester_id;
     }
+    console.log(this.sem);
     return semesters;
   }
 
@@ -57,6 +60,9 @@ class Program extends Component {
     // Add new semester id to state.sequence_semester_ids, and as new object in state.sequence
     new_sequence_semester_ids.push(next_semester_id);
     new_sequence[next_semester_id] = [[], 2020, "F"];
+
+    this.sem[next_semester_id] = createRef();
+    console.log("created 3A");
     this.setState({sequence: new_sequence, sequence_semester_ids: new_sequence_semester_ids});
   }
 
@@ -82,7 +88,7 @@ class Program extends Component {
     }
 
     if(updateState == true){
-      this.state.sem[semester_id].current.addCourse(course_str, false);
+      this.sem[semester_id].current.addCourse(course_str, false);
     }
     return true;
   }
@@ -100,7 +106,7 @@ class Program extends Component {
       console.log("failed to add course...");
       return false;
     }
-    this.state.sem[origin_semester_id].current.removeCourse(course_str, false);
+    this.sem[origin_semester_id].current.removeCourse(course_str, false);
 
 	  return true;
   }
@@ -110,21 +116,21 @@ class Program extends Component {
     . Commonly used after course moved, to check it does not break any other course reqs */
 
     // Temporarily move course in question to new position, simulate new arrangement
-    this.state.sem[origin_semester_id].current.removeCourse(course_str, true);
-    this.state.sem[new_semester_id].current.addCourse(course_str, true);
+    this.sem[origin_semester_id].current.removeCourse(course_str, true);
+    this.sem[new_semester_id].current.addCourse(course_str, true);
 
     var _failed = false;
-    for(var semester_id in this.state.sem){
-      for(var i=0; i<this.state.sem[semester_id].current.state.courses[0].length; i++){
-        var course_obj = this.props.data[this.state.sem[semester_id].current.state.courses[0][i]];
+    for(var semester_id in this.sem){
+      for(var i=0; i<this.sem[semester_id].current.state.courses[0].length; i++){
+        var course_obj = this.props.data[this.sem[semester_id].current.state.courses[0][i]];
         if(!this.verifyCourseRequisitesSatisfied(course_obj, semester_id)){
           _failed = true;
         }
       }
     }
 
-    this.state.sem[new_semester_id].current.removeCourse(course_str, true);
-    this.state.sem[origin_semester_id].current.addCourse(course_str, true);
+    this.sem[new_semester_id].current.removeCourse(course_str, true);
+    this.sem[origin_semester_id].current.addCourse(course_str, true);
 
     if(_failed){
       return false;
@@ -170,14 +176,13 @@ class Program extends Component {
   }
 
   verifyCourseReqSatisfied(course_str, semester_id, req_choice){
-    var current_semester = this.state.sem[semester_id];
-    if(req_choice == "p") current_semester = this.state.sem[current_semester.current.state.prev_semester];
+    var current_semester = this.sem[semester_id];
+    if(req_choice == "p") current_semester = this.sem[current_semester.current.state.prev_semester];
     while(current_semester != null){
-      //console.log(current_semester.current.props.courses[0]);
       if(current_semester.current.props.courses[0].includes(course_str)){
         return true;
       }
-      current_semester = this.state.sem[current_semester.current.state.prev_semester];
+      current_semester = this.sem[current_semester.current.state.prev_semester];
     }
     return false;
   }
@@ -205,11 +210,10 @@ class Program extends Component {
   }
 
   componentDidMount(){
-    this.setState({sem: this.sem});
   }
 
   componentDidUpdate(){
-    this.props.updateProgramReqs(this.state.sem);
+    //this.props.updateProgramReqs(this.state.sem);
   }
 
   render() {

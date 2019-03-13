@@ -115,18 +115,17 @@ ReactDOM.render(<PopupAddCourse data={data}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
 document.getElementById('modal-add-course-container'));
 
-// jQuery code
-$(function(){
-  // Configure draggable course elements for semester container
+function makeProgramSortable(){
   $(function(){
+    // Configure draggable course elements for semester container
     var startIndex, changeIndex, uiHeight;
     $(".panel-term-list").sortable({
       'placeholder': 'marker',
       start: function(e, ui){
         // BUG: First time element is selected, reduces size, but all subsequenc selects actions have no effect
-        console.log("start");
+        //console.log("start");
         startIndex = ui.placeholder.index();
-        console.log("Start: "+startIndex);
+        //console.log("Start: "+startIndex);
         uiHeight = ui.item.outerHeight(true);
 
         // Moves all next elements down by uiHeight px
@@ -140,19 +139,19 @@ $(function(){
         });*/
       },
       change: function(e, ui){
-        console.log("change");
+        //console.log("change");
 
         // The index at which the placeholder of the element is located.
         // BUG: When moving element up, causes placeholder to be shifted 1 more up than it's supposed to be
         changeIndex = ui.placeholder.index();
-        console.log("Placeholder: "+changeIndex);
+        //console.log("Placeholder: "+changeIndex);
 
         // BUG: When moving element down, no smooth transition at all, all blocky, unless moved up first
         if(startIndex > changeIndex){
           changeIndex = changeIndex + 1;
-          console.log("up");
+          //console.log("up");
           var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
-          console.log("LENGT: "+slice.length);
+          //console.log("LENGT: "+slice.length);
           /*slice.not(".ui-sortable-helper").each(function(){
             var item = $(this);
             item.css({
@@ -160,9 +159,9 @@ $(function(){
             });
           });*/
         }else if (startIndex < changeIndex) {
-          console.log("down");
+          //console.log("down");
           var slice = $("#"+ui.item.parent().attr("id")+" li").slice(startIndex, changeIndex);
-          console.log("LENGT: "+slice.length);
+          //console.log("LENGT: "+slice.length);
           slice.not('.ui-sortable-helper').each(function() {
               var item = $(this);
               item.css({
@@ -187,6 +186,11 @@ $(function(){
       }
     });
   });
+}
+
+// jQuery code
+$(function(){
+  makeProgramSortable();
 
   // Configure course details modal to open on double click
   $(".panel-course").dblclick(function(){
@@ -318,5 +322,7 @@ $(function(){
   // Add semester action
   $("#add-semester-button").click(function(){
     window.prog.addSemester();
+
+    makeProgramSortable();
   });
 });

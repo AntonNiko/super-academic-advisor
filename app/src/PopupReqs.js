@@ -23,6 +23,7 @@ class PopupReqs extends Component {
   updateProgramReqList(semesters){
     var new_active_courses = [];
     for(var semester_id in semesters){
+      console.log(semester_id);
       var current_semester_courses = semesters[semester_id].current.state.courses[0];
       new_active_courses = new_active_courses.concat(current_semester_courses);
     }
