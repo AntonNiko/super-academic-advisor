@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './style/Sidebar.css';
 
 class Sidebar extends Component {

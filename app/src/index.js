@@ -4,7 +4,6 @@ import './style/App.css';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Program from './Program';
-import Semester from './Semester';
 import PopupAddCourse from './PopupAddCourse.js';
 import PopupCourse from './PopupCourse';
 import PopupReqs from './PopupReqs.js';
@@ -124,13 +123,17 @@ $(function(){
     $(".panel-term-list").sortable({
       'placeholder': 'marker',
       start: function(e, ui){
+        // BUG: First time element is selected, reduces size, but all subsequenc selects actions have no effect
         console.log("start");
         startIndex = ui.placeholder.index();
+        console.log("Start: "+startIndex);
         uiHeight = ui.item.outerHeight(true);
 
+        // Moves all next elements down by uiHeight px
         /*ui.item.nextAll("li:not(.marker)").css({
           transform: "translateY("+uiHeight+"px)"
         });*/
+        // Moves all next elements up one iteration of uiHeight px
         /*ui.placeholder.css({
           height: 0,
           padding: 0
@@ -138,20 +141,28 @@ $(function(){
       },
       change: function(e, ui){
         console.log("change");
+
+        // The index at which the placeholder of the element is located.
+        // BUG: When moving element up, causes placeholder to be shifted 1 more up than it's supposed to be
         changeIndex = ui.placeholder.index();
+        console.log("Placeholder: "+changeIndex);
+
+        // BUG: When moving element down, no smooth transition at all, all blocky, unless moved up first
         if(startIndex > changeIndex){
+          changeIndex = changeIndex + 1;
           console.log("up");
-          // TODO: Only select slice of current list, not other semesters
           var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
-          slice.not(".ui-sortable-helper").each(function(){
+          console.log("LENGT: "+slice.length);
+          /*slice.not(".ui-sortable-helper").each(function(){
             var item = $(this);
             item.css({
               transform: "translateY("+uiHeight+"px)"
             });
-          });
+          });*/
         }else if (startIndex < changeIndex) {
           console.log("down");
-          var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
+          var slice = $("#"+ui.item.parent().attr("id")+" li").slice(startIndex, changeIndex);
+          console.log("LENGT: "+slice.length);
           slice.not('.ui-sortable-helper').each(function() {
               var item = $(this);
               item.css({

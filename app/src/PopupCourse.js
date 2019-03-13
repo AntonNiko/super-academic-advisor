@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './style/PopupCourse.css';
 import './style/Modal.css';
 
