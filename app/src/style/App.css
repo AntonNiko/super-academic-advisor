@@ -180,7 +180,17 @@ ul.dropdown-select-small li {
   font-size: 13px;
 }
 
-ul.dropdown-select li div p.dropdown-value , ul.dropdown-select-small li div p.dropdown-value {
+ul.dropdown-select li div p.dropdown-value {
+  padding-right: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+  width: 87%;
+  height: 16px;
+}
+
+ul.dropdown-select-small li div p.dropdown-value {
   padding-right: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;

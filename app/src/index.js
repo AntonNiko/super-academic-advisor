@@ -110,10 +110,10 @@ ReactDOM.render(<Program sequence={program_sequence}
   updateProgramReqs={window.reqs.updateProgramReqList}/>,
 document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<PopupAddCourse data={data} 
-  ref={addCourse => {window.addCourse = addCourse}} 
-  addCourse={window.prog.addCourse} 
-  updateProgramReqs={window.reqs.updateProgramReqList}/>, 
+ReactDOM.render(<PopupAddCourse data={data}
+  ref={addCourse => {window.addCourse = addCourse}}
+  addCourse={window.prog.addCourse}
+  updateProgramReqs={window.reqs.updateProgramReqList}/>,
 document.getElementById('modal-add-course-container'));
 
 // jQuery code
@@ -140,7 +140,6 @@ $(function(){
       if(startIndex > changeIndex){
         // TODO: Only select slice of current list, not other semesters
         var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
-        //console.log(slice);
         slice.not(".ui-sortable-helper").each(function(){
           var item = $(this);
           item.css({
@@ -149,7 +148,6 @@ $(function(){
         });
       }else if (startIndex < changeIndex) {
         var slice = $("#"+ui.item.parent().attr("id")+' li').slice(startIndex, changeIndex);
-
         slice.not('.ui-sortable-helper').each(function() {
             var item = $(this);
             item.css({
@@ -176,7 +174,6 @@ $(function(){
 
   // Configure course details modal to open on double click
   $(".panel-course").dblclick(function(){
-    console.log("id");
     var course_obj = data[$(this).attr("id").replace("_"," ")];
     window.popup.populateCourse(course_obj);
     $("#modal-course-details").css("display","block");
@@ -243,7 +240,24 @@ $(function(){
     var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
     selected_display.attr("value", selected_value);
     selected_display.text(selected_value);
-    $(this).parent().css({"visibility":"hidden", "opacity":"0"})
+    $(this).parent().css({"visibility":"hidden", "opacity":"0"});
+
+    switch($(this).parent().parent().attr("id")){
+      case "faculty-dropdown":
+        window.sidebar.selectFaculty(selected_value);
+        break;
+      case "program-dropdown":
+        window.sidebar.selectProgram(selected_value);
+        break;
+      case "minor-dropdown":
+        window.sidebar.selectMinor(selected_value);
+        break;
+      case "specialization-dropdown":
+        window.sidebar.selectSpecialization(selected_value);
+        break;
+      default:
+        break;
+    }
   });
 
   // Modal add course table toggle animation
@@ -289,25 +303,4 @@ $(function(){
   $("#add-semester-button").click(function(){
     window.prog.addSemester();
   });
-
-  // Sidebar value aciton
-  $(document).on("click", "ul.dropdown-select li ul li", function(){
-    switch($(this).parent().parent().attr("id")){
-      case "faculty-dropdown":
-        window.sidebar.selectFaculty();
-        break;
-      case "program-dropdown":
-        window.sidebar.selectProgram();
-        break;
-      case "minor-dropdown":
-        window.sidebar.selectMinor();
-        break;
-      case "specialization-dropdown":
-        window.sidebar.selectSpecialization();
-        break;
-      default:
-        break;
-    }
-  });
-
 });

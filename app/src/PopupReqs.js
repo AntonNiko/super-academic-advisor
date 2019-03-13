@@ -82,7 +82,6 @@ class PopupReqs extends Component {
   }
 
   render(){
-    console.log("hello");
       return (
         <div id="modal-reqs" class="modal-clear">
           <div id="modal-reqs-content">

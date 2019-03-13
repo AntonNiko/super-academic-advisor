@@ -6,11 +6,13 @@ class Sidebar extends Component {
   constructor(props){
     super(props);
 
+    // If a faculty has not been selected (first-time load), set first item as faculty
+    // TODO: Develop more robust firs-time load
     this.state = {
       current_selection: null,
-      faculty_selected: null,
-      program_selected: null,
-      minor_selected: null,
+      faculty_selected: "Engineering",
+      program_selected: "Biomedical Engineering",
+      minor_selected: "Software Development",
       specialization_selected: null
     };
 
@@ -20,21 +22,20 @@ class Sidebar extends Component {
     this.selectSpecialization = this.selectSpecialization.bind(this);
   }
 
-
-  selectFaculty(){
-    console.log("a");
+  selectFaculty(value){
+    this.setState({faculty_selected: value});
   }
 
-  selectProgram(){
-    console.log("b");
+  selectProgram(value){
+    this.setState({program_selected: value});
   }
 
-  selectMinor(){
-    console.log("c");
+  selectMinor(value){
+    this.setState({minor_selected: value});
   }
 
-  selectSpecialization(){
-    console.log("d");
+  selectSpecialization(value){
+    this.setState({specialization_selected: value});
   }
 
   renderFacultyDropdown(){
@@ -46,7 +47,6 @@ class Sidebar extends Component {
         result.push(<div class="dropdown-header"><p class="dropdown-value">{faculty}</p><span class="arrow-down"></span></div>);
         _first = false;
       }
-
       if(faculty != "Minors"){
         list.push(<li value={faculty}><span>{faculty}</span></li>);
       }
@@ -59,17 +59,78 @@ class Sidebar extends Component {
     var result = [];
     var _first = true;
     var list = [];
+
+    if(this.state.faculty_selected == null){
+      result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+    }else{
+      for(var program in this.props.selection[this.state.faculty_selected]){
+        if(_first){
+          result.push(<div class="dropdown-header"><p class="dropdown-value">{program}</p><span class="arrow-down"></span></div>);
+          _first = false;
+        }
+        list.push(<li value={program}><span>{program}</span></li>);
+      }
+    }
+    result.push(<ul>{list}</ul>);
+    return result;
   }
 
   renderMinorDropdown(){
+    var result = [];
+    var _first = true;
+    var list = [];
 
+    if(this.state.program_selected == null){
+      result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+    }else{
+      for(var minor in this.props.selection["Minors"]){
+        // Check that the minor is available for selected program. If not, skip minor
+        if(this.props.selection["Minors"][minor].includes(this.state.program_selected)){
+          continue;
+        }
+        if(_first){
+          result.push(<div class="dropdown-header"><p class="dropdown-value">{minor}</p><span class="arrow-down"></span></div>);
+          _first = false;
+        }
+        list.push(<li value={minor}><span>{minor}</span></li>);
+      }
+    }
+    result.push(<ul>{list}</ul>);
+    return result;
   }
 
   renderSpecializationDropdown(){
+    var result = [];
+    var _first = true;
+    var list = [];
 
+    console.log("aa");
+    if(this.state.program_selected == null){
+      result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+      console.log("null");
+    }else{
+      // If program does not have any specliazations, skip
+      var program = this.props.selection[this.state.faculty_selected][this.state.program_selected];
+      console.log(program);
+      if(program != null){
+        for(var i=0; i < program["Specializations"].length; i++){
+          if(_first){
+            console.log("first");
+            result.push(<div class="dropdown-header"><p class="dropdown-value">{program["Specializations"][i]}</p><span class="arrow-down"></span></div>);
+            _first = false;
+          }
+          list.push(<li value={program["Specializations"][i]}><span>{program["Specializations"][i]}</span></li>);
+        }
+      }else{
+        result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+      }
+    }
+    result.push(<ul>{list}</ul>);
+    return result;
   }
 
   render() {
+    this.renderSpecializationDropdown();
     return (
       <div>
         <div class="form-group-new">
@@ -84,14 +145,7 @@ class Sidebar extends Component {
           <span>Program</span>
           <ul class="dropdown-select">
             <li id="program-dropdown">
-              <div class="dropdown-header">
-                <p class="dropdown-value">Software Engineering</p><span class="arrow-down"></span>
-              </div>
-              <ul>
-                <li value="Software Engineering"><span>Software Engineering</span></li>
-                <li value="Mechanical Engineering"><span>Mechanical Engineering</span></li>
-                <li value="Biomedical Engineering"><span>Biomedical Engineering</span></li>
-              </ul>
+              {this.renderProgramDropdown()}
             </li>
           </ul>
         </div>
@@ -99,14 +153,7 @@ class Sidebar extends Component {
           <span>Minor</span>
           <ul class="dropdown-select">
             <li id="minor-dropdown">
-              <div class="dropdown-header">
-                <p class="dropdown-value">Business</p><span class="arrow-down"></span>
-              </div>
-              <ul>
-                <li value="Business"><span>Business</span></li>
-                <li value="Software Development"><span>Software Development</span></li>
-                <li value="Biomedical Engineering"><span>Biomedical Engineering</span></li>
-              </ul>
+              {this.renderMinorDropdown()}
             </li>
           </ul>
         </div>
@@ -114,14 +161,7 @@ class Sidebar extends Component {
           <span>Specialization</span>
           <ul class="dropdown-select">
             <li id="specialization-dropdown">
-              <div class="dropdown-header">
-                <p class="dropdown-value">Data mining and analysis, artificial intelligence, and machine learning</p><span class="arrow-down"></span>
-              </div>
-              <ul>
-                <li value="Data mining and analysis, artificial intelligence, and machine learning"><span>Data mining and analysis, artificial intelligence, and machine learning</span></li>
-                <li value="Software Development"><span>Cybersecurity and privacy</span></li>
-                <li value="Performance and scalability"><span>Performance and scalability</span></li>
-              </ul>
+              {this.renderSpecializationDropdown()}
             </li>
           </ul>
         </div>
