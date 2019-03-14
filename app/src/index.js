@@ -128,9 +128,6 @@ $(function(){
   ModalCourse.configureGeneralModal();
   ModalCourse.configurePageModalComponents();
 
-  // Dropdown select hover action
-  // TODO: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements
-  // Adapt for dynamically generated elements
   Dropdown.configureDropdownActions();
   Dropdown.configureDropdownSelection(window.sidebar);
 

@@ -35,9 +35,7 @@ class Program extends Component {
     var last_added_semester = null;
 
     // Evaluate each course requisites, and adjust props accordingly
-    console.log("rendering...");
     for(var semester_id in this.state.sequence){
-      console.log(semester_id);
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
         last_added_semester={last_added_semester}
@@ -72,6 +70,11 @@ class Program extends Component {
     // Verify course offered in semester
     if(!this.verifyCourseOffered(course_str, semester_id)){
       alert("Not offered!");
+      return false;
+    }
+
+    if(!this.verifyCourseIsNotDuplicate(course_str)){
+      alert("Duplicate!");
       return false;
     }
 
@@ -207,6 +210,17 @@ class Program extends Component {
     }else{
       return true;
     }
+  }
+
+  verifyCourseIsNotDuplicate(course_str){
+    for(var semester in this.sem){
+      var current_semester = this.sem[semester].current;
+      var current_semester_courses = current_semester.props.courses[0];
+      if(current_semester_courses.includes(course_str)){
+        return false;
+      }
+    }
+    return true;
   }
 
   componentDidMount(){
