@@ -64,7 +64,7 @@ class Program extends Component {
     this.setState({sequence: new_sequence, sequence_semester_ids: new_sequence_semester_ids});
   }
 
-  addCourse(semester_id, course_str, updateState = true){
+  addCourse(semester_id, course_str, updateState = true, checkDuplicates = true){
     // Method that will allow courses to be added as a component
 
     // Verify course offered in semester
@@ -73,7 +73,8 @@ class Program extends Component {
       return false;
     }
 
-    if(!this.verifyCourseIsNotDuplicate(course_str)){
+    // If for moving courses, do not check for duplicate
+    if(!this.verifyCourseIsNotDuplicate(course_str) && checkDuplicates == true){
       alert("Duplicate!");
       return false;
     }
@@ -105,7 +106,7 @@ class Program extends Component {
       return false;
     }
 
-    if(!this.addCourse(new_semester_id, course_str)){
+    if(!this.addCourse(new_semester_id, course_str, true, false)){
       console.log("failed to add course...");
       return false;
     }

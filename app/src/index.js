@@ -122,7 +122,7 @@ document.getElementById('modal-add-course-container'));
 
 // jQuery code
 $(function(){
-  SortableProgram.render();
+  SortableProgram.render(window.program);
 
   ModalCourse.configureCourseModal(data, window.popupCourse);
   ModalCourse.configureGeneralModal();

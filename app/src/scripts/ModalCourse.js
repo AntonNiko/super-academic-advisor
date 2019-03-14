@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 class ModalCourse {
   static configureCourseModal(data, modal){
-      $(".panel-course").dblclick(function(){
+      $(document).on("dblclick", ".panel-course", function(){
         var course_obj = data[$(this).attr("id").replace("_"," ")];
         modal.populateCourse(course_obj);
         $("#modal-course-details").css("display","block");
