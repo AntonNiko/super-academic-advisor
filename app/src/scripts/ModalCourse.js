@@ -1,18 +1,15 @@
 import $ from 'jquery';
 
 class ModalCourse {
-  static ConfigureCourseModal(data, modal){
-    $(function(){
+  static configureCourseModal(data, modal){
       $(".panel-course").dblclick(function(){
         var course_obj = data[$(this).attr("id").replace("_"," ")];
         modal.populateCourse(course_obj);
         $("#modal-course-details").css("display","block");
       });
-    });
   }
 
-  static ConfigureGeneralModal(){
-    $(function(){
+  static configureGeneralModal(){
       $(".modal-draggable").draggable();
 
       $(".modal-cancel-button").click(function(){
@@ -32,10 +29,9 @@ class ModalCourse {
           target.find(".modal-content").css({top: 0, left: 0, position:"relative"})
         }
       });
-    });
   }
 
-  static ConfigurePageModalComponents(){
+  static configurePageModalComponents(){
     // Configure Add Course modal actions and properties
     $("#add-course").click(function(){
       $("#modal-add-course").css("display","block");

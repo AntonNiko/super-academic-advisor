@@ -13,6 +13,8 @@ import 'jquery-ui/ui/widgets/draggable';
 import SortableProgram from './scripts/SortableProgram.js';
 import ModalCourse from './scripts/ModalCourse.js';
 import Dropdown from './scripts/Dropdown.js';
+import AddCourse from './scripts/AddCourse.js';
+import AddSemester from './scripts/AddSemester.js';
 
 function getCoursesData(){
   return JSON.parse($.ajax({
@@ -122,85 +124,19 @@ document.getElementById('modal-add-course-container'));
 $(function(){
   SortableProgram.render();
 
-  ModalCourse.ConfigureCourseModal(data, window.popupCourse);
-  ModalCourse.ConfigureGeneralModal();
-  ModalCourse.ConfigurePageModalComponents();
-
+  ModalCourse.configureCourseModal(data, window.popupCourse);
+  ModalCourse.configureGeneralModal();
+  ModalCourse.configurePageModalComponents();
 
   // Dropdown select hover action
   // TODO: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements
   // Adapt for dynamically generated elements
   Dropdown.configureDropdownActions();
+  Dropdown.configureDropdownSelection(window.sidebar);
 
-  // Dropdown select value
-  $(document).on("click", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
-    var selected_value = $(this).attr("value");
-    var selected_display = $(this).parent().parent().children(".dropdown-header").children("p.dropdown-value");
-    selected_display.attr("value", selected_value);
-    selected_display.text(selected_value);
-    $(this).parent().css({"visibility":"hidden", "opacity":"0"});
+  AddCourse.configureModalAnimations(window.popupAddCourse);
+  AddCourse.configureStagingActions(window.popupAddCourse);
+  AddCourse.configureSubmitActions(window.popupAddCourse, window.popupReqs);
 
-    switch($(this).parent().parent().attr("id")){
-      case "faculty-dropdown":
-        window.sidebar.selectFaculty(selected_value);
-        break;
-      case "program-dropdown":
-        window.sidebar.selectProgram(selected_value);
-        break;
-      case "minor-dropdown":
-        window.sidebar.selectMinor(selected_value);
-        break;
-      case "specialization-dropdown":
-        window.sidebar.selectSpecialization(selected_value);
-        break;
-      default:
-        break;
-    }
-  });
-
-  // Modal add course table toggle animation
-  $(".modal-add-course-subject").on("click", function(){
-    $(this).next().slideToggle(200);
-    $(this).find(".modal-chevron-collapsed").toggleClass("modal-chevron-expanded");
-  });
-
-  // Modal add course table select action
-  $(".modal-course-item").on("click", function(){
-    var course_str = $(this).find("span").text();
-    if($(this).hasClass("course-item-selected")){
-      window.popupAddCourse.unselectUnstagedCourse(course_str);
-    }else{
-      window.popupAddCourse.selectUnstagedCourse(course_str);
-    }
-  })
-
-  $(document).on("click", ".modal-add-course-selected-course", function(){
-    var course_str = $(this).find(".modal-add-course-selected-title span").text();
-
-    if($(this).hasClass("course-item-selected")){
-      window.popupAddCourse.unselectStagedCourse(course_str);
-    }else{
-      window.popupAddCourse.selectStagedCourse(course_str);
-    }
-  });
-
-  $("#modal-add-course-action-add").on("click", function(){
-    window.popupAddCourse.stageCourses();
-  });
-  $("#modal-add-course-action-remove").on("click", function(){
-    window.popupAddCourse.unstageCourses();
-  });
-
-  // Modal add course submit courses to program action
-  $("#modal-add-course-submit").click(function(){
-    window.popupAddCourse.submitCourses();
-    window.popupReqs.forceUpdate();
-  });
-
-  // Add semester action
-  $("#add-semester-button").click(function(){
-    window.program.addSemester();
-
-    SortableProgram.render();
-  });
+  AddSemester.configureAddSemesterAction(window.program, SortableProgram);
 });
