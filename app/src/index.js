@@ -10,6 +10,9 @@ import PopupReqs from './PopupReqs.js';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
+import SortableProgram from './scripts/SortableProgram.js';
+import ModalCourse from './scripts/ModalCourse.js';
+import Dropdown from './scripts/Dropdown.js';
 
 function getCoursesData(){
   return JSON.parse($.ajax({
@@ -97,162 +100,37 @@ var program_requirements = getRequirementsData();
 // Build React Elements
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
 ReactDOM.render(<Sidebar selection={program_selection} ref={sidebar => {window.sidebar = sidebar}}/>, document.getElementById('sidebar'));
-ReactDOM.render(<PopupCourse ref={popup => {window.popup = popup;}}/>, document.getElementById('modal-course-container'));
-ReactDOM.render(<PopupReqs ref={reqs => {window.reqs = reqs;}}
+ReactDOM.render(<PopupCourse ref={popupCourse => {window.popupCourse = popupCourse;}}/>, document.getElementById('modal-course-container'));
+ReactDOM.render(<PopupReqs ref={popupReqs => {window.popupReqs = popupReqs;}}
    requirements={program_requirements_seng}/>,
 document.getElementById('modal-reqs-container'));
 
 ReactDOM.render(<Program sequence={program_sequence}
-  ref={prog => {window.prog = prog;}}
+  ref={program => {window.program = program;}}
   data={data}
   sequence_ids={sequence_ids}
-  updateProgramReqs={window.reqs.updateProgramReqList}/>,
+  updateProgramReqs={window.popupReqs.updateProgramReqList}/>,
 document.getElementById('panel-container-parent'));
 
 ReactDOM.render(<PopupAddCourse data={data}
-  ref={addCourse => {window.addCourse = addCourse}}
-  addCourse={window.prog.addCourse}
-  updateProgramReqs={window.reqs.updateProgramReqList}/>,
+  ref={popupAddCourse => {window.popupAddCourse = popupAddCourse}}
+  addCourse={window.program.addCourse}
+  updateProgramReqs={window.popupReqs.updateProgramReqList}/>,
 document.getElementById('modal-add-course-container'));
-
-function makeProgramSortable(){
-  $(function(){
-    // Configure draggable course elements for semester container
-    var startIndex, changeIndex, uiHeight;
-    $(".panel-term-list").sortable({
-      'placeholder': 'marker',
-      start: function(e, ui){
-        // BUG: First time element is selected, reduces size, but all subsequenc selects actions have no effect
-        //console.log("start");
-        startIndex = ui.placeholder.index();
-        //console.log("Start: "+startIndex);
-        uiHeight = ui.item.outerHeight(true);
-
-        // Moves all next elements down by uiHeight px
-        /*ui.item.nextAll("li:not(.marker)").css({
-          transform: "translateY("+uiHeight+"px)"
-        });*/
-        // Moves all next elements up one iteration of uiHeight px
-        /*ui.placeholder.css({
-          height: 0,
-          padding: 0
-        });*/
-      },
-      change: function(e, ui){
-        //console.log("change");
-
-        // The index at which the placeholder of the element is located.
-        // BUG: When moving element up, causes placeholder to be shifted 1 more up than it's supposed to be
-        changeIndex = ui.placeholder.index();
-        //console.log("Placeholder: "+changeIndex);
-
-        // BUG: When moving element down, no smooth transition at all, all blocky, unless moved up first
-        if(startIndex > changeIndex){
-          changeIndex = changeIndex + 1;
-          //console.log("up");
-          var slice = $("#"+ui.item.parent().attr("id")+" li").slice(changeIndex, $("#"+ui.item.parent().attr("id")+" li").length);
-          //console.log("LENGT: "+slice.length);
-          /*slice.not(".ui-sortable-helper").each(function(){
-            var item = $(this);
-            item.css({
-              transform: "translateY("+uiHeight+"px)"
-            });
-          });*/
-        }else if (startIndex < changeIndex) {
-          //console.log("down");
-          var slice = $("#"+ui.item.parent().attr("id")+" li").slice(startIndex, changeIndex);
-          //console.log("LENGT: "+slice.length);
-          slice.not('.ui-sortable-helper').each(function() {
-              var item = $(this);
-              item.css({
-                  transform: 'translateY(0px)'
-              });
-          });
-        }
-        startIndex = changeIndex;
-      },
-      stop: function(e, ui) {
-        $('.ui-sortable-handle').css({
-            transform: 'translateY(0)'
-        })
-      },
-      connectWith: ".panel-term-list",
-      placeholder: "ui-state-highlight",
-      receive: function(event, ui){
-        var origin_semester_id = ui.sender.attr("id");
-        var new_semester_id = event.target.id;
-        var course_str = ui.item.attr("id").replace("_"," ");
-        window.prog.moveCourse(course_str, origin_semester_id, new_semester_id);
-      }
-    });
-  });
-}
 
 // jQuery code
 $(function(){
-  makeProgramSortable();
+  SortableProgram.render();
 
-  // Configure course details modal to open on double click
-  $(".panel-course").dblclick(function(){
-    var course_obj = data[$(this).attr("id").replace("_"," ")];
-    window.popup.populateCourse(course_obj);
-    $("#modal-course-details").css("display","block");
-  });
+  ModalCourse.ConfigureCourseModal(data, window.popupCourse);
+  ModalCourse.ConfigureGeneralModal();
+  ModalCourse.ConfigurePageModalComponents();
 
-  $(".modal-draggable").draggable();
-
-  $(".modal-cancel-button").click(function(){
-    $(this).parents().eq(4).css({"display":"none"});
-    $(this).parents().eq(3).css({top: 0, left: 0, position:"relative"});
-  });
-
-  $(".modal-close-button").click(function(){
-    $(this).parents().eq(1).css({"display":"none"});
-    $(this).parent().css({top: 0, left: 0, position:"relative"});
-  });
-
-  $(window).click(function(e){
-  var target = $(e.target);
-    if(target.is(".modal")){
-      target.css("display","none");
-      target.find(".modal-content").css({top: 0, left: 0, position:"relative"})
-    }
-  });
-
-  // Configure Add Course modal actions and properties
-  $("#add-course").click(function(){
-    $("#modal-add-course").css("display","block");
-  });
-
-  // Configure course reqs modal properties
-  $("#navbar-course-icon").click(function(){
-    $("#modal-reqs").css("display","block");
-  });
-
-  $(window).click(function(e){
-  var target = $(e.target);
-    if(target.is("#modal-reqs")){
-      $("#modal-reqs").css("display","none");
-    }
-  });
 
   // Dropdown select hover action
   // TODO: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements
   // Adapt for dynamically generated elements
-  $(document).on("mouseenter", "ul.dropdown-select li, ul.dropdown-select-small li", function(){
-    $(this).find("ul").css({"visibility":"visible", "opacity":"1"});
-  });
-
-  $(document).on("mouseleave", "ul.dropdown-select li, ul.dropdown-select-small li", function(){
-    $(this).find("ul").css({"visibility":"hidden", "opacity":"0"});
-  });
-
-  $(document).on("mouseenter", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
-    $(this).css({"background":"#666"});
-  });
-  $(document).on("mouseleave", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
-    $(this).css({"background":"#353535"});
-  });
+  Dropdown.configureDropdownActions();
 
   // Dropdown select value
   $(document).on("click", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
@@ -290,9 +168,9 @@ $(function(){
   $(".modal-course-item").on("click", function(){
     var course_str = $(this).find("span").text();
     if($(this).hasClass("course-item-selected")){
-      window.addCourse.unselectUnstagedCourse(course_str);
+      window.popupAddCourse.unselectUnstagedCourse(course_str);
     }else{
-      window.addCourse.selectUnstagedCourse(course_str);
+      window.popupAddCourse.selectUnstagedCourse(course_str);
     }
   })
 
@@ -300,29 +178,29 @@ $(function(){
     var course_str = $(this).find(".modal-add-course-selected-title span").text();
 
     if($(this).hasClass("course-item-selected")){
-      window.addCourse.unselectStagedCourse(course_str);
+      window.popupAddCourse.unselectStagedCourse(course_str);
     }else{
-      window.addCourse.selectStagedCourse(course_str);
+      window.popupAddCourse.selectStagedCourse(course_str);
     }
   });
 
   $("#modal-add-course-action-add").on("click", function(){
-    window.addCourse.stageCourses();
+    window.popupAddCourse.stageCourses();
   });
   $("#modal-add-course-action-remove").on("click", function(){
-    window.addCourse.unstageCourses();
+    window.popupAddCourse.unstageCourses();
   });
 
   // Modal add course submit courses to program action
   $("#modal-add-course-submit").click(function(){
-    window.addCourse.submitCourses();
-    window.reqs.forceUpdate();
+    window.popupAddCourse.submitCourses();
+    window.popupReqs.forceUpdate();
   });
 
   // Add semester action
   $("#add-semester-button").click(function(){
-    window.prog.addSemester();
+    window.program.addSemester();
 
-    makeProgramSortable();
+    SortableProgram.render();
   });
 });
