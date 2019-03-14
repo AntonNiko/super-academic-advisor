@@ -8,8 +8,8 @@
     ],
     [],
     [],
-	{},
-	"CHEM/101.html"
+	  {},
+	  "CHEM/101.html"
   ],
   "CSC 111": [
     "CSC",
@@ -20,8 +20,20 @@
     ],
     [],
     [],
-	{},
-	"CSC/111.html"
+	  {
+    "Title": "Fundamentals of Programming with Engineering Applications",
+    "Hours": "3-2-0",
+    "Description": "Fundamentals of computer programming with real-world engineering examples using an imperative programming language. Topics include variables, data types, statements, control structures, functions, parameter passing mechanisms, expressions, data structures, files, pointers, storage allocation, elementary searching and sorting, recursion, encapsulation, modularity, incremental development, testing and debugging.",
+    "Prerequisites":
+      [
+        "One of Foundations of Math 12, Mathematics 12, Pre-Calculus 12, MATH 100, MATH 109, MATH 120."
+      ],
+    "Note":
+      [
+        "Credit will be granted for only one of CSC 111, CSC 110."
+      ]
+    },
+	  "CSC/111.html"
   ],
   "CSC 115": [
     "CSC",
@@ -35,20 +47,20 @@
       ]
     ],
     [],
-	{
-	"Title": "Fundamentals of Programming II",
-	"Hours": "3-2-0",
-	"Description": "Techniques, methods, and tools for systematic development and maintenance of software systems and documentation; basic algorithms and data structures; and fundamental concepts of object-oriented programming. Topics include control and data abstraction, modularization, abstract data types, layers of abstraction, information hiding, separation of concerns, type checking, program design, separate compilation, software libraries, techniques for the development of high-quality software components, program understanding.",
-	"Prerequisites":
-	  [
-	    "CSC 110 or CSC 111."
-	  ],
-	"Note":
-	  [
-	    "Credit will be granted for only one of CSC 115, CSC 116, CSC 160."
-	  ]
-	},
-	"CSC/115.html"
+    {
+    "Title": "Fundamentals of Programming II",
+    "Hours": "3-2-0",
+    "Description": "Techniques, methods, and tools for systematic development and maintenance of software systems and documentation; basic algorithms and data structures; and fundamental concepts of object-oriented programming. Topics include control and data abstraction, modularization, abstract data types, layers of abstraction, information hiding, separation of concerns, type checking, program design, separate compilation, software libraries, techniques for the development of high-quality software components, program understanding.",
+    "Prerequisites":
+      [
+        "CSC 110 or CSC 111."
+      ],
+    "Note":
+      [
+        "Credit will be granted for only one of CSC 115, CSC 116, CSC 160."
+      ]
+	  },
+	  "CSC/115.html"
   ],
   "CSC 116": [
     "CSC",
@@ -62,17 +74,17 @@
       ]
     ],
     [],
-	{
-	"Prerequisites":
-	  [
-	    "CSC 110 or CSC 111."
-	  ],
-	"Note":
-	  [
-	    "Credit will be granted for only one of CSC 116, CSC 115, CSC 160."
-	  ]
-	},
-	"CSC/116.html"
+    {
+    "Prerequisites":
+      [
+        "CSC 110 or CSC 111."
+      ],
+    "Note":
+      [
+        "Credit will be granted for only one of CSC 116, CSC 115, CSC 160."
+      ]
+    },
+    "CSC/116.html"
   ],
   "CSC 225": [
     "CSC",
@@ -406,7 +418,17 @@
       "F"
     ],
     [],
-    []
+    [],
+    {
+      "Title": "Design and Communication I",
+      "Hours": "4-2-0",
+      "Description": "Introductory principles of engineering design processes through practical projects to be undertaken by teams of students; integrated development and demonstration of writing, research, design and presentation skills through research and design projects. Writing, research and organizational skills appropriate for University level writing.",
+      "Note":
+        [
+          "Not open for credit to students registered in or with credit in any of ENGR 111, ENGR 112, ELEC 199, ENGL 115, ENGL 135."
+        ]      
+    },
+    "ENGR/110.html"
   ],
   "ENGR 112": [
     "ENGR",
@@ -512,7 +534,17 @@
       "Sp"
     ],
     [],
-    []
+    [],
+    {
+    "Title": "Introduction to Professional Practice",
+    "Hours": "",
+    "Description": "Awareness of the role and responsibilities of Professional Engineers in society with respect to the environment, ethics, equity, public and worker safety and health considerations. Introduction to technical and other forms of work term and/or work experience report preparation, understanding national and international placement standards, WorkSafeBC standards, engineering logbooks. Development of effective interview techniques, skill assessment and analysis, career management and development. Preparation of resumés and cover letters.",
+    "Note":
+      [
+        "Credit will be granted for only one of ENGR 130, ENGR 020."
+      ]
+    },
+    "ENGR/130.html"
   ],
   "ENGR 141": [
     "ENGR",

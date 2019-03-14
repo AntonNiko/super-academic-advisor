@@ -32,8 +32,7 @@ class PopupCourse extends Component {
 	}
 
 	renderCourseDetails(){
-		// TEMPORARY: ONLY FOR CSC 115 (TEST)
-		if(this.state.course_str != "CSC 115"){
+		if(!["CSC 111","CSC 115","ENGR 110","ENGR 130"].includes(this.state.course_str)){
 			return [<h3 class="modal-subsection-title">Prerequisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>

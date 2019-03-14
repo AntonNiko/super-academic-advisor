@@ -44,7 +44,6 @@ class Program extends Component {
         data = {this.props.data}/>);
       last_added_semester = semester_id;
     }
-    console.log(this.sem);
     return semesters;
   }
 
@@ -94,6 +93,8 @@ class Program extends Component {
     if(updateState == true){
       this.sem[semester_id].current.addCourse(course_str, false);
     }
+
+    this.forceUpdate();
     return true;
   }
 
@@ -225,13 +226,15 @@ class Program extends Component {
   }
 
   componentDidMount(){
+    this.props.updateProgramReqs(this.sem);
   }
 
   componentDidUpdate(){
-    //this.props.updateProgramReqs(this.state.sem);
+    this.props.updateProgramReqs(this.state.sem);
   }
 
   render() {
+    console.log(this.sem);
     return (
       <div class="panel-container" id="panel-container">
         {this.createSemesters()}

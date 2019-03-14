@@ -31,6 +31,7 @@ class PopupAddCourse extends Component {
       this.props.addCourse(semester_id, course_str);
 
       // TODO: Remove staged course if successfully added
+      // TODO: Update popupreqs
     }
 
   }
