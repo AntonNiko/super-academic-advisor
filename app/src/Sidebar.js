@@ -141,6 +141,7 @@ class Sidebar extends Component {
   }
 
   render() {
+    console.log("render");
     return (
       <div>
         <div class="form-group-new">

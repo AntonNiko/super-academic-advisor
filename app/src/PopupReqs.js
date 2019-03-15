@@ -12,8 +12,10 @@ class PopupReqs extends Component {
       requirements: this.props.requirements,
       active_courses: [],
       fulfilled: false,
+      remaining_number: this.props.requirements.length,
     };
 
+    this.remaining_number = this.state.remaining_number;
     this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
     this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
 
@@ -27,6 +29,39 @@ class PopupReqs extends Component {
       new_active_courses = new_active_courses.concat(current_semester_courses);
     }
     this.setState({active_courses: new_active_courses});
+  }
+
+  updateRemainingRequirementsNumber(){
+    // TODO: Write method which calculates how many requirements have not been met
+    var requirements = this.state.requirements;
+    var remaining_requirements = requirements.length;
+
+    for(var i=0; i<requirements.length; i++){
+      var requirement = requirements[i];
+      var requirement_met = false;
+      for(var j=0; j<requirement.length; j++){
+        var nested_requirement = requirement[j];
+        // Assuming nested requirement is course
+        if(this.state.active_courses.includes(nested_requirement)){
+          requirement_met = true;
+        }
+        // Assuming nested requirement is array of 2 or more courses
+        if(typeof nested_requirement == "object"){
+          var nested_requirement_met = true;
+          for(var k=0; k<nested_requirement.length; k++){
+            if(!this.state.active_courses.includes(nested_requirement[k])) nested_requirement_met = false;
+          }
+          if(nested_requirement_met) requirement_met = true;
+        }
+      }
+
+      if(requirement_met){
+        remaining_requirements-=1;
+        requirement_met = false;
+      }
+    }
+
+    return remaining_requirements;
   }
 
   allProgramRequirementsMet(){
@@ -78,13 +113,19 @@ class PopupReqs extends Component {
     return list_items;
   }
 
+  renderRemainingRequirements(){
+    var remaining_requirements_num = this.updateRemainingRequirementsNumber();
+    return (<span id="modal-reqs-fulfilled-status">{remaining_requirements_num} missing</span>);
+  }
+
   render(){
+    console.log("render");
       return (
         <div id="modal-reqs" class="modal-clear">
           <div id="modal-reqs-content">
             <div id="modal-reqs-header">
               <span id="modal-reqs-title">Required</span>
-              <span id="modal-reqs-fulfilled-status">1 or more missing</span>
+              {this.renderRemainingRequirements()}
             </div>
 
             <div id="modal-reqs-list">

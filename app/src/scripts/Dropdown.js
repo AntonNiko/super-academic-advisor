@@ -32,6 +32,7 @@ class Dropdown {
           sidebar.selectFaculty(selected_value);
           break;
         case "program-dropdown":
+          
           sidebar.selectProgram(selected_value);
           break;
         case "minor-dropdown":
