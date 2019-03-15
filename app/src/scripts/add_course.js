@@ -12,9 +12,9 @@ class AddCourse {
         $(".modal-course-item").on("click", function(){
             var course_str = $(this).find("span").text();
             if($(this).hasClass("course-item-selected")){
-            popupAddCourse.unselectUnstagedCourse(course_str);
+            popupAddCourse.actionUnselectUnstagedCourse(course_str);
             }else{
-            popupAddCourse.selectUnstagedCourse(course_str);
+            popupAddCourse.actionSelectUnstagedCourse(course_str);
             }
         });
 
@@ -22,26 +22,26 @@ class AddCourse {
             var course_str = $(this).find(".modal-add-course-selected-title span").text();
         
             if($(this).hasClass("course-item-selected")){
-                popupAddCourse.unselectStagedCourse(course_str);
+                popupAddCourse.actionUnselectStagedCourse(course_str);
             }else{
-                popupAddCourse.selectStagedCourse(course_str);
+                popupAddCourse.actionSelectStagedCourse(course_str);
             }
         });
     }
 
     static configureStagingActions(popupAddCourse){
         $("#modal-add-course-action-add").on("click", function(){
-            popupAddCourse.stageCourses();
+            popupAddCourse.actionStageCourses();
         });
         $("#modal-add-course-action-remove").on("click", function(){
-            popupAddCourse.unstageCourses();
+            popupAddCourse.actionUnstageCourses();
         });
     }
 
     static configureSubmitActions(popupAddCourse, popupReqs){
         // Modal add course submit courses to program action
         $("#modal-add-course-submit").click(function(){
-            popupAddCourse.submitCourses();
+            popupAddCourse.actionSubmitCourses();
             popupReqs.forceUpdate();
         });        
     }

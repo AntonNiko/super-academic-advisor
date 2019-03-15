@@ -20,7 +20,7 @@ class Semester extends Component {
     this.updateCreditValue = this.updateCreditValue.bind(this);
   }
 
-  createCourses(){
+  renderCourses(){
     var courses = [];
 
     for(var i=0; i<this.state.courses[0].length; i++){
@@ -62,7 +62,7 @@ class Semester extends Component {
         <span style={{float: "right"}}><span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
         </div>
         <ul class="panel-term-list ui-sortable" id={this.props.semester_id}>
-          {this.createCourses()}
+          {this.renderCourses()}
         </ul>
         <div class="panel-term-footer">
 

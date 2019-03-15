@@ -10,11 +10,11 @@ import PopupReqs from './PopupReqs.js';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
-import SortableProgram from './scripts/SortableProgram.js';
-import ModalCourse from './scripts/ModalCourse.js';
-import Dropdown from './scripts/Dropdown.js';
-import AddCourse from './scripts/AddCourse.js';
-import AddSemester from './scripts/AddSemester.js';
+import SortableProgram from './scripts/sortable_program.js';
+import ModalCourse from './scripts/modal_course.js';
+import Dropdown from './scripts/dropdown.js';
+import AddCourse from './scripts/add_course.js';
+import AddSemester from './scripts/add_semester.js';
 
 function getCoursesData(){
   return JSON.parse($.ajax({
@@ -111,13 +111,13 @@ ReactDOM.render(<Program sequence={program_sequence}
   ref={program => {window.program = program;}}
   data={data}
   sequence_ids={sequence_ids}
-  updateProgramReqs={window.popupReqs.updateProgramReqs}/>,
+  updateProgramReqs={window.popupReqs.actionUpdateProgramReqs}/>,
 document.getElementById('panel-container-parent'));
 
 ReactDOM.render(<PopupAddCourse data={data}
   ref={popupAddCourse => {window.popupAddCourse = popupAddCourse}}
   addCourse={window.program.addCourse}
-  updateProgramReqs={window.popupReqs.updateProgramReqList}/>,
+  updateProgramReqs={window.popupReqs.actionUpdateProgramReqList}/>,
 document.getElementById('modal-add-course-container'));
 
 // jQuery code

@@ -19,10 +19,10 @@ class PopupReqs extends Component {
     this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
     this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
 
-    this.updateProgramReqs = this.updateProgramReqs.bind(this);
+    this.actionUpdateProgramReqs = this.actionUpdateProgramReqs.bind(this);
   }
 
-  updateProgramReqs(semesters){
+  actionUpdateProgramReqs(semesters){
     var new_active_courses = [];
     for(var semester_id in semesters){
       var current_semester_courses = semesters[semester_id].current.state.courses[0];
@@ -31,7 +31,7 @@ class PopupReqs extends Component {
     this.setState({active_courses: new_active_courses});
   }
 
-  updateRemainingRequirementsNumber(){
+  actionUpdateRemainingRequirementsNumber(){
     // TODO: Write method which calculates how many requirements have not been met
     var requirements = this.state.requirements;
     var remaining_requirements = requirements.length;
@@ -76,7 +76,7 @@ class PopupReqs extends Component {
     }
   }
 
-  createProgramReqList(){
+  renderProgramRequirementsList(){
     var list_items = [];
 
     var requirements = this.props.requirements;
@@ -114,7 +114,7 @@ class PopupReqs extends Component {
   }
 
   renderRemainingRequirements(){
-    var remaining_requirements_num = this.updateRemainingRequirementsNumber();
+    var remaining_requirements_num = this.actionUpdateRemainingRequirementsNumber();
     return (<span id="modal-reqs-fulfilled-status">{remaining_requirements_num} missing</span>);
   }
 
@@ -129,7 +129,7 @@ class PopupReqs extends Component {
 
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
-                {this.createProgramReqList()}
+                {this.renderProgramRequirementsList()}
               </ul>
             </div>
             <div id="modal-reqs-footer">

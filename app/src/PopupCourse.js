@@ -17,10 +17,10 @@ class PopupCourse extends Component {
 
 		this.course_link_url = "https://web.uvic.ca/calendar2019-05/CDs/";
 
-    this.populateCourse = this.populateCourse.bind(this);
+    this.actionPopulateCourse = this.actionPopulateCourse.bind(this);
   }
 
-  populateCourse(course){
+  actionPopulateCourse(course){
 		console.log(course);
     this.setState({
       course_str: course[0]+" "+course[1],

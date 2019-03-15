@@ -4,7 +4,7 @@ class ModalCourse {
   static configureCourseModal(data, modal){
       $(document).on("dblclick", ".panel-course", function(){
         var course_obj = data[$(this).attr("id").replace("_"," ")];
-        modal.populateCourse(course_obj);
+        modal.actionPopulateCourse(course_obj);
         $("#modal-course-details").css("display","block");
       });
   }

@@ -9,14 +9,9 @@ class Course extends Component {
     };
   }
 
-  returnCourseContent(){
+  actionGetCourseContent(){
     var course_id = this.props.course_id;
     return this.props.data[course_id];
-  }
-
-  getCourseCreditValue(){
-    var course_id = this.props.course_id;
-    //return this.state.data[course_id][2];
   }
 
   componentDidMount(){
@@ -32,7 +27,7 @@ class Course extends Component {
     if(this.props.data == null){
       return <li class="panel-course" id={this.props.course_id.replace(" ","_")}></li>
     }
-    var course_obj = this.returnCourseContent();
+    var course_obj = this.actionGetCourseContent();
 
     return (
       <li class="panel-course" id={this.props.course_id.replace(" ","_")}>

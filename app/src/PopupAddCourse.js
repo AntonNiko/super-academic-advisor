@@ -15,52 +15,49 @@ class PopupAddCourse extends Component {
       available_years: ["2018","2019","2020","2021"],
     }
 
-    this.submitCourses = this.submitCourses.bind(this);
-    this.selectUnstagedCourse = this.selectUnstagedCourse.bind(this);
-    this.unselectUnstagedCourse = this.unselectUnstagedCourse.bind(this);
-    this.stageCourses = this.stageCourses.bind(this);
-    this.unstageCourses = this.unstageCourses.bind(this);
-    this.selectStagedCourse = this.selectStagedCourse.bind(this);
-    this.unselectStagedCourse = this.unselectStagedCourse.bind(this);
+    this.actionSubmitCourses = this.actionSubmitCourses.bind(this);
+    this.actionSelectUnstagedCourse = this.actionSelectUnstagedCourse.bind(this);
+    this.actionUnselectUnstagedCourse = this.actionUnselectUnstagedCourse.bind(this);
+    this.actionStageCourses = this.actionStageCourses.bind(this);
+    this.actionUnstageCourses = this.actionUnstageCourses.bind(this);
+    this.actionSelectStagedCourse = this.actionSelectStagedCourse.bind(this);
+    this.actionUnselectStagedCourse = this.actionUnselectStagedCourse.bind(this);
   }
 
-  submitCourses(){
+  actionSubmitCourses(){
     // TODO: For each selected staged course, add to program
     for(var course_str in this.state.staged_courses){
       var semester_id = this.state.staged_courses[course_str][2];
       this.props.addCourse(semester_id, course_str);
-
       // TODO: Remove staged course if successfully added
-      // TODO: Update popupreqs
     }
-
   }
 
-  selectUnstagedCourse(course_str){
+  actionSelectUnstagedCourse(course_str){
     var new_selected_courses = this.state.selected_unstaged_courses;
     new_selected_courses.push(course_str);
     this.setState({selected_unstaged_courses: new_selected_courses});
   }
 
-  unselectUnstagedCourse(course_str){
+  actionUnselectUnstagedCourse(course_str){
     var new_selected_courses = this.state.selected_unstaged_courses;
     new_selected_courses.splice(new_selected_courses.indexOf(course_str), 1);
     this.setState({selected_unstaged_courses: new_selected_courses});
   }
 
-  selectStagedCourse(course_str){
+  actionSelectStagedCourse(course_str){
     var new_selected_courses = this.state.selected_staged_courses;
     new_selected_courses.push(course_str);
     this.setState({selected_staged_courses: new_selected_courses});
   }
 
-  unselectStagedCourse(course_str){
+  actionUnselectStagedCourse(course_str){
     var new_staged_courses = this.state.selected_staged_courses;
     new_staged_courses.splice(new_staged_courses.indexOf(course_str), 1);
     this.setState({selected_staged_courses: new_staged_courses});
   }
 
-  stageCourses(){
+  actionStageCourses(){
     // Move selected courses in position to be added to program
     // TODO: Verify course offered in right semesters
     // TODO: Verify course not already added to program
@@ -72,16 +69,12 @@ class PopupAddCourse extends Component {
     this.setState({staged_courses: new_staged_courses});
   }
 
-  unstageCourses(){
+  actionUnstageCourses(){
     var new_staged_courses = this.state.staged_courses;
     for(var i=0; i<this.state.selected_staged_courses.length; i++){
       delete new_staged_courses[this.state.selected_staged_courses[i]];
     }
     this.setState({staged_courses: new_staged_courses});
-  }
-
-  editStagedCourseSequence(){
-    console.log("edit");
   }
 
   renderCourseSelectionList(){
@@ -125,8 +118,8 @@ class PopupAddCourse extends Component {
       var actions_container = [];
 
       // Generate year dropdown for course, based on state
-      actions_container.push(this.generateDynamicYearDropdownList());
-      actions_container.push(this.generateDynamicSemesterDropdownList(course_str));
+      actions_container.push(this.renderDynamicYearDropdownList());
+      actions_container.push(this.renderDynamicSemesterDropdownList(course_str));
       actions_container.push(<div class="modal-add-course-selected-delete"><img src="/assets/icons8-delete-40.png"></img></div>);
 
       course_container.push(<div class="modal-add-course-selected-title"><span>{course_str}</span></div>);
@@ -141,7 +134,7 @@ class PopupAddCourse extends Component {
     return list_elements;
   }
 
-  generateDynamicYearDropdownList(){
+  renderDynamicYearDropdownList(){
     var list_items = [];
     for(var i=0; i<this.state.available_years.length; i++){
       list_items.push(<li value={this.state.available_years[i]}><span>{this.state.available_years[i]}</span></li>)
@@ -161,7 +154,7 @@ class PopupAddCourse extends Component {
     );
   }
 
-  generateDynamicSemesterDropdownList(course_str){
+  renderDynamicSemesterDropdownList(course_str){
     /* Generate dynamic semester dropdown list, based on specific course's semester avilability */
     var course_semesters_offered = this.props.data[course_str][3];
     var list_items = [];

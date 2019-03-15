@@ -30,7 +30,7 @@ class Program extends Component {
     this.addCourse = this.addCourse.bind(this);
   }
 
-  createSemesters(){
+  renderSemesters(){
     var semesters = [];
     var last_added_semester = null;
 
@@ -236,7 +236,7 @@ class Program extends Component {
   render() {
     return (
       <div class="panel-container" id="panel-container">
-        {this.createSemesters()}
+        {this.renderSemesters()}
         <div id="panel-add-semester">
           <button type="button" class="btn-action" id="add-semester-button">Add Semester</button>
         </div>
