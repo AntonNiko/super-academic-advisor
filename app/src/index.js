@@ -11,7 +11,7 @@ import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 import SortableProgram from './scripts/sortable_program.js';
-import ModalCourse from './scripts/modal_course.js';
+import Modal from './scripts/modal.js';
 import Dropdown from './scripts/dropdown.js';
 import AddCourse from './scripts/add_course.js';
 import AddSemester from './scripts/add_semester.js';
@@ -40,13 +40,13 @@ function getSelectionData(){
   }).responseText);
 }
 
-function getRequirementsData(){
+/*function getRequirementsData(){
   return JSON.parse($.ajax({
     type: "GET",
     url: "/data/requirements_dir.json",
     async: false
   }).responseText);
-}
+}*/
 
 var program_requirements_seng = [
   ["CSC 111"],
@@ -97,7 +97,7 @@ var sequence_ids = [
 var data = getCoursesData();
 var program_sequence = getSequenceData();
 var program_selection = getSelectionData();
-var program_requirements = getRequirementsData();
+//var program_requirements = getRequirementsData();
 
 // Build React Elements
 ReactDOM.render(<Navbar />, document.getElementById('navigation'));
@@ -124,9 +124,10 @@ document.getElementById('modal-add-course-container'));
 $(function(){
   SortableProgram.render(window.program);
 
-  ModalCourse.configureCourseModal(data, window.popupCourse);
-  ModalCourse.configureGeneralModal();
-  ModalCourse.configurePageModalComponents();
+  Modal.configureCourseModal(data, window.popupCourse);
+  Modal.configureGeneralModal();
+  Modal.configureAddCourseModal();
+  Modal.configureReqModal();
 
   Dropdown.configureDropdownActions();
   Dropdown.configureDropdownSelection(window.sidebar);

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Course from './Course';
 import './style/Semester.css';
 
@@ -33,7 +32,8 @@ class Semester extends Component {
   }
 
   updateCreditValue(course_credit_value){
-    this.setState({current_units: this.state.current_units+=course_credit_value});
+    var current_units = this.state.current_units;
+    this.setState({current_units: current_units+course_credit_value});
   }
 
   addCourse(course_id, temporary = false){

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-class ModalCourse {
+class Modal {
   static configureCourseModal(data, modal){
       $(document).on("dblclick", ".panel-course", function(){
         var course_obj = data[$(this).attr("id").replace("_"," ")];
@@ -31,12 +31,14 @@ class ModalCourse {
       });
   }
 
-  static configurePageModalComponents(){
+  static configureAddCourseModal(){
     // Configure Add Course modal actions and properties
     $("#add-course").click(function(){
       $("#modal-add-course").css("display","block");
     });
+  }
 
+  static configureReqModal(){
     // Configure course reqs modal properties
     $("#navbar-course-icon").click(function(){
       $("#modal-reqs").css("display","block");
@@ -51,4 +53,4 @@ class ModalCourse {
   }
 }
 
-export default ModalCourse;
+export default Modal;

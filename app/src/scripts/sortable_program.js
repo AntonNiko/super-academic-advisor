@@ -10,9 +10,7 @@ class SortableProgram {
       'placeholder': 'marker',
       start: function(e, ui){
         // BUG: First time element is selected, reduces size, but all subsequenc selects actions have no effect
-        //console.log("start");
         startIndex = ui.placeholder.index();
-        //console.log("Start: "+startIndex);
         uiHeight = ui.item.outerHeight(true);
 
         // Moves all next elements down by uiHeight px
