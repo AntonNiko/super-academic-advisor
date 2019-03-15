@@ -111,7 +111,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   ref={program => {window.program = program;}}
   data={data}
   sequence_ids={sequence_ids}
-  updateProgramReqs={window.popupReqs.updateProgramReqList}/>,
+  updateProgramReqs={window.popupReqs.updateProgramReqs}/>,
 document.getElementById('panel-container-parent'));
 
 ReactDOM.render(<PopupAddCourse data={data}

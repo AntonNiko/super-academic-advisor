@@ -17,13 +17,12 @@ class PopupReqs extends Component {
     this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
     this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
 
-    this.updateProgramReqList = this.updateProgramReqList.bind(this);
+    this.updateProgramReqs = this.updateProgramReqs.bind(this);
   }
 
-  updateProgramReqList(semesters){
+  updateProgramReqs(semesters){
     var new_active_courses = [];
     for(var semester_id in semesters){
-      console.log(semester_id);
       var current_semester_courses = semesters[semester_id].current.state.courses[0];
       new_active_courses = new_active_courses.concat(current_semester_courses);
     }

@@ -230,11 +230,10 @@ class Program extends Component {
   }
 
   componentDidUpdate(){
-    this.props.updateProgramReqs(this.state.sem);
+    this.props.updateProgramReqs(this.sem);
   }
 
   render() {
-    console.log(this.sem);
     return (
       <div class="panel-container" id="panel-container">
         {this.createSemesters()}
