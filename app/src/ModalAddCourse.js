@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './style/PopupAddCourse.css';
+import './style/ModalAddCourse.css';
 import './style/Modal.css';
 
-class PopupAddCourse extends Component {
+class ModalAddCourse extends Component {
   // Write method to recognize semester_id based on user input of year and semester
 
   constructor(props){
@@ -231,4 +231,4 @@ class PopupAddCourse extends Component {
   }
 }
 
-export default PopupAddCourse;
+export default ModalAddCourse;

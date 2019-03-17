@@ -21,25 +21,25 @@ class Sidebar extends Component {
     this.minorValue = null;
     this.specializationValue = null;
 
-    this.selectFaculty = this.selectFaculty.bind(this);
-    this.selectProgram = this.selectProgram.bind(this);
-    this.selectMinor = this.selectMinor.bind(this);
-    this.selectSpecialization = this.selectSpecialization.bind(this);
+    this.actionSelectFaculty = this.actionSelectFaculty.bind(this);
+    this.actionSelectProgram = this.actionSelectProgram.bind(this);
+    this.actionSelectMinor = this.actionSelectMinor.bind(this);
+    this.actionSelectSpecialization = this.actionSelectSpecialization.bind(this);
   }
 
-  selectFaculty(value){
+  actionSelectFaculty(value){
     this.setState({faculty_selected: value});
   }
 
-  selectProgram(value){
+  actionSelectProgram(value){
     this.setState({program_selected: value});
   }
 
-  selectMinor(value){
+  actionSelectMinor(value){
     this.setState({minor_selected: value});
   }
 
-  selectSpecialization(value){
+  actionSelectSpecialization(value){
     this.setState({specialization_selected: value});
   }
 

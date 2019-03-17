@@ -29,22 +29,22 @@ class Dropdown {
 
       switch($(this).parent().parent().attr("id")){
         case "faculty-dropdown":
-          sidebar.selectFaculty(selected_value);
+          sidebar.actionSelectFaculty(selected_value);
           break;
         case "program-dropdown":
-          
-          sidebar.selectProgram(selected_value);
+
+          sidebar.actionSelectProgram(selected_value);
           break;
         case "minor-dropdown":
-          sidebar.selectMinor(selected_value);
+          sidebar.actionSelectMinor(selected_value);
           break;
         case "specialization-dropdown":
-          sidebar.selectSpecialization(selected_value);
+          sidebar.actionSelectSpecialization(selected_value);
           break;
         default:
           break;
       }
-    });   
+    });
   }
 }
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './style/PopupCourse.css';
+import './style/ModalCourse.css';
 import './style/Modal.css';
 
-class PopupCourse extends Component {
+class ModalCourse extends Component {
   constructor(props){
     super(props);
 
@@ -148,4 +148,4 @@ class PopupCourse extends Component {
   }
 }
 
-export default PopupCourse;
+export default ModalCourse;

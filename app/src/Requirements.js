@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
-import './style/PopupReqs.css';
+import './style/Requirements.css';
 import './style/Modal.css';
 
-class PopupReqs extends Component {
+class Requirements extends Component {
   constructor(props){
     super(props);
 
@@ -141,4 +141,4 @@ class PopupReqs extends Component {
   }
 }
 
-export default PopupReqs;
+export default Requirements;
