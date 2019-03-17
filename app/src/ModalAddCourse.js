@@ -22,10 +22,15 @@ class ModalAddCourse extends Component {
     this.actionUnstageCourses = this.actionUnstageCourses.bind(this);
     this.actionSelectStagedCourse = this.actionSelectStagedCourse.bind(this);
     this.actionUnselectStagedCourse = this.actionUnselectStagedCourse.bind(this);
+    this.actionSelectStagedCourseYear = this.actionSelectStagedCourseYear.bind(this);
+    this.actionSelectStagedCourseSemester = this.actionSelectStagedCourseSemester.bind(this);
   }
 
   actionSubmitCourses(){
     // TODO: For each selected staged course, add to program
+    // TODO: Verify course offered in right semesters
+    // TODO: Verify course not already added to program
+    // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     for(var course_str in this.state.staged_courses){
       var semester_id = this.state.staged_courses[course_str][2];
       this.props.addCourse(semester_id, course_str);
@@ -59,9 +64,6 @@ class ModalAddCourse extends Component {
 
   actionStageCourses(){
     // Move selected courses in position to be added to program
-    // TODO: Verify course offered in right semesters
-    // TODO: Verify course not already added to program
-    // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     var new_staged_courses = this.state.staged_courses;
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
       new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2019","F","2A"];
@@ -74,6 +76,18 @@ class ModalAddCourse extends Component {
     for(var i=0; i<this.state.selected_staged_courses.length; i++){
       delete new_staged_courses[this.state.selected_staged_courses[i]];
     }
+    this.setState({staged_courses: new_staged_courses});
+  }
+
+  actionSelectStagedCourseYear(course_str, year){
+    var new_staged_courses = this.state.staged_courses;
+    new_staged_courses[course_str][0] = year;
+    this.setState({staged_courses: new_staged_courses});
+  }
+
+  actionSelectStagedCourseSemester(course_str, semester){
+    var new_staged_courses = this.state.staged_courses;
+    new_staged_courses[course_str][1] = semester;
     this.setState({staged_courses: new_staged_courses});
   }
 
@@ -127,7 +141,7 @@ class ModalAddCourse extends Component {
 
       var selection_class = this.state.selected_staged_courses.includes(course_str) ? "course-item-selected" : "course-item-unselected";
       var course_item_class = "modal-add-course-selected-course "+selection_class;
-      list_elements.push(<li class={course_item_class}>{course_container}</li>);
+      list_elements.push(<li class={course_item_class} id={course_str.replace(" ","_")+"_staged"}>{course_container}</li>);
       list_elements.push(<li class="modal-add-course-selected-separator"><hr></hr></li>);
     }
 
@@ -143,7 +157,7 @@ class ModalAddCourse extends Component {
     return(
     <ul class="dropdown-select-small">
       <li>
-        <div class="dropdown-header">
+        <div class="dropdown-header staged-course-year">
           <p class="dropdown-value">{this.state.available_years[0]}</p><span class="arrow-down"></span>
         </div>
         <ul>
@@ -166,7 +180,7 @@ class ModalAddCourse extends Component {
     return (
     <ul class="dropdown-select-small">
       <li class="dropdown-select-small-narrow">
-        <div class="dropdown-header">
+        <div class="dropdown-header staged-course-semester">
           <p class="dropdown-value">{course_semesters_offered[0]}</p><span class="arrow-down"></span>
         </div>
         <ul>

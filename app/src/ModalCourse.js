@@ -21,7 +21,6 @@ class ModalCourse extends Component {
   }
 
   actionPopulateCourse(course){
-		console.log(course);
     this.setState({
       course_str: course[0]+" "+course[1],
       course_offered: course[3].join(", "),

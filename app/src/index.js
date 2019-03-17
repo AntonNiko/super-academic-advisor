@@ -63,7 +63,7 @@ $(function(){
   Modal.configureReqModal();
 
   Dropdown.configureDropdownActions();
-  Dropdown.configureDropdownSelection(window.sidebar);
+  Dropdown.configureDropdownSelection(window.sidebar, window.modalAddCourse);
 
   AddCourse.configureModalAnimations(window.modalAddCourse);
   AddCourse.configureStagingActions(window.modalAddCourse);

@@ -13,12 +13,13 @@ class Dropdown {
     $(document).on("mouseenter", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
       $(this).css({"background":"#666"});
     });
+
     $(document).on("mouseleave", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
       $(this).css({"background":"#353535"});
     });
   }
 
-  static configureDropdownSelection(sidebar){
+  static configureDropdownSelection(sidebar, modalAddCourse){
     // Dropdown select value
     $(document).on("click", "ul.dropdown-select li ul li, ul.dropdown-select-small li ul li", function(){
       var selected_value = $(this).attr("value");
@@ -32,7 +33,6 @@ class Dropdown {
           sidebar.actionSelectFaculty(selected_value);
           break;
         case "program-dropdown":
-
           sidebar.actionSelectProgram(selected_value);
           break;
         case "minor-dropdown":
@@ -43,6 +43,14 @@ class Dropdown {
           break;
         default:
           break;
+      }
+
+      if($(this).parent().parent().find(".dropdown-header").hasClass("staged-course-year")){
+        var course_str = $(this).parents().eq(4).attr("id").replace("_staged","").replace("_"," ");
+        modalAddCourse.actionSelectStagedCourseYear(course_str, selected_value);
+      }else if($(this).parent().parent().find(".dropdown-header").hasClass("staged-course-semester")){
+        var course_str = $(this).parents().eq(4).attr("id").replace("_staged","").replace("_"," ");
+        modalAddCourse.actionSelectStagedCourseSemester(course_str, selected_value);
       }
     });
   }
