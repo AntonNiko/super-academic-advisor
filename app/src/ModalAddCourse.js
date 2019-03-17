@@ -29,7 +29,7 @@ class ModalAddCourse extends Component {
   actionSubmitCourses(){
     // TODO: For each selected staged course, add to program
     // TODO: Verify course offered in right semesters
-    // TODO: Verify course not already added to program
+    // TODO: Verify course  not already added to program
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     for(var course_str in this.state.staged_courses){
       var semester_id = this.state.staged_courses[course_str][2];
