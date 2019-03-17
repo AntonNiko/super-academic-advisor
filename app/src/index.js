@@ -50,7 +50,8 @@ document.getElementById('panel-container-parent'));
 ReactDOM.render(<ModalAddCourse data={data}
   ref={modalAddCourse => {window.modalAddCourse = modalAddCourse}}
   addCourse={window.program.addCourse}
-  updateProgramReqs={window.requirements.actionUpdateProgramReqList}/>,
+  updateProgramReqs={window.requirements.actionUpdateProgramReqList}
+  convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}/>,
 document.getElementById('modal-add-course-container'));
 
 // jQuery code

@@ -32,8 +32,10 @@ class ModalAddCourse extends Component {
     // TODO: Verify course  not already added to program
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     for(var course_str in this.state.staged_courses){
-      var semester_id = this.state.staged_courses[course_str][2];
-      this.props.addCourse(semester_id, course_str);
+      var course_year = this.state.staged_courses[course_str][0];
+      var course_semester = this.state.staged_courses[course_str][1];
+      var course_semester_id = this.props.convertYearAndSemesterToProgramSemesterId(course_year, course_semester);
+      this.props.addCourse(course_semester_id, course_str);
       // TODO: Remove staged course if successfully added
     }
   }
@@ -66,6 +68,7 @@ class ModalAddCourse extends Component {
     // Move selected courses in position to be added to program
     var new_staged_courses = this.state.staged_courses;
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
+      // TODO: Modify defalt year, semester, and semester_id for consistency
       new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2019","F","2A"];
     }
     this.setState({staged_courses: new_staged_courses});

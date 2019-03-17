@@ -28,6 +28,7 @@ class Program extends Component {
     this.moveCourse = this.moveCourse.bind(this);
     this.addSemester = this.addSemester.bind(this);
     this.addCourse = this.addCourse.bind(this);
+    this.convertYearAndSemesterToProgramSemesterId = this.convertYearAndSemesterToProgramSemesterId.bind(this);
   }
 
   renderSemesters(){
@@ -223,6 +224,21 @@ class Program extends Component {
       }
     }
     return true;
+  }
+
+  convertYearAndSemesterToProgramSemesterId(year, semester){
+    // Matches the year and semester value with an existing semester ID.
+    // If does not match, return null/-1/false or something...
+    console.log(year+" "+semester);
+    for(var semester_id in this.state.sequence){
+      var current_year = this.state.sequence[semester_id][1];
+      var current_semester = this.state.sequence[semester_id][2];
+      if(current_year == year && current_semester == semester){
+        console.log(semester_id);
+        return semester_id;
+      }
+    }
+    return null;
   }
 
   componentDidMount(){
