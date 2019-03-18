@@ -73,7 +73,7 @@ class Semester extends Component {
           <span style={{float: "right"}}>{this.state.semester_id} {this.state.year}</span>
         </div>
         <div class="panel-term-subheader">
-        <span style={{float: "right"}}><span id={"credit-"+this.props.semester_id}>{this.state.current_units}</span></span>
+        <span style={{float: "right"}}><span id={"credit-"+this.props.semester_id}>{this.state.current_units.toFixed(1)}</span></span>
         </div>
         <ul class="panel-term-list ui-sortable" id={this.props.semester_id}>
           {this.renderCourses()}

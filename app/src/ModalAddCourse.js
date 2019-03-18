@@ -42,6 +42,7 @@ class ModalAddCourse extends Component {
       this.props.addCourse(course_semester_id, course_str);
       // TODO: Remove staged course if successfully added
     }
+    this.setState({staged_courses: {}});
   }
 
   actionSelectUnstagedCourse(course_str){
@@ -70,10 +71,10 @@ class ModalAddCourse extends Component {
 
   actionStageCourses(){
     // Move selected courses in position to be added to program
-    var new_staged_courses = this.state.staged_courses;
+    var new_staged_courses = {};
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
       // TODO: Modify defalt year, semester, and semester_id for consistency
-      new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2019","F","2A"];
+      new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2018","F","1A"];
     }
     this.setState({staged_courses: new_staged_courses});
   }
@@ -204,13 +205,10 @@ class ModalAddCourse extends Component {
         <div class="modal-content modal-draggable">
           <span class="modal-close-button">X</span>
           <h2 class="modal-title">Add Course</h2>
-
-
           <div class="modal-subtitle">
             <h3 id="modal-course-subtitle-left" class="modal-subtitle-left"><span>To select:</span></h3>
             <h3 id="modal-course-subtitle-right" class="modal-subtitle-right"><span>Selected:</span></h3>
           </div>
-
           <div id="modal-add-course-workplace">
             <div class="modal-table-nested" id="modal-add-course-dir">
               <div class="modal-table-content">
@@ -219,7 +217,6 @@ class ModalAddCourse extends Component {
                 </ul>
               </div>
             </div>
-
             <div id="modal-add-course-transfer-actions">
               <div id="modal-add-course-action-container">
                 <div>
@@ -228,7 +225,6 @@ class ModalAddCourse extends Component {
                 </div>
               </div>
             </div>
-
             <div class="modal-table-nested" id="modal-add-course-results">
               <div class="modal-table-content" id="modal-add-course-results-content">
                 <ul class="modal-table-list" id="modal-add-course-results-list">
