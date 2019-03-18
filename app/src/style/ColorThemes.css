@@ -1,0 +1,50 @@
+:root {
+  --dark-navbar-bg: #171819;
+  --dark-navbar-text: #f2f2f2;
+  --dark-navbar-hover: #333333;
+
+  --dark-sidebar-bg: #3e3e3e;
+  --dark-sidebar-text: #f2f2f2;
+
+  --dark-dropdown-text: #fff;
+  --dark-dropdown-border: #8c8c8c;
+
+  --dark-primary-btn-bg: #0077cc;
+  --dark-primary-btn-bg-hover: #04558e;
+  --dark-primary-btn-text: #f3f2f2;
+  --dark-primary-btn-border: #656565;
+
+  --dark-action-btn-bg: #1d7108;
+  --dark-action-btn-bg-hover: #0f4003;
+  --dark-action-btn-text: #f3f2f2;
+  --dark-action-btn-border: #656565;
+
+  --dark-secondary-btn-bg: #8e8e8e;
+  --dark-secondary-btn-bg-hover: #616161;
+  --dark-secondary-btn-text: #f3f2f2;
+  --dark-secondary-btn-border: #656565;
+
+  --dark-danger-btn-bg: #980a0a;
+  --dark-danger-btn-bg-hover: #730505;
+  --dark-danger-btn-text: #f3f2f2;
+  --dark-danger-btn-border: #656565;
+
+  --dark-container-bg: #2b2b2b;
+
+  --dark-semester-bg: #353535;
+  --dark-semester-border: #272727;
+  --dark-semester-header-text: #ffffff;
+
+  --dark-course-bg: #232323;
+  --dark-course-border: #5f5858;
+  --dark-course-text: #efefef;
+
+  --dark-modal-bg: #353535;
+  --dark-modal-text: #f3f2f2;
+  --dark-modal-border: #888;
+
+  --dark-modal-table: #232323;
+  --dark-modal-border: #757575;
+
+  --dark-link-text: #99a9e4;
+}
