@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 class AddCourse {
-    static configureModalAnimations(popupAddCourse){
+    static configureModalAnimations(modalAddCourse){
         // Modal add course table toggle animation
         $(".modal-add-course-subject").on("click", function(){
             $(this).next().slideToggle(200);
@@ -12,9 +12,9 @@ class AddCourse {
         $(".modal-course-item").on("click", function(){
             var course_str = $(this).find("span").text();
             if($(this).hasClass("course-item-selected")){
-            popupAddCourse.actionUnselectUnstagedCourse(course_str);
+            modalAddCourse.actionUnselectUnstagedCourse(course_str);
             }else{
-            popupAddCourse.actionSelectUnstagedCourse(course_str);
+            modalAddCourse.actionSelectUnstagedCourse(course_str);
             }
         });
 
@@ -22,27 +22,27 @@ class AddCourse {
             var course_str = $(this).find(".modal-add-course-selected-title span").text();
         
             if($(this).hasClass("course-item-selected")){
-                popupAddCourse.actionUnselectStagedCourse(course_str);
+                modalAddCourse.actionUnselectStagedCourse(course_str);
             }else{
-                popupAddCourse.actionSelectStagedCourse(course_str);
+                modalAddCourse.actionSelectStagedCourse(course_str);
             }
         });
     }
 
-    static configureStagingActions(popupAddCourse){
+    static configureStagingActions(modalAddCourse){
         $("#modal-add-course-action-add").on("click", function(){
-            popupAddCourse.actionStageCourses();
+            modalAddCourse.actionStageCourses();
         });
         $("#modal-add-course-action-remove").on("click", function(){
-            popupAddCourse.actionUnstageCourses();
+            modalAddCourse.actionUnstageCourses();
         });
     }
 
-    static configureSubmitActions(popupAddCourse, popupReqs){
+    static configureSubmitActions(modalAddCourse, requirements){
         // Modal add course submit courses to program action
         $("#modal-add-course-submit").click(function(){
-            popupAddCourse.actionSubmitCourses();
-            popupReqs.forceUpdate();
+            modalAddCourse.actionSubmitCourses();
+            requirements.forceUpdate();
         });        
     }
 }

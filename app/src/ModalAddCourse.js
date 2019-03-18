@@ -31,6 +31,8 @@ class ModalAddCourse extends Component {
     // TODO: Verify course offered in right semesters
     // TODO: Verify course  not already added to program
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
+    var new_staged_courses = this.state.staged_courses;
+    console.log(new_staged_courses);
     for(var course_str in this.state.staged_courses){
       var course_year = this.state.staged_courses[course_str][0];
       var course_semester = this.state.staged_courses[course_str][1];
@@ -39,10 +41,12 @@ class ModalAddCourse extends Component {
         alert("Semester does not exist!");
         continue;
       }
-      this.props.addCourse(course_semester_id, course_str);
+      if(this.props.addCourse(course_semester_id, course_str)){
+        delete new_staged_courses[course_str];
+      }
       // TODO: Remove staged course if successfully added
     }
-    this.setState({staged_courses: {}});
+    this.setState({staged_courses: new_staged_courses});
   }
 
   actionSelectUnstagedCourse(course_str){

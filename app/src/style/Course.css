@@ -41,6 +41,41 @@
   .panel-course-details-icon {
     position: absolute;
     right: 0;
+    padding-right: 3px;
+  }
+
+  .panel-course-details-icon img {
+    height: 25px;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transiton: opacity 0.1s;
+    -moz-transition: opacity 0.1s;
+    -ms-transition: opacity 0.1s;
+    -o-transition: opacity 0.1s;
+    -transition: opacity 0.1s;
+    transition: visibility 0s, opacity 0.1s linear;
+  }
+
+  .panel-course-context-menu {
+    float: right;
+    width: 0;
+  }
+
+  .panel-course-context-menu ul {
+    width: 60px;
+    padding-left: 0;
+    list-style-type: none;
+    background-color: #353535;
+    border: 1px solid #8c8c8c;
+    position: relative;
+    left: -3px;
+    top: 4px;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .panel-course-context-menu ul li {
+    padding: 3px;
   }
   
   .panel-course-footer {

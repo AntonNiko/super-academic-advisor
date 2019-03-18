@@ -31,7 +31,7 @@ class ModalCourse extends Component {
 	}
 
 	renderCourseDetails(){
-		if(!["CSC 111","CSC 115","ENGR 110","ENGR 130"].includes(this.state.course_str)){
+		if(!["CSC 111","CSC 115","ENGR 110","ENGR 130","MATH 100"].includes(this.state.course_str)){
 			return [<h3 class="modal-subsection-title">Prerequisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>
@@ -111,7 +111,7 @@ class ModalCourse extends Component {
         <div id="modal-course-content" class="modal-content modal-draggable">
     	    <span class="modal-close-button">X</span>
     	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
-    	    <h2 class="modal-title" id="modal-course-desc">{this.state.course_str == "CSC 115" ? this.state.course_details.Title : "Course Title"}</h2>
+    	    <h2 class="modal-title" id="modal-course-desc">{["CSC 111","CSC 115","ENGR 110","ENGR 130","MATH 100"].includes(this.state.course_str) ? this.state.course_details.Title : "Course Title"}</h2>
 
     	    <div class="modal-subtitle">
     	      <h3 id="modal-course-subtitle-left" class="modal-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>

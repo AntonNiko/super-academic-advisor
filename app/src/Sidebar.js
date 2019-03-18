@@ -122,6 +122,7 @@ class Sidebar extends Component {
           list.push(<li value="None"><span>None</span></li>);
         }
 
+        console.log(program);
         for(var i=0; i < program["Specializations"]["Items"].length; i++){
           if(_first){
             result.push(<div class="dropdown-header"><p class="dropdown-value">{program["Specializations"]["Items"][i]}</p><span class="arrow-down"></span></div>);

@@ -58,6 +58,7 @@ document.getElementById('modal-add-course-container'));
 // jQuery code
 $(function(){
   SortableProgram.render(window.program);
+  SortableProgram.configureCourseContextMenu();
 
   Modal.configureCourseModal(data, window.modalCourse);
   Modal.configureGeneralModal();

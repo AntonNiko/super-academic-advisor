@@ -618,7 +618,22 @@
       "Su"
     ],
     [],
-    []
+    [],
+    {
+      "Title": "Calculus I",
+      "Hours": "3-0-1",
+      "Description": "Review of analytic geometry; functions and graphs; limits; derivatives; techniques and applications of differentiation; antiderivatives; the definite integral and area; logarithmic and exponential functions; trigonometric functions; Newton's, Simpson's and trapezoidal methods; l'Hopital's rule.",
+      "Prerequisites":
+        [
+          "One of MATH 120 with a minimum grade of C+, Pre- Calculus 12 with a minimum grade of B (73%), Principles of Mathematics 12 with a minimum grade of B (73%); or",
+          "permission of the department."
+        ],
+      "Note":
+        [
+          "A passing grade in Calculus 12 or equivalent course recommended prior to MATH 100, since MATH 100 expects some previous exposure to Calculus."
+        ]
+    },
+    "MATH/100.html"
   ],
   "MATH 101": [
     "MATH",

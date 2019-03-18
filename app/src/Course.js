@@ -14,6 +14,16 @@ class Course extends Component {
     return this.props.data[course_id];
   }
 
+  renderContextMenu(){
+    var list = [];
+
+    list.push(<li><span>Delete</span></li>);
+    list.push(<li><span>Edit</span></li>);
+
+
+    return (<ul>{list}</ul>);
+  }
+
   render() {
     // Check for result of Async JSON fetch request
     if(this.props.data == null){
@@ -26,8 +36,9 @@ class Course extends Component {
           <div class="panel-course-header">
             <span class="panel-course-name">{this.props.course_id}</span>
             <span class="panel-course-details-icon">
-              <img src=""></img>
+              <img src="/assets/icons8-ellipsis-filled-48.png"></img>
             </span>
+            <span class="panel-course-context-menu">{this.renderContextMenu()}</span>
           </div>
           <div class="panel-course-body">
             <span class="panel-course-offered">{course_obj[3].join(", ")}</span>

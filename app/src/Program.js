@@ -67,13 +67,13 @@ class Program extends Component {
 
     // Assert all requisites satisfied
     if(!this.verifyCourseRequisitesSatisfied(this.props.data[course_str], semester_id)){
-      console.log("Course requisite not satisifed!!!...");
+      alert("Course requisite not satisifed!!!...");
       return false;
     }
 
     // Assert that course will not exceed credit limit
     if(!this.verifyCourseCreditLimit(course_str, semester_id)){
-      console.log("Too many units!");
+      alert("Too many units!");
       return false;
     }
 
