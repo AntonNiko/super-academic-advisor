@@ -130,8 +130,8 @@ class Program extends Component {
 
     var _failed = false;
     for(var semester_id in this.sem){
-      for(var i=0; i<this.sem[semester_id].current.state.courses[0].length; i++){
-        var course_obj = this.props.data[this.sem[semester_id].current.state.courses[0][i]];
+      for(var i=0; i<this.sem[semester_id].current.state.courses.length; i++){
+        var course_obj = this.props.data[this.sem[semester_id].current.state.courses[i]];
         if(!this.verifyCourseRequisitesSatisfied(course_obj, semester_id)){
           _failed = true;
         }

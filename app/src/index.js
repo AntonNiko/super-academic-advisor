@@ -29,8 +29,8 @@ ReactDOM.render(<Navbar />,
 document.getElementById('navigation'));
 
 ReactDOM.render(<Sidebar
-  selection={program_selection}
-  ref={sidebar => {window.sidebar = sidebar}}/>,
+  ref={sidebar => {window.sidebar = sidebar}}
+  selection={program_selection}/>,
 document.getElementById('sidebar'));
 
 ReactDOM.render(<ModalCourse ref={modalCourse => {window.modalCourse = modalCourse;}}/>, document.getElementById('modal-course-container'));

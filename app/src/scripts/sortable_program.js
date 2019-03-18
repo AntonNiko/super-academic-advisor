@@ -67,7 +67,6 @@ class SortableProgram {
         var origin_semester_id = ui.sender.attr("id");
         var new_semester_id = event.target.id;
         var course_str = ui.item.attr("id").replace("_"," ");
-        console.log(program);
         program.moveCourse(course_str, origin_semester_id, new_semester_id);
       }
     });

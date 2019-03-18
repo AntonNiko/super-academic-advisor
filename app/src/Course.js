@@ -15,11 +15,11 @@ class Course extends Component {
   }
 
   componentDidMount(){
-    this.props.updateCreditValue(this.props.data[this.props.course_id][2])
+    //this.props.updateCreditValue(this.props.data[this.props.course_id][2])
   }
 
   componentWillUnmount(){
-    this.props.updateCreditValue(-this.props.data[this.props.course_id][2]);
+    //this.props.updateCreditValue(-this.props.data[this.props.course_id][2]);
   }
 
   render() {
