@@ -23,31 +23,14 @@ class Program extends Component {
       sequence: this.props.sequence
     };
 
-    this.moveCourse = this.moveCourse.bind(this);
-    this.addSemester = this.addSemester.bind(this);
-    this.addCourse = this.addCourse.bind(this);
+    this.actionAddSemester = this.actionAddSemester.bind(this);
+    this.actionAddCourse = this.actionAddCourse.bind(this);
+    this.actionMoveCourse = this.actionMoveCourse.bind(this);
     this.convertYearAndSemesterToProgramSemesterId = this.convertYearAndSemesterToProgramSemesterId.bind(this);
     this.getCurrentAvailableYears = this.getCurrentAvailableYears.bind(this);
   }
 
-  renderSemesters(){
-    var semesters = [];
-    var last_added_semester = null;
-
-    // Evaluate each course requisites, and adjust props accordingly
-    for(var semester_id in this.state.sequence){
-      semesters.push(<Semester semester_id={semester_id}
-        courses={this.props.sequence[semester_id]}
-        last_added_semester={last_added_semester}
-        ref={this.sem[semester_id]}
-        updateCreditValues={this.updateCreditValues}
-        data = {this.props.data}/>);
-      last_added_semester = semester_id;
-    }
-    return semesters;
-  }
-
-  addSemester(){
+  actionAddSemester(){
     var new_sequence_semester_ids = Object.keys(this.state.sequence);
     var new_sequence = this.state.sequence;
 
@@ -67,7 +50,7 @@ class Program extends Component {
     this.setState({sequence: new_sequence, sequence_semester_ids: new_sequence_semester_ids});
   }
 
-  addCourse(semester_id, course_str, updateState = true, checkDuplicates = true){
+  actionAddCourse(semester_id, course_str, updateState = true, checkDuplicates = true){
     // Method that will allow courses to be added as a component
 
     // Verify course offered in semester
@@ -102,7 +85,7 @@ class Program extends Component {
     return true;
   }
 
-  moveCourse(course_str, origin_semester_id, new_semester_id){
+  actionMoveCourse(course_str, origin_semester_id, new_semester_id){
     // Temporarily move course DOM back to original semester for processing (needed for React to properly update DOM)
     $("#"+origin_semester_id).prepend($("#"+course_str.replace(" ","_")))
 
@@ -111,7 +94,7 @@ class Program extends Component {
       return false;
     }
 
-    if(!this.addCourse(new_semester_id, course_str, true, false)){
+    if(!this.actionAddCourse(new_semester_id, course_str, true, false)){
       console.log("failed to add course...");
       return false;
     }
@@ -279,6 +262,23 @@ class Program extends Component {
       }
     }
     return available_years;
+  }
+
+  renderSemesters(){
+    var semesters = [];
+    var last_added_semester = null;
+
+    // Evaluate each course requisites, and adjust props accordingly
+    for(var semester_id in this.state.sequence){
+      semesters.push(<Semester semester_id={semester_id}
+        courses={this.props.sequence[semester_id]}
+        last_added_semester={last_added_semester}
+        ref={this.sem[semester_id]}
+        updateCreditValues={this.updateCreditValues}
+        data = {this.props.data}/>);
+      last_added_semester = semester_id;
+    }
+    return semesters;
   }
 
   componentDidMount(){

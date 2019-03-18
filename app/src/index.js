@@ -49,7 +49,7 @@ document.getElementById('panel-container-parent'));
 
 ReactDOM.render(<ModalAddCourse data={data}
   ref={modalAddCourse => {window.modalAddCourse = modalAddCourse}}
-  addCourse={window.program.addCourse}
+  addCourse={window.program.actionAddCourse}
   updateProgramReqs={window.requirements.actionUpdateProgramReqList}
   convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}
   getCurrentAvailableYears={window.program.getCurrentAvailableYears}/>,
