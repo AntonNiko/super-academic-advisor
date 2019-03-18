@@ -25,7 +25,7 @@ class Requirements extends Component {
   actionUpdateProgramReqs(semesters){
     var new_active_courses = [];
     for(var semester_id in semesters){
-      var current_semester_courses = semesters[semester_id].current.state.courses[0];
+      var current_semester_courses = semesters[semester_id].current.state.courses;
       new_active_courses = new_active_courses.concat(current_semester_courses);
     }
     this.setState({active_courses: new_active_courses});

@@ -14,14 +14,6 @@ class Course extends Component {
     return this.props.data[course_id];
   }
 
-  componentDidMount(){
-    //this.props.updateCreditValue(this.props.data[this.props.course_id][2])
-  }
-
-  componentWillUnmount(){
-    //this.props.updateCreditValue(-this.props.data[this.props.course_id][2]);
-  }
-
   render() {
     // Check for result of Async JSON fetch request
     if(this.props.data == null){
