@@ -47,7 +47,7 @@ class Sidebar extends Component {
     var result = [];
     var _first = true;
     var list = [];
-    for(var faculty in this.props.selection){
+    for(var faculty in this.props.selection["Faculty"]){
       if(_first){
         result.push(<div class="dropdown-header"><p class="dropdown-value">{faculty}</p><span class="arrow-down"></span></div>);
         this.facultyValue = faculty;
@@ -69,9 +69,9 @@ class Sidebar extends Component {
     if(this.state.faculty_selected == null){
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
     }else{
-      for(var program in this.props.selection[this.state.faculty_selected]){
+      for(var program in this.props.selection["Faculty"][this.state.faculty_selected]){
         if(_first){
-          result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+          result.push(<div class="dropdown-header"><p class="dropdown-value">{program}</p><span class="arrow-down"></span></div>);
           _first = false;
         }
         list.push(<li value={program}><span>{program}</span></li>);
@@ -89,13 +89,14 @@ class Sidebar extends Component {
     if(this.state.program_selected == null){
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
     }else{
+      list.push(<li value="None"><span>None</span></li>);
       for(var minor in this.props.selection["Minors"]){
         // Check that the minor is available for selected program. If not, skip minor
         if(this.props.selection["Minors"][minor].includes(this.state.program_selected)){
           continue;
         }
         if(_first){
-          result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+          result.push(<div class="dropdown-header"><p class="dropdown-value">{minor}</p><span class="arrow-down"></span></div>);
           _first = false;
         }
         list.push(<li value={minor}><span>{minor}</span></li>);
@@ -114,14 +115,20 @@ class Sidebar extends Component {
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
     }else{
       // If program does not have any specliazations, skip
-      var program = this.props.selection[this.state.faculty_selected][this.state.program_selected];
+      var program = this.props.selection["Faculty"][this.state.faculty_selected][this.state.program_selected];
       if(program != null){
-        for(var i=0; i < program["Specializations"].length; i++){
+
+        if(program["Specializations"]["Nullable"] == true){
+          list.push(<li value="None"><span>None</span></li>);
+        }
+
+        for(var i=0; i < program["Specializations"]["Items"].length; i++){
           if(_first){
-            result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+            result.push(<div class="dropdown-header"><p class="dropdown-value">{program["Specializations"]["Items"][i]}</p><span class="arrow-down"></span></div>);
             _first = false;
           }
-          list.push(<li value={program["Specializations"][i]}><span>{program["Specializations"][i]}</span></li>);
+
+          list.push(<li value={program["Specializations"]["Items"][i]}><span>{program["Specializations"]["Items"][i]}</span></li>);
         }
       }else{
         result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);

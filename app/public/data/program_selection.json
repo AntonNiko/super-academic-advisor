@@ -1,43 +1,51 @@
 {
-  "Engineering": {
-    "Biomedical Engineering":null,
-	"Civil Engineering":null,
-	"Computer Engineering":null,
-	"Computer Science":null,
-	"Computer Science and Mathematics":null,
-	"Computer Science and Statistics":null,
-	"Electrical Engineering":null,
-	"Geography and Computer Science (Geomatics)":null,
-	"Mechanical Engineering":null,
-	"Music and Computer Science":null,
-	"Physics and Computer Science":null,
-	"Psychology and Computer Science":null,
-	"Software Engineering": {
-	  "Specializations": [
-	    "Data mining and analysis, artificial intelligence, and machine learning",
-		"Cybersecurity and privacy",
-		"Performance and scalability",
-		"Interaction design and data visualization",
-		"Visual computing (vision/graphics)"
-	  ]
-	}
-  },
-  "Business": {
-    "Commerce": {
-	  "Specializations": [
-	    "Entrepreneurship",
-		"International Business",
-		"Service Management",
-		"Non-specialized option"
-	  ]
-	}
-  },
-  "Education": {
-    "Kinesiology":null,
-    "Recreation and Health Education":null,
-    "Teacher Education: Elementary Curriculum":null,
-    "Teacher Education: Elementary Curriculum (Post-degree)":null,
-    "Teacher Education: Secondary Curriculum (Post-degree)":null
+  "Faculty": {
+    "Engineering": {
+      "Biomedical Engineering":null,
+  	  "Civil Engineering":null,
+  	  "Computer Engineering":null,
+  	  "Computer Science":null,
+  	  "Computer Science and Mathematics":null,
+  	  "Computer Science and Statistics":null,
+  	  "Electrical Engineering":null,
+  	  "Geography and Computer Science (Geomatics)":null,
+  	  "Mechanical Engineering":null,
+  	  "Music and Computer Science":null,
+  	  "Physics and Computer Science":null,
+  	  "Psychology and Computer Science":null,
+  	  "Software Engineering": {
+  	    "Specializations": {
+          "Items": [
+            "Data mining and analysis, artificial intelligence, and machine learning",
+      		  "Cybersecurity and privacy",
+      		  "Performance and scalability",
+      		  "Interaction design and data visualization",
+      		  "Visual computing (vision/graphics)"
+          ],
+          "Nullable": true
+        }
+  	  }
+    },
+    "Business": {
+      "Commerce": {
+  	    "Specializations": {
+          "items": [
+            "Entrepreneurship",
+    		    "International Business",
+    		    "Service Management",
+    		    "Non-specialized option"
+          ],
+          "Nullable": true
+  	    }
+      }
+    },
+    "Education": {
+      "Kinesiology":null,
+      "Recreation and Health Education":null,
+      "Teacher Education: Elementary Curriculum":null,
+      "Teacher Education: Elementary Curriculum (Post-degree)":null,
+      "Teacher Education: Secondary Curriculum (Post-degree)":null
+    }
   },
   "Minors": {
     "Software Development": ["Software Engineering"],
