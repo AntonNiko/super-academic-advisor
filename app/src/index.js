@@ -51,7 +51,8 @@ ReactDOM.render(<ModalAddCourse data={data}
   ref={modalAddCourse => {window.modalAddCourse = modalAddCourse}}
   addCourse={window.program.addCourse}
   updateProgramReqs={window.requirements.actionUpdateProgramReqList}
-  convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}/>,
+  convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}
+  getCurrentAvailableYears={window.program.getCurrentAvailableYears}/>,
 document.getElementById('modal-add-course-container'));
 
 // jQuery code

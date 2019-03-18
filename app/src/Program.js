@@ -20,15 +20,14 @@ class Program extends Component {
     }
 
     this.state = {
-      sem: {},
-      sequence: this.props.sequence,
-      sequence_semester_ids: Object.keys(this.props.sequence),
+      sequence: this.props.sequence
     };
 
     this.moveCourse = this.moveCourse.bind(this);
     this.addSemester = this.addSemester.bind(this);
     this.addCourse = this.addCourse.bind(this);
     this.convertYearAndSemesterToProgramSemesterId = this.convertYearAndSemesterToProgramSemesterId.bind(this);
+    this.getCurrentAvailableYears = this.getCurrentAvailableYears.bind(this);
   }
 
   renderSemesters(){
@@ -49,18 +48,22 @@ class Program extends Component {
   }
 
   addSemester(){
-    var new_sequence_semester_ids = this.state.sequence_semester_ids;
+    var new_sequence_semester_ids = Object.keys(this.state.sequence);
     var new_sequence = this.state.sequence;
 
     var last_semester_id = new_sequence_semester_ids[new_sequence_semester_ids.length -1];
+    var last_year = this.state.sequence[last_semester_id][1];
+    var last_semester = this.state.sequence[last_semester_id][2];
+
     var next_semester_id = this.props.sequence_ids[this.props.sequence_ids.indexOf(last_semester_id)+1];
+    var next_semester_info = this.getNextSemesterYearAndInitial(last_year, last_semester);
+    var next_year = next_semester_info.year;
+    var next_semester = next_semester_info.semester;
 
     // Add new semester id to state.sequence_semester_ids, and as new object in state.sequence
     new_sequence_semester_ids.push(next_semester_id);
-    new_sequence[next_semester_id] = [[], 2020, "F"];
-
+    new_sequence[next_semester_id] = [[], next_year, next_semester];
     this.sem[next_semester_id] = createRef();
-    console.log("created 3A");
     this.setState({sequence: new_sequence, sequence_semester_ids: new_sequence_semester_ids});
   }
 
@@ -239,6 +242,43 @@ class Program extends Component {
       }
     }
     return null;
+  }
+
+  getNextSemesterYearAndInitial(year, semester){
+    // Takes arguments such as 2019 F, and returns the next semester
+    // year and semester initial, e.g: 2020 Sp
+    var new_year = year;
+    var new_semester = semester;
+    switch(semester){
+      case "Sp":
+        new_semester = "Su";
+        break;
+      case "Su":
+        new_semester = "F";
+        break;
+      case "F":
+        new_semester = "Sp";
+        new_year+=1;
+        break;
+      default:
+        return null;
+        break;
+    }
+    return {year: new_year, semester: new_semester};
+  }
+
+  getCurrentAvailableYears(){
+    // Returns a list of years which matches the existing years
+    // added to the Program. Used by ModalAddCourse to display
+    // available years user can add course
+    var available_years = [];
+    for(var semester_id in this.state.sequence){
+      var current_year = this.state.sequence[semester_id][1];
+      if(!available_years.includes(current_year)){
+        available_years.push(current_year);
+      }
+    }
+    return available_years;
   }
 
   componentDidMount(){

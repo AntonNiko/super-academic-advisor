@@ -12,7 +12,7 @@ class ModalAddCourse extends Component {
       selected_unstaged_courses: [],
       selected_staged_courses: [],
       staged_courses: {},
-      available_years: ["2018","2019","2020","2021"],
+      available_years: this.props.getCurrentAvailableYears(),
     }
 
     this.actionSubmitCourses = this.actionSubmitCourses.bind(this);
@@ -35,6 +35,10 @@ class ModalAddCourse extends Component {
       var course_year = this.state.staged_courses[course_str][0];
       var course_semester = this.state.staged_courses[course_str][1];
       var course_semester_id = this.props.convertYearAndSemesterToProgramSemesterId(course_year, course_semester);
+      if(course_semester_id == null){
+        alert("Semester does not exist!");
+        continue;
+      }
       this.props.addCourse(course_semester_id, course_str);
       // TODO: Remove staged course if successfully added
     }
@@ -152,16 +156,17 @@ class ModalAddCourse extends Component {
   }
 
   renderDynamicYearDropdownList(){
+    var available_years = this.props.getCurrentAvailableYears();
     var list_items = [];
-    for(var i=0; i<this.state.available_years.length; i++){
-      list_items.push(<li value={this.state.available_years[i]}><span>{this.state.available_years[i]}</span></li>)
+    for(var i=0; i<available_years.length; i++){
+      list_items.push(<li value={available_years[i]}><span>{available_years[i]}</span></li>)
     }
 
     return(
     <ul class="dropdown-select-small">
       <li>
         <div class="dropdown-header staged-course-year">
-          <p class="dropdown-value">{this.state.available_years[0]}</p><span class="arrow-down"></span>
+          <p class="dropdown-value">{available_years[0]}</p><span class="arrow-down"></span>
         </div>
         <ul>
           {list_items}
