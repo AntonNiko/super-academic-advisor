@@ -88,6 +88,7 @@ class Program extends Component {
 
   actionRemoveCourse(semester_id, course_str){
     this.sem[semester_id].current.removeCourse(course_str, false);
+    this.forceUpdate();
   }
 
   actionMoveCourse(course_str, origin_semester_id, new_semester_id){
