@@ -1,3 +1,7 @@
+#modal-reqs {
+	position: absolute;
+}
+
 #modal-reqs-header {
 	height: 20px;
 }
@@ -29,7 +33,7 @@
 	border: 1px solid #757575;
 	width: 250px;
     height: 355px;
-	position: fixed;
+	position: absolute;
 	top: 50px;
 	right: 0px;
 	font-size: 14px;
