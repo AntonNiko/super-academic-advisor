@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/App.css';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
-import Program from './Program';
+import Navbar from './Navbar.js';
+import Sidebar from './Sidebar.js';
+import Program from './Program.js';
 import ModalAddCourse from './ModalAddCourse.js';
 import ModalCourse from './ModalCourse';
 import Requirements from './Requirements.js';

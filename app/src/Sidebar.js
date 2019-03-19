@@ -132,7 +132,7 @@ class Sidebar extends Component {
           list.push(<li value={program["Specializations"]["Items"][i]}><span>{program["Specializations"]["Items"][i]}</span></li>);
         }
       }else{
-        result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
+        result.push(<div class="dropdown-header"><p class="dropdown-value">None</p><span class="arrow-down"></span></div>);
       }
     }
     result.push(<ul>{list}</ul>);

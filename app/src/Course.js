@@ -42,7 +42,7 @@ class Course extends Component {
             <span class="panel-course-prereqs"></span>
           </div>
           <div class="panel-course-footer">
-            <span class="panel-course-credits">{course_obj[2]}</span>
+            <span class="panel-course-credits">{course_obj[2].toFixed(1)}</span>
           </div>
       </li>
     );

@@ -87,6 +87,7 @@ class Program extends Component {
   }
 
   actionRemoveCourse(semester_id, course_str){
+    // TODO: Check if removing course will invalidate pre-requisites/co-requisites of other courses
     this.sem[semester_id].current.removeCourse(course_str, false);
     this.forceUpdate();
   }
