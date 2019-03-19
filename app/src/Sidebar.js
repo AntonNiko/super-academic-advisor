@@ -148,6 +148,10 @@ class Sidebar extends Component {
     });
   }
 
+  componentDidUpdate(){
+    this.props.colors.updateColorThemes();
+  }
+
   render() {
     return (
       <div>

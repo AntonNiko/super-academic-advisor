@@ -203,6 +203,10 @@ class ModalAddCourse extends Component {
     </ul>);
   }
 
+  componentDidUpdate(){
+    this.props.colors.updateColorThemes();
+  }
+
   render(){
     return (
       <div id="modal-add-course" class="modal modal-opaque">

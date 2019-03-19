@@ -293,6 +293,7 @@ class Program extends Component {
 
   componentDidUpdate(){
     this.props.updateProgramReqs(this.sem);
+    this.props.colors.updateColorThemes();
   }
 
   render() {

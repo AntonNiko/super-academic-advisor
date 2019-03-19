@@ -8,6 +8,7 @@
 
   --dark-dropdown-text: #fff;
   --dark-dropdown-border: #8c8c8c;
+  --dark-dropdown-bg: #353535;
 
   --dark-primary-btn-bg: #0077cc;
   --dark-primary-btn-bg-hover: #04558e;
@@ -38,6 +39,7 @@
   --dark-course-bg: #232323;
   --dark-course-border: #5f5858;
   --dark-course-text: #efefef;
+  --dark-course-placeholder-bg: #313131;
 
   --dark-modal-bg: #353535;
   --dark-modal-text: #f3f2f2;

@@ -118,6 +118,10 @@ class Requirements extends Component {
     return (<span id="modal-reqs-fulfilled-status">{remaining_requirements_num} missing</span>);
   }
 
+  componentDidUpdate(){
+    this.props.colors.updateColorThemes();
+  }
+
   render(){
       return (
         <div id="modal-reqs" class="modal-clear">

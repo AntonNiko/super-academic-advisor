@@ -1,7 +1,5 @@
 .panel-term {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #272727;
+    border: 1px solid #272727;
     min-width: 200px;
     height: 800px;
     background-color: #353535;

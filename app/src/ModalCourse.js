@@ -105,6 +105,10 @@ class ModalCourse extends Component {
 		return this.course_link_url + this.state.course_link_extension;
 	}
 
+	componentDidUpdate(){
+    this.props.colors.updateColorThemes();
+	}
+
   render() {
     return (
       <div id="modal-course-details" class="modal modal-opaque">
