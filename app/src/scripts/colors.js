@@ -24,7 +24,23 @@ class Colors {
     }
 
     static switchToLightTheme(){
-        console.log("light");
+        $(".navbar").css({"background-color":"var(--light-navbar-bg)"});
+        $(".navbar-text").css({"color":"var(--light-navbar-text)"});
+        $(".navbar a:hover").css({"background-color":"var(--light-navbar-hover)"});
+
+        $(".sidebar").css({
+            "background-color":"var(--light-sidebar-bg)",
+            "border": "1px solid var(--light-sidebar-border)"
+        });
+        $(".sidebar div > div").css({"color":"var(--light-sidebar-text)"});
+
+        $("ul.dropdown-select li").css({
+            "color":"var(--light-dropdown-text)",
+            "border":"1px solid var(--light-dropdown-border)",
+            "background-color":"var(--light-dropdown-bg)"
+        });
+
+        $(".panel-container").css({"background-color":"var(--light-container-bg)"});
     }
 
     static switchToDarkTheme(){
