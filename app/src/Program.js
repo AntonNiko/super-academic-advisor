@@ -25,6 +25,7 @@ class Program extends Component {
 
     this.actionAddSemester = this.actionAddSemester.bind(this);
     this.actionAddCourse = this.actionAddCourse.bind(this);
+    this.actionRemoveCourse = this.actionRemoveCourse.bind(this);
     this.actionMoveCourse = this.actionMoveCourse.bind(this);
     this.convertYearAndSemesterToProgramSemesterId = this.convertYearAndSemesterToProgramSemesterId.bind(this);
     this.getCurrentAvailableYears = this.getCurrentAvailableYears.bind(this);
@@ -83,6 +84,10 @@ class Program extends Component {
 
     this.forceUpdate();
     return true;
+  }
+
+  actionRemoveCourse(semester_id, course_str){
+    this.sem[semester_id].current.removeCourse(course_str, false);
   }
 
   actionMoveCourse(course_str, origin_semester_id, new_semester_id){

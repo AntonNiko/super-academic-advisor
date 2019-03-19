@@ -3,7 +3,7 @@ import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 
 class SortableProgram {
-  static configureCourseContextMenu(){
+  static configureCourseContextMenu(program){
     $(document).on("mouseenter", ".panel-course-details-icon", function(){
       $(this).find("img").css({"visibility":"visible", "opacity":"1"});
     });
@@ -20,21 +20,24 @@ class SortableProgram {
       $(this).css({"background":"#353535"});
     });
 
-    /*$(window).click(function(e){
-      if(!$(e.target).is(".panel-course-context-menu ul li") && !$(e.target).is(".panel-course-context-menu ul li span")){
-        console.log($(".panel-course-context-menu ul ").css("visibility"));
-
-        //$(".panel-course-context-menu ul ").css({"visibility":"hidden", "opacity":"0"});
-      }
-    });*/
-
     $(document).on("click", ".panel-course-details-icon", function(){
       $(this).next().find("ul").css({"visibility":"visible", "opacity":"1"});
     });
 
-    //$(document).on("click", ":not(.panel-course-context-menu ul, .panel-course-details-icon)", function(){
-      //$(".panel-course-context-menu ul ").css({"visibility":"hidden", "opacity":"0"});
-    //});
+    $(window).click(function(e){
+      if(!$(e.target).is(".panel-course-context-menu ul li") &&
+         !$(e.target).is(".panel-course-context-menu ul li span") &&
+         !$(e.target).is(".panel-course-details-icon img")){
+        $(".panel-course-context-menu ul ").css({"visibility":"hidden", "opacity":"0"});
+      }
+    });
+
+    $(document).on("click", ".context-delete", function(){
+      var course_str = $(this).parents().eq(3).attr("id").replace("_"," ");
+      var semester_id = $(this).parents().eq(4).attr("id");
+      program.actionRemoveCourse(semester_id, course_str);
+      $(this).parent().css({"visibility":"hidden", "opacity":"0"});
+    });
   }
 
   static render(program){

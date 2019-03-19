@@ -16,11 +16,8 @@ class Course extends Component {
 
   renderContextMenu(){
     var list = [];
-
-    list.push(<li><span>Delete</span></li>);
-    list.push(<li><span>Edit</span></li>);
-
-
+    list.push(<li class="context-edit"><span>Edit</span></li>);
+    list.push(<li class="context-delete"><span>Delete</span></li>);
     return (<ul>{list}</ul>);
   }
 
