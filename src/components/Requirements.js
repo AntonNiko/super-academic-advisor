@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
-import './style/Requirements.css';
-import './style/Modal.css';
+import '../style/Requirements.css';
+import '../style/Modal.css';
 
 class Requirements extends Component {
   constructor(props){

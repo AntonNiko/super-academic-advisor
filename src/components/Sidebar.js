@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style/Sidebar.css';
+import '../style/Sidebar.css';
 
 class Sidebar extends Component {
   // TODO: TEST STATE UPDATE ON FACULTY, PROGRAM, MINOR, and SPECIALIZATION CHANGE

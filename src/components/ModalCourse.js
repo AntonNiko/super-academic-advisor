@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './style/ModalCourse.css';
-import './style/Modal.css';
+import '../style/ModalCourse.css';
+import '../style/Modal.css';
 
 class ModalCourse extends Component {
   constructor(props){
@@ -113,6 +113,7 @@ class ModalCourse extends Component {
     return (
       <div id="modal-course-details" class="modal modal-opaque">
         <div id="modal-course-content" class="modal-content modal-draggable">
+					<div class="modal-draggable-handle"></div>
     	    <span class="modal-close-button">X</span>
     	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
     	    <h2 class="modal-title" id="modal-course-desc">{["CSC 111","CSC 115","ENGR 110","ENGR 130","MATH 100"].includes(this.state.course_str) ? this.state.course_details.Title : "Course Title"}</h2>

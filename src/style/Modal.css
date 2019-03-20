@@ -29,9 +29,14 @@
 	color: #f3f2f2;
 	margin: 15% auto;
 	margin-top: 5%;
-	padding: 20px 10px 5px 15px;
+	padding: 0px 10px 5px 15px;
 	border: 1px solid #888;
 	width: 80%;
+}
+
+.modal-draggable-handle {
+  position: relative;
+  height: 30px;
 }
 
 .modal-title {

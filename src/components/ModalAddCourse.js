@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './style/ModalAddCourse.css';
-import './style/Modal.css';
+import '../style/ModalAddCourse.css';
+import '../style/Modal.css';
 
 class ModalAddCourse extends Component {
   // Write method to recognize semester_id based on user input of year and semester
@@ -211,6 +211,7 @@ class ModalAddCourse extends Component {
     return (
       <div id="modal-add-course" class="modal modal-opaque">
         <div class="modal-content modal-draggable">
+          <div class="modal-draggable-handle"></div>
           <span class="modal-close-button">X</span>
           <h2 class="modal-title">Add Course</h2>
           <div class="modal-subtitle">

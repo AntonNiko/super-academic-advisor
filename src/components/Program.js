@@ -3,7 +3,7 @@ import Semester from './Semester';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
-import './style/Program.css';
+import '../style/Program.css';
 
 class Program extends Component {
   // Modify implementation of state.sequence to be used as:

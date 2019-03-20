@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/App.css';
-import Navbar from './Navbar.js';
-import Sidebar from './Sidebar.js';
-import Program from './Program.js';
-import ModalAddCourse from './ModalAddCourse.js';
-import ModalCourse from './ModalCourse';
-import Requirements from './Requirements.js';
+import Navbar from './components/Navbar.js';
+import Sidebar from './components/Sidebar.js';
+import Program from './components/Program.js';
+import ModalAddCourse from './components/ModalAddCourse.js';
+import ModalCourse from './components/ModalCourse';
+import Requirements from './components/Requirements.js';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
