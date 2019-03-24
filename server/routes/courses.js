@@ -6,4 +6,8 @@ router.get("/", function(req, res, next){
   course.list(req, res);
 });
 
+router.get("/:course_str", function(req, res) {
+  course.show(req, res);
+});
+
 module.exports = router;

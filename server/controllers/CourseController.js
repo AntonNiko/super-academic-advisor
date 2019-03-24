@@ -14,4 +14,14 @@ courseController.list = function(req, res) {
   });
 };
 
+courseController.show = function(req, res) {
+  Course.findOne({course_str : req.params.course_str}).exec(function (err, course) {
+    if (err) {
+      console.log("Error:", err);
+    } else {
+      res.json(course);
+    }
+  });
+}
+
 module.exports = courseController;
