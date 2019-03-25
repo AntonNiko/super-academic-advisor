@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
+import 'jquery-ui/ui/widgets/sortable';
+import 'jquery-ui/ui/widgets/draggable';
+
 import './style/App.css';
+
 import Navbar from './components/Navbar.js';
 import Sidebar from './components/Sidebar.js';
 import Program from './components/Program.js';
 import ModalAddCourse from './components/ModalAddCourse.js';
 import ModalCourse from './components/ModalCourse';
 import Requirements from './components/Requirements.js';
-import $ from 'jquery';
-import 'jquery-ui/ui/widgets/sortable';
-import 'jquery-ui/ui/widgets/draggable';
+import Settings from './components/Settings.js';
+
 import SortableProgram from './scripts/sortable_program.js';
 import Modal from './scripts/modal.js';
 import Dropdown from './scripts/dropdown.js';
@@ -66,8 +70,11 @@ ReactDOM.render(<ModalAddCourse data={data}
   colors={Colors}/>,
 document.getElementById('modal-add-course-container'));
 
+ReactDOM.render(<Settings/>, document.getElementById('modal-settings-container'));
+
 // jQuery code
 $(function(){
+  // Configure dynamic actions for website
   SortableProgram.render(window.program);
   SortableProgram.configureCourseContextMenu(window.program);
 
@@ -75,6 +82,7 @@ $(function(){
   Modal.configureGeneralModal();
   Modal.configureAddCourseModal();
   Modal.configureReqModal();
+  Modal.configureSettingsModal();
 
   Dropdown.configureDropdownActions();
   Dropdown.configureDropdownSelection(window.sidebar, window.modalAddCourse);

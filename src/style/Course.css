@@ -1,4 +1,4 @@
-.panel-course {
+.course {
     height: 85px;
     width: 160px;
     border: 1px solid #5f5858;
@@ -10,75 +10,69 @@
     text-decoration: none;
     color: #efefef;
   }
-  
-  .marker { opacity:0.0; transition:.2s height }
-  
-  .ui-sortable-helper {
-    transform:scale(.9)
-  }
-  
-  .panel-course a {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .panel-course-header {
-    position: relative;
-    height: 30px;
-  }
-  
-  .panel-course-header:hover .panel-course-name, .panel-course-body:hover .panel-course-offered {
-      text-decoration: underline;
-  }
-  
-  .panel-course-name {
-    position: absolute;
-    left: 0;
-    padding-top: 5px;
-    font-weight: bold;
-  }
-  .panel-course-details-icon {
-    position: absolute;
-    right: 0;
-    padding-right: 3px;
-  }
 
-  .panel-course-details-icon img {
-    height: 25px;
-    opacity: 0;
-    visibility: hidden;
-    -webkit-transiton: opacity 0.1s;
-    -moz-transition: opacity 0.1s;
-    -ms-transition: opacity 0.1s;
-    -o-transition: opacity 0.1s;
-    -transition: opacity 0.1s;
-    transition: visibility 0s, opacity 0.1s linear;
-  }
+.course-header {
+  position: relative;
+  height: 30px;
+}
 
-  .panel-course-context-menu {
-    float: right;
-    width: 0;
-  }
+.course-header:hover .course-name, .course-body:hover .course-offered {
+    text-decoration: underline;
+}
 
-  .panel-course-context-menu ul {
-    width: 60px;
-    padding-left: 0;
-    list-style-type: none;
-    background-color: #353535;
-    border: 1px solid #8c8c8c;
-    position: relative;
-    left: -3px;
-    top: 4px;
-    visibility: hidden;
-    opacity: 0;
-  }
+.course-name {
+  position: absolute;
+  left: 0;
+  padding-top: 5px;
+  font-weight: bold;
+}
+.course-details-icon {
+  position: absolute;
+  right: 0;
+  padding-right: 3px;
+}
 
-  .panel-course-context-menu ul li {
-    padding: 3px;
-  }
-  
-  .panel-course-footer {
-    position: absolute;
-    bottom: 5px;
-  }
+.course-details-icon img {
+  height: 25px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.1s;
+  -moz-transition: opacity 0.1s;
+  -ms-transition: opacity 0.1s;
+  -o-transition: opacity 0.1s;
+  -transition: opacity 0.1s;
+  transition: visibility 0s, opacity 0.1s linear;
+}
+
+.course-context-menu {
+  float: right;
+  width: 0;
+}
+
+.course-context-menu ul {
+  width: 60px;
+  padding-left: 0;
+  list-style-type: none;
+  background-color: #353535;
+  border: 1px solid #8c8c8c;
+  position: relative;
+  left: -3px;
+  top: 4px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.course-context-menu ul li {
+  padding: 3px;
+}
+
+.course-footer {
+  position: absolute;
+  bottom: 5px;
+}
+
+.marker { opacity:0.0; transition:.2s height }
+
+.ui-sortable-helper {
+  transform:scale(.9)
+}

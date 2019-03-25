@@ -24,7 +24,7 @@ class Modal {
   }
 
   static configureCourseModal(data, modal){
-      $(document).on("dblclick", ".panel-course", function(){
+      $(document).on("dblclick", ".course", function(){
         var course_obj = data[$(this).attr("id").replace("_"," ")];
         modal.actionPopulateCourse(course_obj);
         $("#modal-course-details").css("display","block");
@@ -49,6 +49,12 @@ class Modal {
       if(target.is("#modal-reqs")){
         $("#modal-reqs").css("display","none");
       }
+    });
+  }
+
+  static configureSettingsModal(){
+    $("#navbar-settings-icon").click(function(){
+      $("#modal-settings-details").css("display","block");
     });
   }
 }

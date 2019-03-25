@@ -1,3 +1,21 @@
+
+
+## Project Structure
+
+
+## Naming Conventions
+
+The assumed naming convention in this project is of a top-down style, where elements are referred to by their parent class (e.g: Modal), and the rest of their
+name is derived from subclasses. This naming conventions is applicable to:
+* HTML element classes and ID
+* CSS selectors
+
+
+Examples:
+* *Modal for settings* :
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

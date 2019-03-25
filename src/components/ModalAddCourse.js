@@ -209,14 +209,14 @@ class ModalAddCourse extends Component {
 
   render(){
     return (
-      <div id="modal-add-course" class="modal modal-opaque">
+      <div class="modal modal-opaque" id="modal-add-course">
         <div class="modal-content modal-draggable">
           <div class="modal-draggable-handle"></div>
           <span class="modal-close-button">X</span>
           <h2 class="modal-title">Add Course</h2>
           <div class="modal-subtitle">
-            <h3 id="modal-course-subtitle-left" class="modal-subtitle-left"><span>To select:</span></h3>
-            <h3 id="modal-course-subtitle-right" class="modal-subtitle-right"><span>Selected:</span></h3>
+            <h3 class="modal-subtitle-left" id="modal-course-subtitle-left"><span>To select:</span></h3>
+            <h3 class="modal-subtitle-right" id="modal-course-subtitle-right"><span>Selected:</span></h3>
           </div>
           <div id="modal-add-course-workplace">
             <div class="modal-table-nested" id="modal-add-course-dir">
