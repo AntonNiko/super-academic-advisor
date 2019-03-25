@@ -4,7 +4,7 @@ class Data {
   static getCoursesData(){
     return JSON.parse($.ajax({
       type: "GET",
-      url: "/data/course_dir.json",
+      url: "/data/courses.json",
       async: false
     }).responseText);
   }
@@ -12,7 +12,7 @@ class Data {
   static getSequenceData(){
     return JSON.parse($.ajax({
       type: "GET",
-      url: "/data/program_sequence.json",
+      url: "/data/sequence.json",
       async: false
     }).responseText);
   }
@@ -20,7 +20,15 @@ class Data {
   static getSelectionData(){
     return JSON.parse($.ajax({
       type: "GET",
-      url: "/data/program_selection.json",
+      url: "/data/programs.json",
+      async: false
+    }).responseText);
+  }
+
+  static getRequirementsData(){
+    return JSON.parse($.ajax({
+      type: "GET",
+      url: "/data/requirements.json",
       async: false
     }).responseText);
   }

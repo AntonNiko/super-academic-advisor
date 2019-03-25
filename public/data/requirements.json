@@ -1,0 +1,204 @@
+{
+    "Faculty": {
+        "Engineering": {
+            "Biomedical Engineering": {"required": []},
+            "Civil Engineering": {"required": []},
+            "Computer Engineering": {"required": []},
+            "Computer Science": {"required": []},
+            "Computer Science and Mathematics": {"required": []},
+            "Computer Science and Statistics": {"required": []},
+            "Electrical Engineering": {"required": []},
+            "Geography and Computer Science (Geomatics)": {"required": []},
+            "Mechanical Engineering": {"required": []},
+            "Music and Computer Science": {"required": []},
+            "Physics and Computer Science": {"required": []},
+            "Psychology and Computer Science": {"required": []},
+            "Software Engineering": {
+                "required": [
+                    ["CSC 111"],
+                    ["CSC 115", "CSC 116"],
+                    ["ENGR 110",["ENGR 112","ENGL 135"]],
+                    ["ENGR 120",["ENGR 240","ENGR 121"]],
+                    ["ENGR 130"],
+                    ["ENGR 141"],
+                    ["MATH 100", "MATH 109"],
+                    ["MATH 101"],
+                    ["MATH 110","MATH 211"],
+                    ["PHYS 110"],
+                    ["PHYS 111"],
+                    ["CSC 230", "ECE 255"],
+                    ["CHEM 101", "CHEM 150"],
+                    ["CSC 225"],
+                    ["ECE 260"],
+                    ["ECE 310"],
+                    ["ECON 180"],
+                    ["MATH 122"],
+                    ["SENG 265"],
+                    ["SENG 275"],
+                    ["SENG 310"],
+                    ["STAT 260"],
+                    ["COMP"],
+                    ["ECE 355", "CSC 355"],
+                    ["ECE 458", "CSC 361"],
+                    ["CSC 226"],
+                    ["CSC 320"],
+                    ["CSC 360"],
+                    ["CSC 371"],
+                    ["NATSCI"],
+                    ["ECE 455", "CSC 460"],
+                    ["SENG 401"],
+                    ["SENG 426"],
+                    ["SENG 440"],
+                    ["SENG 499"],
+                    ["TECH"],
+                    ["TECH"],
+                    ["TECH"],
+                    ["TECH"],
+                    ["TECH"],
+                    ["COMP"],
+                    ["NATSCI"],
+                    ["ENGR 001"],
+                    ["ENGR 002"],
+                    ["ENGR 003"],
+                    ["ENGR 004"]
+                ],
+                "specializations": {
+                    "Data mining and analysis, artificial intelligence, and machine learning": {
+                        "Group 1" : [
+                            ["ECE 470", "CSC 421"],
+                            ["ECE 485"],
+                            ["SENG 474"]
+                        ],
+                        "Group 2" : [
+                            ["ECE 471"],
+                            ["CSC 322"],
+                            ["CSC 349A"],
+                            ["CSC 425"],
+                            ["CSC 445"],
+                            ["CSC 446"],
+                            ["ECE 403"]
+                        ]
+                    },
+                    "Cybersecurity and privacy": {
+                        "Group 1" : [
+                            ["ECE 448"],
+                            ["CSC 429"],
+                            ["SENG 460"],
+                            ["SENG 461"]
+                        ],
+                        "Group 2" : [
+                            ["ECE 463"],
+                            ["CSC 463"],
+                            ["CSC 466"],
+                            ["CSC 467"]
+                        ]
+                    },
+                    "Performance and scalability": {
+                        "Group 1" : [
+                            ["ECE 457"],
+                            ["CSC 462"],
+                            ["CSC 464"],
+                            ["SENG 462"],
+                            ["SENG 468"],
+                            ["SENG 475"]
+                        ],
+                        "Group 2" : [
+                            ["CSC 454"]
+                        ]
+                    },
+                    "Interaction design and data visualization": {
+                        "Group 1" : [
+                            ["ECE 440"],
+                            ["ECE 470", "CSC 421"],
+                            ["SENG 411"],
+                            ["SENG 435"]
+                        ],
+                        "Group 2" : [
+                        ]
+                    },
+                    "Visual computing (vision/graphics)" : {
+                        "Group 1" : [
+                            ["CSC 305"],
+                            ["CSC 471"],
+                            ["CSC 472"],
+                            ["CSC 473"],
+                            ["ECE 471"]
+                        ],
+                        "Group 2" : [
+                            ["CSC 426"],
+                            ["CSC 461"],
+                            ["CSC 475"],
+                            ["ECE 470","CSC 421"],
+                            ["ECE 483"],
+                            ["ECE 484"],
+                            ["ECE 486"],
+                            ["SENG 475"]
+                        ]
+                    }
+                },
+                "technical_electives": [
+                    ["CSC 305"],
+                    ["CSC 322"],
+                    ["CSC 330"],
+                    ["CSC 349A"],
+                    ["CSC 421","ECE 470"],
+                    ["CSC 422"],
+                    ["CSC 423"],
+                    ["CSC 425"],
+                    ["CSC 426"],
+                    ["CSC 428A"],
+                    ["CSC 429"],
+                    ["CSC 435"],
+                    ["CSC 445"],
+                    ["CSC 446"],
+                    ["CSC 449"],
+                    ["CSC 454"],
+                    ["CSC 461"],
+                    ["CSC 462"],
+                    ["CSC 463"],
+                    ["CSC 464"],
+                    ["CSC 466"],
+                    ["CSC 467"],
+                    ["CSC 471"],
+                    ["CSC 472"],
+                    ["CSC 473"],
+                    ["CSC 475"],
+                    ["CSC 498"],
+                    ["ECE 403"],
+                    ["ECE 407"],
+                    ["ECE 426"],
+                    ["ECE 435"],
+                    ["ECE 440"],
+                    ["ECE 449"],
+                    ["ECE 457"],
+                    ["ECE 459"],
+                    ["ECE 460"],
+                    ["ECE 463"],
+                    ["ECE 466"],
+                    ["ECE 470", "CSC 421"],
+                    ["ECE 471"],
+                    ["ECE 483"],
+                    ["ECE 484"],
+                    ["ECE 485"],
+                    ["ECE 486"],
+                    ["SENG 411"],
+                    ["SENG 421"],
+                    ["SENG 422"],
+                    ["SENG 435"],
+                    ["SENG 460"],
+                    ["SENG 461"],
+                    ["SENG 468"],
+                    ["SENG 474"],
+                    ["SENG 475"],
+                    ["SENG 480A"],
+                    ["SENG 480B"],
+                    ["SENG 480C"],
+                    ["SENG 480D"]
+                ]
+            }
+        }
+    },
+    "Minors" : {
+        
+    }
+}

@@ -150,6 +150,7 @@ class Sidebar extends Component {
 
   componentDidUpdate(){
     this.props.colors.updateColorThemes();
+    console.log("send new requirements...");
   }
 
   render() {

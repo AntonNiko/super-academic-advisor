@@ -44,7 +44,6 @@ class ModalAddCourse extends Component {
       if(this.props.addCourse(course_semester_id, course_str)){
         delete new_staged_courses[course_str];
       }
-      // TODO: Remove staged course if successfully added
     }
     this.setState({staged_courses: new_staged_courses});
   }

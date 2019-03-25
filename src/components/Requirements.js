@@ -5,9 +5,13 @@ import '../style/Requirements.css';
 import '../style/Modal.css';
 
 class Requirements extends Component {
+  // TODO: Handle SENG Specializations, electives (including technical electives)
+
   constructor(props){
     super(props);
 
+    // TRUTH SOURCE FOR USER-SUBMITTED PROGRAM REQUIREMENTS. SIDEBAR COMPONENT
+    // SENDS RESULTING REQUIREMENTS FETCHED FROM DATA SOURCE, APPLIED HERE
     this.state = {
       requirements: this.props.requirements,
       active_courses: [],
@@ -19,16 +23,20 @@ class Requirements extends Component {
     this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
     this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
 
-    this.actionUpdateProgramReqs = this.actionUpdateProgramReqs.bind(this);
+    this.actionUpdateProgramRequirements = this.actionUpdateProgramRequirements.bind(this);
   }
 
-  actionUpdateProgramReqs(semesters){
+  actionUpdateProgramRequirements(semesters){
     var new_active_courses = [];
     for(var semester_id in semesters){
       var current_semester_courses = semesters[semester_id].current.state.courses;
       new_active_courses = new_active_courses.concat(current_semester_courses);
     }
     this.setState({active_courses: new_active_courses});
+  }
+
+  actionChangeProgramRequirements(){
+
   }
 
   actionUpdateRemainingRequirementsNumber(){
@@ -64,11 +72,11 @@ class Requirements extends Component {
     return remaining_requirements;
   }
 
-  allProgramRequirementsMet(){
+  utilAllProgramRequirementsMet(){
     // TODO: Write method which checks if all program requirements have been met
   }
 
-  isCourseActive(course_str){
+  utilIsCourseActive(course_str){
     if(this.state.active_courses.includes(course_str)){
       return true;
     }else{
@@ -89,8 +97,7 @@ class Requirements extends Component {
         if(typeof current_course == "object"){
           // If the requirements is an array, means that both courses need to be satisfied
           for(var k=0; k<current_course.length; k++){
-            list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.isCourseActive(current_course[k]) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
-
+            list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.utilIsCourseActive(current_course[k]) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
             if(k+1 != current_course.length){
               list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">AND</span></li>);
             }
@@ -98,7 +105,7 @@ class Requirements extends Component {
 
         }else if(typeof current_course == "string"){
           // Individual course, so can simply add course item and move on
-          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.isCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>);
+          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.utilIsCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>);
         }
 
         // If we've reached the end of the individual program requirement, we can avoid placing a conditional item

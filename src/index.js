@@ -58,7 +58,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   ref={program => {window.program = program;}}
   data={data}
   sequence_ids={sequence_ids}
-  updateProgramReqs={window.requirements.actionUpdateProgramReqs}
+  updateProgramRequirements={window.requirements.actionUpdateProgramRequirements}
   colors={Colors}/>,
 document.getElementById('panel-container-parent'));
 

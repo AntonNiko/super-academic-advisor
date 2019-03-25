@@ -19,6 +19,9 @@ class Program extends Component {
       this.sem[semester_id] = createRef();
     }
 
+    // TOP-LEVEL TRUTH SOURCE FOR COURSES. THIS.STATE.SEQUENCE DEFINES
+    // ALL CURRENT COURSES, THEIR ASSOCIATED SEMESTERS. SEMESTER AND COURSE
+    // COMPONENTS ARE FED BY THIS TRUTH SOURCE
     this.state = {
       sequence: this.props.sequence
     };
@@ -289,12 +292,12 @@ class Program extends Component {
   }
 
   componentDidMount(){
-    this.props.updateProgramReqs(this.sem);
+    this.props.updateProgramRequirements(this.sem);
   }
 
   componentDidUpdate(){
-    this.props.updateProgramReqs(this.sem);
-    this.props.colors.updateColorThemes();
+    this.props.updateProgramRequirements(this.sem);
+    //this.props.colors.updateColorThemes();
   }
 
   render() {
