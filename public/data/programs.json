@@ -9,7 +9,19 @@
   	  "Computer Science and Statistics":null,
   	  "Electrical Engineering":null,
   	  "Geography and Computer Science (Geomatics)":null,
-  	  "Mechanical Engineering":null,
+  	  "Mechanical Engineering": {
+        "Specializations": {
+          "Items" : [
+            "Computer Aided Engineering and Advanced Manufacturing",
+            "Advanced Materials",
+            "Biomedical Engineering",
+            "Energy Systems", 
+            "Thermo-Fluids and Aerodynamics",
+            "Mechatronics"
+          ],
+          "Nullable": false
+        }
+      },
   	  "Music and Computer Science":null,
   	  "Physics and Computer Science":null,
   	  "Psychology and Computer Science":null,

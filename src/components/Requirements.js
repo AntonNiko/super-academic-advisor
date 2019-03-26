@@ -3,6 +3,8 @@ import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 import '../style/Requirements.css';
 import '../style/Modal.css';
+import '../scripts/requirementsWizard.js';
+import RequirementsWizard from '../scripts/requirementsWizard.js';
 
 class Requirements extends Component {
   // TODO: Handle SENG Specializations, electives (including technical electives)
@@ -13,11 +15,13 @@ class Requirements extends Component {
     // TRUTH SOURCE FOR USER-SUBMITTED PROGRAM REQUIREMENTS. SIDEBAR COMPONENT
     // SENDS RESULTING REQUIREMENTS FETCHED FROM DATA SOURCE, APPLIED HERE
     this.state = {
-      requirements: this.props.requirements,
+      course_requirements: [],
       active_courses: [],
       fulfilled: false,
       remaining_number: this.props.requirements.length,
     };
+
+    this.requirementsWizard = new RequirementsWizard(this.props.requirements);
 
     this.remaining_number = this.state.remaining_number;
     this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
@@ -37,18 +41,14 @@ class Requirements extends Component {
   }
 
   actionSetProgramRequirements(faculty, program, minor, specialization){
-    console.log(faculty+" | "+program+" | "+minor+" | "+specialization);
-    console.log(this.props.requirementsNew);
-
-    var requirements = [];
-
-    // Add program required courses
-
+    this.requirementsWizard.setNewRequirements(faculty, program, minor, specialization);
+    this.requirementsWizard.generateCourseRequirementsBasedOnSelectedRequirements();
+    this.setState({course_requirements: this.requirementsWizard.getGeneratedCourseRequirements()});
   }
 
   actionUpdateRemainingRequirementsNumber(){
     // TODO: Write method which calculates how many requirements have not been met
-    var requirements = this.state.requirements;
+    var requirements = this.state.course_requirements;
     var remaining_requirements = requirements.length;
 
     for(var i=0; i<requirements.length; i++){
@@ -93,37 +93,8 @@ class Requirements extends Component {
 
   renderProgramRequirementsList(){
     var list_items = [];
-
-    var requirements = this.props.requirements;
-    // Cycle through each individual program requirement
-    for(var i=0; i<requirements.length; i++){
-      // Cycle through each course requirement's elements
-      for(var j=0; j<requirements[i].length; j++){
-        // Represents a program requirements
-        var current_course = requirements[i][j];
-        if(typeof current_course == "object"){
-          // If the requirements is an array, means that both courses need to be satisfied
-          for(var k=0; k<current_course.length; k++){
-            list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.utilIsCourseActive(current_course[k]) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
-            if(k+1 != current_course.length){
-              list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">AND</span></li>);
-            }
-          }
-
-        }else if(typeof current_course == "string"){
-          // Individual course, so can simply add course item and move on
-          list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.utilIsCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>);
-        }
-
-        // If we've reached the end of the individual program requirement, we can avoid placing a conditional item
-        if(j+1 != requirements[i].length){
-          list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">OR</span></li>);
-        }
-      }
-
-      list_items.push(<li class="reqs-course-separator"><hr></hr></li>);
-    }
-
+    var requirements = this.state.course_requirements;
+    
     return list_items;
   }
 
@@ -144,7 +115,6 @@ class Requirements extends Component {
               <span id="modal-reqs-title">Required</span>
               {this.renderRemainingRequirements()}
             </div>
-
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">
                 {this.renderProgramRequirementsList()}

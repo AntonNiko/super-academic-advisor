@@ -36,9 +36,12 @@ class Data {
   static getRequirementsData(){
     var program_requirements_seng = [
       ["CSC 111"],
-      ["CSC 115","CSC 116"],
-      ["ENGR 110",["ENGR 112","ENGL 135"]],
-      ["ENGR 120",["ENGR 240","ENGR 121"]],
+      ["CSC 115","OR","CSC 116"],
+      ["ENGR 110","OR",["ENGR 112","AND","ENGL 135"]],
+      ["ENGR 120","OR",["ENGR 240","AND","ENGR 121"]]
+    ]
+
+    /*
       ["ENGR 130"],
       ["ENGR 141"],
       ["MATH 100"],
@@ -53,7 +56,7 @@ class Data {
       ["ECE 310"],
       ["ECON 180"],
       ["MATH 122"]
-    ]
+    */
     return program_requirements_seng;
   }
 

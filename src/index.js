@@ -45,8 +45,7 @@ document.getElementById('modal-course-container'));
 
 ReactDOM.render(<Requirements
   ref={requirements => {window.requirements = requirements;}}
-  requirements={program_requirements}
-  requirementsNew={requirements}
+  requirements={requirements}
   colors={Colors}/>,
 document.getElementById('modal-reqs-container'));
 
