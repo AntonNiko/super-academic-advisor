@@ -27,32 +27,35 @@ var data = Data.getCoursesData();
 var program_sequence = Data.getSequenceData();
 var program_selection = Data.getSelectionData();
 var sequence_ids = Data.getSemesterSequenceIds();
-var program_requirements_seng = Data.getRequirementsData();
+var program_requirements = Data.getRequirementsData();
+var requirements = Data.getRequirementsDataNew();
 
 // Create global variable indicating color theme choice
 window.colorTheme = "dark";
 
 // Build React Elements
-ReactDOM.render(<Navbar 
+ReactDOM.render(<Navbar
   colors={Colors}/>,
 document.getElementById('navigation'));
 
-ReactDOM.render(<Sidebar
-  ref={sidebar => {window.sidebar = sidebar}}
-  selection={program_selection}
-  colors={Colors}/>,
-document.getElementById('sidebar'));
-
-ReactDOM.render(<ModalCourse 
+ReactDOM.render(<ModalCourse
   ref={modalCourse => {window.modalCourse = modalCourse;}}
-  colors={Colors}/>, 
+  colors={Colors}/>,
 document.getElementById('modal-course-container'));
 
 ReactDOM.render(<Requirements
   ref={requirements => {window.requirements = requirements;}}
-  requirements={program_requirements_seng}
+  requirements={program_requirements}
+  requirementsNew={requirements}
   colors={Colors}/>,
 document.getElementById('modal-reqs-container'));
+
+ReactDOM.render(<Sidebar
+  ref={sidebar => {window.sidebar = sidebar}}
+  selection={program_selection}
+  colors={Colors}
+  setProgramRequirements={window.requirements.actionSetProgramRequirements}/>,
+document.getElementById('sidebar'));
 
 ReactDOM.render(<Program sequence={program_sequence}
   ref={program => {window.program = program;}}
@@ -86,6 +89,7 @@ $(function(){
 
   Dropdown.configureDropdownActions();
   Dropdown.configureDropdownSelection(window.sidebar, window.modalAddCourse);
+  Dropdown.configureSidebarSubmitSelection(window.sidebar);
 
   AddCourse.configureModalAnimations(window.modalAddCourse);
   AddCourse.configureStagingActions(window.modalAddCourse);

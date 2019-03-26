@@ -9,7 +9,6 @@ class Sidebar extends Component {
     // If a faculty has not been selected (first-time load), set first item as faculty
     // TODO: Develop more robust firs-time load
     this.state = {
-      current_selection: null,
       faculty_selected: null,
       program_selected: null,
       minor_selected: null,
@@ -25,10 +24,13 @@ class Sidebar extends Component {
     this.actionSelectProgram = this.actionSelectProgram.bind(this);
     this.actionSelectMinor = this.actionSelectMinor.bind(this);
     this.actionSelectSpecialization = this.actionSelectSpecialization.bind(this);
+    this.actionSubmitSelections = this.actionSubmitSelections.bind(this);
   }
 
   actionSelectFaculty(value){
-    this.setState({faculty_selected: value});
+    this.setState({
+      faculty_selected: value
+    });
   }
 
   actionSelectProgram(value){
@@ -43,19 +45,22 @@ class Sidebar extends Component {
     this.setState({specialization_selected: value});
   }
 
+  actionSubmitSelections(){
+    this.props.setProgramRequirements(this.state.faculty_selected, this.state.program_selected, this.state.minor_selected, this.state.specialization_selected);
+  }
+
   renderFacultyDropdown(){
     var result = [];
     var _first = true;
     var list = [];
+
     for(var faculty in this.props.selection["Faculty"]){
       if(_first){
         result.push(<div class="dropdown-header"><p class="dropdown-value">{faculty}</p><span class="arrow-down"></span></div>);
         this.facultyValue = faculty;
         _first = false;
       }
-      if(faculty != "Minors"){
-        list.push(<li value={faculty}><span>{faculty}</span></li>);
-      }
+      list.push(<li value={faculty}><span>{faculty}</span></li>);
     }
     result.push(<ul>{list}</ul>);
     return result;
@@ -66,12 +71,14 @@ class Sidebar extends Component {
     var _first = true;
     var list = [];
 
-    if(this.state.faculty_selected == null){
+    if(this.state.faculty_selected == null && this.facultyValue == null){
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
     }else{
-      for(var program in this.props.selection["Faculty"][this.state.faculty_selected]){
+      var faculty_value = this.state.faculty_selected == null ? this.facultyValue : this.state.faculty_selected;
+      for(var program in this.props.selection["Faculty"][faculty_value]){
         if(_first){
           result.push(<div class="dropdown-header"><p class="dropdown-value">{program}</p><span class="arrow-down"></span></div>);
+          this.programValue = program;
           _first = false;
         }
         list.push(<li value={program}><span>{program}</span></li>);
@@ -86,17 +93,19 @@ class Sidebar extends Component {
     var _first = true;
     var list = [];
 
-    if(this.state.program_selected == null){
+    if(this.state.program_selected == null && this.programValue == null){
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
     }else{
       list.push(<li value="None"><span>None</span></li>);
+      var program_exception_value = this.state.program_selected == null ? this.programValue : this.state.program_selected;
       for(var minor in this.props.selection["Minors"]){
         // Check that the minor is available for selected program. If not, skip minor
-        if(this.props.selection["Minors"][minor].includes(this.state.program_selected)){
+        if(this.props.selection["Minors"][minor].includes(program_exception_value)){
           continue;
         }
         if(_first){
           result.push(<div class="dropdown-header"><p class="dropdown-value">{minor}</p><span class="arrow-down"></span></div>);
+          this.minorValue = minor;
           _first = false;
         }
         list.push(<li value={minor}><span>{minor}</span></li>);
@@ -111,21 +120,24 @@ class Sidebar extends Component {
     var _first = true;
     var list = [];
 
-    if(this.state.program_selected == null){
+    if(this.state.program_selected == null && this.programValue == null){
       result.push(<div class="dropdown-header"><p class="dropdown-value"></p><span class="arrow-down"></span></div>);
     }else{
       // If program does not have any specliazations, skip
-      var program = this.props.selection["Faculty"][this.state.faculty_selected][this.state.program_selected];
+      var faculty_value = this.state.faculty_selected == null ? this.facultyValue : this.state.faculty_selected;
+      var program_value = this.state.program_selected == null ? this.programValue : this.state.program_selected;
+
+      var program = this.props.selection["Faculty"][faculty_value][program_value];
       if(program != null){
 
         if(program["Specializations"]["Nullable"] == true){
           list.push(<li value="None"><span>None</span></li>);
         }
 
-        console.log(program);
         for(var i=0; i < program["Specializations"]["Items"].length; i++){
           if(_first){
             result.push(<div class="dropdown-header"><p class="dropdown-value">{program["Specializations"]["Items"][i]}</p><span class="arrow-down"></span></div>);
+            this.specializationValue = program["Specializations"]["Items"][i];
             _first = false;
           }
 
@@ -133,6 +145,7 @@ class Sidebar extends Component {
         }
       }else{
         result.push(<div class="dropdown-header"><p class="dropdown-value">None</p><span class="arrow-down"></span></div>);
+        this.specializationValue = "None";
       }
     }
     result.push(<ul>{list}</ul>);
@@ -150,7 +163,6 @@ class Sidebar extends Component {
 
   componentDidUpdate(){
     this.props.colors.updateColorThemes();
-    console.log("send new requirements...");
   }
 
   render() {
@@ -189,7 +201,7 @@ class Sidebar extends Component {
           </ul>
         </div>
         <div class="form-group">
-          <button type="button" class="btn-primary">Submit</button>
+          <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
         </div>
       </div>
     );

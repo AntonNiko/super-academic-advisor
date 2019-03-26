@@ -54,6 +54,12 @@ class Dropdown {
       }
     });
   }
+
+  static configureSidebarSubmitSelection(sidebar){
+    $(document).on("click", "#sidebar-selection-submit", function(){
+      sidebar.actionSubmitSelections();
+    });
+  }
 }
 
 export default Dropdown;

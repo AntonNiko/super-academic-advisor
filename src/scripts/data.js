@@ -25,7 +25,7 @@ class Data {
     }).responseText);
   }
 
-  static getRequirementsData(){
+  static getRequirementsDataNew(){
     return JSON.parse($.ajax({
       type: "GET",
       url: "/data/requirements.json",

@@ -24,6 +24,7 @@ class Requirements extends Component {
     this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
 
     this.actionUpdateProgramRequirements = this.actionUpdateProgramRequirements.bind(this);
+    this.actionSetProgramRequirements = this.actionSetProgramRequirements.bind(this);
   }
 
   actionUpdateProgramRequirements(semesters){
@@ -35,7 +36,13 @@ class Requirements extends Component {
     this.setState({active_courses: new_active_courses});
   }
 
-  actionChangeProgramRequirements(){
+  actionSetProgramRequirements(faculty, program, minor, specialization){
+    console.log(faculty+" | "+program+" | "+minor+" | "+specialization);
+    console.log(this.props.requirementsNew);
+
+    var requirements = [];
+
+    // Add program required courses
 
   }
 

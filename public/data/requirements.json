@@ -9,7 +9,27 @@
             "Computer Science and Statistics": {"required": []},
             "Electrical Engineering": {"required": []},
             "Geography and Computer Science (Geomatics)": {"required": []},
-            "Mechanical Engineering": {"required": []},
+            "Mechanical Engineering": {
+                "required": [
+                  ["CSC 111"],
+                  ["CSC 115", "CSC 116"],
+                  ["ENGR 110",["ENGR 112","ENGL 135"]],
+                  ["ENGR 120",["ENGR 240","ENGR 121"]],
+                  ["ENGR 130"],
+                  ["ENGR 141"],
+                  ["MATH 100", "MATH 109"],
+                  ["MATH 101"],
+                  ["MATH 110","MATH 211"],
+                  ["PHYS 110"],
+                  ["PHYS 111"],
+                ],
+                "specialization": [
+
+                ],
+                "technical_electives": [
+
+                ]
+              },
             "Music and Computer Science": {"required": []},
             "Physics and Computer Science": {"required": []},
             "Psychology and Computer Science": {"required": []},
@@ -199,6 +219,6 @@
         }
     },
     "Minors" : {
-        
+
     }
 }
