@@ -43,7 +43,7 @@ class Requirements extends Component {
   actionSetProgramRequirements(faculty, program, minor, specialization){
     this.requirementsWizard.setNewRequirements(faculty, program, minor, specialization);
     this.requirementsWizard.generateCourseRequirementsBasedOnSelectedRequirements();
-    this.setState({course_requirements: this.requirementsWizard.getGeneratedCourseRequirements()});
+    this.setState({course_requirements: this.requirementsWizard.result_course_requirements});
   }
 
   actionUpdateRemainingRequirementsNumber(){
@@ -92,10 +92,7 @@ class Requirements extends Component {
   }
 
   renderProgramRequirementsList(){
-    var list_items = [];
-    var requirements = this.state.course_requirements;
-    
-    return list_items;
+    return this.requirementsWizard.getGeneratedCourseRequirementsList();
   }
 
   renderRemainingRequirements(){
