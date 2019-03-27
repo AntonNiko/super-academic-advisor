@@ -296,8 +296,8 @@ class Program extends Component {
   }
 
   componentDidUpdate(){
+    // BUG: On update, moved course appears twice in list of active courses
     this.props.updateProgramRequirements(this.sem);
-    //this.props.colors.updateColorThemes();
   }
 
   render() {

@@ -7,8 +7,6 @@ import '../scripts/requirementsWizard.js';
 import RequirementsWizard from '../scripts/requirementsWizard.js';
 
 class Requirements extends Component {
-  // TODO: Handle SENG Specializations, electives (including technical electives)
-
   constructor(props){
     super(props);
 
@@ -32,12 +30,7 @@ class Requirements extends Component {
   }
 
   actionUpdateProgramRequirements(semesters){
-    var new_active_courses = [];
-    for(var semester_id in semesters){
-      var current_semester_courses = semesters[semester_id].current.state.courses;
-      new_active_courses = new_active_courses.concat(current_semester_courses);
-    }
-    this.setState({active_courses: new_active_courses});
+    this.requirementsWizard.updateActiveCourses(semesters);
   }
 
   actionSetProgramRequirements(faculty, program, minor, specialization){
@@ -91,10 +84,12 @@ class Requirements extends Component {
     }
   }
 
+  // Calls the requirement wizard method to get generated requirements, from the previous user submit
   renderProgramRequirementsList(){
     return this.requirementsWizard.getGeneratedCourseRequirementsList();
   }
 
+  // TODO: Update method to call requirementsWizard for that
   renderRemainingRequirements(){
     var remaining_requirements_num = this.actionUpdateRemainingRequirementsNumber();
     return (<span id="modal-reqs-fulfilled-status">{remaining_requirements_num} missing</span>);
@@ -110,7 +105,7 @@ class Requirements extends Component {
           <div id="modal-reqs-content">
             <div id="modal-reqs-header">
               <span id="modal-reqs-title">Required</span>
-              {this.renderRemainingRequirements()}
+              <span id="modal-reqs-fulfilled-status">0 missing</span>
             </div>
             <div id="modal-reqs-list">
               <ul id="reqs-course-list">

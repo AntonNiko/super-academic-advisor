@@ -1,11 +1,13 @@
 import React from 'react';
 
 // Class which servers as helper to generate a list of required courses for selected
-// faculties, programs, minors, and specializations
+// faculties, programs, minors, and specializations. It also updates itself based on 
+// active courses, and displays what requirements have and have not been met yet.
 class RequirementsWizard {
     constructor(requirements_data){
         this.requirements_data = requirements_data;
         this.result_course_requirements = [];
+        this.active_courses = [];
 
         this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
         this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
@@ -20,20 +22,26 @@ class RequirementsWizard {
         this.selected_specialization = specialization;
     }
 
+    // Method which updats the list of currently active courses in the program component. 
+    // Used to display correct icon for requirements list, and for other method to evaluate
+    // how many requirements have been met.
+    updateActiveCourses(semesters) {
+      var new_active_courses = [];
+      for(var semester_id in semesters){
+        var current_semester_courses = semesters[semester_id].current.state.courses;
+        new_active_courses = new_active_courses.concat(current_semester_courses);
+      }
+
+      this.active_courses = new_active_courses;
+    }
+
     // Method which generates list of course requirements based on selected values.
     // Generates program course requirements first, then moves on to minors and
     // specializations, which are program-specific. Stores result in class
     generateCourseRequirementsBasedOnSelectedRequirements() {
-        /*
-        FOR ANY PROGRAM, MINOR, AND SPECIALIZATION CHOICE:
-          1) ALL PROGRAM BASE REQUIREMENTS ARE SAME
-          2) MINORS WILL SIMPLY ADD ON REQUIRED COURSES
-          3) SPECIALIZATION MAY OVERRIDE TECHNICAL ELECTIVES IN BASIC REQUIREMENTS
-        */
-
         // Generate basic program requirements;
         var program_required_courses = this.requirements_data["Faculty"][this.selected_faculty][this.selected_program]["required"];
-        this.result_course_requirements = this.result_course_requirements.concat(program_required_courses);
+        this.result_course_requirements = program_required_courses;
 
         // Handle specializations/options
         if(this.selected_specialization != "None") {
@@ -83,6 +91,14 @@ class RequirementsWizard {
 
     }
 
+    utilIsCourseActive(course_str){
+      if(this.active_courses.includes(course_str)){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     getRequirementType(requirement) {
       /*
       Statement types:
@@ -92,27 +108,21 @@ class RequirementsWizard {
       4) ["N CREDITS/COURSES",["SUBJ"],["100",...],["WITH"],"M CREDITS/COURSES",["100",..]]] (Quantified)
       */
 
-      console.log(requirement);
       if (requirement.length == 3 && ["OR","AND"].includes(requirement[1])) {
-        console.log("conditional");
         return "conditional";
 
       } else if (requirement.length == 2 && requirement[0].slice(-2) == "OF" && Array.isArray(requirement[1])) {
-        console.log("collection");
         return "collection";
 
       } else if (requirement.length == 1 && requirement[0].slice(0,8) == "ELECTIVE"){
-        console.log("elective");
         return "elective";
 
       } else if ((requirement[0].slice(-7) == "CREDITS" || requirement[0].slice(-7) == "COURSES") &&
             Array.isArray(requirement[1]) &&
             Array.isArray(requirement[2])) {
-              console.log("quantified");
         return "quantified";
 
       } else if (requirement.length == 1 && requirement[0].slice(0,8) != "ELECTIVE") {
-        console.log("course");
         return "course";
 
       } else {
@@ -168,7 +178,6 @@ class RequirementsWizard {
       var requirement_number = parseInt(requirement[0].match(/\d+/));
 
       // TODO: MANAGE SECOND PART OF REQUIREMENT OF QUANTIFIED REQUIREMENT
-
       return (
         <li class="reqs-course-item">
           <span class="reqs-checkmark-bg">
@@ -207,35 +216,7 @@ class RequirementsWizard {
         requirements_list = requirements_list.concat(this.getRequirementElement(this.result_course_requirements[i]));
         requirements_list.push(<li class="reqs-course-separator"><hr></hr></li>);
       }
-      /*
-      for(var i=0; i<requirements.length; i++){
-        // Cycle through each course requirement's elements
-        for(var j=0; j<requirements[i].length; j++){
-          // Represents a program requirements
-          var current_course = requirements[i][j];
-          if(typeof current_course == "object"){
-            // If the requirements is an array, means that both courses need to be satisfied
-            for(var k=0; k<current_course.length; k++){
-              list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.utilIsCourseActive(current_course[k]) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course[k]}</span></li>);
-              if(k+1 != current_course.length){
-                list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">AND</span></li>);
-              }
-            }
 
-          }else if(typeof current_course == "string"){
-            // Individual course, so can simply add course item and move on
-            list_items.push(<li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.utilIsCourseActive(current_course) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{current_course}</span></li>);
-          }
-
-          // If we've reached the end of the individual program requirement, we can avoid placing a conditional item
-          if(j+1 != requirements[i].length){
-            list_items.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">OR</span></li>);
-          }
-        }
-
-        list_items.push(<li class="reqs-course-separator"><hr></hr></li>);
-      }
-      */
       return requirements_list;
     }
 }
