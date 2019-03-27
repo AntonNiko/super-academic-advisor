@@ -81,38 +81,38 @@
                 ],
                 "specializations": {
                     "Data mining and analysis, artificial intelligence, and machine learning": [
-                        [">=3 OF", [["ECE 470","OR","CSC 421"], "ECE 485", "SENG 474"]], 
+                        [">=3 OF", [["ECE 470","OR","CSC 421"], ["ECE 485"], ["SENG 474"]]], 
                         "OR",
-                        [[">=2 OF", [["ECE 470","OR","CSC 421"], "ECE 485", "SENG 474"]],
+                        [[">=2 OF", [["ECE 470","OR","CSC 421"], ["ECE 485"], ["SENG 474"]]],
                          "AND",
-                         [">=1 OF", ["ECE 471","CSC 322","CSC 349A","CSC 425","CSC 445","CSC 446","ECE 403"]]
+                         [">=1 OF", [["ECE 471"],["CSC 322"],["CSC 349A"],["CSC 425"],["CSC 445"],["CSC 446"],["ECE 403"]]]
                         ]
                     ],
                     "Cybersecurity and privacy": [
-                        [">=3 OF", ["ECE 448", "CSC 429", "SENG 460", "SENG 461"]], 
+                        [">=3 OF", [["ECE 448"], ["CSC 429"], ["SENG 460"], ["SENG 461"]]], 
                         "OR",
-                        [[">=2 OF", ["ECE 448", "CSC 429", "SENG 460", "SENG 461"]],
+                        [[">=2 OF", [["ECE 448"], ["CSC 429"], ["SENG 460"], ["SENG 461"]]],
                          "AND",
-                         [">=1 OF", ["ECE 463", "CSC 463", "CSC 466", "CSC 467"]]
+                         [">=1 OF", [["ECE 463"], ["CSC 463"], ["CSC 466"], ["CSC 467"]]]
                         ]
                     ],
                     "Performance and scalability": [
-                        [">=3 OF", ["ECE 457","CSC 462", "CSC 464", "SENG 462", "SENG 468", "SENG 475"]], 
+                        [">=3 OF", [["ECE 457"],["CSC 462"], ["CSC 464"], ["SENG 462"], ["SENG 468"], ["SENG 475"]]], 
                         "OR",
-                        [[">=2 OF", ["ECE 457","CSC 462", "CSC 464", "SENG 462", "SENG 468", "SENG 475"]],
+                        [[">=2 OF", [["ECE 457"],["CSC 462"], ["CSC 464"], ["SENG 462"], ["SENG 468"], ["SENG 475"]]],
                          "AND",
-                         [">=1 OF", ["CSC 454"]]
+                         [">=1 OF", [["CSC 454"]]]
                         ]
                     ],
                     "Interaction design and data visualization": [
-                        [">=3 OF", ["ECE 440", ["ECE 470","OR","CSC 421"], "SENG 411", "SENG 435"]]
+                        [">=3 OF", [["ECE 440"], ["ECE 470","OR","CSC 421"], ["SENG 411"], ["SENG 435"]]]
                     ],
                     "Visual computing (vision/graphics)" : [
-                        [">=3 OF", ["CSC 305", "CSC 471", "CSC 472", "CSC 473", "ECE 471"]], 
+                        [">=3 OF", [["CSC 305"], ["CSC 471"], ["CSC 472"], ["CSC 473"], ["ECE 471"]]], 
                         "OR",
-                        [[">=2 OF", ["CSC 305", "CSC 471", "CSC 472", "CSC 473", "ECE 471"]],
+                        [[">=2 OF", [["CSC 305"], ["CSC 471"], ["CSC 472"], ["CSC 473"], ["ECE 471"]]],
                          "AND",
-                         [">=1 OF", ["CSC 426", "CSC 461", "CSC 475", ["ECE 470","OR","CSC 421"], "ECE 483","ECE 484","ECE 486","SENG 475"]]
+                         [">=1 OF", [["CSC 426"], ["CSC 461"], ["CSC 475"], ["ECE 470","OR","CSC 421"], ["ECE 483"], ["ECE 484"], ["ECE 486"], ["SENG 475"]]]
                         ]
                     ]
                 }
@@ -136,78 +136,91 @@
         ]
     },
     "Electives" : {
-        "ENG_TECH_SENG" : [
-            ["CSC 305"],
-            ["CSC 322"],
-            ["CSC 330"],
-            ["CSC 349A"],
-            ["CSC 421","ECE 470"],
-            ["CSC 422"],
-            ["CSC 423"],
-            ["CSC 425"],
-            ["CSC 426"],
-            ["CSC 428A"],
-            ["CSC 429"],
-            ["CSC 435"],
-            ["CSC 445"],
-            ["CSC 446"],
-            ["CSC 449"],
-            ["CSC 454"],
-            ["CSC 461"],
-            ["CSC 462"],
-            ["CSC 463"],
-            ["CSC 464"],
-            ["CSC 466"],
-            ["CSC 467"],
-            ["CSC 471"],
-            ["CSC 472"],
-            ["CSC 473"],
-            ["CSC 475"],
-            ["CSC 498"],
-            ["ECE 403"],
-            ["ECE 407"],
-            ["ECE 426"],
-            ["ECE 435"],
-            ["ECE 440"],
-            ["ECE 449"],
-            ["ECE 457"],
-            ["ECE 459"],
-            ["ECE 460"],
-            ["ECE 463"],
-            ["ECE 466"],
-            ["ECE 470", "CSC 421"],
-            ["ECE 471"],
-            ["ECE 483"],
-            ["ECE 484"],
-            ["ECE 485"],
-            ["ECE 486"],
-            ["SENG 411"],
-            ["SENG 421"],
-            ["SENG 422"],
-            ["SENG 435"],
-            ["SENG 460"],
-            ["SENG 461"],
-            ["SENG 468"],
-            ["SENG 474"],
-            ["SENG 475"],
-            ["SENG 480A"],
-            ["SENG 480B"],
-            ["SENG 480C"],
-            ["SENG 480D"]
-        ],
-        "ENG_COMP" : [
-            ["ADMN 200"],
-            ["AHVS 120"],
-            ["AHVS 121"],
-            ["AHVS 200"]
-        ],
-        "ECE_NATSCI" : [
+        "ENG_TECH_SENG" : {
+            "Courses": [
+                ["CSC 305"],
+                ["CSC 322"],
+                ["CSC 330"],
+                ["CSC 349A"],
+                ["CSC 421","ECE 470"],
+                ["CSC 422"],
+                ["CSC 423"],
+                ["CSC 425"],
+                ["CSC 426"],
+                ["CSC 428A"],
+                ["CSC 429"],
+                ["CSC 435"],
+                ["CSC 445"],
+                ["CSC 446"],
+                ["CSC 449"],
+                ["CSC 454"],
+                ["CSC 461"],
+                ["CSC 462"],
+                ["CSC 463"],
+                ["CSC 464"],
+                ["CSC 466"],
+                ["CSC 467"],
+                ["CSC 471"],
+                ["CSC 472"],
+                ["CSC 473"],
+                ["CSC 475"],
+                ["CSC 498"],
+                ["ECE 403"],
+                ["ECE 407"],
+                ["ECE 426"],
+                ["ECE 435"],
+                ["ECE 440"],
+                ["ECE 449"],
+                ["ECE 457"],
+                ["ECE 459"],
+                ["ECE 460"],
+                ["ECE 463"],
+                ["ECE 466"],
+                ["ECE 470", "CSC 421"],
+                ["ECE 471"],
+                ["ECE 483"],
+                ["ECE 484"],
+                ["ECE 485"],
+                ["ECE 486"],
+                ["SENG 411"],
+                ["SENG 421"],
+                ["SENG 422"],
+                ["SENG 435"],
+                ["SENG 460"],
+                ["SENG 461"],
+                ["SENG 468"],
+                ["SENG 474"],
+                ["SENG 475"],
+                ["SENG 480A"],
+                ["SENG 480B"],
+                ["SENG 480C"],
+                ["SENG 480D"]
+            ],
+            "Abbreviation": "SENG Technical Elective"
+        },
+        "ENG_COMP" : {
+            "Courses": [
+                ["ADMN 200"],
+                ["AHVS 120"],
+                ["AHVS 121"],
+                ["AHVS 200"]
+            ],
+            "Abbreviation": "ENG Complementary Studies"
+        },
+        "ECE_NATSCI" : {
+            "Courses": [
 
-        ],
-        "BSENG_NATSCI" : [
-            ["ASTR 101"],
-            ["ASTR 102"],
-            ["ASTR 150"]
-        ]
+            ],
+            "Abbreviation": "ECE Natural Science Elective"
+        },
+        "BSENG_NATSCI" : {
+            "Courses": [
+                ["ASTR 101"],
+                ["ASTR 102"],
+                ["ASTR 150"]
+            ],
+            "Abbreviation": "BSENG Natural Science Elective"
+        }
+
     }
 }
