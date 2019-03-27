@@ -6,6 +6,9 @@ class RequirementsWizard {
     constructor(requirements_data){
         this.requirements_data = requirements_data;
         this.result_course_requirements = [];
+
+        this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
+        this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
     }
 
     // Whenever user submits new set of choices, this method gets called
@@ -89,21 +92,27 @@ class RequirementsWizard {
       4) ["N CREDITS/COURSES",["SUBJ"],["100",...],["WITH"],"M CREDITS/COURSES",["100",..]]] (Quantified)
       */
 
+      console.log(requirement);
       if (requirement.length == 3 && ["OR","AND"].includes(requirement[1])) {
+        console.log("conditional");
         return "conditional";
 
       } else if (requirement.length == 2 && requirement[0].slice(-2) == "OF" && Array.isArray(requirement[1])) {
+        console.log("collection");
         return "collection";
 
       } else if (requirement.length == 1 && requirement[0].slice(0,8) == "ELECTIVE"){
+        console.log("elective");
         return "elective";
 
       } else if ((requirement[0].slice(-7) == "CREDITS" || requirement[0].slice(-7) == "COURSES") &&
             Array.isArray(requirement[1]) &&
             Array.isArray(requirement[2])) {
+              console.log("quantified");
         return "quantified";
 
       } else if (requirement.length == 1 && requirement[0].slice(0,8) != "ELECTIVE") {
+        console.log("course");
         return "course";
 
       } else {
@@ -149,7 +158,7 @@ class RequirementsWizard {
       var elective_type = requirement[0].slice(9);
       var elective_abbreviation = this.requirements_data["Electives"][elective_type]["Abbreviation"];
 
-      return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src=""></img></span><span class="reqs-course-name">{elective_abbreviation}</span></li>;
+      return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{elective_abbreviation}</span></li>;
     }
 
     getQuantifiedRequirementElement(requirement) {
@@ -163,14 +172,14 @@ class RequirementsWizard {
       return (
         <li class="reqs-course-item">
           <span class="reqs-checkmark-bg">
-            <img src=""></img></span><span class="reqs-course-name">{requirement_number} {primary_requirement_type}
+            <img src={this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{requirement_number} {primary_requirement_type}
           </span>
         </li>
       );
     }
 
     getCourseRequirementElement(requirement) {
-      return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src=""></img></span><span class="reqs-course-name">{requirement[0]}</span></li>;
+      return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{requirement[0]}</span></li>;
     }
 
     getRequirementElement(requirement) {
@@ -194,7 +203,6 @@ class RequirementsWizard {
     // various course requirement formats into readable html elements to be rendered
     getGeneratedCourseRequirementsList() {
       var requirements_list = [];
-
       for(var i=0; i<this.result_course_requirements.length; i++) {
         requirements_list = requirements_list.concat(this.getRequirementElement(this.result_course_requirements[i]));
         requirements_list.push(<li class="reqs-course-separator"><hr></hr></li>);

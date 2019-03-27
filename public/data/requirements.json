@@ -12,14 +12,14 @@
             "Mechanical Engineering": {
                 "required": [
                   ["CSC 111"],
-                  ["CSC 115", "CSC 116"],
-                  ["ENGR 110",["ENGR 112","ENGL 135"]],
-                  ["ENGR 120",["ENGR 240","ENGR 121"]],
+                  [["CSC 115"], "OR", ["CSC 116"]],
+                  [["ENGR 110"], "OR", [["ENGR 112"],"OR",["ENGL 135"]]],
+                  [["ENGR 120"], "OR", [["ENGR 240"],"OR",["ENGR 121"]]],
                   ["ENGR 130"],
                   ["ENGR 141"],
-                  ["MATH 100", "MATH 109"],
+                  [["MATH 100"], "OR", ["MATH 109"]],
                   ["MATH 101"],
-                  ["MATH 110","MATH 211"],
+                  [["MATH 110"], "OR", ["MATH 211"]],
                   ["PHYS 110"],
                   ["PHYS 111"]
                 ],
@@ -33,18 +33,18 @@
             "Software Engineering": {
                 "required": [
                     ["CSC 111"],
-                    ["CSC 115", "OR", "CSC 116"],
-                    ["ENGR 110", "OR", ["ENGR 112","AND","ENGL 135"]],
-                    ["ENGR 120", "OR", ["ENGR 240","AND","ENGR 121"]],
+                    [["CSC 115"], "OR", ["CSC 116"]],
+                    [["ENGR 110"], "OR", [["ENGR 112"],"AND",["ENGL 135"]]],
+                    [["ENGR 120"], "OR", [["ENGR 240"],"AND",["ENGR 121"]]],
                     ["ENGR 130"],
                     ["ENGR 141"],
-                    ["MATH 100", "OR", "MATH 109"],
+                    [["MATH 100"], "OR", ["MATH 109"]],
                     ["MATH 101"],
-                    ["MATH 110", "OR", "MATH 211"],
-                    ["PHYS 110", "OR", "PHYS 120"],
-                    ["PHYS 111", "OR", "PHYS 130"],
-                    ["CSC 230", "OR", "ECE 255"],
-                    ["CHEM 101", "OR", "CHEM 150"],
+                    [["MATH 110"], "OR", ["MATH 211"]],
+                    [["PHYS 110"], "OR", ["PHYS 120"]],
+                    [["PHYS 111"], "OR", ["PHYS 130"]],
+                    [["CSC 230"], "OR", ["ECE 255"]],
+                    [["CHEM 101"], "OR", ["CHEM 150"]],
                     ["CSC 225"],
                     ["ECE 260"],
                     ["ECE 310"],
@@ -55,14 +55,14 @@
                     ["SENG 310"],
                     ["STAT 260"],
                     ["ELECTIVE ENG_COMP"],
-                    ["ECE 355", "OR", "CSC 355"],
-                    ["ECE 458", "OR", "CSC 361"],
+                    [["ECE 355"], "OR", ["CSC 355"]],
+                    [["ECE 458"], "OR", ["CSC 361"]],
                     ["CSC 226"],
                     ["CSC 320"],
                     ["CSC 360"],
                     ["CSC 371"],
                     ["ELECTIVE BSENG_NATSCI"],
-                    ["ECE 455", "OR", "CSC 460"],
+                    [["ECE 455"], "OR",["CSC 460"]],
                     ["SENG 401"],
                     ["SENG 426"],
                     ["SENG 440"],
@@ -81,9 +81,9 @@
                 ],
                 "specializations": {
                     "Data mining and analysis, artificial intelligence, and machine learning": [
-                        [">=3 OF", [["ECE 470","OR","CSC 421"], ["ECE 485"], ["SENG 474"]]], 
+                        [">=3 OF", [[["ECE 470"],"OR",["CSC 421"]], ["ECE 485"], ["SENG 474"]]], 
                         "OR",
-                        [[">=2 OF", [["ECE 470","OR","CSC 421"], ["ECE 485"], ["SENG 474"]]],
+                        [[">=2 OF", [[["ECE 470"],"OR",["CSC 421"]], ["ECE 485"], ["SENG 474"]]],
                          "AND",
                          [">=1 OF", [["ECE 471"],["CSC 322"],["CSC 349A"],["CSC 425"],["CSC 445"],["CSC 446"],["ECE 403"]]]
                         ]
@@ -112,7 +112,7 @@
                         "OR",
                         [[">=2 OF", [["CSC 305"], ["CSC 471"], ["CSC 472"], ["CSC 473"], ["ECE 471"]]],
                          "AND",
-                         [">=1 OF", [["CSC 426"], ["CSC 461"], ["CSC 475"], ["ECE 470","OR","CSC 421"], ["ECE 483"], ["ECE 484"], ["ECE 486"], ["SENG 475"]]]
+                         [">=1 OF", [["CSC 426"], ["CSC 461"], ["CSC 475"], [["ECE 470"],"OR",["CSC 421"]], ["ECE 483"], ["ECE 484"], ["ECE 486"], ["SENG 475"]]]
                         ]
                     ]
                 }
@@ -121,8 +121,8 @@
     },
     "Minors" : {
         "Software Development": [
-            ["CSC 110","OR","CSC 111"],
-            ["CSC 115","OR","CSC 116"],
+            [["CSC 110"],"OR",["CSC 111"]],
+            [["CSC 115"],"OR",["CSC 116"]],
             ["SENG 265"],
             ["SENG 275"],
             ["SENG 350"],
@@ -142,7 +142,7 @@
                 ["CSC 322"],
                 ["CSC 330"],
                 ["CSC 349A"],
-                ["CSC 421","ECE 470"],
+                [["CSC 421"],"OR",["ECE 470"]],
                 ["CSC 422"],
                 ["CSC 423"],
                 ["CSC 425"],
@@ -176,7 +176,6 @@
                 ["ECE 460"],
                 ["ECE 463"],
                 ["ECE 466"],
-                ["ECE 470", "CSC 421"],
                 ["ECE 471"],
                 ["ECE 483"],
                 ["ECE 484"],
