@@ -7,6 +7,7 @@ class RequirementsWizard {
     constructor(requirements_data){
         this.requirements_data = requirements_data;
         this.result_course_requirements = [];
+        this.result_course_requirements_fulfilled = [];
         this.active_courses = [];
 
         this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
