@@ -10,6 +10,9 @@ class RequirementsWizard {
         this.result_course_requirements_fulfilled = [];
         this.active_courses = [];
 
+        // Dictionary of list of courses that have been acocunted for in terms of electives (e.g: two ["ELECTIVE ENG_COMP"] in requirements)
+        this.result_course_categories_fulfilled = {};
+
         this.inactive_course_icon_link = "/assets/icons8-delete-96.png";
         this.active_course_icon_link = "/assets/icons8-checkmark-96.png";
     }
@@ -34,6 +37,16 @@ class RequirementsWizard {
       }
 
       this.active_courses = new_active_courses;
+    }
+
+    updateFulfilledRequirements() {
+      for(var i=0; i<this.result_course_requirements.length; i++) {
+        var requirement = this.result_course_requirements[i];
+        this.result_course_requirements_fulfilled[i] = this.isRequirementFulfilled(requirement);
+
+        // DEBUG
+        console.log(this.result_course_requirements[i]+": "+this.result_course_requirements_fulfilled[i]);
+      }
     }
 
     // Method which generates list of course requirements based on selected values.
@@ -62,6 +75,9 @@ class RequirementsWizard {
             var minor_requirements = this.requirements_data["Minors"][this.selected_minor];
             this.result_course_requirements = this.result_course_requirements.concat(minor_requirements);
         }
+
+        // Generate list of status of fulfilled requirmeents based on generated result_course_requirements order
+        this.result_course_requirements_fulfilled = Array(this.result_course_requirements.length).fill(false);
     }
 
     // Handling Software Engineering specialization according to Calendar regulations:
@@ -130,6 +146,102 @@ class RequirementsWizard {
         return "unrecognized";
 
       }
+    }
+
+    getConditionalRequirementFulfilledState(requirement) {
+      var fulfilled = false;
+
+      var fulfilled_first_element = this.getRequirementFulfilledState(requirement[0]);
+      var fulfilled_second_element = this.getRequirementFulfilledState(requirement[2]);
+
+      var conditional_token = requirement[1];
+      if (conditional_token == "AND" && fulfilled_first_element && fulfilled_second_element) {
+        return true;
+      } else if (conditional_token == "OR" && (fulfilled_first_element || fulfilled_second_element)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    getCollectionRequirementFulfilledState(requirement) {
+
+      // Track how many requirements of collection are fulfilled
+      var requirements_fulfilled = 0;
+      for(var i=0; i<requirement[1].length; i++) {
+        if (this.getRequirementFulfilledState(requirement[1][i])) {
+          requirements_fulfilled++;
+        }
+      }
+
+      // Depending on condition (>=/=), determine if requirement fulfilled
+      var condition_limit = parseInt(requirement[0].match(/\d+/));
+      if (requirement[0].slice(0,2) == ">=" && requirements_fulfilled >= condition_limit) {
+        return true;
+      } else if (requirement[0].slice(0,1) == "=" && requirements_fulfilled >= condition_limit) {
+        // Even if more requirements fulfilled, returns true
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    getElectiveRequirementFulfilledState(requirement) {
+      
+      // Get elective type, to use for look up in requirements data
+      var elective_type = requirement[0].slice(9);
+
+      // If elective type index not accounted for in class variable, assign it
+      if (this.result_course_categories_fulfilled[elective_type] == undefined) {
+        this.result_course_categories_fulfilled[elective_type] = [];
+      }
+      
+      // TODO: Ensure that in fulfilling requirement of one elective, does not only get stuck on same requirement
+      var elective_type_courses = this.requirements_data["Electives"][elective_type]["Courses"];
+      for (var i=0; i<this.active_courses.length; i++) {
+        var course = [this.active_courses[i]];
+        if (elective_type_courses.includes(course) && !this.result_course_categories_fulfilled[elective_type].includes(course)) {
+          // If a new unaccounted for course shows up, then add it to accounted for list of courses 
+          this.result_course_categories_fulfilled[elective_type].push(course);
+          return true;
+        }
+      }
+
+      // If no unaccounted active courses fulfill requirement, return corresponding result
+      return false;
+    }
+
+    getQuantifiedRequirementFulfilledState(requirement) {
+      return false;
+    }
+
+    getCourseRequirementFulfilledState(requirement) {
+      if (this.active_courses.includes(requirement[0])) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    getRequirementFulfilledState(requirement) {
+      switch(this.getRequirementType(requirement)) {
+        case "conditional":
+          return this.getConditionalRequirementFulfilledState(requirement);
+        case "collection":
+          return this.getCollectionRequirementFulfilledState(requirement);
+        case "elective":
+          return this.getElectiveRequirementFulfilledState(requirement);
+        case "quantified":
+          return this.getQuantifiedRequirementFulfilledState(requirement);
+        case "course":
+          return this.getCourseRequirementFulfilledState(requirement);
+        default:
+          return null;
+      }  
+    }
+
+    isRequirementFulfilled(requirement) {
+      return this.getRequirementFulfilledState(requirement);
     }
 
     getConditionalRequirementElement(requirement) {

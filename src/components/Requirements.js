@@ -86,6 +86,7 @@ class Requirements extends Component {
 
   // Calls the requirement wizard method to get generated requirements, from the previous user submit
   renderProgramRequirementsList(){
+    this.requirementsWizard.updateFulfilledRequirements();
     return this.requirementsWizard.getGeneratedCourseRequirementsList();
   }
 
