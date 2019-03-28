@@ -7,7 +7,7 @@ class RequirementsWizard {
     constructor(requirements_data){
         this.requirements_data = requirements_data;
         this.result_course_requirements = [];
-        this.result_course_requirements_fulfilled = [];
+        this.result_course_requirements_fulfilled = {};
         this.active_courses = [];
 
         // Dictionary of list of courses that have been acocunted for in terms of electives (e.g: two ["ELECTIVE ENG_COMP"] in requirements)
@@ -42,10 +42,11 @@ class RequirementsWizard {
     updateFulfilledRequirements() {
       for(var i=0; i<this.result_course_requirements.length; i++) {
         var requirement = this.result_course_requirements[i];
-        this.result_course_requirements_fulfilled[i] = this.isRequirementFulfilled(requirement);
+        this.result_course_requirements_fulfilled[requirement] = this.isRequirementFulfilled(requirement);
+        // TODO: FIX WITH SAME REQUIREMENT NAMES (E.G: ELECTIVE ENG_COMP)
 
         // DEBUG
-        console.log(this.result_course_requirements[i]+": "+this.result_course_requirements_fulfilled[i]);
+        console.log(this.result_course_requirements[i]+": "+this.result_course_requirements_fulfilled[requirement]);
       }
     }
 
@@ -77,7 +78,9 @@ class RequirementsWizard {
         }
 
         // Generate list of status of fulfilled requirmeents based on generated result_course_requirements order
-        this.result_course_requirements_fulfilled = Array(this.result_course_requirements.length).fill(false);
+        this.result_course_requirements.forEach(element => {
+          this.result_course_requirements_fulfilled[element] = false;
+        });
     }
 
     // Handling Software Engineering specialization according to Calendar regulations:
@@ -113,6 +116,14 @@ class RequirementsWizard {
         return true;
       }else{
         return false;
+      }
+    }
+
+    getRequirementElementIconLink(requirement) {
+      if(this.result_course_requirements_fulfilled[requirement] == true) {
+        return this.active_course_icon_link; 
+      } else {
+        return this.inactive_course_icon_link;
       }
     }
 
