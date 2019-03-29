@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Class which servers as helper to generate a list of required courses for selected
-// faculties, programs, minors, and specializations. It also updates itself based on 
+// faculties, programs, minors, and specializations. It also updates itself based on
 // active courses, and displays what requirements have and have not been met yet.
 class RequirementsWizard {
     constructor(requirements_data){
@@ -26,7 +26,7 @@ class RequirementsWizard {
         this.selected_specialization = specialization;
     }
 
-    // Method which updats the list of currently active courses in the program component. 
+    // Method which updats the list of currently active courses in the program component.
     // Used to display correct icon for requirements list, and for other method to evaluate
     // how many requirements have been met.
     updateActiveCourses(semesters) {
@@ -41,12 +41,13 @@ class RequirementsWizard {
 
     updateFulfilledRequirements() {
       for(var i=0; i<this.result_course_requirements.length; i++) {
-        var requirement = this.result_course_requirements[i];
-        this.result_course_requirements_fulfilled[requirement] = this.isRequirementFulfilled(requirement);
+        var requirement = this.result_course_requirements[i][0];
+        this.result_course_requirements[i][1] = this.isRequirementFulfilled(requirement);
+        //.result_course_requirements_fulfilled[requirement] = this.isRequirementFulfilled(requirement);
         // TODO: FIX WITH SAME REQUIREMENT NAMES (E.G: ELECTIVE ENG_COMP)
 
         // DEBUG
-        console.log(this.result_course_requirements[i]+": "+this.result_course_requirements_fulfilled[requirement]);
+        //console.log(this.result_course_requirements[i]);
       }
     }
 
@@ -56,7 +57,11 @@ class RequirementsWizard {
     generateCourseRequirementsBasedOnSelectedRequirements() {
         // Generate basic program requirements;
         var program_required_courses = this.requirements_data["Faculty"][this.selected_faculty][this.selected_program]["required"];
-        this.result_course_requirements = program_required_courses;
+
+        // Add all program requirements in array with requirement and fulfilled state as elements
+        for (var i=0; i<program_required_courses.length; i++) {
+          this.result_course_requirements.push([program_required_courses[i], false]);
+        }
 
         // Handle specializations/options
         if(this.selected_specialization != "None") {
@@ -74,13 +79,10 @@ class RequirementsWizard {
         // Handle minors
         if(this.selected_minor != "None") {
             var minor_requirements = this.requirements_data["Minors"][this.selected_minor];
-            this.result_course_requirements = this.result_course_requirements.concat(minor_requirements);
+            for(var i=0; i<minor_requirements.length; i++) {
+              this.result_course_requirements.push([minor_requirements[i], false]);
+            }
         }
-
-        // Generate list of status of fulfilled requirmeents based on generated result_course_requirements order
-        this.result_course_requirements.forEach(element => {
-          this.result_course_requirements_fulfilled[element] = false;
-        });
     }
 
     // Handling Software Engineering specialization according to Calendar regulations:
@@ -94,16 +96,21 @@ class RequirementsWizard {
         var result_course_requirements = [];
         var courses_removed = 0;
         for(var i=0; i<this.result_course_requirements.length; i++) {
-            if(this.result_course_requirements[i][0] != "ELECTIVE ENG_TECH_SENG" ||
-               this.result_course_requirements[i][0] == "ELECTIVE ENG_TECH_SENG" && courses_removed >=3){
-                result_course_requirements.push(this.result_course_requirements[i]);
+            if(this.result_course_requirements[i][0][0] != "ELECTIVE ENG_TECH_SENG" ||
+               this.result_course_requirements[i][0][0] == "ELECTIVE ENG_TECH_SENG" && courses_removed >=3){
+                // Add requirement and initial fulfilled state to array
+                result_course_requirements.push([this.result_course_requirements[i][0], false]);
             } else {
                 courses_removed++;
             }
         }
 
-        // Append the program_specialization requirements, and reassign the updated requirements
-        result_course_requirements.push(program_specialization);
+        // Append the program_specialization requirements with requirement and initial state,
+        // and reassign the updated requirements
+        for (var i=0; i < program_specialization.length; i++) {
+          result_course_requirements.push([program_specialization[i], false]);
+        }
+
         this.result_course_requirements = result_course_requirements;
     }
 
@@ -121,7 +128,7 @@ class RequirementsWizard {
 
     getRequirementElementIconLink(requirement) {
       if(this.result_course_requirements_fulfilled[requirement] == true) {
-        return this.active_course_icon_link; 
+        return this.active_course_icon_link;
       } else {
         return this.inactive_course_icon_link;
       }
@@ -198,21 +205,21 @@ class RequirementsWizard {
     }
 
     getElectiveRequirementFulfilledState(requirement) {
-      
+
       // Get elective type, to use for look up in requirements data
       var elective_type = requirement[0].slice(9);
 
       // If elective type index not accounted for in class variable, assign it
-      if (this.result_course_categories_fulfilled[elective_type] == undefined) {
-        this.result_course_categories_fulfilled[elective_type] = [];
-      }
-      
+      //if (this.result_course_categories_fulfilled[elective_type] == undefined) {
+      //  this.result_course_categories_fulfilled[elective_type] = [];
+      //}
+
       // TODO: Ensure that in fulfilling requirement of one elective, does not only get stuck on same requirement
       var elective_type_courses = this.requirements_data["Electives"][elective_type]["Courses"];
       for (var i=0; i<this.active_courses.length; i++) {
         var course = [this.active_courses[i]];
         if (elective_type_courses.includes(course) && !this.result_course_categories_fulfilled[elective_type].includes(course)) {
-          // If a new unaccounted for course shows up, then add it to accounted for list of courses 
+          // If a new unaccounted for course shows up, then add it to accounted for list of courses
           this.result_course_categories_fulfilled[elective_type].push(course);
           return true;
         }
@@ -222,6 +229,7 @@ class RequirementsWizard {
       return false;
     }
 
+    // TODO: COMPLETE METHOD
     getQuantifiedRequirementFulfilledState(requirement) {
       return false;
     }
@@ -248,7 +256,7 @@ class RequirementsWizard {
           return this.getCourseRequirementFulfilledState(requirement);
         default:
           return null;
-      }  
+      }
     }
 
     isRequirementFulfilled(requirement) {
@@ -280,7 +288,7 @@ class RequirementsWizard {
         requirement_list.push(<li class="reqs-course-conditional"><span class="reqs-conditional-text">{collection_number} OF:</span></li>);
       }
 
-      // Get requirement element for all elements of second part of requirement 
+      // Get requirement element for all elements of second part of requirement
       for(var i=0; i<requirement[1].length; i++) {
         requirement_list = requirement_list.concat(this.getRequirementElement(requirement[1][i]));
       }
@@ -295,6 +303,7 @@ class RequirementsWizard {
       return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{elective_abbreviation}</span></li>;
     }
 
+    // TODO: COMPLETE METHOD
     getQuantifiedRequirementElement(requirement) {
       var requirement_list = [];
 
@@ -312,7 +321,7 @@ class RequirementsWizard {
     }
 
     getCourseRequirementElement(requirement) {
-      return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{requirement[0]}</span></li>;
+      return <li class="reqs-course-item"><span class="reqs-checkmark-bg"><img src={this.active_courses.includes(requirement[0]) ? this.active_course_icon_link : this.inactive_course_icon_link}></img></span><span class="reqs-course-name">{requirement[0]}</span></li>;
     }
 
     getRequirementElement(requirement) {
@@ -329,7 +338,7 @@ class RequirementsWizard {
           return this.getCourseRequirementElement(requirement);
         default:
           return null;
-      }      
+      }
     }
 
     // This method is called from Requirements component, and is used to convert the
@@ -337,7 +346,7 @@ class RequirementsWizard {
     getGeneratedCourseRequirementsList() {
       var requirements_list = [];
       for(var i=0; i<this.result_course_requirements.length; i++) {
-        requirements_list = requirements_list.concat(this.getRequirementElement(this.result_course_requirements[i]));
+        requirements_list = requirements_list.concat(this.getRequirementElement(this.result_course_requirements[i][0]));
         requirements_list.push(<li class="reqs-course-separator"><hr></hr></li>);
       }
 

@@ -81,39 +81,49 @@
                 ],
                 "specializations": {
                     "Data mining and analysis, artificial intelligence, and machine learning": [
-                        [">=3 OF", [[["ECE 470"],"OR",["CSC 421"]], ["ECE 485"], ["SENG 474"]]], 
-                        "OR",
-                        [[">=2 OF", [[["ECE 470"],"OR",["CSC 421"]], ["ECE 485"], ["SENG 474"]]],
-                         "AND",
-                         [">=1 OF", [["ECE 471"],["CSC 322"],["CSC 349A"],["CSC 425"],["CSC 445"],["CSC 446"],["ECE 403"]]]
+                        [
+                          [">=3 OF", [[["ECE 470"],"OR",["CSC 421"]], ["ECE 485"], ["SENG 474"]]],
+                          "OR",
+                          [[">=2 OF", [[["ECE 470"],"OR",["CSC 421"]], ["ECE 485"], ["SENG 474"]]],
+                           "AND",
+                           [">=1 OF", [["ECE 471"],["CSC 322"],["CSC 349A"],["CSC 425"],["CSC 445"],["CSC 446"],["ECE 403"]]]
+                          ]
                         ]
                     ],
                     "Cybersecurity and privacy": [
-                        [">=3 OF", [["ECE 448"], ["CSC 429"], ["SENG 460"], ["SENG 461"]]], 
+                      [
+                        [">=3 OF", [["ECE 448"], ["CSC 429"], ["SENG 460"], ["SENG 461"]]],
                         "OR",
                         [[">=2 OF", [["ECE 448"], ["CSC 429"], ["SENG 460"], ["SENG 461"]]],
                          "AND",
                          [">=1 OF", [["ECE 463"], ["CSC 463"], ["CSC 466"], ["CSC 467"]]]
                         ]
+                      ]
                     ],
                     "Performance and scalability": [
-                        [">=3 OF", [["ECE 457"],["CSC 462"], ["CSC 464"], ["SENG 462"], ["SENG 468"], ["SENG 475"]]], 
+                      [
+                        [">=3 OF", [["ECE 457"],["CSC 462"], ["CSC 464"], ["SENG 462"], ["SENG 468"], ["SENG 475"]]],
                         "OR",
                         [[">=2 OF", [["ECE 457"],["CSC 462"], ["CSC 464"], ["SENG 462"], ["SENG 468"], ["SENG 475"]]],
                          "AND",
                          [">=1 OF", [["CSC 454"]]]
                         ]
+                      ]
                     ],
                     "Interaction design and data visualization": [
+                      [
                         [">=3 OF", [["ECE 440"], ["ECE 470","OR","CSC 421"], ["SENG 411"], ["SENG 435"]]]
+                      ]
                     ],
                     "Visual computing (vision/graphics)" : [
-                        [">=3 OF", [["CSC 305"], ["CSC 471"], ["CSC 472"], ["CSC 473"], ["ECE 471"]]], 
+                      [
+                        [">=3 OF", [["CSC 305"], ["CSC 471"], ["CSC 472"], ["CSC 473"], ["ECE 471"]]],
                         "OR",
                         [[">=2 OF", [["CSC 305"], ["CSC 471"], ["CSC 472"], ["CSC 473"], ["ECE 471"]]],
                          "AND",
                          [">=1 OF", [["CSC 426"], ["CSC 461"], ["CSC 475"], [["ECE 470"],"OR",["CSC 421"]], ["ECE 483"], ["ECE 484"], ["ECE 486"], ["SENG 475"]]]
-                        ]
+                        ]                        
+                      ]
                     ]
                 }
             }
