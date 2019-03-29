@@ -22,6 +22,7 @@ import ScriptAddCourse from './scripts/add_course.js';
 import ScriptAddSemester from './scripts/add_semester.js';
 import ScriptData from './scripts/data.js';
 import ScriptColors from './scripts/colors.js';
+import ScriptNotification from './scripts/notification.js';
 
 // Fetch Data for course info and program sequence respectively
 var data = ScriptData.getCoursesData();
@@ -33,6 +34,8 @@ var requirements = ScriptData.getRequirementsDataNew();
 
 // Create global variable indicating color theme choice
 window.colorTheme = "dark";
+
+ReactDOM.render(<Notification ref={notification => {window.notification = notification}}/>, document.getElementById("notification-container"));
 
 // Build React Elements
 ReactDOM.render(<Navbar
@@ -62,6 +65,7 @@ ReactDOM.render(<Program sequence={program_sequence}
   data={data}
   sequence_ids={sequence_ids}
   updateProgramRequirements={window.requirements.actionUpdateProgramRequirements}
+  throwNewNotification={window.notification.throwNewNotification}
   colors={ScriptColors}/>,
 document.getElementById('panel-container-parent'));
 
@@ -74,8 +78,6 @@ ReactDOM.render(<AddCourse data={data}
 document.getElementById('modal-add-course-container'));
 
 ReactDOM.render(<Settings/>, document.getElementById('modal-settings-container'));
-
-ReactDOM.render(<Notification/>, document.getElementById("notification-container"));
 
 // jQuery code
 $(function(){
@@ -100,4 +102,6 @@ $(function(){
   ScriptAddSemester.configureAddSemesterAction(window.program, ScriptSortableProgram);
 
   ScriptColors.configureLightAndDarkThemes();
+
+  ScriptNotification.configureNotificationBarToggle();
 });

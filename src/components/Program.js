@@ -59,13 +59,13 @@ class Program extends Component {
 
     // Verify course offered in semester
     if(!this.verifyCourseOffered(course_str, semester_id)){
-      alert("Not offered!");
+      this.props.throwNewNotification("danger", "Error", course_str+" is not offered during that semester!");
       return false;
     }
 
     // If for moving courses, do not check for duplicate
     if(!this.verifyCourseIsNotDuplicate(course_str) && checkDuplicates == true){
-      alert("Duplicate!");
+      this.props.throwNewNotification("danger", "Error", course_str+" already exists in your selection");
       return false;
     }
 
