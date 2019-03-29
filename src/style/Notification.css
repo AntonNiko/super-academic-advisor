@@ -1,0 +1,9 @@
+
+#notification-content {
+    width: 80vw;
+    height: 50px;
+    background-color: #ff0000;
+    position: fixed; 
+    bottom: 0;
+    margin-left: 10vw;
+}

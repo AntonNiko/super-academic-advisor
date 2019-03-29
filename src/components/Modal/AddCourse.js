@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../style/ModalAddCourse.css';
-import '../style/Modal.css';
+import '../../style/Modal/AddCourse.css';
+import '../../style/Modal.css';
 
-class ModalAddCourse extends Component {
+class AddCourse extends Component {
   // Write method to recognize semester_id based on user input of year and semester
 
   constructor(props){
@@ -76,7 +76,7 @@ class ModalAddCourse extends Component {
     // Move selected courses in position to be added to program
     var new_staged_courses = {};
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
-      // TODO: Modify defalt year, semester, and semester_id for consistency
+
       if (this.state.staged_courses[this.state.selected_unstaged_courses[i]] == undefined) {
         new_staged_courses[this.state.selected_unstaged_courses[i]] = [this.props.getCurrentAvailableYears()[0], this.props.data[this.state.selected_unstaged_courses[i]][3][0]];
       }
@@ -84,6 +84,7 @@ class ModalAddCourse extends Component {
         new_staged_courses[this.state.selected_unstaged_courses[i]] = this.state.staged_courses[this.state.selected_unstaged_courses[i]];
       }
     }
+    
     this.setState({staged_courses: new_staged_courses});
   }
 
@@ -262,4 +263,4 @@ class ModalAddCourse extends Component {
   }
 }
 
-export default ModalAddCourse;
+export default AddCourse;

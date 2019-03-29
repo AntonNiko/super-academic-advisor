@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../style/ModalCourse.css';
-import '../style/Modal.css';
+import '../../style/Modal/Course.css';
+import '../../style/Modal.css';
 
-class ModalCourse extends Component {
+class Course extends Component {
   constructor(props){
     super(props);
 
@@ -152,4 +152,4 @@ class ModalCourse extends Component {
   }
 }
 
-export default ModalCourse;
+export default Course;

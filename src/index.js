@@ -9,50 +9,51 @@ import './style/App.css';
 import Navbar from './components/Navbar.js';
 import Sidebar from './components/Sidebar.js';
 import Program from './components/Program.js';
-import ModalAddCourse from './components/ModalAddCourse.js';
-import ModalCourse from './components/ModalCourse';
+import AddCourse from './components/Modal/AddCourse.js';
+import Course from './components/Modal/Course';
 import Requirements from './components/Requirements.js';
 import Settings from './components/Settings.js';
+import Notification from './components/Notification.js';
 
-import SortableProgram from './scripts/sortable_program.js';
-import Modal from './scripts/modal.js';
-import Dropdown from './scripts/dropdown.js';
-import AddCourse from './scripts/add_course.js';
-import AddSemester from './scripts/add_semester.js';
-import Data from './scripts/data.js';
-import Colors from './scripts/colors.js';
+import ScriptSortableProgram from './scripts/sortable_program.js';
+import ScriptModal from './scripts/modal.js';
+import ScriptDropdown from './scripts/dropdown.js';
+import ScriptAddCourse from './scripts/add_course.js';
+import ScriptAddSemester from './scripts/add_semester.js';
+import ScriptData from './scripts/data.js';
+import ScriptColors from './scripts/colors.js';
 
 // Fetch Data for course info and program sequence respectively
-var data = Data.getCoursesData();
-var program_sequence = Data.getSequenceData();
-var program_selection = Data.getSelectionData();
-var sequence_ids = Data.getSemesterSequenceIds();
-var program_requirements = Data.getRequirementsData();
-var requirements = Data.getRequirementsDataNew();
+var data = ScriptData.getCoursesData();
+var program_sequence = ScriptData.getSequenceData();
+var program_selection = ScriptData.getSelectionData();
+var sequence_ids = ScriptData.getSemesterSequenceIds();
+var program_requirements = ScriptData.getRequirementsData();
+var requirements = ScriptData.getRequirementsDataNew();
 
 // Create global variable indicating color theme choice
 window.colorTheme = "dark";
 
 // Build React Elements
 ReactDOM.render(<Navbar
-  colors={Colors}/>,
+  colors={ScriptColors}/>,
 document.getElementById('navigation'));
 
-ReactDOM.render(<ModalCourse
+ReactDOM.render(<Course
   ref={modalCourse => {window.modalCourse = modalCourse;}}
-  colors={Colors}/>,
+  colors={ScriptColors}/>,
 document.getElementById('modal-course-container'));
 
 ReactDOM.render(<Requirements
   ref={requirements => {window.requirements = requirements;}}
   requirements={requirements}
-  colors={Colors}/>,
+  colors={ScriptColors}/>,
 document.getElementById('modal-reqs-container'));
 
 ReactDOM.render(<Sidebar
   ref={sidebar => {window.sidebar = sidebar}}
   selection={program_selection}
-  colors={Colors}
+  colors={ScriptColors}
   setProgramRequirements={window.requirements.actionSetProgramRequirements}/>,
 document.getElementById('sidebar'));
 
@@ -61,40 +62,42 @@ ReactDOM.render(<Program sequence={program_sequence}
   data={data}
   sequence_ids={sequence_ids}
   updateProgramRequirements={window.requirements.actionUpdateProgramRequirements}
-  colors={Colors}/>,
+  colors={ScriptColors}/>,
 document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<ModalAddCourse data={data}
+ReactDOM.render(<AddCourse data={data}
   ref={modalAddCourse => {window.modalAddCourse = modalAddCourse}}
   addCourse={window.program.actionAddCourse}
   convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}
   getCurrentAvailableYears={window.program.getCurrentAvailableYears}
-  colors={Colors}/>,
+  colors={ScriptColors}/>,
 document.getElementById('modal-add-course-container'));
 
 ReactDOM.render(<Settings/>, document.getElementById('modal-settings-container'));
 
+ReactDOM.render(<Notification/>, document.getElementById("notification-container"));
+
 // jQuery code
 $(function(){
   // Configure dynamic actions for website
-  SortableProgram.render(window.program);
-  SortableProgram.configureCourseContextMenu(window.program);
+  ScriptSortableProgram.render(window.program);
+  ScriptSortableProgram.configureCourseContextMenu(window.program);
 
-  Modal.configureCourseModal(data, window.modalCourse);
-  Modal.configureGeneralModal();
-  Modal.configureAddCourseModal();
-  Modal.configureReqModal();
-  Modal.configureSettingsModal();
+  ScriptModal.configureCourseModal(data, window.modalCourse);
+  ScriptModal.configureGeneralModal();
+  ScriptModal.configureAddCourseModal();
+  ScriptModal.configureReqModal();
+  ScriptModal.configureSettingsModal();
 
-  Dropdown.configureDropdownActions();
-  Dropdown.configureDropdownSelection(window.sidebar, window.modalAddCourse);
-  Dropdown.configureSidebarSubmitSelection(window.sidebar);
+  ScriptDropdown.configureDropdownActions();
+  ScriptDropdown.configureDropdownSelection(window.sidebar, window.modalAddCourse);
+  ScriptDropdown.configureSidebarSubmitSelection(window.sidebar);
 
-  AddCourse.configureModalAnimations(window.modalAddCourse);
-  AddCourse.configureStagingActions(window.modalAddCourse);
-  AddCourse.configureSubmitActions(window.modalAddCourse, window.requirements);
+  ScriptAddCourse.configureModalAnimations(window.modalAddCourse);
+  ScriptAddCourse.configureStagingActions(window.modalAddCourse);
+  ScriptAddCourse.configureSubmitActions(window.modalAddCourse, window.requirements);
 
-  AddSemester.configureAddSemesterAction(window.program, SortableProgram);
+  ScriptAddSemester.configureAddSemesterAction(window.program, ScriptSortableProgram);
 
-  Colors.configureLightAndDarkThemes();
+  ScriptColors.configureLightAndDarkThemes();
 });
