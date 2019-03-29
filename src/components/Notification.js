@@ -13,10 +13,17 @@ class Notification extends Component {
             text: null
         };
 
+        this.visible = false;
+
         this.throwNewNotification = this.throwNewNotification.bind(this);
     }
 
     throwNewNotification(notification_type, title, text) {
+        // Add animation of hiding to accentuate reactive behavior
+        if (this.visible) {
+            this.makeHidden(true);
+        }
+
         this.setState({
             notification_type: notification_type,
             title: title,
@@ -26,29 +33,57 @@ class Notification extends Component {
         this.makeVisible();
     }
 
-    makeVisible() {
-        $("#notification-content").animate({
-            bottom: "0px"
-        }, 300);
+    makeVisible(no_animation = false) {
+        if (no_animation) {
+            $("#notification-content").css({
+                bottom: "0px"
+            });
+        } else {
+            $("#notification-content").animate({
+                bottom: "0px"
+            }, 300);
+        }
+
+
+        this.visible = true;
     }
 
-    makeHidden() {
-        $("#notification-content").animate({
-            bottom: "-60px"
-        }, 300);
+    makeHidden(no_animation = false) {
+        if (no_animation) {
+            $("#notification-content").css({
+                bottom: "-60px"
+            });
+        } else {
+            $("#notification-content").animate({
+                bottom: "-60px"
+            }, 300);
+        }
+
+        this.visible = false;
     }
 
     renderNotificationIcon() {
         return [];
     }
 
-    renderNotificationType() {
-
+    renderNotificationTypeClass() {
+        switch(this.state.notification_type) {
+            case "danger":
+              return "notification-danger";
+            case "success":
+              return "notification-success";
+            case "warning":
+              return "notification-warning";
+            case "info":
+              return "notification-info";
+            default:
+              break;
+        }
     }
 
     render() {
         return (
-            <div id="notification-content" class="notification-danger">
+            <div id="notification-content" class={this.renderNotificationTypeClass()}>
                 <div id="notification-icon">
                     <span>{this.renderNotificationIcon()}</span>
                 </div>

@@ -84,8 +84,13 @@ class AddCourse extends Component {
         new_staged_courses[this.state.selected_unstaged_courses[i]] = this.state.staged_courses[this.state.selected_unstaged_courses[i]];
       }
     }
-    
-    this.setState({staged_courses: new_staged_courses});
+
+    // Unselect all previously selected unstaged courses for reactiveness as well 
+    // as assign new staged courses
+    this.setState({
+      staged_courses: new_staged_courses,
+      selected_unstaged_courses: []
+    });
   }
 
   actionUnstageCourses(){
@@ -93,7 +98,13 @@ class AddCourse extends Component {
     for(var i=0; i<this.state.selected_staged_courses.length; i++){
       delete new_staged_courses[this.state.selected_staged_courses[i]];
     }
-    this.setState({staged_courses: new_staged_courses});
+
+    // Unselect all previously selected staged courses for reactiveness, as well
+    // as unstageing courses
+    this.setState({
+      staged_courses: new_staged_courses,
+      selected_staged_courses: []
+    });
   }
 
   actionSelectStagedCourseYear(course_str, year){

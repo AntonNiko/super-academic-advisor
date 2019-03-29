@@ -59,7 +59,7 @@ class Program extends Component {
 
     // Verify course offered in semester
     if(!this.verifyCourseOffered(course_str, semester_id)){
-      this.props.throwNewNotification("danger", "Error", course_str+" is not offered during that semester!");
+      this.props.throwNewNotification("danger", "Error", course_str+" is not offered in semester "+semester_id);
       return false;
     }
 
@@ -70,6 +70,7 @@ class Program extends Component {
     }
 
     // Assert all requisites satisfied
+    // TODO: Return relevant information about all requirements that were not met 
     if(!this.verifyCourseRequisitesSatisfied(this.props.data[course_str], semester_id)){
       alert("Course requisite not satisifed!!!...");
       return false;
@@ -77,7 +78,7 @@ class Program extends Component {
 
     // Assert that course will not exceed credit limit
     if(!this.verifyCourseCreditLimit(course_str, semester_id)){
-      alert("Too many units!");
+      this.props.throwNewNotification("danger", "Error", "Semester "+semester_id+" max credit limit reached");
       return false;
     }
 
@@ -99,13 +100,14 @@ class Program extends Component {
     // Temporarily move course DOM back to original semester for processing (needed for React to properly update DOM)
     $("#"+origin_semester_id).prepend($("#"+course_str.replace(" ","_")))
 
+    // TODO: Return relevant information about all requirements that were not met 
     if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
-      console.log("One or more courses were invalidated...");
+      alert("One or more courses were invalidated...");
       return false;
     }
 
     if(!this.actionAddCourse(new_semester_id, course_str, true, false)){
-      console.log("failed to add course...");
+      //alert("failed to add course...");
       return false;
     }
     this.sem[origin_semester_id].current.removeCourse(course_str, false);

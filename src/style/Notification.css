@@ -53,3 +53,15 @@
 .notification-danger {
     background-color: #ca1a1a;
 }
+
+.notification-success {
+    background-color: #456f25;
+}
+
+.notification-warning {
+    background-color: #b76c37;
+}
+
+.notification-info {
+    background-color: #275ea2;
+}
