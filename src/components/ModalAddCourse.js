@@ -77,7 +77,12 @@ class ModalAddCourse extends Component {
     var new_staged_courses = {};
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
       // TODO: Modify defalt year, semester, and semester_id for consistency
-      new_staged_courses[this.state.selected_unstaged_courses[i]] = ["2018","F","1A"];
+      if (this.state.staged_courses[this.state.selected_unstaged_courses[i]] == undefined) {
+        new_staged_courses[this.state.selected_unstaged_courses[i]] = [this.props.getCurrentAvailableYears()[0], this.props.data[this.state.selected_unstaged_courses[i]][3][0]];
+      }
+      else {
+        new_staged_courses[this.state.selected_unstaged_courses[i]] = this.state.staged_courses[this.state.selected_unstaged_courses[i]];
+      }
     }
     this.setState({staged_courses: new_staged_courses});
   }

@@ -47,7 +47,7 @@ class RequirementsWizard {
         // TODO: FIX WITH SAME REQUIREMENT NAMES (E.G: ELECTIVE ENG_COMP)
 
         // DEBUG
-        //console.log(this.result_course_requirements[i]);
+        console.log(this.result_course_requirements[i]);
       }
     }
 
