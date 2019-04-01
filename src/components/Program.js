@@ -73,7 +73,7 @@ class Program extends Component {
     var fulfilled = true;
     var course_obj = this.getCourseObjectByString(course_str);
     for (var i=0; i<course_obj["requisites"].length; i++) {
-      if (!this.isRequisiteSatisfied(course_obj["requisites"][i], semester_id)) {
+      if (!this.isRequisiteSatisfied(course_obj["requisites"][i], semester_id, true)) {
         return false;
       }
     }
@@ -141,23 +141,35 @@ class Program extends Component {
     }
   }
 
-  getConditionalRequisiteFulfilledState(requisite, semester_id) {
+  getConditionalRequisiteFulfilledState(requisite, semester_id, displayError) {
     var fulfilled = false;
 
-    var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0], semester_id);
-    var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2], semester_id);
-
     var conditional_token = requisite[1];
-    if (conditional_token == "AND" && fulfilled_first_element && fulfilled_second_element) {
-      return true;
-    } else if (conditional_token == "OR" && (fulfilled_first_element || fulfilled_second_element)) {
-      return true;
+
+    if (conditional_token == "AND") {
+      var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0], semester_id);
+      var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2], semester_id);
+
+      if (fulfilled_first_element && fulfilled_second_element) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (conditional_token == "OR") {
+      var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0], semester_id, displayError);
+      var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2], semester_id, displayError);
+
+      if (fulfilled_first_element || fulfilled_second_element ) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      return null;
     }
   }
 
-  getCollectionRequisiteFulfilledState(requisite, semester_id) {
+  getCollectionRequisiteFulfilledState(requisite, semester_id, displayError) {
     // Track how many requisites fulfilled
     var requisites_fulfilled = 0;
     for (var i=0; i < requisite[1].length; i++) {
@@ -177,7 +189,7 @@ class Program extends Component {
     }
   }
 
-  getCourseRequisiteFulfilledState(requisite, semester_id) {
+  getCourseRequisiteFulfilledState(requisite, semester_id, displayError) {
     var current_semester = this.sem[semester_id];
 
     // If prerequisite, we start at previous semester to check for course
@@ -197,14 +209,15 @@ class Program extends Component {
     return false;
   }
 
-  isRequisiteSatisfied(requisite, semester_id) {
+  isRequisiteSatisfied(requisite, semester_id, displayError = false) {
+    console.log(requisite);
     switch (this.getRequisiteType(requisite)) {
       case "conditional":
-        return this.getConditionalRequisiteFulfilledState(requisite, semester_id);
+        return this.getConditionalRequisiteFulfilledState(requisite, semester_id, displayError);
       case "collection":
-        return this.getCollectionRequisiteFulfilledState(requisite, semester_id);
+        return this.getCollectionRequisiteFulfilledState(requisite, semester_id, displayError);
       case "course":
-        return this.getCourseRequisiteFulfilledState(requisite, semester_id);
+        return this.getCourseRequisiteFulfilledState(requisite, semester_id, displayError);
       default:
         return null;
     }

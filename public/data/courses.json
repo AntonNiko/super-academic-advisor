@@ -431,7 +431,7 @@
     "credits" : 2.5,
     "offered" : ["F"],
     "requisites" : [],
-    "exceptions" : [],
+    "exceptions" : [[["ENGR 112","p"],"OR",["ENGL 135","p"]]],
     "description" : {
       "title": "",
       "hours": "",
@@ -680,7 +680,7 @@
     "requisites" : [
       ["=1 OF",[["MATH 100","p"],["MATH 102","p"],["MATH 109","p"],["MATH 151","p"]]]
     ],
-    "exceptions" : [],
+    "exceptions" : [[">=1 OF",[["MATH 222","p"], ["MATH 422","p"], ["MATH 423","p"]]]],
     "description" : {
       "title": "",
       "hours": "",
