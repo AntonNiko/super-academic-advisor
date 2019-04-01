@@ -264,8 +264,8 @@ class AddCourse extends Component {
             <div id="modal-add-course-transfer-actions">
               <div id="modal-add-course-action-container">
                 <div>
-                  <button type="button" class="btn-action" id="modal-add-course-action-add">Move Courses</button>
-                  <button type="button" class="btn-action" id="modal-add-course-action-remove">Remove Courses</button>
+                  <button type="button" class="btn-action" id="modal-add-course-action-add">Stage</button>
+                  <button type="button" class="btn-action" id="modal-add-course-action-remove">Unstage</button>
                 </div>
               </div>
             </div>
