@@ -70,11 +70,18 @@ class Program extends Component {
     }
 
     // Assert all requisites satisfied
-    // TODO: Return relevant information about all requirements that were not met 
-    if(!this.verifyCourseRequisitesSatisfied(this.props.data[course_str], semester_id)){
-      alert("Course requisite not satisifed!!!...");
-      return false;
+    var fulfilled = true;
+    var course_obj = this.getCourseObjectByString(course_str);
+    for (var i=0; i<course_obj["requisites"].length; i++) {
+      if (!this.isRequisiteSatisfied(course_obj["requisites"][i], semester_id)) {
+        fulfilled = false;
+      }
     }
+
+    //if(!this.verifyCourseRequisitesSatisfied(this.props.data[course_str], semester_id)){
+    //  alert("Course requisite not satisifed!!!...");
+    //  return false;
+    //}
 
     // Assert that course will not exceed credit limit
     if(!this.verifyCourseCreditLimit(course_str, semester_id)){
@@ -100,7 +107,7 @@ class Program extends Component {
     // Temporarily move course DOM back to original semester for processing (needed for React to properly update DOM)
     $("#"+origin_semester_id).prepend($("#"+course_str.replace(" ","_")))
 
-    // TODO: Return relevant information about all requirements that were not met 
+    // TODO: Return relevant information about all requirements that were not met
     if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
       alert("One or more courses were invalidated...");
       return false;
@@ -115,6 +122,94 @@ class Program extends Component {
 	  return true;
   }
 
+  getRequisiteType(requisite) {
+    /*
+    Requisite types:
+    1) ["SUBJ XXX","OR/AND","SUBJ YYY"] / [[],"OR/AND",[]] (Conditional)
+    2) [">=/</N OF",["SUBJ XXX","SUBJ YYY",...]] (Collection)
+    4) ["N CREDITS/COURSES",["SUBJ"],["100",...],["WITH"],"M CREDITS/COURSES",["100",..]]] (Quantified)
+    */
+
+    if (requisite.length == 3 && ["OR","AND"].includes(requisite[1])) {
+      return "conditional";
+    } else if (requisite.length == 2 && requisite[0].slice(-2) == "OF" && Array.isArray(requisite[1])) {
+      return "collection";
+    } else if (requisite.length == 2 && requisite[0].slice(0,8) != "ELECTIVE" && ["p","c"].includes(requisite[1])) {
+      return "course";
+    } else {
+      return "unrecognized";
+    }
+  }
+
+  getConditionalRequisiteFulfilledState(requisite, semester_id) {
+    var fulfilled = false;
+
+    var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0]);
+    var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2]);
+
+    var conditional_token = requisite[1];
+    if (conditional_token == "AND" && fulfilled_first_element && fulfilled_second_element) {
+      return true;
+    } else if (conditional_token == "OR" && (fulfilled_first_element || fulfilled_second_element)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getCollectionRequisiteFulfilledState(requisite, semester_id) {
+    // Track how many requisites fulfilled
+    var requisites_fulfilled = 0;
+    for (var i=0; i < requisite[1].length; i++) {
+      if (this.isRequisiteSatisfied(requisite[1][i], semester_id)) {
+        requisites_fulfilled++;
+      }
+    }
+
+    // Depending on condition, determ if requirmeent fulfilled
+    var condition_limit = parseInt(requisite[0].match(/\d+/));
+    if (requisite[0].slice(0,2) == ">=" && requisites_fulfilled >= condition_limit) {
+      return true;
+    } else if (requisite[0].slice(0,1) == "=" && requisites_fulfilled >= condition_limit) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getCourseRequisiteFulfilledState(requisite, semester_id) {
+    var current_semester = this.sem[semester_id];
+
+    // If prerequisite, we start at previous semester to check for course
+    if (requisite[1] == "p") {
+      current_semester = this.sem[current_semester.current.state.prev_semester];
+    }
+
+    // Loop through each consecutive previous semesters to check for course
+    while (current_semester != null) {
+      if (current_semester.current.props.courses[0].includes(requisite[0])) {
+        return true;
+      }
+
+      current_semester = this.sem[current_semester.current.state.prev_semester];
+    }
+
+    return false;
+  }
+
+  isRequisiteSatisfied(requisite, semester_id) {
+    switch (this.getRequisiteType(requisite)) {
+      case "conditional":
+        return this.getConditionalRequisiteFulfilledState(requisite, semester_id);
+      case "collection":
+        return this.getCollectionRequisiteFulfilledState(requisite, semester_id);
+      case "course":
+        return this.getCourseRequisiteFulfilledState(requisite, semester_id);
+      default:
+        return null;
+    }
+  }
+
   verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id){
     /* Method which checks that for all existing courses, all reqs are satisified
     . Commonly used after course moved, to check it does not break any other course reqs */
@@ -126,9 +221,12 @@ class Program extends Component {
     var _failed = false;
     for(var semester_id in this.sem){
       for(var i=0; i<this.sem[semester_id].current.state.courses.length; i++){
-        var course_obj = this.props.data[this.sem[semester_id].current.state.courses[i]];
-        if(!this.verifyCourseRequisitesSatisfied(course_obj, semester_id)){
-          _failed = true;
+
+        var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.state.courses[i], semester_id);
+        for (var j=0; j<course_obj["requisites"].length; i++) {
+          if (!this.isRequisiteSatisifed(course_obj["requisites"][j], semester_id)) {
+            _failed = true;
+          }
         }
       }
     }
@@ -194,7 +292,7 @@ class Program extends Component {
   verifyCourseOffered(course_str, semester_id){
     /* Checks if course offered in semester. If it is, return true.
     If not, return false */
-    if(this.props.data[course_str][3].includes(this.sem[semester_id].current.props.courses[2])){
+    if(this.getCourseObjectByString(course_str)["offered"].includes(this.sem[semester_id].current.props.courses[2])){
       return true;
     }else{
       return false;
@@ -202,7 +300,7 @@ class Program extends Component {
   }
 
   verifyCourseCreditLimit(course_str, semester_id){
-    var course_credit = this.props.data[course_str][2];
+    var course_credit = this.getCourseObjectByString(course_str)["credits"];
     var semester_credit = this.sem[semester_id].current.state.current_units;
     var credit_limit = this.sem[semester_id].current.state.max_units;
 
@@ -227,12 +325,10 @@ class Program extends Component {
   convertYearAndSemesterToProgramSemesterId(year, semester){
     // Matches the year and semester value with an existing semester ID.
     // If does not match, return null/-1/false or something...
-    console.log(year+" "+semester);
     for(var semester_id in this.state.sequence){
       var current_year = this.state.sequence[semester_id][1];
       var current_semester = this.state.sequence[semester_id][2];
       if(current_year == year && current_semester == semester){
-        console.log(semester_id);
         return semester_id;
       }
     }
@@ -274,6 +370,14 @@ class Program extends Component {
       }
     }
     return available_years;
+  }
+
+  getCourseObjectByString(course_str) {
+    for (var i=0; i<this.props.data.length; i++) {
+      if (this.props.data[i]["course_str"] == course_str) {
+        return this.props.data[i];
+      }
+    }
   }
 
   renderSemesters(){

@@ -32,7 +32,7 @@ class AddCourse extends Component {
     // TODO: Verify course  not already added to program
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     var new_staged_courses = this.state.staged_courses;
-    
+
     for(var course_str in this.state.staged_courses){
       var course_year = this.state.staged_courses[course_str][0];
       var course_semester = this.state.staged_courses[course_str][1];
@@ -78,14 +78,15 @@ class AddCourse extends Component {
     for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
 
       if (this.state.staged_courses[this.state.selected_unstaged_courses[i]] == undefined) {
-        new_staged_courses[this.state.selected_unstaged_courses[i]] = [this.props.getCurrentAvailableYears()[0], this.props.data[this.state.selected_unstaged_courses[i]][3][0]];
+        new_staged_courses[this.state.selected_unstaged_courses[i]] = [this.props.getCurrentAvailableYears()[0], 
+                                                                       this.getCourseObjectByString(this.state.selected_unstaged_courses[i])["offered"][0]];
       }
       else {
         new_staged_courses[this.state.selected_unstaged_courses[i]] = this.state.staged_courses[this.state.selected_unstaged_courses[i]];
       }
     }
 
-    // Unselect all previously selected unstaged courses for reactiveness as well 
+    // Unselect all previously selected unstaged courses for reactiveness as well
     // as assign new staged courses
     this.setState({
       staged_courses: new_staged_courses,
@@ -119,12 +120,30 @@ class AddCourse extends Component {
     this.setState({staged_courses: new_staged_courses});
   }
 
+  getCourseObjectByString(course_str) {
+    for (var i=0; i<this.props.data.length; i++) {
+      if (this.props.data[i]["course_str"] == course_str) {
+        return this.props.data[i];
+      }
+    }
+  }
+
   renderCourseSelectionList(){
     var list_elements = [];
 
     // Sort course props into dictionary, ready to render
     var course_dir = {};
-    for(var course_key in this.props.data){
+    for (var i=0; i<this.props.data.length; i++) {
+      var course_subject = this.props.data[i]["course_subject"];
+      var course_str = this.props.data[i]["course_str"];
+
+      if (course_dir[course_subject] == undefined) {
+        course_dir[course_subject] = [];
+      }
+      course_dir[course_subject].push(course_str);
+    }
+
+    /*for(var course_key in this.props.data){
       var course_obj = this.props.data[course_key];
       var course_subject = course_obj[0];
 
@@ -134,7 +153,7 @@ class AddCourse extends Component {
         course_dir[course_subject] = [];
       }
       course_dir[course_subject].push(course_key);
-    }
+    }*/
 
     // Render all list elements
     for(var course_subject in course_dir){
@@ -199,7 +218,7 @@ class AddCourse extends Component {
 
   renderDynamicSemesterDropdownList(course_str){
     /* Generate dynamic semester dropdown list, based on specific course's semester avilability */
-    var course_semesters_offered = this.props.data[course_str][3];
+    var course_semesters_offered = this.getCourseObjectByString(course_str)["offered"];
     var list_items = [];
     for(var i=0; i<course_semesters_offered.length; i++){
       var semester = course_semesters_offered[i];

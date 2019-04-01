@@ -19,8 +19,8 @@ class Semester extends Component {
 
     // Add courses to state, to update credit
     for(var i=0; i<this.props.courses[0].length; i++){
-      var course_id = this.props.courses[0][i];
-      var course_credits = this.props.data[course_id][2];
+      var course_str = this.props.courses[0][i];
+      var course_credits = this.getCourseObjectByString(course_str)["credits"];
       this.updateCreditValue(course_credits);
     }
 
@@ -32,20 +32,28 @@ class Semester extends Component {
     this.current_units+=course_credit_value;
   }
 
-  addCourse(course_id, temporary = false){
-    this.props.courses[0].push(course_id);
+  addCourse(course_str, temporary = false){
+    this.props.courses[0].push(course_str);
     if(!temporary){
       this.forceUpdate();
-      this.updateCreditValue(this.props.data[course_id][2]);
+      this.updateCreditValue(this.getCourseObjectByString(course_str)["credits"]);
       this.setState({current_units: this.current_units});
     }
   }
 
-  removeCourse(course_id, temporary = false){
-    this.props.courses[0].splice(this.props.courses[0].indexOf(course_id), 1);
+  getCourseObjectByString(course_str) {
+    for (var i=0; i<this.props.data.length; i++) {
+      if (this.props.data[i]["course_str"] == course_str) {
+        return this.props.data[i];
+      }
+    }
+  }
+
+  removeCourse(course_str, temporary = false){
+    this.props.courses[0].splice(this.props.courses[0].indexOf(course_str), 1);
     if(!temporary){
       this.forceUpdate();
-      this.updateCreditValue(-this.props.data[course_id][2]);
+      this.updateCreditValue(-this.getCourseObjectByString(course_str)["credits"]);
       this.setState({current_units: this.current_units});
     }
   }
@@ -53,7 +61,7 @@ class Semester extends Component {
   renderCourses(){
     var courses = [];
     for(var i=0; i<this.state.courses.length; i++){
-      courses.push(<Course course_id={this.state.courses[i]}
+      courses.push(<Course course_str={this.state.courses[i]}
                       ref={course => {this.course = course}}
                       updateCreditValue={this.updateCreditValue}
                       data = {this.props.data}/>);

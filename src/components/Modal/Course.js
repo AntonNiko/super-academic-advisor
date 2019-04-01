@@ -22,16 +22,16 @@ class Course extends Component {
 
   actionPopulateCourse(course){
     this.setState({
-      course_str: course[0]+" "+course[1],
-      course_offered: course[3].join(", "),
-			course_credits: course[2],
-			course_details: course[6],
-			course_link_extension: course[7],
+      course_str: course["course_str"],
+      course_offered: course["offered"].join(", "),
+			course_credits: course["credits"],
+			course_details: course["description"],
+			course_link_extension: course["description"]["link"]
     });
 	}
 
 	renderCourseDetails(){
-		if(!["CSC 111","CSC 115","ENGR 110","ENGR 130","MATH 100"].includes(this.state.course_str)){
+		if(!["CSC 111","CSC 115","CSC 116","CSC 225"].includes(this.state.course_str)){
 			return [<h3 class="modal-subsection-title">Prerequisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>
@@ -58,29 +58,29 @@ class Course extends Component {
 		var coreq_elements = [];
 		var notes_elements = [];
 
-		if(this.state.course_details.Prerequisites != undefined){
+		if(this.state.course_details["prerequisites"] != undefined){
 			elements.push(<h3 class="modal-subsection-title">Prerequisites</h3>);
 			// Look through prerequisites list
-			for(var i=0; i<this.state.course_details.Prerequisites.length; i++){
-				prereq_elements.push(<li><span>{this.state.course_details.Prerequisites[i]}</span></li>);
+			for(var i=0; i<this.state.course_details["prerequisites"].length; i++){
+				prereq_elements.push(<li><span>{this.state.course_details["prerequisites"][i]}</span></li>);
 			}
 			elements.push(<ul class="modal-list">{prereq_elements}</ul>);
 		}
 
-		if(this.state.course_details.Corequisites != undefined){
+		if(this.state.course_details["corequisites"] != undefined){
 			elements.push(<h3 class="modal-subsection-title">Corequisites</h3>);
 			// Look through corequisites list
-			for(var i=0; i<this.state.course_details.Corequisites.length; i++){
-				coreq_elements.push(<li><span>{this.state.course_details.Corequisites[i]}</span></li>);
+			for(var i=0; i<this.state.course_details["corequisites"] .length; i++){
+				coreq_elements.push(<li><span>{this.state.course_details["corequisites"] [i]}</span></li>);
 			}
 			elements.push(<ul class="modal-list">{coreq_elements}</ul>);
 		}
 
-		if(this.state.course_details.Note != undefined){
+		if(this.state.course_details["note"] != undefined){
 			elements.push(<h3 class="modal-subsection-title">Notes</h3>);
 			// Look through notes list
-			for(var i=0; i<this.state.course_details.Note.length; i++){
-				notes_elements.push(<li><span>{this.state.course_details.Note[i]}</span></li>);
+			for(var i=0; i<this.state.course_details["note"].length; i++){
+				notes_elements.push(<li><span>{this.state.course_details["note"][i]}</span></li>);
 			}
 			elements.push(<ul class="modal-list">{notes_elements}</ul>);
 		}
@@ -94,8 +94,8 @@ class Course extends Component {
 			return <div></div>
 		}
 
-		if(this.state.course_details.Description != undefined){
-			return (<p>{this.state.course_details.Description}</p>);
+		if(this.state.course_details["description"] != undefined){
+			return (<p>{this.state.course_details["description"]}</p>);
 		}else{
 			return (<p></p>);
 		}
@@ -116,7 +116,7 @@ class Course extends Component {
 					<div class="modal-draggable-handle"></div>
     	    <span class="modal-close-button">X</span>
     	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
-    	    <h2 class="modal-title" id="modal-course-desc">{["CSC 111","CSC 115","ENGR 110","ENGR 130","MATH 100"].includes(this.state.course_str) ? this.state.course_details.Title : "Course Title"}</h2>
+    	    <h2 class="modal-title" id="modal-course-desc">{["CSC 111","CSC 115","CSC 116","CSC 225"].includes(this.state.course_str) ? this.state.course_details["title"] : "Course Title"}</h2>
 
     	    <div class="modal-subtitle">
     	      <h3 id="modal-course-subtitle-left" class="modal-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>

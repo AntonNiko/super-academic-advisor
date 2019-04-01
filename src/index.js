@@ -60,7 +60,8 @@ ReactDOM.render(<Sidebar
   setProgramRequirements={window.requirements.actionSetProgramRequirements}/>,
 document.getElementById('sidebar'));
 
-ReactDOM.render(<Program sequence={program_sequence}
+ReactDOM.render(<Program
+  sequence={program_sequence}
   ref={program => {window.program = program;}}
   data={data}
   sequence_ids={sequence_ids}
@@ -69,7 +70,8 @@ ReactDOM.render(<Program sequence={program_sequence}
   colors={ScriptColors}/>,
 document.getElementById('panel-container-parent'));
 
-ReactDOM.render(<AddCourse data={data}
+ReactDOM.render(<AddCourse
+  data={data}
   ref={modalAddCourse => {window.modalAddCourse = modalAddCourse}}
   addCourse={window.program.actionAddCourse}
   convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}
