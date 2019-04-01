@@ -21,9 +21,18 @@ class Settings extends Component {
                     <h2 class="modal-title" id="modal-settings-title">Settings</h2>
 
                     <div class="modal-settings-section">
-                        <h3 class="modal-subtitle-left"><span>Color Theme</span></h3>
-                        <div class="modal-settings-section-text"><span>Dark Theme</span></div>
-                        <div class="modal-settings-section-text"><span>Light Theme</span></div>
+                        <ul class="dropdown-select">
+                          <li id="settings-color-theme-dropdown">
+                            <div class="dropdown-header">
+                                <p class="dropdown-value">Dark Theme</p>
+                                <span class="arrow-down"></span>
+                            </div>
+                            <ul>
+                                <li value="Dark Theme"><span>Dark Theme</span></li>
+                                <li value="Light Theme"><span>Light Theme</span></li>
+                            </ul>
+                          </li>
+                        </ul>
                     </div>
                 </div>
             </div>          
