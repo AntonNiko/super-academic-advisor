@@ -4,31 +4,31 @@ import 'jquery-ui/ui/widgets/draggable';
 
 class SortableProgram {
   static configureCourseContextMenu(program){
-    $(document).on("mouseenter", ".panel-course-details-icon", function(){
+    $(document).on("mouseenter", ".course-details-icon", function(){
       $(this).find("img").css({"visibility":"visible", "opacity":"1"});
     });
 
-    $(document).on("mouseleave", ".panel-course-details-icon", function(){
+    $(document).on("mouseleave", ".course-details-icon", function(){
       $(this).find("img").css({"visibility":"hidden", "opacity":"0"});
     });
 
-    $(document).on("mouseenter", ".panel-course-context-menu ul li", function(){
+    $(document).on("mouseenter", ".course-context-menu ul li", function(){
       $(this).css({"background":"#666"});
     });
 
-    $(document).on("mouseleave", ".panel-course-context-menu ul li", function(){
+    $(document).on("mouseleave", ".course-context-menu ul li", function(){
       $(this).css({"background":"#353535"});
     });
 
-    $(document).on("click", ".panel-course-details-icon", function(){
+    $(document).on("click", ".course-details-icon", function(){
       $(this).next().find("ul").css({"visibility":"visible", "opacity":"1"});
     });
 
     $(window).click(function(e){
-      if(!$(e.target).is(".panel-course-context-menu ul li") &&
-         !$(e.target).is(".panel-course-context-menu ul li span") &&
-         !$(e.target).is(".panel-course-details-icon img")){
-        $(".panel-course-context-menu ul ").css({"visibility":"hidden", "opacity":"0"});
+      if(!$(e.target).is(".course-context-menu ul li") &&
+         !$(e.target).is(".course-context-menu ul li span") &&
+         !$(e.target).is(".course-details-icon img")){
+        $(".course-context-menu ul ").css({"visibility":"hidden", "opacity":"0"});
       }
     });
 
