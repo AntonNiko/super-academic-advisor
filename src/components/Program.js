@@ -74,7 +74,7 @@ class Program extends Component {
     var course_obj = this.getCourseObjectByString(course_str);
     for (var i=0; i<course_obj["requisites"].length; i++) {
       if (!this.isRequisiteSatisfied(course_obj["requisites"][i], semester_id)) {
-        fulfilled = false;
+        return false;
       }
     }
 
@@ -144,8 +144,8 @@ class Program extends Component {
   getConditionalRequisiteFulfilledState(requisite, semester_id) {
     var fulfilled = false;
 
-    var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0]);
-    var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2]);
+    var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0], semester_id);
+    var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2], semester_id);
 
     var conditional_token = requisite[1];
     if (conditional_token == "AND" && fulfilled_first_element && fulfilled_second_element) {
@@ -221,10 +221,9 @@ class Program extends Component {
     var _failed = false;
     for(var semester_id in this.sem){
       for(var i=0; i<this.sem[semester_id].current.state.courses.length; i++){
-
         var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.state.courses[i], semester_id);
-        for (var j=0; j<course_obj["requisites"].length; i++) {
-          if (!this.isRequisiteSatisifed(course_obj["requisites"][j], semester_id)) {
+        for (var j=0; j<course_obj["requisites"].length; j++) {
+          if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id)) {
             _failed = true;
           }
         }
@@ -239,54 +238,6 @@ class Program extends Component {
     }else{
       return true;
     }
-  }
-
-  verifyCourseRequisitesSatisfied(course, semester_id){
-    var course_reqs = course[4];
-    /* [[["CSC 110","p"],["CSC 111","c"]], [["ENGR 110","p"],[["ENGR 112","ENGL 135"],"p"]]] */
-    for(var i=0; i<course_reqs.length; i++){
-      /* Each iteration in this outer loop represents a requirement that must be satisfied */
-      var current_req = course_reqs[i];
-      var _found_req = false;
-      for(var j=0; j<current_req.length; j++){
-        var current_course = current_req[j];
-        var req_choice = current_course[1]; /* either p (prereq), or c (coreq) */
-
-        // If nested condition is actually 2 or more courses, then all those courses must be present
-        if(typeof current_course[0] === 'object'){
-          var _found_joint_reqs = true;
-          for(var k=0; k<current_course[0].length; k++){
-            if(!this.verifyCourseReqSatisfied(current_course[0][k], semester_id, req_choice)){
-              _found_joint_reqs = false;
-            }
-          }
-          if(_found_joint_reqs == true) _found_req = true;
-        }else if(typeof current_course[0] === 'string'){
-          /* Requisite only involves 1 course */
-          if(this.verifyCourseReqSatisfied(current_course[0], semester_id, req_choice)){
-            _found_req = true;
-          }
-        }
-      }
-    }
-
-    // If a required req is not satisfied, return false
-    if(_found_req == false){
-      return false;
-    }
-    return true;
-  }
-
-  verifyCourseReqSatisfied(course_str, semester_id, req_choice){
-    var current_semester = this.sem[semester_id];
-    if(req_choice == "p") current_semester = this.sem[current_semester.current.state.prev_semester];
-    while(current_semester != null){
-      if(current_semester.current.props.courses[0].includes(course_str)){
-        return true;
-      }
-      current_semester = this.sem[current_semester.current.state.prev_semester];
-    }
-    return false;
   }
 
   verifyCourseOffered(course_str, semester_id){

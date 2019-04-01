@@ -84,16 +84,14 @@
     ],
     "exceptions" : [],
     "description" : {
-      "title": "Fundamentals of Programming with Engineering Applications II",
-      "hours": "3-2-0",
-      "description": "Development of software for real-world engineering applications using both imperative and object-oriented approaches. Topics include basic algorithms and data structures, abstract data types, generic collection types, design of large programs, using and building software libraries, user interfaces, debugging techniques, software documentation.",
+      "title": "",
+      "hours": "",
+      "description": "",
       "prerequisites":
         [
-          "CSC 110 or CSC 111."
         ],
       "note":
         [
-          "Credit will be granted for only one of CSC 116, CSC 115, CSC 160."
         ],
       "link" : "CSC/116.html"
     }
