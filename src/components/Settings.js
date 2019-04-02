@@ -33,6 +33,8 @@ class Settings extends Component {
                             </ul>
                           </li>
                         </ul>
+
+                        <button type="button" class="btn-primary" id="settings-color-theme-submit">Submit</button>
                     </div>
                 </div>
             </div>          

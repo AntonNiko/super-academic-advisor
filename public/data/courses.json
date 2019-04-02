@@ -426,6 +426,84 @@
   },
   {
     "course_subject" : "ENGR",
+    "course_number" : "001",
+    "course_str" : "ENGR 001",
+    "credits" : 4.5,
+    "offered" : ["F","Sp","Su"],
+    "requisites" : [["ENGR 110","p"],["ENGR 130","p"],["MATH 100","p"],[">=2 OF", [["CSC 111","p"],["MATH 110","p"],["PHYS 110","p"]]]],
+    "exceptions" : [],
+    "description" : {
+      "title": "Work Term 1",
+      "hours": "",
+      "description": "Students are employed for a work term, normally of four months' duration. Competencies typically addressed include personal management and work place behaviour. Provides an introduction to a productive work experience that is related to the student's program of studies and individual interests.",
+      "prerequisites":
+        [
+          "All of ENGR 110, ENGR 130, MATH 100; and",
+          "at least two of CSC 111, MATH 110, PHYS 110; and", 
+          "permission of the faculty"
+        ],
+      "note":
+        [
+          "This is a Co-operative Education work term as defined on this page and thus the Co-op work term tuition fee on this page applies."
+        ],
+      "link" : "ENGR/001.html"
+    }
+  },
+  {
+    "course_subject" : "ENGR",
+    "course_number" : "002",
+    "course_str" : "ENGR 002",
+    "credits" : 4.5,
+    "offered" : ["F","Sp","Su"],
+    "requisites" : [[["ENGR 001","p"],"AND",["ENGR 130","p"]], [["ENGR 120","p"], "OR", ["ENGR 240","p"]]],
+    "exceptions" : [],
+    "description" : {
+      "title": "Work Term 2",
+      "hours": "",
+      "description": "Students are employed for a work term, normally of four months' duration. Competencies typically addressed include communication and teamwork. Should generally provide an increased level of responsibility in an area that is related to the student's program of studies and individual interests.",
+      "prerequisites":
+        [
+          "ENGR 001 and ENGR 130; and",
+          "ENGR 120 or ENGR 240; and", 
+          "Academic Writing Requirement satisfied; and",
+          "permission of the faculty."
+        ],
+      "note":
+        [
+          "This is a Co-operative Education work term as defined on this page and thus the Co-op work term tuition fee on this page applies."
+        ],
+      "link" : "ENGR/002.html"
+    }
+  },
+  {
+    "course_subject" : "ENGR",
+    "course_number" : "003",
+    "course_str" : "ENGR 003",
+    "credits" : 4.5,
+    "offered" : ["F","Sp","Su"],
+    "requisites" : [[["ENGR 002","p"],"AND",["ENGR 130","p"]], [["ENGR 120","p"],"OR",["ENGR 240","p"]], ["=1 OF", [["BME 200","p"], ["CIVE 299","p"], ["ECE 250","p"], ["MECH 200","p"], ["SENG 265","p"]]]],
+    "exceptions" : [],
+    "description" : {
+      "title": "Work Term 3",
+      "hours": "",
+      "description": "Students are employed for a work term, normally of four months' duration. Competencies typically addressed include managing information, research and problem solving, and commitment to quality. Should generally provide an increased level of responsibility in an area that is related to the area of specialization in the student's program of studies.",
+      "prerequisites":
+        [
+          "ENGR 002 and ENGR 130; and",
+          "ENGR 120 or ENGR 240; and", 
+          "one of BME 200, CIVE 299, ECE 250, ELEC 250, MECH 200, SENG 265; and",
+          "Academic Writing Requirement satisfied; and",
+          "permission of the faculty."
+        ],
+      "note":
+        [
+          "This is a Co-operative Education work term as defined on this page and thus the Co-op work term tuition fee on this page applies."
+        ],
+      "link" : "ENGR/002.html"
+    }
+  },
+  {
+    "course_subject" : "ENGR",
     "course_number" : "110",
     "course_str" : "ENGR 110",
     "credits" : 2.5,
@@ -546,7 +624,7 @@
     "offered" : ["Sp","Su"],
     "requisites" : [
       [["MATH 100","p"],"OR",["MATH 109","p"]],
-      [["MATH 110","c"],"OR",["MATH 110","c"]]
+      [["MATH 110","c"],"OR",["MATH 211","c"]]
     ],
     "exceptions" : [],
     "description" : {

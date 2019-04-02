@@ -11,8 +11,8 @@
             "Geography and Computer Science (Geomatics)": {"required": []},
             "Mechanical Engineering": {
                 "required": [
-                  ["CSC 111"],
-                  [["CSC 115"], "OR", ["CSC 116"]],
+                  [["CHEM 101"], "OR", ["CHEM 150"]],
+                  [["CSC 110"], "OR", ["CSC 111"]],
                   [["ENGR 110"], "OR", [["ENGR 112"],"OR",["ENGL 135"]]],
                   [["ENGR 120"], "OR", [["ENGR 240"],"OR",["ENGR 121"]]],
                   ["ENGR 130"],
@@ -21,10 +21,160 @@
                   ["MATH 101"],
                   [["MATH 110"], "OR", ["MATH 211"]],
                   ["PHYS 110"],
-                  ["PHYS 111"]
+                  ["PHYS 111"],
+                  [["CSC 115"], "OR", ["CSC 116"]],
+                  [["ECE 216"], "OR", ["PHYS 216"]],
+                  ["ECE 250"],
+                  ["ENGR 297"],
+                  ["MATH 200"],
+                  ["MATH 204"],
+                  ["MECH 200"],
+                  ["MECH 220"],
+                  ["MECH 240"],
+                  ["MECH 242"],
+                  ["MECH 285"],
+                  [["STAT 254"], "OR", ["STAT 260"]],
+                  ["CSC 349A"],
+                  ["ECE 365"],
+                  ["ECON 180"],
+                  ["MECH 320"],
+                  ["MECH 330"],
+                  ["MECH 335"],
+                  ["MECH 345"],
+                  ["MECH 350"],
+                  ["MECH 360"],
+                  ["MECH 380"],
+                  ["MECH 390"],
+                  ["MECH 395"],
+                  ["MECH 400"],
+                  ["ENGR 446"],
+                  ["ENGR 498"],
+                  [["MECH 462"], "OR", ["ELECTIVE ENG_COMP"]],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ELECTIVE ENG_TECH_MECH"],
+                  ["ENGR 001"],
+                  ["ENGR 002"],
+                  ["ENGR 003"],
+                  ["ENGR 004"]
                 ],
                 "specializations": {
-
+                    "Computer Aided Engineering and Advanced Manufacturing": [
+                        ["=8 OF", [
+                            ["MECH 410"], 
+                            ["MECH 420"], 
+                            ["MECH 460"], 
+                            ["MECH 466"], 
+                            ["MECH 495"], 
+                            ["MECH 497"], 
+                            ["MECH 450A"], 
+                            ["MECH 450B"], 
+                            ["MECH 450C"],
+                            ["MECH 450D"],
+                            ["MECH 450E"],
+                            ["MECH 450F"],
+                            ["MECH 498"],
+                            ["MECH 499"]
+                        ]]
+                    ],
+                    "Advanced Materials": [
+                        ["=8 OF", [
+                            ["MECH 472"],
+                            ["MECH 473"],
+                            ["MECH 481"],
+                            ["MECH 450A"], 
+                            ["MECH 450B"], 
+                            ["MECH 450C"],
+                            ["MECH 450D"],
+                            ["MECH 450E"],
+                            ["MECH 450F"],
+                            ["MECH 498"],
+                            ["MECH 499"]
+                        ]]
+                    ],
+                    "Biomedical Engineering": [
+                        ["=8 OF", [
+                            ["ECE 434"],
+                            ["ECE 435"],
+                            ["MECH 472"],
+                            ["MECH 481"],
+                            ["MECH 483"],
+                            ["MECH 450A"], 
+                            ["MECH 450B"], 
+                            ["MECH 450C"],
+                            ["MECH 450D"],
+                            ["MECH 450E"],
+                            ["MECH 450F"],
+                            ["MECH 498"],
+                            ["MECH 499"]
+                        ]]
+                    ],
+                    "Energy Systems": [
+                        ["=8 OF", [
+                            ["MECH 443"],
+                            ["MECH 444"],
+                            ["MECH 445"],
+                            ["MECH 446"],
+                            ["MECH 447"],
+                            ["MECH 449"],
+                            ["MECH 459"],
+                            ["MECH 493"],
+                            ["MECH 494"],
+                            ["MECH 497"],
+                            ["MECH 450A"], 
+                            ["MECH 450B"], 
+                            ["MECH 450C"],
+                            ["MECH 450D"],
+                            ["MECH 450E"],
+                            ["MECH 450F"],
+                            ["MECH 498"],
+                            ["MECH 499"]
+                        ]]
+                    ],
+                    "Thermo-Fluids and Aerodynamics": [
+                        ["=8 OF", [
+                            ["MECH 443"],
+                            ["MECH 444"],
+                            ["MECH 446"],
+                            ["MECH 447"],
+                            ["MECH 475"],
+                            ["MECH 492"],
+                            ["MECH 493"],
+                            ["MECH 494"],
+                            ["MECH 495"],
+                            ["MECH 450A"], 
+                            ["MECH 450B"], 
+                            ["MECH 450C"],
+                            ["MECH 450D"],
+                            ["MECH 450E"],
+                            ["MECH 450F"],
+                            ["MECH 498"],
+                            ["MECH 499"]             
+                        ]]
+                    ],
+                    "Mechatronics": [
+                        ["=8 OF", [
+                            ["MECH 421"],
+                            ["MECH 430"],
+                            ["MECH 455"],
+                            ["MECH 458"],
+                            ["MECH 459"],
+                            ["MECH 466"],
+                            ["MECH 450A"], 
+                            ["MECH 450B"], 
+                            ["MECH 450C"],
+                            ["MECH 450D"],
+                            ["MECH 450E"],
+                            ["MECH 450F"],
+                            ["MECH 498"],
+                            ["MECH 499"]                
+                        ]]
+                    ]
                 }
               },
             "Music and Computer Science": {"required": []},
@@ -143,6 +293,17 @@
         ],
         "Mechanical Systems": [
             ["9 CREDITS",["MECH"],["100","200","300","400"],"WITH","4.5 CREDITS",["300","400"]]
+        ],
+        "Business": [
+            ["COM 202"],
+            ["COM 220"],
+            ["COM 240"],
+            ["COM 250"],
+            ["COM 317"],
+            ["1.5 CREDITS",["COM"],["300","400"]]
+        ],
+        "Computer Systems": [
+            ["9 CREDITS", ["ECE"],["100","200","300","400"],"WITH","4.5 CREDITS",["300","400"]]
         ]
     },
     "Electives" : {
@@ -207,6 +368,12 @@
                 ["SENG 480D"]
             ],
             "Abbreviation": "SENG Technical Elective"
+        },
+        "ENG_TECH_MECH" : {
+            "Courses": [
+
+            ],
+            "Abbreviation": "MECH Technical Elective"
         },
         "ENG_COMP" : {
             "Courses": [

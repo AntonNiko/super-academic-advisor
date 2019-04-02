@@ -31,7 +31,7 @@ class Course extends Component {
 	}
 
 	renderCourseDetails(){
-		if(!["CSC 111","CSC 115","CSC 116"].includes(this.state.course_str)){
+		if(!["CSC 111","CSC 115","CSC 116","ENGR 001","ENGR 002","ENGR 003"].includes(this.state.course_str)){
 			return [<h3 class="modal-subsection-title">Prerequisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>
@@ -116,7 +116,7 @@ class Course extends Component {
 					<div class="modal-draggable-handle"></div>
     	    <span class="modal-close-button">X</span>
     	    <h2 class="modal-title" id="modal-course-title">{this.state.course_str}</h2>
-    	    <h2 class="modal-title" id="modal-course-desc">{["CSC 111","CSC 115","CSC 116"].includes(this.state.course_str) ? this.state.course_details["title"] : "Course Title"}</h2>
+    	    <h2 class="modal-title" id="modal-course-desc">{["CSC 111","CSC 115","CSC 116","ENGR 001","ENGR 002","ENGR 003"].includes(this.state.course_str) ? this.state.course_details["title"] : "Course Title"}</h2>
 
     	    <div class="modal-subtitle">
     	      <h3 id="modal-course-subtitle-left" class="modal-subtitle-left"><span>Offered: </span><span id="modal-course-offered">{this.state.course_offered}</span></h3>

@@ -64,7 +64,6 @@
 	  "Business": ["Commerce"],
 	  "Mechanical Systems": ["Mechanical Engineering"],
 	  "Electrical Systems": ["Electrical Engineering", "Computer Engineering"],
-	  "Computer Systems": ["Electrical Engineering", "Computer Engineering"],
-	  "Education": ["Teacher Education"]
+	  "Computer Systems": ["Electrical Engineering", "Computer Engineering"]
   }
 }
