@@ -29,8 +29,7 @@ var data = ScriptData.getCoursesData();
 var program_sequence = ScriptData.getSequenceData();
 var program_selection = ScriptData.getSelectionData();
 var sequence_ids = ScriptData.getSemesterSequenceIds();
-var program_requirements = ScriptData.getRequirementsData();
-var requirements = ScriptData.getRequirementsDataNew();
+var requirements = ScriptData.getRequirementsData();
 
 // Create global variable indicating color theme choice
 window.colorTheme = "dark";

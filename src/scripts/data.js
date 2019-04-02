@@ -25,39 +25,12 @@ class Data {
     }).responseText);
   }
 
-  static getRequirementsDataNew(){
+  static getRequirementsData(){
     return JSON.parse($.ajax({
       type: "GET",
       url: "/data/requirements.json",
       async: false
     }).responseText);
-  }
-
-  static getRequirementsData(){
-    var program_requirements_seng = [
-      ["CSC 111"],
-      ["CSC 115","OR","CSC 116"],
-      ["ENGR 110","OR",["ENGR 112","AND","ENGL 135"]],
-      ["ENGR 120","OR",["ENGR 240","AND","ENGR 121"]]
-    ]
-
-    /*
-      ["ENGR 130"],
-      ["ENGR 141"],
-      ["MATH 100"],
-      ["MATH 101"],
-      ["MATH 110","MATH 211"],
-      ["PHYS 110"],
-      ["PHYS 111"],
-      ["CSC 230", "ECE 255"],
-      ["CHEM 101"],
-      ["CSC 225"],
-      ["ECE 260"],
-      ["ECE 310"],
-      ["ECON 180"],
-      ["MATH 122"]
-    */
-    return program_requirements_seng;
   }
 
   static getSemesterSequenceIds(){

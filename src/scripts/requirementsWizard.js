@@ -343,7 +343,12 @@ class RequirementsWizard {
     getGeneratedCourseRequirementsList() {
       var requirements_list = [];
       for(var i=0; i<this.result_course_requirements.length; i++) {
-        requirements_list = requirements_list.concat(this.getRequirementElement(this.result_course_requirements[i][0]));
+        requirements_list = requirements_list.concat(
+          <div class={this.result_course_requirements[i][1] == true ? "fulfilled" : ""}>
+            {this.getRequirementElement(this.result_course_requirements[i][0], true)}
+          </div>
+        );
+        
         requirements_list.push(<li class="reqs-course-separator"><hr></hr></li>);
       }
 

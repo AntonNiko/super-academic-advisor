@@ -61,8 +61,7 @@
 .reqs-course-item {
 	list-style-type: none;
 	height: 25px;
-	margin: 3px 0px 3px 0px;
-	padding: 2px 0px 0px 5px;
+	padding: 3px 0px 3px 5px;
 }
 
 .reqs-checkmark-bg {
@@ -103,4 +102,8 @@
 .reqs-conditional-text {
 	position: relative;
 	left: 34px;
+}
+
+.fulfilled {
+	background-color: #0f3506;
 }
