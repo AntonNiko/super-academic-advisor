@@ -1,9 +1,9 @@
+import '../style/Semester.css';
 import React, { Component } from 'react';
 import Course from './Course';
-import '../style/Semester.css';
 
 class Semester extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.current_units = 0;
@@ -18,9 +18,10 @@ class Semester extends Component {
     };
 
     // Add courses to state, to update credit
-    for(var i=0; i<this.props.courses[0].length; i++){
+    for (var i=0; i<this.props.courses[0].length; i++) {
       var course_str = this.props.courses[0][i];
       var course_credits = this.getCourseObjectByString(course_str)["credits"];
+
       this.updateCreditValue(course_credits);
     }
 
@@ -28,13 +29,14 @@ class Semester extends Component {
     this.updateCreditValue = this.updateCreditValue.bind(this);
   }
 
-  updateCreditValue(course_credit_value){
+  updateCreditValue(course_credit_value) {
     this.current_units+=course_credit_value;
   }
 
-  addCourse(course_str, temporary = false){
+  addCourse(course_str, temporary = false) {
     this.props.courses[0].push(course_str);
-    if(!temporary){
+
+    if(!temporary) {
       this.forceUpdate();
       this.updateCreditValue(this.getCourseObjectByString(course_str)["credits"]);
       this.setState({current_units: this.current_units});
@@ -49,27 +51,29 @@ class Semester extends Component {
     }
   }
 
-  removeCourse(course_str, temporary = false){
+  removeCourse(course_str, temporary = false) {
     this.props.courses[0].splice(this.props.courses[0].indexOf(course_str), 1);
-    if(!temporary){
+
+    if(!temporary) {
       this.forceUpdate();
       this.updateCreditValue(-this.getCourseObjectByString(course_str)["credits"]);
       this.setState({current_units: this.current_units});
     }
   }
 
-  renderCourses(){
+  renderCourses() {
     var courses = [];
-    for(var i=0; i<this.state.courses.length; i++){
+    for(var i=0; i<this.state.courses.length; i++) {
       courses.push(<Course course_str={this.state.courses[i]}
                       ref={course => {this.course = course}}
                       updateCreditValue={this.updateCreditValue}
                       data = {this.props.data}/>);
     }
+
     return courses;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState({current_units: this.current_units});
   }
 

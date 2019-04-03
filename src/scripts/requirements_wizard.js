@@ -348,7 +348,7 @@ class RequirementsWizard {
             {this.getRequirementElement(this.result_course_requirements[i][0], true)}
           </div>
         );
-        
+
         requirements_list.push(<li class="reqs-course-separator"><hr></hr></li>);
       }
 

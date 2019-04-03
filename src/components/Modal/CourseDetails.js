@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import '../../style/Modal/Course.css';
+import '../../style/Modal/CourseDetails.css';
 import '../../style/Modal.css';
+import React, { Component } from 'react';
 
-class Course extends Component {
-  constructor(props){
+class CourseDetails extends Component {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -15,12 +15,13 @@ class Course extends Component {
 			course_details: null,
 		}
 
+    // Link to most current UVic calendar course directory
 		this.course_link_url = "https://web.uvic.ca/calendar2019-05/CDs/";
 
     this.actionPopulateCourse = this.actionPopulateCourse.bind(this);
   }
 
-  actionPopulateCourse(course){
+  actionPopulateCourse(course) {
     this.setState({
       course_str: course["course_str"],
       course_offered: course["offered"].join(", "),
@@ -30,8 +31,8 @@ class Course extends Component {
     });
 	}
 
-	renderCourseDetails(){
-		if(!["CSC 111","CSC 115","CSC 116","ENGR 001","ENGR 002","ENGR 003"].includes(this.state.course_str)){
+	renderCourseDetails() {
+		if (!["CSC 111","CSC 115","CSC 116","ENGR 001","ENGR 002","ENGR 003"].includes(this.state.course_str)) {
 			return [<h3 class="modal-subsection-title">Prerequisites</h3>,
 			<ul class="modal-course-reqs-content">
 				<li><span>MECH 141 or ENGR 141; and</span></li>
@@ -58,7 +59,7 @@ class Course extends Component {
 		var coreq_elements = [];
 		var notes_elements = [];
 
-		if(this.state.course_details["prerequisites"] != undefined){
+		if (this.state.course_details["prerequisites"] != undefined) {
 			elements.push(<h3 class="modal-subsection-title">Prerequisites</h3>);
 			// Look through prerequisites list
 			for(var i=0; i<this.state.course_details["prerequisites"].length; i++){
@@ -67,7 +68,7 @@ class Course extends Component {
 			elements.push(<ul class="modal-list">{prereq_elements}</ul>);
 		}
 
-		if(this.state.course_details["corequisites"] != undefined){
+		if (this.state.course_details["corequisites"] != undefined) {
 			elements.push(<h3 class="modal-subsection-title">Corequisites</h3>);
 			// Look through corequisites list
 			for(var i=0; i<this.state.course_details["corequisites"] .length; i++){
@@ -76,7 +77,7 @@ class Course extends Component {
 			elements.push(<ul class="modal-list">{coreq_elements}</ul>);
 		}
 
-		if(this.state.course_details["note"] != undefined){
+		if (this.state.course_details["note"] != undefined) {
 			elements.push(<h3 class="modal-subsection-title">Notes</h3>);
 			// Look through notes list
 			for(var i=0; i<this.state.course_details["note"].length; i++){
@@ -90,22 +91,22 @@ class Course extends Component {
 
 	renderCourseDescription(){
 		// On render, check null state
-		if(this.state.course_details == null){
+		if (this.state.course_details == null) {
 			return <div></div>
 		}
 
-		if(this.state.course_details["description"] != undefined){
+		if (this.state.course_details["description"] != undefined) {
 			return (<p>{this.state.course_details["description"]}</p>);
 		}else{
 			return (<p></p>);
 		}
 	}
 
-	renderCourseLink(){
+	renderCourseLink() {
 		return this.course_link_url + this.state.course_link_extension;
 	}
 
-	componentDidUpdate(){
+	componentDidUpdate() {
     this.props.colors.updateColorThemes();
 	}
 
@@ -152,4 +153,4 @@ class Course extends Component {
   }
 }
 
-export default Course;
+export default CourseDetails;

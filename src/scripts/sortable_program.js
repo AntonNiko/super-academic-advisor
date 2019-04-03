@@ -40,7 +40,7 @@ class SortableProgram {
     });
   }
 
-  static render(program){
+  static configureSortable(program){
     // Configure draggable course elements for semester container
     var startIndex, changeIndex, uiHeight;
     $(".panel-term-list").sortable({

@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 import '../style/Requirements.css';
 import '../style/Modal.css';
-import '../scripts/requirementsWizard.js';
-import RequirementsWizard from '../scripts/requirementsWizard.js';
+import React, { Component } from 'react';
+import RequirementsWizard from '../scripts/requirements_wizard.js';
 
 class Requirements extends Component {
   constructor(props){

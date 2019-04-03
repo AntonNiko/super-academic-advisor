@@ -1,9 +1,9 @@
-import React, { Component, createRef } from 'react';
-import Semester from './Semester';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
 import '../style/Program.css';
+import React, { Component, createRef } from 'react';
+import Semester from './Semester';
 
 class Program extends Component {
   // Modify implementation of state.sequence to be used as:
@@ -15,7 +15,7 @@ class Program extends Component {
     super(props);
 
     this.sem = {};
-    for(var semester_id in this.props.sequence){
+    for (var semester_id in this.props.sequence) {
       this.sem[semester_id] = createRef();
     }
 
@@ -34,7 +34,7 @@ class Program extends Component {
     this.getCurrentAvailableYears = this.getCurrentAvailableYears.bind(this);
   }
 
-  actionAddSemester(){
+  actionAddSemester() {
     var new_sequence_semester_ids = Object.keys(this.state.sequence);
     var new_sequence = this.state.sequence;
 
@@ -51,20 +51,21 @@ class Program extends Component {
     new_sequence_semester_ids.push(next_semester_id);
     new_sequence[next_semester_id] = [[], next_year, next_semester];
     this.sem[next_semester_id] = createRef();
+
     this.setState({sequence: new_sequence, sequence_semester_ids: new_sequence_semester_ids});
   }
 
-  actionAddCourse(semester_id, course_str, updateState = true, checkDuplicates = true){
+  actionAddCourse(semester_id, course_str, updateState = true, checkDuplicates = true) {
     // Method that will allow courses to be added as a component
 
     // Verify course offered in semester
-    if(!this.verifyCourseOffered(course_str, semester_id)){
+    if (!this.verifyCourseOffered(course_str, semester_id)) {
       this.props.throwNewNotification("danger", "Error", course_str+" is not offered in semester "+semester_id);
       return false;
     }
 
     // If for moving courses, do not check for duplicate
-    if(!this.verifyCourseIsNotDuplicate(course_str) && checkDuplicates == true){
+    if (!this.verifyCourseIsNotDuplicate(course_str) && checkDuplicates == true) {
       this.props.throwNewNotification("danger", "Error", course_str+" already exists in your selection");
       return false;
     }
@@ -77,14 +78,14 @@ class Program extends Component {
         return false;
       }
     }
-    
+
     // Assert that course will not exceed credit limit
-    if(!this.verifyCourseCreditLimit(course_str, semester_id)){
+    if (!this.verifyCourseCreditLimit(course_str, semester_id)) {
       this.props.throwNewNotification("danger", "Error", "Semester "+semester_id+" max credit limit reached");
       return false;
     }
 
-    if(updateState == true){
+    if (updateState == true) {
       this.sem[semester_id].current.addCourse(course_str, false);
     }
 
@@ -92,27 +93,27 @@ class Program extends Component {
     return true;
   }
 
-  actionRemoveCourse(semester_id, course_str){
+  actionRemoveCourse(semester_id, course_str) {
     // TODO: Check if removing course will invalidate pre-requisites/co-requisites of other courses
     this.sem[semester_id].current.removeCourse(course_str, false);
     this.forceUpdate();
   }
 
-  actionMoveCourse(course_str, origin_semester_id, new_semester_id){
+  actionMoveCourse(course_str, origin_semester_id, new_semester_id) {
     // Temporarily move course DOM back to original semester for processing (needed for React to properly update DOM)
     $("#"+origin_semester_id).prepend($("#"+course_str.replace(" ","_")))
 
     // TODO: Return relevant information about all requirements that were not met
-    if(!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)){
+    if (!this.verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id)) {
       return false;
     }
 
-    if(!this.actionAddCourse(new_semester_id, course_str, true, false)){
+    if (!this.actionAddCourse(new_semester_id, course_str, true, false)) {
       //alert("failed to add course...");
       return false;
     }
-    this.sem[origin_semester_id].current.removeCourse(course_str, false);
 
+    this.sem[origin_semester_id].current.removeCourse(course_str, false);
 	  return true;
   }
 
@@ -137,9 +138,7 @@ class Program extends Component {
 
   getConditionalRequisiteFulfilledState(requisite, semester_id, displayError) {
     var fulfilled = false;
-
     var conditional_token = requisite[1];
-
     var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0], semester_id);
     var fulfilled_second_element = this.isRequisiteSatisfied(requisite[2], semester_id);
 
@@ -239,7 +238,7 @@ class Program extends Component {
     }
   }
 
-  verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id){
+  verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id) {
     /* Method which checks that for all existing courses, all reqs are satisified
     . Commonly used after course moved, to check it does not break any other course reqs */
 
@@ -248,9 +247,11 @@ class Program extends Component {
     this.sem[new_semester_id].current.addCourse(course_str, true);
 
     var _failed = false;
-    for(var semester_id in this.sem){
-      for(var i=0; i<this.sem[semester_id].current.state.courses.length; i++){
+    for (var semester_id in this.sem) {
+
+      for (var i=0; i<this.sem[semester_id].current.state.courses.length; i++) {
         var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.state.courses[i], semester_id);
+
         for (var j=0; j<course_obj["requisites"].length; j++) {
           if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true)) {
             _failed = true;
@@ -262,64 +263,67 @@ class Program extends Component {
     this.sem[new_semester_id].current.removeCourse(course_str, true);
     this.sem[origin_semester_id].current.addCourse(course_str, true);
 
-    if(_failed){
+    if (_failed) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
-  verifyCourseOffered(course_str, semester_id){
+  verifyCourseOffered(course_str, semester_id) {
     /* Checks if course offered in semester. If it is, return true.
     If not, return false */
-    if(this.getCourseObjectByString(course_str)["offered"].includes(this.sem[semester_id].current.props.courses[2])){
+    if (this.getCourseObjectByString(course_str)["offered"].includes(this.sem[semester_id].current.props.courses[2])) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  verifyCourseCreditLimit(course_str, semester_id){
+  verifyCourseCreditLimit(course_str, semester_id) {
     var course_credit = this.getCourseObjectByString(course_str)["credits"];
     var semester_credit = this.sem[semester_id].current.state.current_units;
     var credit_limit = this.sem[semester_id].current.state.max_units;
 
-    if(semester_credit + course_credit > credit_limit){
+    if (semester_credit + course_credit > credit_limit) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
-  verifyCourseIsNotDuplicate(course_str){
-    for(var semester in this.sem){
+  verifyCourseIsNotDuplicate(course_str) {
+    for (var semester in this.sem) {
       var current_semester = this.sem[semester].current;
       var current_semester_courses = current_semester.props.courses[0];
-      if(current_semester_courses.includes(course_str)){
+
+      if (current_semester_courses.includes(course_str)) {
         return false;
       }
     }
     return true;
   }
 
-  convertYearAndSemesterToProgramSemesterId(year, semester){
+  convertYearAndSemesterToProgramSemesterId(year, semester) {
     // Matches the year and semester value with an existing semester ID.
     // If does not match, return null/-1/false or something...
-    for(var semester_id in this.state.sequence){
+    for (var semester_id in this.state.sequence) {
       var current_year = this.state.sequence[semester_id][1];
       var current_semester = this.state.sequence[semester_id][2];
-      if(current_year == year && current_semester == semester){
+
+      if (current_year == year && current_semester == semester) {
         return semester_id;
       }
     }
     return null;
   }
 
-  getNextSemesterYearAndInitial(year, semester){
+  getNextSemesterYearAndInitial(year, semester) {
     // Takes arguments such as 2019 F, and returns the next semester
     // year and semester initial, e.g: 2020 Sp
     var new_year = year;
     var new_semester = semester;
+
     switch(semester){
       case "Sp":
         new_semester = "Su";
@@ -333,22 +337,24 @@ class Program extends Component {
         break;
       default:
         return null;
-        break;
     }
+
     return {year: new_year, semester: new_semester};
   }
 
-  getCurrentAvailableYears(){
+  getCurrentAvailableYears() {
     // Returns a list of years which matches the existing years
     // added to the Program. Used by ModalAddCourse to display
     // available years user can add course
     var available_years = [];
-    for(var semester_id in this.state.sequence){
+
+    for (var semester_id in this.state.sequence) {
       var current_year = this.state.sequence[semester_id][1];
-      if(!available_years.includes(current_year)){
+      if (!available_years.includes(current_year)) {
         available_years.push(current_year);
       }
     }
+
     return available_years;
   }
 
@@ -360,12 +366,12 @@ class Program extends Component {
     }
   }
 
-  renderSemesters(){
+  renderSemesters() {
     var semesters = [];
     var last_added_semester = null;
 
     // Evaluate each course requisites, and adjust props accordingly
-    for(var semester_id in this.state.sequence){
+    for (var semester_id in this.state.sequence) {
       semesters.push(<Semester semester_id={semester_id}
         courses={this.props.sequence[semester_id]}
         last_added_semester={last_added_semester}
@@ -374,14 +380,15 @@ class Program extends Component {
         data = {this.props.data}/>);
       last_added_semester = semester_id;
     }
+
     return semesters;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.updateProgramRequirements(this.sem);
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     // BUG: On update, moved course appears twice in list of active courses
     this.props.updateProgramRequirements(this.sem);
   }

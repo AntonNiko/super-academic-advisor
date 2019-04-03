@@ -7,7 +7,6 @@ class Settings extends Component {
         super(props);
 
         this.state = {
-
         };
     }
 
@@ -37,7 +36,7 @@ class Settings extends Component {
                         <button type="button" class="btn-primary" id="settings-color-theme-submit">Submit</button>
                     </div>
                 </div>
-            </div>          
+            </div>
         );
     }
 }

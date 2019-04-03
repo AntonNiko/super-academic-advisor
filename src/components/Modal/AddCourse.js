@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
 import '../../style/Modal/AddCourse.css';
 import '../../style/Modal.css';
+import React, { Component } from 'react';
 
 class AddCourse extends Component {
-  // Write method to recognize semester_id based on user input of year and semester
-
   constructor(props){
     super(props);
 
@@ -26,62 +24,70 @@ class AddCourse extends Component {
     this.actionSelectStagedCourseSemester = this.actionSelectStagedCourseSemester.bind(this);
   }
 
-  actionSubmitCourses(){
+  actionSubmitCourses() {
     // TODO: For each selected staged course, add to program
     // TODO: Verify course offered in right semesters
     // TODO: Verify course  not already added to program
     // TODO: Verify course does not have exceptions (E.g: ENGR 112 and ENGR 110)
     var new_staged_courses = this.state.staged_courses;
 
-    for(var course_str in this.state.staged_courses){
+    for (var course_str in this.state.staged_courses) {
       var course_year = this.state.staged_courses[course_str][0];
       var course_semester = this.state.staged_courses[course_str][1];
       var course_semester_id = this.props.convertYearAndSemesterToProgramSemesterId(course_year, course_semester);
+
       if(course_semester_id == null){
         alert("Semester does not exist!");
         continue;
       }
+
       if(this.props.addCourse(course_semester_id, course_str)){
         delete new_staged_courses[course_str];
       }
     }
+
     this.setState({staged_courses: new_staged_courses});
   }
 
-  actionSelectUnstagedCourse(course_str){
+  actionSelectUnstagedCourse(course_str) {
     var new_selected_courses = this.state.selected_unstaged_courses;
+
     new_selected_courses.push(course_str);
     this.setState({selected_unstaged_courses: new_selected_courses});
   }
 
-  actionUnselectUnstagedCourse(course_str){
+  actionUnselectUnstagedCourse(course_str) {
     var new_selected_courses = this.state.selected_unstaged_courses;
+
     new_selected_courses.splice(new_selected_courses.indexOf(course_str), 1);
     this.setState({selected_unstaged_courses: new_selected_courses});
   }
 
-  actionSelectStagedCourse(course_str){
+  actionSelectStagedCourse(course_str) {
     var new_selected_courses = this.state.selected_staged_courses;
+
     new_selected_courses.push(course_str);
     this.setState({selected_staged_courses: new_selected_courses});
   }
 
-  actionUnselectStagedCourse(course_str){
+  actionUnselectStagedCourse(course_str) {
     var new_staged_courses = this.state.selected_staged_courses;
+
     new_staged_courses.splice(new_staged_courses.indexOf(course_str), 1);
     this.setState({selected_staged_courses: new_staged_courses});
   }
 
-  actionStageCourses(){
+  actionStageCourses() {
     // Move selected courses in position to be added to program
     var new_staged_courses = {};
-    for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
 
+    for(var i=0; i<this.state.selected_unstaged_courses.length; i++){
       if (this.state.staged_courses[this.state.selected_unstaged_courses[i]] == undefined) {
-        new_staged_courses[this.state.selected_unstaged_courses[i]] = [this.props.getCurrentAvailableYears()[0], 
+        new_staged_courses[this.state.selected_unstaged_courses[i]] = [this.props.getCurrentAvailableYears()[0],
                                                                        this.getCourseObjectByString(this.state.selected_unstaged_courses[i])["offered"][0]];
       }
-      else {
+      else
+      {
         new_staged_courses[this.state.selected_unstaged_courses[i]] = this.state.staged_courses[this.state.selected_unstaged_courses[i]];
       }
     }
@@ -94,8 +100,9 @@ class AddCourse extends Component {
     });
   }
 
-  actionUnstageCourses(){
+  actionUnstageCourses() {
     var new_staged_courses = this.state.staged_courses;
+
     for(var i=0; i<this.state.selected_staged_courses.length; i++){
       delete new_staged_courses[this.state.selected_staged_courses[i]];
     }
@@ -108,14 +115,16 @@ class AddCourse extends Component {
     });
   }
 
-  actionSelectStagedCourseYear(course_str, year){
+  actionSelectStagedCourseYear(course_str, year) {
     var new_staged_courses = this.state.staged_courses;
+
     new_staged_courses[course_str][0] = year;
     this.setState({staged_courses: new_staged_courses});
   }
 
-  actionSelectStagedCourseSemester(course_str, semester){
+  actionSelectStagedCourseSemester(course_str, semester) {
     var new_staged_courses = this.state.staged_courses;
+
     new_staged_courses[course_str][1] = semester;
     this.setState({staged_courses: new_staged_courses});
   }
@@ -128,7 +137,7 @@ class AddCourse extends Component {
     }
   }
 
-  renderCourseSelectionList(){
+  renderCourseSelectionList() {
     var list_elements = [];
 
     // Sort course props into dictionary, ready to render
@@ -140,41 +149,33 @@ class AddCourse extends Component {
       if (course_dir[course_subject] == undefined) {
         course_dir[course_subject] = [];
       }
+
       course_dir[course_subject].push(course_str);
     }
 
-    /*for(var course_key in this.props.data){
-      var course_obj = this.props.data[course_key];
-      var course_subject = course_obj[0];
-
-
-      // If subject key is undefined, create one
-      if(course_dir[course_subject] == undefined){
-        course_dir[course_subject] = [];
-      }
-      course_dir[course_subject].push(course_key);
-    }*/
-
     // Render all list elements
-    for(var course_subject in course_dir){
+    for (var course_subject in course_dir) {
       list_elements.push(<li class="modal-add-course-subject"><span class="modal-chevron-collapsed"></span><span class="modal-list-title">{course_subject}</span></li>);
       var subject_courses = [];
-      for(var i=0; i<course_dir[course_subject].length; i++){
+
+      for (var i=0; i<course_dir[course_subject].length; i++) {
         var selection_class = this.state.selected_unstaged_courses.includes(course_dir[course_subject][i]) ? "course-item-selected" : "course-item-unselected";
         var course_item_class = "modal-course-item "+selection_class;
 
         subject_courses.push(<li class={course_item_class}><span>{course_dir[course_subject][i]}</span></li>);
       }
+
       list_elements.push(<ul class="modal-course-group">{subject_courses}</ul>);
     }
+
     return list_elements;
   }
 
-  renderStagedCoursesList(){
+  renderStagedCoursesList() {
     var list_elements = [];
 
     // For each staged course in the state, render and add a separator for list
-    for(var course_str in this.state.staged_courses){
+    for (var course_str in this.state.staged_courses) {
       var course_container = []
       var actions_container = [];
 
@@ -198,11 +199,12 @@ class AddCourse extends Component {
   renderDynamicYearDropdownList(){
     var available_years = this.props.getCurrentAvailableYears();
     var list_items = [];
-    for(var i=0; i<available_years.length; i++){
+
+    for (var i=0; i<available_years.length; i++) {
       list_items.push(<li value={available_years[i]}><span>{available_years[i]}</span></li>)
     }
 
-    return(
+    return (
     <ul class="dropdown-select-small">
       <li>
         <div class="dropdown-header staged-course-year">
@@ -216,10 +218,11 @@ class AddCourse extends Component {
     );
   }
 
-  renderDynamicSemesterDropdownList(course_str){
+  renderDynamicSemesterDropdownList(course_str) {
     /* Generate dynamic semester dropdown list, based on specific course's semester avilability */
     var course_semesters_offered = this.getCourseObjectByString(course_str)["offered"];
     var list_items = [];
+
     for(var i=0; i<course_semesters_offered.length; i++){
       var semester = course_semesters_offered[i];
       list_items.push(<li value={semester}><span>{semester}</span></li>);
@@ -235,7 +238,8 @@ class AddCourse extends Component {
           {list_items}
         </ul>
       </li>
-    </ul>);
+    </ul>
+    );
   }
 
   componentDidUpdate(){
@@ -289,7 +293,8 @@ class AddCourse extends Component {
             </div>
           </div>
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 

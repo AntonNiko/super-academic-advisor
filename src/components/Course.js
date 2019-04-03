@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import '../style/Course.css';
+import React, { Component } from 'react';
 
 class Course extends Component {
   constructor(props){
@@ -17,7 +17,7 @@ class Course extends Component {
     }
   }
 
-  renderContextMenu(){
+  renderContextMenu() {
     var list = [];
     list.push(<li class="context-edit"><span>Edit</span></li>);
     list.push(<li class="context-delete"><span>Delete</span></li>);
@@ -29,6 +29,7 @@ class Course extends Component {
     if(this.props.data == null){
       return <li class="course" id={this.props.course_str.replace(" ","_")}></li>
     }
+
     var course_obj = this.getCourseObject();
 
     return (

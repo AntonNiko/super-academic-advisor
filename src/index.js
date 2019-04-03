@@ -1,20 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/draggable';
-
 import './style/App.css';
-
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar.js';
 import Sidebar from './components/Sidebar.js';
 import Program from './components/Program.js';
 import AddCourse from './components/Modal/AddCourse.js';
-import Course from './components/Modal/Course';
+import CourseDetails from './components/Modal/CourseDetails';
 import Requirements from './components/Requirements.js';
 import Settings from './components/Settings.js';
 import Notification from './components/Notification.js';
-
 import ScriptSortableProgram from './scripts/sortable_program.js';
 import ScriptModal from './scripts/modal.js';
 import ScriptDropdown from './scripts/dropdown.js';
@@ -24,7 +21,8 @@ import ScriptData from './scripts/data.js';
 import ScriptColors from './scripts/colors.js';
 import ScriptNotification from './scripts/notification.js';
 
-// Fetch Data for course info and program sequence respectively
+// Fetch all relevant data, including courses, sequence, selection, semester IDs,
+// and program requirements
 var data = ScriptData.getCoursesData();
 var program_sequence = ScriptData.getSequenceData();
 var program_selection = ScriptData.getSelectionData();
@@ -34,30 +32,32 @@ var requirements = ScriptData.getRequirementsData();
 // Create global variable indicating color theme choice
 window.colorTheme = "dark";
 
-ReactDOM.render(<Notification ref={notification => {window.notification = notification}}/>, document.getElementById("notification-container"));
+// Create React elements for web app
+ReactDOM.render(<Notification
+  ref={notification => {window.notification = notification}}/>,
+  document.getElementById("notification-container"));
 
-// Build React Elements
 ReactDOM.render(<Navbar
   colors={ScriptColors}/>,
-document.getElementById('navigation'));
+  document.getElementById('navigation'));
 
-ReactDOM.render(<Course
+ReactDOM.render(<CourseDetails
   ref={modalCourse => {window.modalCourse = modalCourse;}}
   colors={ScriptColors}/>,
-document.getElementById('modal-course-container'));
+  document.getElementById('modal-course-container'));
 
 ReactDOM.render(<Requirements
   ref={requirements => {window.requirements = requirements;}}
   requirements={requirements}
   colors={ScriptColors}/>,
-document.getElementById('modal-reqs-container'));
+  document.getElementById('modal-reqs-container'));
 
 ReactDOM.render(<Sidebar
   ref={sidebar => {window.sidebar = sidebar}}
   selection={program_selection}
   colors={ScriptColors}
   setProgramRequirements={window.requirements.actionSetProgramRequirements}/>,
-document.getElementById('sidebar'));
+  document.getElementById('sidebar'));
 
 ReactDOM.render(<Program
   sequence={program_sequence}
@@ -67,7 +67,7 @@ ReactDOM.render(<Program
   updateProgramRequirements={window.requirements.actionUpdateProgramRequirements}
   throwNewNotification={window.notification.throwNewNotification}
   colors={ScriptColors}/>,
-document.getElementById('panel-container-parent'));
+  document.getElementById('panel-container-parent'));
 
 ReactDOM.render(<AddCourse
   data={data}
@@ -76,33 +76,45 @@ ReactDOM.render(<AddCourse
   convertYearAndSemesterToProgramSemesterId={window.program.convertYearAndSemesterToProgramSemesterId}
   getCurrentAvailableYears={window.program.getCurrentAvailableYears}
   colors={ScriptColors}/>,
-document.getElementById('modal-add-course-container'));
+  document.getElementById('modal-add-course-container'));
 
-ReactDOM.render(<Settings/>, document.getElementById('modal-settings-container'));
+ReactDOM.render(<Settings/>,
+  document.getElementById('modal-settings-container'));
 
-// jQuery code
+// jQuery helps configure dynamic behavior of webpage by configuring all
+// dynamic components with imported static classes
 $(function(){
-  // Configure dynamic actions for website
-  ScriptSortableProgram.render(window.program);
+
+  // Configure sortable and draggable properties of courses & context menu
+  ScriptSortableProgram.configureSortable(window.program);
   ScriptSortableProgram.configureCourseContextMenu(window.program);
 
-  ScriptModal.configureCourseModal(data, window.modalCourse);
-  ScriptModal.configureGeneralModal();
+  // Configure dynamic Modal behavior, and subsequent behavior relating to
+  // individual modal elements
+  ScriptModal.configureModal();
+  ScriptModal.configureCourseDetailsModal(data, window.modalCourse);
   ScriptModal.configureAddCourseModal();
-  ScriptModal.configureReqModal();
+  ScriptModal.configureRequirementsModal();
   ScriptModal.configureSettingsModal();
 
+  // Configure dropdown menu events, such as selection, and additional
+  // behavior for sidebar selection
   ScriptDropdown.configureDropdownActions();
   ScriptDropdown.configureDropdownSelection(window.sidebar, window.modalAddCourse);
   ScriptDropdown.configureSidebarSubmitSelection(window.sidebar);
 
+  // Configure modal events and animations, and additional Add Coruse modal
+  // evetns
   ScriptAddCourse.configureModalAnimations(window.modalAddCourse);
   ScriptAddCourse.configureStagingActions(window.modalAddCourse);
   ScriptAddCourse.configureSubmitActions(window.modalAddCourse, window.requirements);
 
+  // Configure action of adding semester to program
   ScriptAddSemester.configureAddSemesterAction(window.program, ScriptSortableProgram);
 
+  // Configure dynamic behavior for switching between light and dark theme
   ScriptColors.configureLightAndDarkThemes();
 
+  // Configure dynamic behavior of notification bar
   ScriptNotification.configureNotificationBarToggle();
 });

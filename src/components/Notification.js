@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import '../style/Notification.css';
-
 import $ from 'jquery';
+import '../style/Notification.css';
+import React, { Component } from 'react';
 
 class Notification extends Component {
     constructor(props) {
@@ -43,7 +42,6 @@ class Notification extends Component {
                 bottom: "0px"
             }, 300);
         }
-
 
         this.visible = true;
     }
