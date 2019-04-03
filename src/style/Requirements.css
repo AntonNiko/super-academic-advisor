@@ -32,7 +32,7 @@
 	padding: 8px 0px 5px 15px;
 	border: 1px solid #757575;
 	width: 250px;
-    height: 355px;
+  height: 355px;
 	position: absolute;
 	top: 50px;
 	right: 0px;
@@ -58,10 +58,22 @@
 	background-color: #232323;
 }
 
+#reqs-course-list div {
+	width: 5px;
+	overflow: visible;
+}
+
 .reqs-course-item {
 	list-style-type: none;
 	height: 25px;
-	padding: 3px 0px 3px 5px;
+	width: 250px;
+	padding: 3px 0px 3px 7px;
+}
+
+.reqs-course-conditional {
+	list-style-type: none;
+	padding: 2px 0px 0px 7px;
+	width: 250px;
 }
 
 .reqs-checkmark-bg {
@@ -85,6 +97,7 @@
 
 .reqs-course-separator {
 	list-style-type: none;
+	width: 250px;
 }
 
 .reqs-course-separator hr {
@@ -94,16 +107,11 @@
 	height: 1px;
 }
 
-.reqs-course-conditional {
-	list-style-type: none;
-	padding: 2px 0px 0px 5px;
-}
-
 .reqs-conditional-text {
 	position: relative;
 	left: 34px;
 }
 
 .fulfilled {
-	background-color: #0f3506;
+	background-color: #146700;
 }

@@ -65,7 +65,7 @@ class Notification extends Component {
     }
 
     renderNotificationTypeClass() {
-        switch(this.state.notification_type) {
+        switch (this.state.notification_type) {
             case "danger":
               return "notification-danger";
             case "success":
