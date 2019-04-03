@@ -207,9 +207,9 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <div>
+      [<div id="sidebar-select-view">
         <div class="sidebar-header">
-          <div class="sidebar-header-content">
+          <div class="sidebar-header-content" id="sidebar-select-switch-button">
             <span class="sidebar-header-content-title">Switch to Wizard</span>
             <span class="sidebar-header-content-icon"></span>
           </div>
@@ -250,7 +250,20 @@ class Sidebar extends Component {
         <div class="form-group">
           <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
         </div>
-      </div>
+      </div>,
+
+      <div id="sidebar-wizard-view">
+        <div class="sidebar-header">
+          <div class="sidebar-header-content" id="sidebar-wizard-switch-button">
+            <span class="sidebar-header-content-title">Switch to Select</span>
+            <span class="sidebar-header-content-icon"></span>
+          </div>
+          <div class="sidebar-header-title"><span>Select</span></div>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
+        </div>
+      </div>]
     );
   }
 }

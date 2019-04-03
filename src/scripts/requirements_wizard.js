@@ -52,6 +52,8 @@ class RequirementsWizard {
     // Generates program course requirements first, then moves on to minors and
     // specializations, which are program-specific. Stores result in class
     generateCourseRequirementsBasedOnSelectedRequirements() {
+      this.result_course_requirements = [];
+
         // Generate basic program requirements;
         var program_required_courses = this.requirements_data["Faculty"][this.selected_faculty][this.selected_program]["required"];
 
@@ -87,28 +89,28 @@ class RequirementsWizard {
     // technical electives
     // Reference: https://www.uvic.ca/engineering/software/current-students/specializations/index.php
     handleSoftwareEngineeringSpecialization(specialization_type) {
-        var program_specialization = this.requirements_data["Faculty"][this.selected_faculty][this.selected_program]["specializations"][this.selected_specialization];
+      var program_specialization = this.requirements_data["Faculty"][this.selected_faculty][this.selected_program]["specializations"][this.selected_specialization];
 
-        // Remove 3 entries of "ELECTIVE ENG_TECH_SENG" from current course_requirements
-        var result_course_requirements = [];
-        var courses_removed = 0;
-        for(var i=0; i<this.result_course_requirements.length; i++) {
-            if(this.result_course_requirements[i][0][0] != "ELECTIVE ENG_TECH_SENG" ||
-               this.result_course_requirements[i][0][0] == "ELECTIVE ENG_TECH_SENG" && courses_removed >=3){
-                // Add requirement and initial fulfilled state to array
-                result_course_requirements.push([this.result_course_requirements[i][0], false]);
-            } else {
-                courses_removed++;
-            }
-        }
+      // Remove 3 entries of "ELECTIVE ENG_TECH_SENG" from current course_requirements
+      var result_course_requirements = [];
+      var courses_removed = 0;
+      for(var i=0; i<this.result_course_requirements.length; i++) {
+          if(this.result_course_requirements[i][0][0] != "ELECTIVE ENG_TECH_SENG" ||
+              this.result_course_requirements[i][0][0] == "ELECTIVE ENG_TECH_SENG" && courses_removed >=3){
+              // Add requirement and initial fulfilled state to array
+              result_course_requirements.push([this.result_course_requirements[i][0], false]);
+          } else {
+              courses_removed++;
+          }
+      }
 
-        // Append the program_specialization requirements with requirement and initial state,
-        // and reassign the updated requirements
-        for (var i=0; i < program_specialization.length; i++) {
-          result_course_requirements.push([program_specialization[i], false]);
-        }
+      // Append the program_specialization requirements with requirement and initial state,
+      // and reassign the updated requirements
+      for (var i=0; i < program_specialization.length; i++) {
+        result_course_requirements.push([program_specialization[i], false]);
+      }
 
-        this.result_course_requirements = result_course_requirements;
+      this.result_course_requirements = result_course_requirements;
     }
 
     handleMechanicalEngineeringSpecialization(specialization_type) {

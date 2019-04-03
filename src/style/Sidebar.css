@@ -7,6 +7,7 @@
     background-color: #3e3e3e;
     overflow-x: hidden;
     padding-top: 10px;
+    display: flex;
   }
   
   .sidebar div > div:not(.sidebar-header-title):not(.sidebar-header-content) {
@@ -44,4 +45,8 @@
     width: 15px;
     height: 15px;
     background-size: 15px 15px;
+  }
+
+  #sidebar-select-view, #sidebar-wizard-view {
+    width: 200px;
   }

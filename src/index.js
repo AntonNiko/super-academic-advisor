@@ -20,6 +20,7 @@ import ScriptAddSemester from './scripts/add_semester.js';
 import ScriptData from './scripts/data.js';
 import ScriptColors from './scripts/colors.js';
 import ScriptNotification from './scripts/notification.js';
+import ScriptSidebar from './scripts/sidebar.js';
 
 // Fetch all relevant data, including courses, sequence, selection, semester IDs,
 // and program requirements
@@ -117,4 +118,7 @@ $(function(){
 
   // Configure dynamic behavior of notification bar
   ScriptNotification.configureNotificationBarToggle();
+
+  // Configure sidebar view switching animation
+  ScriptSidebar.configureSwitchView();
 });
