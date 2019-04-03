@@ -30,6 +30,7 @@ class Requirements extends Component {
 
   actionUpdateProgramRequirements(semesters){
     this.requirementsWizard.updateActiveCourses(semesters);
+    this.forceUpdate();
   }
 
   actionSetProgramRequirements(faculty, program, minor, specialization){

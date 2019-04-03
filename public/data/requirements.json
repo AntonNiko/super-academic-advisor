@@ -277,6 +277,65 @@
                     ]
                 }
             }
+        },
+        "Business": {
+            "Commerce": {
+                "required":[
+                    ["ECON 103"],
+                    ["MATH 151"],
+                    ["STAT 252"],
+                    ["=2 OF ",[["ENGL 135"], ["ENGL 146"], ["ENGL 147"], ["ENGL 225"]]],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["ELECTIVE PRE_COM"],
+                    ["COM 204"],
+                    ["COM 205"],
+                    ["COM 315"],
+                    ["COM 316"],
+                    ["COM 321"],
+                    ["COM 322"],
+                    ["COM 331"],
+                    ["COM 341"],
+                    ["COM 351"],
+                    ["COM 361"],
+                    ["COM 362"],
+                    ["COM 371"],
+                    ["COM 400"],
+                    ["COM 402"],
+                    ["COM 405"]
+                ], 
+                "specializations": {
+                    "Entrepreneurship": [
+                        ["ENT 410"],
+                        ["ENT 411"],
+                        ["ENT 412"],
+                        ["ENT 413"],
+                        ["COM 400"]
+                    ],
+                    "International Business": [
+                        ["IB 415"],
+                        ["IB 416"],
+                        ["IB 417"]
+                    ],
+                    "Service Management": [
+                        ["SMGT 415"],
+                        ["SMGT 416"],
+                        ["SMGT 417"]
+                    ]
+                }
+            }
         }
     },
     "Minors" : {
@@ -397,6 +456,12 @@
                 ["ASTR 150"]
             ],
             "Abbreviation": "BSENG Natural Science Elective"
+        },
+        "PRE_COM" : {
+            "Courses": [
+
+            ],
+            "Abbreviation": "Pre-Commerce Elective"
         }
 
     }

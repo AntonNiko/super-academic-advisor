@@ -5,7 +5,7 @@ class AddSemester {
         $(function() {
             $("#add-semester-button").click(function() {
                 program.actionAddSemester();
-                SortableProgram.render(program);
+                SortableProgram.configureSortable(program);
               });
         });
     }
