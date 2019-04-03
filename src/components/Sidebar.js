@@ -208,6 +208,13 @@ class Sidebar extends Component {
   render() {
     return (
       <div>
+        <div class="sidebar-header">
+          <div class="sidebar-header-content">
+            <span class="sidebar-header-content-title">Switch to Wizard</span>
+            <span class="sidebar-header-content-icon"></span>
+          </div>
+          <div class="sidebar-header-title"><span>Select</span></div>
+        </div>
         <div class="form-group-new">
           <span>Faculty</span>
           <ul class="dropdown-select">

@@ -1,3 +1,7 @@
 #modal-course-reqs {
   padding-bottom: 50px;
 }
+
+#modal-add-course {
+  z-index: 0;
+}

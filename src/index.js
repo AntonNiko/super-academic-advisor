@@ -104,7 +104,7 @@ $(function(){
   ScriptDropdown.configureSidebarSubmitSelection(window.sidebar);
 
   // Configure modal events and animations, and additional Add Coruse modal
-  // evetns
+  // events
   ScriptAddCourse.configureModalAnimations(window.modalAddCourse);
   ScriptAddCourse.configureStagingActions(window.modalAddCourse);
   ScriptAddCourse.configureSubmitActions(window.modalAddCourse, window.requirements);

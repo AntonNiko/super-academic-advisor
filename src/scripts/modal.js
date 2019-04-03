@@ -26,6 +26,14 @@ class Modal {
   static configureCourseDetailsModal(data, modal) {
       $(document).on("dblclick", ".course", function(){
         var course_str = $(this).attr("id").replace("_"," ");
+        
+        modal.actionPopulateCourse(Modal.getCourseObjectByString(data, course_str));
+        $("#modal-course-details").css("display","block");
+      });
+
+      $(document).on("dblclick", ".modal-course-item", function() {
+        var course_str = $(this).find("span").text();
+
         modal.actionPopulateCourse(Modal.getCourseObjectByString(data, course_str));
         $("#modal-course-details").css("display","block");
       });

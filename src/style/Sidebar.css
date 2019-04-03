@@ -6,13 +6,42 @@
     left: 0;
     background-color: #3e3e3e;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 10px;
   }
   
-  .sidebar div > div {
+  .sidebar div > div:not(.sidebar-header-title):not(.sidebar-header-content) {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 14px;
     color: #f2f2f2;
     display: block;
+  }
+
+  .sidebar-header-title {
+    display: block;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .sidebar-header-title > span {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 30% 0 30%;
+  }
+
+  .sidebar-header-content {
+    height: 20px;
+    padding: 0 15px 0 15px;
+  }
+
+  .sidebar-header-content-title {
+    float: left;
+  }
+
+  .sidebar-header-content-icon {
+    float: right;
+    background-image: url(/assets/icons8-expand-arrow-48-right.png);
+    width: 15px;
+    height: 15px;
+    background-size: 15px 15px;
   }
