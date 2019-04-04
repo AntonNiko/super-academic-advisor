@@ -7,15 +7,20 @@
     background-color: #3e3e3e;
     overflow-x: hidden;
     padding-top: 10px;
-    display: flex;
   }
   
   .sidebar div > div:not(.sidebar-header-title):not(.sidebar-header-content) {
-    padding: 6px 8px 6px 16px;
+    padding: 6px 8px 6px 9px;
     text-decoration: none;
     font-size: 14px;
     color: #f2f2f2;
     display: block;
+  }
+
+  .sidebar > div {
+    position: relative;
+    left: 0px;
+    display: flex;
   }
 
   .sidebar-header-title {

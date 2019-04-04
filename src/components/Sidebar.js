@@ -207,63 +207,64 @@ class Sidebar extends Component {
 
   render() {
     return (
-      [<div id="sidebar-select-view">
-        <div class="sidebar-header">
-          <div class="sidebar-header-content" id="sidebar-select-switch-button">
-            <span class="sidebar-header-content-title">Switch to Wizard</span>
-            <span class="sidebar-header-content-icon"></span>
+      <div>
+        <div id="sidebar-select-view">
+          <div class="sidebar-header">
+            <div class="sidebar-header-content" id="sidebar-select-switch-button">
+              <span class="sidebar-header-content-title">Switch to Wizard</span>
+              <span class="sidebar-header-content-icon"></span>
+            </div>
+            <div class="sidebar-header-title"><span>Select</span></div>
           </div>
-          <div class="sidebar-header-title"><span>Select</span></div>
-        </div>
-        <div class="form-group-new">
-          <span>Faculty</span>
-          <ul class="dropdown-select">
-            <li id="faculty-dropdown">
-              {this.renderFacultyDropdown()}
-            </li>
-          </ul>
-        </div>
-        <div class="form-group-new">
-          <span>Program</span>
-          <ul class="dropdown-select">
-            <li id="program-dropdown">
-              {this.renderProgramDropdown()}
-            </li>
-          </ul>
-        </div>
-        <div class="form-group-new">
-          <span>Minor</span>
-          <ul class="dropdown-select">
-            <li id="minor-dropdown">
-              {this.renderMinorDropdown()}
-            </li>
-          </ul>
-        </div>
-        <div class="form-group-new">
-          <span>Specialization</span>
-          <ul class="dropdown-select">
-            <li id="specialization-dropdown">
-              {this.renderSpecializationDropdown()}
-            </li>
-          </ul>
-        </div>
-        <div class="form-group">
-          <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
-        </div>
-      </div>,
-
-      <div id="sidebar-wizard-view">
-        <div class="sidebar-header">
-          <div class="sidebar-header-content" id="sidebar-wizard-switch-button">
-            <span class="sidebar-header-content-title">Switch to Select</span>
-            <span class="sidebar-header-content-icon"></span>
+          <div class="form-group-new">
+            <span>Faculty</span>
+            <ul class="dropdown-select">
+              <li id="faculty-dropdown">
+                {this.renderFacultyDropdown()}
+              </li>
+            </ul>
           </div>
-          <div class="sidebar-header-title"><span>Select</span></div>
+          <div class="form-group-new">
+            <span>Program</span>
+            <ul class="dropdown-select">
+              <li id="program-dropdown">
+                {this.renderProgramDropdown()}
+              </li>
+            </ul>
+          </div>
+          <div class="form-group-new">
+            <span>Minor</span>
+            <ul class="dropdown-select">
+              <li id="minor-dropdown">
+                {this.renderMinorDropdown()}
+              </li>
+            </ul>
+          </div>
+          <div class="form-group-new">
+            <span>Specialization</span>
+            <ul class="dropdown-select">
+              <li id="specialization-dropdown">
+                {this.renderSpecializationDropdown()}
+              </li>
+            </ul>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
+          </div>
         </div>
-        <div class="form-group">
-          <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
+        <div id="sidebar-wizard-view">
+          <div class="sidebar-header">
+            <div class="sidebar-header-content" id="sidebar-wizard-switch-button">
+              <span class="sidebar-header-content-title">Switch to Select</span>
+              <span class="sidebar-header-content-icon"></span>
+            </div>
+            <div class="sidebar-header-title"><span>Select</span></div>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
+          </div>
         </div>
-      </div>]
+      </div>
     );
   }
 }
