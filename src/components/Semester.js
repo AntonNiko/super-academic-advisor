@@ -9,7 +9,6 @@ class Semester extends Component {
     this.current_units = 0;
     this.state = {
       prev_semester: this.props.last_added_semester,
-      courses: this.props.courses[0],
       year: this.props.courses[1],
       semester_id: this.props.courses[2],
       current_units: 0,
@@ -17,13 +16,7 @@ class Semester extends Component {
       courses_obj: {},
     };
 
-    // Add courses to state, to update credit
-    for (var i=0; i<this.props.courses[0].length; i++) {
-      var course_str = this.props.courses[0][i];
-      var course_credits = this.getCourseObjectByString(course_str)["credits"];
-
-      this.updateCreditValue(course_credits);
-    }
+    this.courses = [];
 
     this.removeCourse = this.removeCourse.bind(this);
     this.updateCreditValue = this.updateCreditValue.bind(this);
@@ -34,7 +27,7 @@ class Semester extends Component {
   }
 
   addCourse(course_str, temporary = false) {
-    this.props.courses[0].push(course_str);
+    this.courses.push(course_str);
 
     if(!temporary) {
       this.forceUpdate();
@@ -52,7 +45,7 @@ class Semester extends Component {
   }
 
   removeCourse(course_str, temporary = false) {
-    this.props.courses[0].splice(this.props.courses[0].indexOf(course_str), 1);
+    this.courses.splice(this.courses.indexOf(course_str), 1);
 
     if(!temporary) {
       this.forceUpdate();
@@ -63,8 +56,8 @@ class Semester extends Component {
 
   renderCourses() {
     var courses = [];
-    for(var i=0; i<this.state.courses.length; i++) {
-      courses.push(<Course course_str={this.state.courses[i]}
+    for(var i=0; i<this.courses.length; i++) {
+      courses.push(<Course course_str={this.courses[i]}
                       ref={course => {this.course = course}}
                       updateCreditValue={this.updateCreditValue}
                       data = {this.props.data}/>);

@@ -53,5 +53,5 @@
   }
 
   #sidebar-select-view, #sidebar-wizard-view {
-    width: 200px;
+    min-width: 200px;
   }

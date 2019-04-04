@@ -6,7 +6,7 @@ class Navbar extends Component {
     super(props);
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.props.colors.updateColorThemes();
   }
 

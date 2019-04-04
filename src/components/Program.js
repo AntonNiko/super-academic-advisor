@@ -94,7 +94,11 @@ class Program extends Component {
   }
 
   actionRemoveCourse(semester_id, course_str) {
-    // TODO: Check if removing course will invalidate pre-requisites/co-requisites of other courses
+    // Checks if removing course will invalidate other courses' requisites
+    if (!this.verifyAllCourseReqsSatisifedRemoved(course_str, semester_id)) {
+      return false;
+    }
+
     this.sem[semester_id].current.removeCourse(course_str, false);
     this.forceUpdate();
   }
@@ -211,7 +215,7 @@ class Program extends Component {
 
     // Loop through each consecutive previous semesters to check for course
     while (current_semester != null) {
-      if (current_semester.current.props.courses[0].includes(requisite[0])) {
+      if (current_semester.current.courses.includes(requisite[0])) {
         return true;
       }
 
@@ -248,9 +252,8 @@ class Program extends Component {
 
     var _failed = false;
     for (var semester_id in this.sem) {
-
-      for (var i=0; i<this.sem[semester_id].current.state.courses.length; i++) {
-        var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.state.courses[i], semester_id);
+      for (var i=0; i<this.sem[semester_id].current.courses.length; i++) {
+        var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.courses[i], semester_id);
 
         for (var j=0; j<course_obj["requisites"].length; j++) {
           if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true)) {
@@ -268,6 +271,34 @@ class Program extends Component {
     } else {
       return true;
     }
+  }
+
+  verifyAllCourseReqsSatisifedRemoved(course_str, course_semester_id) {
+    /* Method which checks if deleting a course from specific semester will cause other courses' requisites to be invalidated
+     */
+
+     this.sem[course_semester_id].current.removeCourse(course_str, true);
+
+     var _failed = false;
+     for (var semester_id in this.sem) {
+       for (var i=0; i<this.sem[semester_id].current.courses.length; i++) {
+         var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.courses[i], semester_id);
+
+         for (var j=0; j<course_obj["requisites"].length; j++) {
+           if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true)) {
+             _failed = true;
+           }
+         }
+       }
+     }
+
+     this.sem[course_semester_id].current.addCourse(course_str, true);
+
+     if (_failed) {
+       return false;
+     } else {
+       return true;
+     }
   }
 
   verifyCourseOffered(course_str, semester_id) {
@@ -295,7 +326,7 @@ class Program extends Component {
   verifyCourseIsNotDuplicate(course_str) {
     for (var semester in this.sem) {
       var current_semester = this.sem[semester].current;
-      var current_semester_courses = current_semester.props.courses[0];
+      var current_semester_courses = current_semester.courses;
 
       if (current_semester_courses.includes(course_str)) {
         return false;
@@ -385,6 +416,14 @@ class Program extends Component {
   }
 
   componentDidMount() {
+    // After all semesters mounted, add every course
+    for (var semester_id in this.props.sequence) {
+      for (var j=0; j<this.props.sequence[semester_id][0].length; j++) {
+        var course_str = this.props.sequence[semester_id][0][j];
+        this.actionAddCourse(semester_id, course_str);
+      }
+    }
+
     this.props.updateProgramRequirements(this.sem);
   }
 
