@@ -29,10 +29,24 @@ class Notification extends Component {
             text: text
         });
 
-        this.makeVisible();
+        this.makeHeaderVisible();
     }
 
-    makeVisible(no_animation = false) {
+    makeHeaderVisible(no_animation = false) {
+        if (no_animation) {
+            $("#notification-content").css({
+                bottom: "-150px"
+            });
+        } else {
+            $("#notification-content").animate({
+                bottom: "-150px"
+            }, 300);
+        }
+
+        this.visible = true;
+    }
+
+    makeBodyVisible(no_animation = false) {
         if (no_animation) {
             $("#notification-content").css({
                 bottom: "0px"
@@ -42,8 +56,6 @@ class Notification extends Component {
                 bottom: "0px"
             }, 300);
         }
-
-        this.visible = true;
     }
 
     makeHidden(no_animation = false) {
@@ -82,16 +94,21 @@ class Notification extends Component {
     render() {
         return (
             <div id="notification-content" class={this.renderNotificationTypeClass()}>
-                <div id="notification-icon">
-                    <span>{this.renderNotificationIcon()}</span>
+                <div id="notification-header">
+                    <div id="notification-icon">
+                        <span>{this.renderNotificationIcon()}</span>
+                    </div>
+                    <div id="notification-title">
+                    <span>{this.state.title}:</span>
+                    </div>
+                    <div id="notification-text">
+                    <span>{this.state.text}</span>
+                    </div>
+                    <div id="notification-dismiss-button"><span>X</span></div>                
                 </div>
-                <div id="notification-title">
-                  <span>{this.state.title}:</span>
+                <div id="notification-body">
+                
                 </div>
-                <div id="notification-text">
-                  <span>{this.state.text}</span>
-                </div>
-                <div id="notification-dismiss-button"><span>X</span></div>
             </div>
         );
     }

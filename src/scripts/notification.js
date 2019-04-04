@@ -4,7 +4,7 @@ class ScriptNotification {
     static configureNotificationBarToggle() {
         $(document).on("click", "#notification-dismiss-button", function(){
             $("#notification-content").animate({
-                bottom: "-80px"
+                bottom: "-210px"
             }, 300);
         });
     }

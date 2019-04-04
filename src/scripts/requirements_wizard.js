@@ -32,7 +32,7 @@ class RequirementsWizard {
     updateActiveCourses(semesters) {
       var new_active_courses = [];
       for(var semester_id in semesters){
-        var current_semester_courses = semesters[semester_id].current.state.courses;
+        var current_semester_courses = semesters[semester_id].current.courses;
         new_active_courses = new_active_courses.concat(current_semester_courses);
       }
 

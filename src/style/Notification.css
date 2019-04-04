@@ -1,9 +1,9 @@
 
 #notification-content {
     width: 80vw;
-    height: 50px;
+    height: 200px;
     position: fixed; 
-    bottom: -60px;
+    bottom: -210px;
     margin-left: 10vw;
     border-radius: 5px 5px 0px 0px;
     border: 1px solid #480606;
@@ -48,6 +48,14 @@
     height: 30px;
     margin-top: 10px; 
     top: 0;
+}
+
+#notification-header {
+    height: 50px;
+}
+
+#notification-body {
+    height: 150px;
 }
 
 .notification-danger {

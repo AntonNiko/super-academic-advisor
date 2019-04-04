@@ -70,6 +70,8 @@ class Program extends Component {
       return false;
     }
 
+    // TODO: Verify exceptions
+
     // Assert all requisites satisfied
     var fulfilled = true;
     var course_obj = this.getCourseObjectByString(course_str);
@@ -229,14 +231,14 @@ class Program extends Component {
     return false;
   }
 
-  isRequisiteSatisfied(requisite, semester_id, displayError = false) {
+  isRequisiteSatisfied(requisite, semester_id, displayError = false, course_str = null) {
     switch (this.getRequisiteType(requisite)) {
       case "conditional":
-        return this.getConditionalRequisiteFulfilledState(requisite, semester_id, displayError);
+        return this.getConditionalRequisiteFulfilledState(requisite, semester_id, displayError, course_str);
       case "collection":
-        return this.getCollectionRequisiteFulfilledState(requisite, semester_id, displayError);
+        return this.getCollectionRequisiteFulfilledState(requisite, semester_id, displayError, course_str);
       case "course":
-        return this.getCourseRequisiteFulfilledState(requisite, semester_id, displayError);
+        return this.getCourseRequisiteFulfilledState(requisite, semester_id, displayError, course_str);
       default:
         return null;
     }
