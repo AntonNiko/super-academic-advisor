@@ -241,13 +241,13 @@ class Program extends Component {
     }
   }
 
-  verifyAllCourseReqsSatisfied(course_str, origin_semester_id, new_semester_id) {
+  verifyAllCourseReqsSatisfied(course_str_arg, origin_semester_id, new_semester_id) {
     /* Method which checks that for all existing courses, all reqs are satisified
     . Commonly used after course moved, to check it does not break any other course reqs */
 
     // Temporarily move course in question to new position, simulate new arrangement
-    this.sem[origin_semester_id].current.removeCourse(course_str, true);
-    this.sem[new_semester_id].current.addCourse(course_str, true);
+    this.sem[origin_semester_id].current.removeCourse(course_str_arg, true);
+    this.sem[new_semester_id].current.addCourse(course_str_arg, true);
 
     var _failed = false;
     for (var semester_id in this.sem) {
@@ -263,8 +263,8 @@ class Program extends Component {
       }
     }
 
-    this.sem[new_semester_id].current.removeCourse(course_str, true);
-    this.sem[origin_semester_id].current.addCourse(course_str, true);
+    this.sem[new_semester_id].current.removeCourse(course_str_arg, true);
+    this.sem[origin_semester_id].current.addCourse(course_str_arg, true);
 
     if (_failed) {
       return false;
@@ -273,12 +273,11 @@ class Program extends Component {
     }
   }
 
-  verifyAllCourseReqsSatisifedRemoved(course_str, course_semester_id) {
+  verifyAllCourseReqsSatisifedRemoved(course_str_arg, course_semester_id) {
     /* Method which checks if deleting a course from specific semester will cause other courses' requisites to be invalidated
      */
 
-     this.sem[course_semester_id].current.removeCourse(course_str, true);
-
+     this.sem[course_semester_id].current.removeCourse(course_str_arg, true);
 
      var _failed = false;
      for (var semester_id in this.sem) {
@@ -294,7 +293,10 @@ class Program extends Component {
        }
      }
 
-     this.sem[course_semester_id].current.addCourse(course_str, true);
+     this.sem[course_semester_id].current.addCourse(course_str_arg, true);
+
+     console.log(this.sem[course_semester_id].current.courses);
+
 
      if (_failed) {
        return false;
