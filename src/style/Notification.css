@@ -40,9 +40,18 @@
     font-size: 15px;
 }
 
+#notification-details-toggle {
+    position: relative;
+    top: -8px; 
+    float: right;
+    top: 18px;
+    right: 20px;
+    color: #382828;
+    text-decoration: underline;
+}
+
 #notification-dismiss-button {
     position: relative;
-    display: inline-block;
     float: right;
     width: 30px;
     height: 30px;
@@ -56,6 +65,12 @@
 
 #notification-body {
     height: 150px;
+    margin-left: 40px;
+    color: #ffffff;
+}
+
+.notification-body-block {
+    display: block;
 }
 
 .notification-danger {

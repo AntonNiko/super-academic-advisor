@@ -19,9 +19,6 @@ class Program extends Component {
       this.sem[semester_id] = createRef();
     }
 
-    // TOP-LEVEL TRUTH SOURCE FOR COURSES. THIS.STATE.SEQUENCE DEFINES
-    // ALL CURRENT COURSES, THEIR ASSOCIATED SEMESTERS. SEMESTER AND COURSE
-    // COMPONENTS ARE FED BY THIS TRUTH SOURCE
     this.state = {
       sequence: this.props.sequence
     };
@@ -60,7 +57,7 @@ class Program extends Component {
 
     // Verify course offered in semester
     if (!this.verifyCourseOffered(course_str, semester_id)) {
-      this.props.throwNewNotification("danger", "Error", course_str+" is not offered in semester "+semester_id);
+    this.props.throwNewNotification("danger", "Error", course_str+" is not offered in semester "+semester_id);
       return false;
     }
 
@@ -76,7 +73,7 @@ class Program extends Component {
     var fulfilled = true;
     var course_obj = this.getCourseObjectByString(course_str);
     for (var i=0; i<course_obj["requisites"].length; i++) {
-      if (!this.isRequisiteSatisfied(course_obj["requisites"][i], semester_id, true)) {
+      if (!this.isRequisiteSatisfied(course_obj["requisites"][i], semester_id, true, course_str)) {
         return false;
       }
     }
@@ -142,7 +139,7 @@ class Program extends Component {
     }
   }
 
-  getConditionalRequisiteFulfilledState(requisite, semester_id, displayError) {
+  getConditionalRequisiteFulfilledState(requisite, semester_id, displayError, course_str = null) {
     var fulfilled = false;
     var conditional_token = requisite[1];
     var fulfilled_first_element = this.isRequisiteSatisfied(requisite[0], semester_id);
@@ -153,7 +150,7 @@ class Program extends Component {
         return true;
       } else {
         if (displayError) {
-          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+requisite);
+          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+course_str+" - Missing: "+requisite);
         }
 
         return false;
@@ -163,7 +160,7 @@ class Program extends Component {
         return true;
       } else {
         if (displayError) {
-          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+requisite);
+          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+course_str+" - Missing: "+requisite);
         }
 
         return false;
@@ -173,7 +170,7 @@ class Program extends Component {
     }
   }
 
-  getCollectionRequisiteFulfilledState(requisite, semester_id, displayError) {
+  getCollectionRequisiteFulfilledState(requisite, semester_id, displayError, course_str = null) {
     // Track how many requisites fulfilled
     var requisites_fulfilled = 0;
     for (var i=0; i < requisite[1].length; i++) {
@@ -189,7 +186,7 @@ class Program extends Component {
         return true;
       } else {
         if (displayError) {
-          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+requisite);
+          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+course_str+" - Missing: "+requisite);
         }
 
         return false;
@@ -199,7 +196,7 @@ class Program extends Component {
         return true;
       } else {
         if (displayError) {
-          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+requisite);
+          this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+course_str+" - Missing: "+requisite);
         }
 
         return false;
@@ -207,7 +204,7 @@ class Program extends Component {
     }
   }
 
-  getCourseRequisiteFulfilledState(requisite, semester_id, displayError) {
+  getCourseRequisiteFulfilledState(requisite, semester_id, displayError, course_str = null) {
     var current_semester = this.sem[semester_id];
 
     // If prerequisite, we start at previous semester to check for course
@@ -225,7 +222,7 @@ class Program extends Component {
     }
 
     if (displayError) {
-      this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+requisite);
+      this.props.throwNewNotification("danger", "Error", "Requisite not satisfied - "+course_str+" - Missing: "+requisite);
     }
 
     return false;
@@ -255,10 +252,11 @@ class Program extends Component {
     var _failed = false;
     for (var semester_id in this.sem) {
       for (var i=0; i<this.sem[semester_id].current.courses.length; i++) {
-        var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.courses[i], semester_id);
+        var course_str = this.sem[semester_id].current.courses[i];
+        var course_obj = this.getCourseObjectByString(course_str, semester_id);
 
         for (var j=0; j<course_obj["requisites"].length; j++) {
-          if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true)) {
+          if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true, course_str)) {
             _failed = true;
           }
         }
@@ -281,13 +279,15 @@ class Program extends Component {
 
      this.sem[course_semester_id].current.removeCourse(course_str, true);
 
+
      var _failed = false;
      for (var semester_id in this.sem) {
        for (var i=0; i<this.sem[semester_id].current.courses.length; i++) {
-         var course_obj = this.getCourseObjectByString(this.sem[semester_id].current.courses[i], semester_id);
+         var course_str = this.sem[semester_id].current.courses[i];
+         var course_obj = this.getCourseObjectByString(course_str, semester_id);
 
          for (var j=0; j<course_obj["requisites"].length; j++) {
-           if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true)) {
+           if (!this.isRequisiteSatisfied(course_obj["requisites"][j], semester_id, true, course_str)) {
              _failed = true;
            }
          }

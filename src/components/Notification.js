@@ -17,7 +17,7 @@ class Notification extends Component {
         this.throwNewNotification = this.throwNewNotification.bind(this);
     }
 
-    throwNewNotification(notification_type, title, text) {
+    throwNewNotification(notification_type, title, text, body = null) {
         // Add animation of hiding to accentuate reactive behavior
         if (this.visible) {
             this.makeHidden(true);
@@ -26,7 +26,8 @@ class Notification extends Component {
         this.setState({
             notification_type: notification_type,
             title: title,
-            text: text
+            text: text,
+            body: body
         });
 
         this.makeHeaderVisible();
@@ -56,16 +57,18 @@ class Notification extends Component {
                 bottom: "0px"
             }, 300);
         }
+
+        this.visible = true;
     }
 
     makeHidden(no_animation = false) {
         if (no_animation) {
             $("#notification-content").css({
-                bottom: "-60px"
+                bottom: "-210px"
             });
         } else {
             $("#notification-content").animate({
-                bottom: "-60px"
+                bottom: "-210px"
             }, 300);
         }
 
@@ -99,15 +102,18 @@ class Notification extends Component {
                         <span>{this.renderNotificationIcon()}</span>
                     </div>
                     <div id="notification-title">
-                    <span>{this.state.title}:</span>
+                        <span>{this.state.title}:</span>
                     </div>
                     <div id="notification-text">
-                    <span>{this.state.text}</span>
+                        <span>{this.state.text}</span>
                     </div>
-                    <div id="notification-dismiss-button"><span>X</span></div>                
+                    <div id="notification-dismiss-button"><span>X</span></div>   
+                    <div id="notification-details-toggle">
+                        <span>{this.state.body == null ? "" : "Details"}</span>
+                    </div>             
                 </div>
                 <div id="notification-body">
-                
+                  {this.state.body}
                 </div>
             </div>
         );

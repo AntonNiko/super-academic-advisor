@@ -36,14 +36,6 @@ class Semester extends Component {
     }
   }
 
-  getCourseObjectByString(course_str) {
-    for (var i=0; i<this.props.data.length; i++) {
-      if (this.props.data[i]["course_str"] == course_str) {
-        return this.props.data[i];
-      }
-    }
-  }
-
   removeCourse(course_str, temporary = false) {
     this.courses.splice(this.courses.indexOf(course_str), 1);
 
@@ -51,6 +43,14 @@ class Semester extends Component {
       this.forceUpdate();
       this.updateCreditValue(-this.getCourseObjectByString(course_str)["credits"]);
       this.setState({current_units: this.current_units});
+    }
+  }
+
+  getCourseObjectByString(course_str) {
+    for (var i=0; i<this.props.data.length; i++) {
+      if (this.props.data[i]["course_str"] == course_str) {
+        return this.props.data[i];
+      }
     }
   }
 
