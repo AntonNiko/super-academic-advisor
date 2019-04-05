@@ -67,12 +67,12 @@
 	list-style-type: none;
 	height: 25px;
 	width: 250px;
-	padding: 3px 0px 3px 7px;
+	padding: 3px 0px 3px 10px;
 }
 
 .reqs-course-conditional {
 	list-style-type: none;
-	padding: 2px 0px 0px 7px;
+	padding: 2px 0px 0px 10px;
 	width: 250px;
 }
 
@@ -113,5 +113,5 @@
 }
 
 .fulfilled {
-	background-color: #146700;
+	background-color: #1b8a00;
 }

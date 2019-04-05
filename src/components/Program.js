@@ -295,9 +295,6 @@ class Program extends Component {
 
      this.sem[course_semester_id].current.addCourse(course_str_arg, true);
 
-     console.log(this.sem[course_semester_id].current.courses);
-
-
      if (_failed) {
        return false;
      } else {

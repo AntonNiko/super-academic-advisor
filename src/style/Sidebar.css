@@ -44,7 +44,15 @@
     float: left;
   }
 
-  .sidebar-header-content-icon {
+  .sidebar-header-content-icon-left {
+    float: left;
+    background-image: url(/assets/icons8-expand-arrow-48-left.png);
+    width: 15px;
+    height: 15px;
+    background-size: 15px 15px;
+  }
+
+  .sidebar-header-content-icon-right {
     float: right;
     background-image: url(/assets/icons8-expand-arrow-48-right.png);
     width: 15px;
