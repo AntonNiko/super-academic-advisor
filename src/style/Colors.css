@@ -2,14 +2,15 @@
   --dark-navbar-bg: #171819;
   --dark-navbar-text: #f2f2f2;
   --dark-navbar-hover: #333333;
-  --light-navbar-bg: #ffffff;
+  --light-navbar-bg: #d2d2d2;
   --light-navbar-text: #8a8a8a;
   --light-navbar-hover: #aaaaaa;
+  --light-navbar-border: 1px solid #848484;
 
   --dark-sidebar-bg: #3e3e3e;
   --dark-sidebar-text: #f2f2f2;
   --light-sidebar-bg: #e6e6e6;
-  --light-sidebar-text: #545454;
+  --light-sidebar-text: #000000;
   --light-sidebar-border: #a5a5a5;
 
   --dark-dropdown-text: #fff;
@@ -19,8 +20,7 @@
   --light-dropdown-border: #8c8c8c;
   --light-dropdown-bg:  #d2d2d2;
 
-
-  --dark-primary-btn-bg: #0077cc;
+  /*--dark-primary-btn-bg: #0077cc;
   --dark-primary-btn-bg-hover: #04558e;
   --dark-primary-btn-text: #f3f2f2;
   --dark-primary-btn-border: #656565;
@@ -38,7 +38,7 @@
   --dark-danger-btn-bg: #980a0a;
   --dark-danger-btn-bg-hover: #730505;
   --dark-danger-btn-text: #f3f2f2;
-  --dark-danger-btn-border: #656565;
+  --dark-danger-btn-border: #656565;*/
 
   --dark-container-bg: #2b2b2b;
   --light-container-bg: #ffffff;
@@ -52,6 +52,8 @@
   --dark-course-border: #5f5858;
   --dark-course-text: #efefef;
   --dark-course-placeholder-bg: #313131;
+  --light-course-bg: #eaeaea;
+  --light-course-text: #000000;
 
   --dark-modal-bg: #353535;
   --dark-modal-text: #f3f2f2;
