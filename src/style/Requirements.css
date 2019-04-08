@@ -52,6 +52,7 @@
 }
 
 #reqs-course-list {
+	width: 300px;
 	padding-left: 0px;
 	margin: 0;
 	font-size: 14px;
@@ -97,7 +98,7 @@
 
 .reqs-course-separator {
 	list-style-type: none;
-	width: 250px;
+	width: 300px;
 }
 
 .reqs-course-separator hr {

@@ -12,31 +12,11 @@ class SortableProgram {
       $(this).find("img").css({"visibility":"hidden", "opacity":"0"});
     });
 
-    $(document).on("mouseenter", ".course-context-menu ul li", function(){
-      $(this).css({"background":"#666"});
-    });
-
-    $(document).on("mouseleave", ".course-context-menu ul li", function(){
-      $(this).css({"background":"#353535"});
-    });
-
     $(document).on("click", ".course-details-icon", function(){
       $(this).next().find("ul").css({"visibility":"visible", "opacity":"1"});
-    });
-
-    $(window).click(function(e){
-      if(!$(e.target).is(".course-context-menu ul li") &&
-         !$(e.target).is(".course-context-menu ul li span") &&
-         !$(e.target).is(".course-details-icon img")){
-        $(".course-context-menu ul ").css({"visibility":"hidden", "opacity":"0"});
-      }
-    });
-
-    $(document).on("click", ".context-delete", function(){
-      var course_str = $(this).parents().eq(3).attr("id").replace("_"," ");
-      var semester_id = $(this).parents().eq(4).attr("id");
+      var course_str = $(this).parents().eq(1).attr("id").replace("_"," ");
+      var semester_id = $(this).parents().eq(2).attr("id");
       program.actionRemoveCourse(semester_id, course_str);
-      $(this).parent().css({"visibility":"hidden", "opacity":"0"});
     });
   }
 

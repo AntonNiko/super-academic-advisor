@@ -33,7 +33,7 @@
 }
 
 .course-details-icon img {
-  height: 25px;
+  height: 20px;
   opacity: 0;
   visibility: hidden;
   -webkit-transiton: opacity 0.1s;

@@ -37,9 +37,8 @@ class Course extends Component {
           <div class="course-header">
             <span class="course-name">{this.props.course_str}</span>
             <span class="course-details-icon">
-              <img src="/assets/icons8-ellipsis-filled-48.png"></img>
+              <img src="/assets/icons8-delete-96.png"></img>
             </span>
-            <span class="course-context-menu">{this.renderContextMenu()}</span>
           </div>
           <div class="course-body">
             <span class="course-offered">{course_obj["offered"].join(", ")}</span>
