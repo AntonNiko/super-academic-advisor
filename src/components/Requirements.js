@@ -116,6 +116,11 @@ class Requirements extends Component {
             <div id="modal-reqs-footer">
               <button type="button" class="btn-primary" id="modal-reqs-clear-button">Clear</button>
             </div>
+            <div id="modal-reqs-toggle-size">
+              <div id="modal-reqs-toggle-size-button">
+                <span>exp</span>
+              </div>
+            </div>
           </div>
         </div>
       );

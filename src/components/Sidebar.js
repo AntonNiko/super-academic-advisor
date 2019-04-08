@@ -198,6 +198,16 @@ class Sidebar extends Component {
     return result;
   }
 
+  renderSelectionSummary() {
+    return [
+      <div class="sidebar-wizard-summary">
+        <div>
+
+        </div>
+      </div>
+    ];
+  }
+
   componentDidMount(){
   }
 
@@ -216,7 +226,7 @@ class Sidebar extends Component {
             </div>
             <div class="sidebar-header-title"><span>Select</span></div>
           </div>
-          <div class="form-group-new">
+          <div class="form-group-sidebar">
             <span>Faculty</span>
             <ul class="dropdown-select">
               <li id="faculty-dropdown">
@@ -224,7 +234,7 @@ class Sidebar extends Component {
               </li>
             </ul>
           </div>
-          <div class="form-group-new">
+          <div class="form-group-sidebar">
             <span>Program</span>
             <ul class="dropdown-select">
               <li id="program-dropdown">
@@ -232,7 +242,7 @@ class Sidebar extends Component {
               </li>
             </ul>
           </div>
-          <div class="form-group-new">
+          <div class="form-group-sidebar">
             <span>Minor</span>
             <ul class="dropdown-select">
               <li id="minor-dropdown">
@@ -240,7 +250,7 @@ class Sidebar extends Component {
               </li>
             </ul>
           </div>
-          <div class="form-group-new">
+          <div class="form-group-sidebar">
             <span>Specialization</span>
             <ul class="dropdown-select">
               <li id="specialization-dropdown">
@@ -257,12 +267,12 @@ class Sidebar extends Component {
             <div class="sidebar-header-content" id="sidebar-wizard-switch-button">
               <span class="sidebar-header-content-icon-left"></span>
               <span class="sidebar-header-content-title">Switch to Select</span>
-              
+
             </div>
             <div class="sidebar-header-title"><span>Wizard</span></div>
           </div>
-          <div class="form-group">
-            <button type="button" class="btn-primary" id="sidebar-selection-submit">Submit</button>
+          <div class="form-group-sidebar">
+            {this.renderSelectionSummary()}
           </div>
         </div>
       </div>

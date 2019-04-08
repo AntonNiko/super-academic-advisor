@@ -64,6 +64,22 @@
 	overflow: visible;
 }
 
+#modal-reqs-toggle-size {
+	position: relative;
+	bottom: -5px;
+	right: 15px;
+	margin: 0 95px;
+	background-color: #0077cc;
+	height: 30px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+#modal-reqs-toggle-size-button {
+	position: relative;
+	padding: 5px 19px;
+}
+
 .reqs-course-item {
 	list-style-type: none;
 	height: 25px;

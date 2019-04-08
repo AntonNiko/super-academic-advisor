@@ -26,7 +26,7 @@ class Modal {
   static configureCourseDetailsModal(data, modal) {
       $(document).on("dblclick", ".course", function(){
         var course_str = $(this).attr("id").replace("_"," ");
-        
+
         modal.actionPopulateCourse(Modal.getCourseObjectByString(data, course_str));
         $("#modal-course-details").css("display","block");
       });
@@ -49,13 +49,14 @@ class Modal {
   static configureRequirementsModal() {
     // Configure course reqs modal properties
     $("#navbar-course-icon").click(function() {
-      $("#modal-reqs").css("display","block");
+      //$("#modal-reqs").css("display","block");
+      $("#modal-reqs").slideToggle(200);
     });
-
+    
     $(window).click(function(e) {
     var target = $(e.target);
       if (target.is("#modal-reqs")) {
-        $("#modal-reqs").css("display","none");
+        $("#modal-reqs").slideToggle(200);
       }
     });
   }
