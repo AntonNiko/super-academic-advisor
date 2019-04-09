@@ -5,13 +5,6 @@ class Sidebar extends Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      faculty_selected: null,
-      program_selected: null,
-      minor_selected: null,
-      specialization_selected: null
-    };
-
     this.facultyValue = null;
     this.programValue = null;
     this.minorValue = null;
@@ -201,8 +194,13 @@ class Sidebar extends Component {
   renderSelectionSummary() {
     return [
       <div class="sidebar-wizard-summary">
-        <div>
-
+        <div id="wizard-selection-summary">
+          <div id="wizard-selection-summary-title-header">
+            <span>Faculty:</span>
+          </div>
+          <div id="wizard-selection-summary-title-value">
+            <span>{this.facultyValue}</span>
+          </div>
         </div>
       </div>
     ];
