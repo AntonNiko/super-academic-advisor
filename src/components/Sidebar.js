@@ -198,8 +198,17 @@ class Sidebar extends Component {
           <div id="wizard-selection-summary-title-header">
             <span>Faculty:</span>
           </div>
-          <div id="wizard-selection-summary-title-value">
+          <div id="wizard-selection-summary-faculty-value">
             <span>{this.facultyValue}</span>
+          </div>
+          <div id="wizard-selection-summary-program-value">
+            <span>{this.programValue}</span>
+          </div>
+          <div id="wizard-selection-summary-minor-value">
+            <span>{this.minorValue}</span>
+          </div>
+          <div id="wizard-selection-summary-specialization-value">
+            <span>{this.specializationValue}</span>
           </div>
         </div>
       </div>
